@@ -1,0 +1,5 @@
+[client]
+database = carrentaldb
+user = root
+password = 
+default-character-set = utf8
