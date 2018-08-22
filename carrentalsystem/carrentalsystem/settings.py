@@ -77,9 +77,11 @@ WSGI_APPLICATION = 'carrentalsystem.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': '/config/system.cnf',
-        },
+        'NAME': 'carrentaldb',                      
+        'USER': 'root',                      
+        'PASSWORD': '',         
+        'HOST': 'localhost',                 
+        'PORT': '3306', 
     }
 }
 
