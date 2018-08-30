@@ -1,0 +1,64 @@
+/*
+    Custome Style Sheet for CRC App
+    Se7en
+*/
+html,body{
+    font-family: 'Roboto', sans-serif;
+}
+
+.font-white{
+    color:#fff;
+}
+.font-black{
+    color:#000;
+}
+.font-green{
+    color:#3cba54;
+}
+.font-yellow{
+    color:#f4c20d;
+}
+.font-red{
+    color:#db3236;
+}
+.font-blue{
+    color:#4885ed;
+}
+
+.font-white{
+    color:#fff;
+}
+.bg-black{
+    background-color:#000;
+}
+.bg-green{
+    background-color:#3cba54;
+}
+.bg-yellow{
+    background-color:#f4c20d;
+}
+.bg-red{
+    background-color:#db3236;
+}
+.bg-blue{
+    background-color:#4885ed;
+}
+.border-black{
+    border-color:#000;
+}
+.border-green{
+    border-color:#3cba54;
+}
+.border-yellow{
+    border-color:#f4c20d;
+}
+.border-red{
+    border-color:#db3236;
+}
+.border-blue{
+    border-color:#4885ed;
+}
+.container{
+    padding: 20px;
+    min-height: 100%;
+}
