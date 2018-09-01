@@ -9,4 +9,4 @@ class Users(models.Model):
                 ('SM','staff member'),
                 ('C','Customer'))
     dateJoined = models.DateField()
-    lastLogin = models.DateField()    
+    lastLogin = models.DateField()
