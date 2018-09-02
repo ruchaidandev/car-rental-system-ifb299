@@ -1,29 +1,21 @@
-# README #
+# Car Rental System #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This project is still in beta stage.
 
-### What is this repository for? ###
+### Required Files ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* python 3.7.0
+* Django
+* django-bootstrap4
+* MySQL
 
 ### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
+ 1. Use development branch/your own branches to code.
+ 2. Send pull request to merge into master branch.
+ 3. Code will be reviewed
 
 ### Who do I talk to? ###
 
 * Repo owner or admin
-* Other community or team contact
+* SE7EN
