@@ -5,9 +5,10 @@ This project is still in beta stage.
 ### Required Files ###
 
 * python 3.7.0
-* Django
-* django-bootstrap4
-* MySQL
+* Django: `pip install Django`
+* django-bootstrap4: `pip install django-bootstrap4 `
+* MySQL: MySQL server, MYSQL client, MYSQL workbench
+* MYSQL python connector: `pip install mysql-connector-python`
 
 ### Contribution guidelines ###
 
