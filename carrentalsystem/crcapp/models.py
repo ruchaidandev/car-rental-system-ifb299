@@ -11,6 +11,9 @@ class Users(models.Model):
     dateJoined = models.DateField()
     lastLogin = models.DateField()
 
+    def __str__(self):
+        return self.choice_text
+
 class Customer(models.Model):
     CustomerID = models.IntegerField(primary_key=True)
     firstName = models.CharField(max_length=32)
@@ -28,6 +31,9 @@ class Customer(models.Model):
     phoneNumber = models.IntegerField(max_length = 10)
     email = models.EmailField()
 
+    def __str__(self):
+            return self.choice_text
+
 
 class Employee(models.Model):
     EmployeeID = models.IntegerField(primary_key=True)
@@ -41,6 +47,9 @@ class Employee(models.Model):
     TFN = models.IntegerField(max_length=9)
     phoneNumber = models.IntegerField(max_length = 10)
     email = models.EmailField()
+
+    def __str__(self):
+        return self.choice_text
 
 class Vehicles(models.Model):
     VehicleID = models.IntegerField(primary_key=True)
@@ -58,3 +67,6 @@ class Vehicles(models.Model):
     bodyType = models.CharField(max_length=16)
     driveType = models.CharField(max_length=3)
     wheelbase = models.IntegerField(max_length=4)
+
+    def __str__(self):
+        return self.choice_text
