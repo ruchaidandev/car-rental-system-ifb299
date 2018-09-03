@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'carrentalsystem.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
         'NAME': 'carrentaldb',                      
         'USER': 'root',                      
         'PASSWORD': '',         

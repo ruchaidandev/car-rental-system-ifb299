@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Users(models.Model):
-    userID = models.IntegerField(primary_key=True)
+    userID = models.CharField(max_length=10, primary_key=True)
     userName = models.CharField(max_length=32)
     password = models.CharField(max_length=32)
     userType = (('BM', 'Boardmember'),
@@ -12,7 +12,7 @@ class Users(models.Model):
     lastLogin = models.DateField()
 
 class Customer(models.Model):
-    CustomerID = models.IntegerField(primary_key=True)
+    CustomerID = models.CharField(max_length=10, primary_key=True)
     firstName = models.CharField(max_length=32)
     lastName = models.CharField(max_length=32)
     streetAddress = models.CharField(max_length=32)
@@ -30,7 +30,7 @@ class Customer(models.Model):
 
 
 class Employee(models.Model):
-    EmployeeID = models.IntegerField(primary_key=True)
+    EmployeeID = models.CharField(max_length=10, primary_key=True)
     firstName = models.CharField(max_length=32)
     lastName = models.CharField(max_length=32)
     streetAddress = models.CharField(max_length=32)
@@ -43,7 +43,7 @@ class Employee(models.Model):
     email = models.EmailField()
 
 class Vehicles(models.Model):
-    VehicleID = models.IntegerField(primary_key=True)
+    VehicleID = models.CharField(max_length=10, primary_key=True)
     makeName = models.CharField(max_length=16)
     model = models.CharField(max_length=16)
     series = models.CharField(max_length = 16)
