@@ -65,11 +65,8 @@ class Vehicle(models.Model):
     bodyType = models.CharField(max_length=30)
     driveType = models.CharField(max_length=3)
     wheelbase = models.IntegerField(max_length=4)
-
-class In(models.Model):
     storeID = models.ForeignKey(Store, on_delete=models.DO_NOTHING,blank=True,null=True)
-    vehicleID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)
-    
+  
 class Inspects(models.Model):
     employeeID = models.ForeignKey(Employee, on_delete=models.DO_NOTHING,blank=True,null=True)
     vehicleID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)
@@ -91,7 +88,7 @@ class Order(models.Model):
 
 class OrderFor(models.Model):   
     orderID = models.ForeignKey(Order, on_delete=models.DO_NOTHING,blank=True,null=True)
-    carID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)
+    vehicleID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)
     
 class Invoice(models.Model):
     invoiceID = models.CharField(max_length=10, primary_key=True)
