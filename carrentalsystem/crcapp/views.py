@@ -13,7 +13,14 @@ def index(request, messages="", mtype="i"):
 
 # Loading the home page
 def home(request, messages=""):
-    return render(request, 'home.html', {'msg': messages})
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        return render(request, 'home.html', {'msg': messages, 'name': name, 'utype': utype})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+    
 
 # Form action class for login, this will be used for employee login only
 def loginEmployee(request):
@@ -23,10 +30,13 @@ def loginEmployee(request):
         if reason:
             return index(request, messages="Token verification failed.", mtype="d")
         else:
-            if authentication.Authentication.login(request) != "NULL":
+            result = authentication.Authentication.login(request);
+            if result != "NULL":
                 return redirect("../home")
-            else:
+            elif result == "NULL":
                 return index(request,messages="Login failed.", mtype="d")
+            else:
+                return index(request,messages=result, mtype="d")
     else:
         return index(request, messages="Opps, something went wrong.", mtype="d")
 
@@ -34,4 +44,5 @@ def loginEmployee(request):
 # Logoff action
 def logoff(request, messages=""):
     messages = "Successfully logged off.";
+    authentication.Authentication.logout(request)
     return render(request, 'index.html', {'msg': messages, 'mtype': "i"})

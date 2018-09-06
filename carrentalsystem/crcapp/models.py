@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import validate_email
 
 # Create your models here.
 class Store(models.Model):
@@ -22,7 +23,7 @@ class Customer(models.Model):
     gender = models.CharField(max_length=2)
     occupation = models.CharField(max_length=50)
     phoneNumber = models.BigIntegerField()
-    email = models.EmailField()
+    email = models.EmailField(validators=[validate_email])
     userName = models.CharField(max_length=50)
     password = models.TextField()
     dateJoined = models.DateField()
@@ -40,7 +41,7 @@ class Employee(models.Model):
     DOB = models.DateField(auto_now=False, auto_now_add=False)
     TFN = models.IntegerField(max_length=9)
     phoneNumber = models.BigIntegerField()
-    email = models.EmailField()
+    email = models.EmailField(validators=[validate_email])
     userName = models.CharField(max_length=50)
     password = models.TextField()
     userType = models.CharField(max_length=16)
