@@ -70,10 +70,8 @@ class Vehicle(models.Model):
 class Inspects(models.Model):
     employeeID = models.ForeignKey(Employee, on_delete=models.DO_NOTHING,blank=True,null=True)
     vehicleID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)
-
-class Rents(models.Model):
-    customerID = models.ForeignKey(Customer, on_delete=models.DO_NOTHING,blank=True,null=True)
-    vehicleID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)
+    class Meta:
+        unique_together = ('employeeID', 'vehicleID')
 
 class Order(models.Model):
     orderID = models.CharField(max_length=12, primary_key=True)
@@ -89,7 +87,9 @@ class Order(models.Model):
 class OrderFor(models.Model):   
     orderID = models.ForeignKey(Order, on_delete=models.DO_NOTHING,blank=True,null=True)
     vehicleID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)
-    
+    class Meta:
+        unique_together = ('orderID', 'vehicleID')
+
 class Invoice(models.Model):
     invoiceID = models.CharField(max_length=10, primary_key=True)
     amount = models.DecimalField(max_digits=12,decimal_places=2)

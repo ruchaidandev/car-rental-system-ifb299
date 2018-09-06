@@ -5,7 +5,7 @@ from django.middleware.csrf import CsrfViewMiddleware
 from django.contrib.auth.hashers import make_password
 
 from . import views
-from crcapp.controllers import *
+from crcapp.controllers import authentication
 
 # Loading the index page
 def index(request, messages="", mtype="i"):
