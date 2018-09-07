@@ -23,33 +23,41 @@
   <body>
     <div class="container pt-5">
       <div class="row justify-content-center">
-        <div class="col-4 pt-5 text-center">
+        
+        <div class="col-md-4 col-sm-12 pt-2 text-center">
+        
+            <h1><b>Car Rental System</b></h1>
+            <br>
+            {% if msg != "" %}
+              {% if mtype == "d" %}
+                <div class="alert alert-danger">
+              {% elif mtype == "i" %}
+                <div class="alert alert-info">
+              {% endif %}
+                    <strong>Error: </strong>  {{ msg }}
+                  </div>
+            {% endif %}
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <form>
+        
+
+            <form action="/login/employee" method="post">
+                {% csrf_token %}
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                  <small id="emailHelp" class="form-text text-muted">Eg: example@domain.com</small>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Your Password">
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Submit</button>
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required="true" placeholder="Enter username">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required="true" placeholder="Your Password">
+                  </div>
+                <button type="submit">Login</button>
               </form>
-            <form class="form-signin">
-      
-               
-             
-              
-            </form>
         </div>
 
       </div>
       <footer>
         <div class="row justify-content-center text-center">
-          <div class="col-4">
+          <div class="col-md-4 col-sm-12">
               <p class="mt-5 mb-3 text-muted">&copy; 2018 | Se7en | Team #23</p>
           </div>
         </div>
