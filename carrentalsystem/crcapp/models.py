@@ -8,11 +8,7 @@ class Store(models.Model):
     storePhone = models.BigIntegerField()
     street = models.CharField(max_length=70)
     city = models.CharField(max_length=30)
-<<<<<<< HEAD
-    state = models.IntegerField(max_length = 30)
-=======
     state = models.CharField(max_length = 30)
->>>>>>> 2f45a13adf6df962743c449984ca06c73a16bdc2
 
 class Customer(models.Model):
     customerID = models.CharField(max_length=10, primary_key=True)
@@ -56,32 +52,18 @@ class Employee(models.Model):
 
 class Vehicle(models.Model):
     vehicleID = models.CharField(max_length=10, primary_key=True)
-<<<<<<< HEAD
-    makeName = models.CharField(max_length=30)
-    model = models.CharField(max_length=30)
-    series = models.CharField(max_length = 30)
-=======
     makeName = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
     series = models.CharField(max_length = 50)
->>>>>>> 2f45a13adf6df962743c449984ca06c73a16bdc2
     year = models.IntegerField(max_length=4)
     newPrice = models.DecimalField(max_digits=10,decimal_places=2)
     enginesize = models.DecimalField(max_digits=2,decimal_places=1)
     fuelSystem = models.CharField(max_length=20)
-<<<<<<< HEAD
-    tankcapacity = models.DecimalField(max_digits=3,decimal_places=1)
-    power = models.IntegerField(max_length=3)
-    seatingCapacity = models.IntegerField(max_length=2)
-    standardTransmission = models.CharField(max_length=6)
-    bodyType = models.CharField(max_length=20)
-=======
     tankcapacity = models.DecimalField(max_digits=7,decimal_places=1)
     power = models.IntegerField(max_length=5)
     seatingCapacity = models.IntegerField(max_length=2)
     standardTransmission = models.CharField(max_length=10)
     bodyType = models.CharField(max_length=30)
->>>>>>> 2f45a13adf6df962743c449984ca06c73a16bdc2
     driveType = models.CharField(max_length=3)
     wheelbase = models.IntegerField(max_length=4)
     storeID = models.ForeignKey(Store, on_delete=models.DO_NOTHING,blank=True,null=True)
