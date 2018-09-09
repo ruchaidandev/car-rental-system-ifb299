@@ -2,11 +2,15 @@ from django.db import models
 from crcapp.models import Vehicle
 
 class Vehicle_():
+<<<<<<< HEAD
 #searches for Vehicles that match the given arguments
+=======
+>>>>>>> 51cd2b1eed7f088a2047803261852776f268592f
     def search(arg):
         x = models.Vehicle.objects.filter(arg)
         for each in x:
             print(each)
+<<<<<<< HEAD
             return(each)
 
 #creates vehicle entry in the database using provided values
@@ -14,3 +18,12 @@ class Vehicle_():
         print('input' + str((vehicleID_ ,makeName_, model_, series_, year_, newPrice_, enginesize_, fuelSystem_, tankcapacity_, power_, seatingCapacity_, standardTransmission_, bodyType_, driveType_, wheelbase_, storeID_)))
         x = Vehicle(vehicleID = vehicleID_, makeName = makeName_, model = model_, series = series_, year = year_, newPrice = newPrice_, enginesize = enginesize_, fuelSystem = fuelSystem_, tankcapacity = tankcapacity_, power = power_, seatingCapacity = seatingCapacity_, standardTransmission = standardTransmission_, bodyType = bodyType_, driveType = driveType_, wheelbase = wheelbase_, storeID = storeID_)
         x.save()
+=======
+
+    def create(vehicleID_ ,makeName_, model_, series_, year_, newPrice_, enginesize_, fuelSystem_, tankcapacity_, power_, seatingCapacity_, standardTransmission_, bodyType_, driveType_, wheelbase_, storeID_):
+        print('input' + str((vehicleID_ ,makeName_, model_, series_, year_, newPrice_, enginesize_, fuelSystem_, tankcapacity_, power_, seatingCapacity_, standardTransmission_, bodyType_, driveType_, wheelbase_, storeID_)))
+        x = Vehicle(vehicleID = vehicleID_, makeName = makeName_, model = model_, series = series_, year = year_, newPrice = newPrice_, enginesize = enginesize_, fuelSystem = fuelSystem_, tankcapacity = tankcapacity_, power = power_, seatingCapacity = seatingCapacity_, standardTransmission = standardTransmission_, bodyType = bodyType_, driveType = driveType_, wheelbase = wheelbase_, storeID = storeID_)
+        print(x)
+        x.save()
+        print(working)
+>>>>>>> 51cd2b1eed7f088a2047803261852776f268592f
