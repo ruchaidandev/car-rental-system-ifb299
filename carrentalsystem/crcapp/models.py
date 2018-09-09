@@ -46,19 +46,6 @@ class Employee(models.Model):
     stateAddress = models.CharField(max_length = 50)
     DOB = models.DateField(auto_now=False, auto_now_add=False)
     TFN = models.IntegerField(max_length=9)
-<<<<<<< HEAD
-    phoneNumber = models.IntegerField(max_length = 10)
-    email = models.EmailField()
-
-    def __str__(self):
-        return self.choice_text
-
-class Vehicles(models.Model):
-    VehicleID = models.IntegerField(primary_key=True)
-    makeName = models.CharField(max_length=16)
-    model = models.CharField(max_length=16)
-    series = models.CharField(max_length = 16)
-=======
     phoneNumber = models.BigIntegerField()
     email = models.EmailField(validators=[validate_email])
     userName = models.CharField(max_length=50)
@@ -67,14 +54,13 @@ class Vehicles(models.Model):
     dateJoined = models.DateField()
     lastLogin = models.DateField()
     storeID = models.ForeignKey(Store, on_delete=models.DO_NOTHING,blank=True,null=True)
-    
+
 
 class Vehicle(models.Model):
     vehicleID = models.CharField(max_length=10, primary_key=True)
     makeName = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
     series = models.CharField(max_length = 50)
->>>>>>> 2f45a13adf6df962743c449984ca06c73a16bdc2
     year = models.IntegerField(max_length=4)
     newPrice = models.DecimalField(max_digits=10,decimal_places=2)
     enginesize = models.DecimalField(max_digits=2,decimal_places=1)
@@ -86,13 +72,8 @@ class Vehicle(models.Model):
     bodyType = models.CharField(max_length=30)
     driveType = models.CharField(max_length=3)
     wheelbase = models.IntegerField(max_length=4)
-<<<<<<< HEAD
-
-    def __str__(self):
-        return self.choice_text
-=======
     storeID = models.ForeignKey(Store, on_delete=models.DO_NOTHING,blank=True,null=True)
-  
+
 class Inspects(models.Model):
     employeeID = models.ForeignKey(Employee, on_delete=models.DO_NOTHING,blank=True,null=True)
     vehicleID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)
@@ -110,7 +91,7 @@ class Order(models.Model):
     returnStoreID = models.ForeignKey(Store, related_name="returnstore", on_delete=models.DO_NOTHING,blank=True,null=True)
     employeeID = models.ForeignKey(Employee, on_delete=models.DO_NOTHING,blank=True,null=True)
 
-class OrderFor(models.Model):   
+class OrderFor(models.Model):
     orderID = models.ForeignKey(Order, on_delete=models.DO_NOTHING,blank=True,null=True)
     vehicleID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)
     class Meta:
@@ -121,5 +102,3 @@ class Invoice(models.Model):
     amount = models.DecimalField(max_digits=12,decimal_places=2)
     paymentType = models.CharField(max_length=20)
     orderID = models.ForeignKey(Order, on_delete=models.DO_NOTHING,blank=True,null=True)
-    
->>>>>>> 2f45a13adf6df962743c449984ca06c73a16bdc2
