@@ -58,11 +58,8 @@ def staffCreate(request, messages=""):
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
-# Create staff action(still in progress)
+# Register new staff action
 def staffCreateAction(request, messages=""):
-    # messages = "Successfully logged off."
-    # authentication.Authentication.logout(request)
-    # return render(request, 'index.html', {'msg': messages, 'mtype': "i"})
     return False
 
 
