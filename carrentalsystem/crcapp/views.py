@@ -3,6 +3,7 @@ from django.urls import path
 from django.http import HttpResponseRedirect
 from django.middleware.csrf import CsrfViewMiddleware
 from django.contrib.auth.hashers import make_password
+from crcapp.models import Store # If the model is used in the view file
 
 from . import views
 from crcapp.controllers import authentication, staff
@@ -59,16 +60,13 @@ def staffCreate(request, messages=""):
 
 # Create staff action(still in progress)
 def staffCreateAction(request, messages=""):
-    if request.method == 'POST':
-        form = request.POST
-        reason = CsrfViewMiddleware().process_view(request, None, (), {})
-        if reason:
-            return index(request, messages="Token verification failed.", mtype="d")
-        else:
-            if(request.GET.get('mybtn')): 
-                result = staff.Staff.createStaff(request)
-                return redirect("../home")
-    else:
-        return index(request, messages="Opps, something went wrong.", mtype="d")
-        
-    # return false
+    # messages = "Successfully logged off."
+    # authentication.Authentication.logout(request)
+    # return render(request, 'index.html', {'msg': messages, 'mtype': "i"})
+    return False
+
+
+# sample view only will be deleted later
+def sample(request):
+    stores = Store.objects.all()
+    return render(request, 'sample/searchandtable.html', {'list': stores})

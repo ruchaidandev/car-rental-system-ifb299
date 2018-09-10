@@ -316,15 +316,22 @@
   </form>
 
 
-  <!-- For DOB -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript">
-        $('#datepicker').datepicker({
-            weekStart: 1,
-            daysOfWeekHighlighted: "6,0",
-            autoclose: true,
-            todayHighlight: true,
-        });
-    </script>
+{% endblock %}
+
+<!-- 
+    All components for the scripts per page goes here.
+    Base.html will contain all the scripts neccessary to the project
+    If you need any new js file add it under the block scripts
+-->
+{% block scripts %}
+<script type="text/javascript">
+    $('#datepicker').datepicker({
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+    });
+</script>
+
+
 {% endblock %}

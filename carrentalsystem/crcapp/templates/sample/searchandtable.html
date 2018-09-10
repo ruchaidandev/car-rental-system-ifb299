@@ -1,0 +1,109 @@
+{% extends '../base.html' %}
+
+<!-- The title of the page goes here -->
+{% block title %}Sample Page{% endblock %}
+
+
+<!-- Main content of the page, basically everything goes here, The base
+    contains the header/ footer and other required items
+-->
+{% block content %}
+<!-- change the id value, this will be required for the script to make it dynamic 
+    put the class as it is
+    style="width:100%;" is required to make it responsive
+    th and t foot will contain the header footer for the table.
+-->
+<table id="tbl" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%;">
+    <caption>A caption required for the table</caption>
+  <thead>
+  <tr>
+    <th>Store ID</th>
+    <th>Store Name</th>
+    <th>Store Phone</th>
+    <th>Street</th>
+    <th>City</th>
+    <th>State</th>
+  </tr>
+  </thead>
+  <tbody id="records">
+        <!-- Iterating through the list passed from the view -->
+        {% for item in list %}
+        <tr>
+                <td class="pdttable">{{ item.storeID }}</td>
+                <td class="pdttable">{{ item.storeName }}</td>
+                <td class="pdttable">{{ item.storePhone }}</td>
+                <td class="pdttable">{{ item.street }}</td> 
+                <td class="pdttable">{{ item.city }}</td> 
+                <td class="pdttable">{{ item.state }}</td>                        
+            </tr>
+        {% endfor %}
+     
+
+
+  </tbody>
+  <tfoot>
+  <tr>
+    <th>Store ID</th>
+    <th>Store Name</th>
+    <th>Store Phone</th>
+    <th>Street</th>
+    <th>City</th>
+    <th>State</th>
+  </tr>
+  </tfoot>
+</table>
+
+{% endblock %}
+
+
+<!-- 
+    All components for the scripts per page goes here.
+    Base.html will contain all the scripts neccessary to the project
+    If you need any new js file add it under the block scripts
+-->
+{% block scripts %}
+<script>
+        $(function () {
+            // The tbl is the id value for the table
+          $('#tbl').DataTable({
+                            'paging'      : true, // for pagination
+                            'lengthChange': false,
+                            'searching'   : true, //searching
+                            'ordering'    : true, //sorting
+                            'info'        : true,
+                            'autoWidth'   : true, // keep this true
+                            'sScrollX': '100%', // this too
+                            "lengthMenu": [[20, 40, 60, -1], [20, 40, 60, "All"]], // for number of items 
+      
+                              'dom': 'Bfrtip', //export buttons
+                              'buttons': [
+                                {
+                                  extend: 'copyHtml5',
+                                  text: 'Copy',
+                                  className: 'btn btn-flat btn-primary',
+                                },
+                                {
+                                  extend: 'excelHtml5',
+                                  text: 'Export to Excel',
+                                  className: 'btn btn-flat btn-primary',
+                                },
+                                {
+                                  extend: 'print',
+                                  className: 'btn btn-flat btn-primary',
+                                  customize: function ( win ) {
+                                    $(win.document.body).css('background', '#fff');
+                                    $(win.document.body).css('padding', '20px');
+                                  }
+      
+                                }
+      
+                              ]
+                          })
+          
+          
+      
+        })
+      </script>
+
+
+{% endblock %}
