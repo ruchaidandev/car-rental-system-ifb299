@@ -10,7 +10,11 @@ class Store(models.Model):
     city = models.CharField(max_length=30)
     state = models.CharField(max_length = 30)
 
+    def __str__(self):
+        return self.choice_text
+
 class Customer(models.Model):
+    choice_text = 'Customer model'
     customerID = models.CharField(max_length=10, primary_key=True)
     firstName = models.CharField(max_length=50)
     lastName = models.CharField(max_length=50)
@@ -28,6 +32,9 @@ class Customer(models.Model):
     password = models.TextField()
     dateJoined = models.DateField()
     lastLogin = models.DateField()
+
+    def __str__(self):
+            return self.choice_text
 
 
 class Employee(models.Model):
@@ -48,7 +55,7 @@ class Employee(models.Model):
     dateJoined = models.DateField()
     lastLogin = models.DateField()
     storeID = models.ForeignKey(Store, on_delete=models.DO_NOTHING,blank=True,null=True)
-    
+
 
 class Vehicle(models.Model):
     vehicleID = models.CharField(max_length=10, primary_key=True)
@@ -67,7 +74,7 @@ class Vehicle(models.Model):
     driveType = models.CharField(max_length=3)
     wheelbase = models.IntegerField(max_length=4)
     storeID = models.ForeignKey(Store, on_delete=models.DO_NOTHING,blank=True,null=True)
-  
+
 class Inspects(models.Model):
     employeeID = models.ForeignKey(Employee, on_delete=models.DO_NOTHING,blank=True,null=True)
     vehicleID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)
@@ -85,7 +92,7 @@ class Order(models.Model):
     returnStoreID = models.ForeignKey(Store, related_name="returnstore", on_delete=models.DO_NOTHING,blank=True,null=True)
     employeeID = models.ForeignKey(Employee, on_delete=models.DO_NOTHING,blank=True,null=True)
 
-class OrderFor(models.Model):   
+class OrderFor(models.Model):
     orderID = models.ForeignKey(Order, on_delete=models.DO_NOTHING,blank=True,null=True)
     vehicleID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)
     class Meta:
@@ -96,4 +103,3 @@ class Invoice(models.Model):
     amount = models.DecimalField(max_digits=12,decimal_places=2)
     paymentType = models.CharField(max_length=20)
     orderID = models.ForeignKey(Order, on_delete=models.DO_NOTHING,blank=True,null=True)
-    
