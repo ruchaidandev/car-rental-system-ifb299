@@ -8,19 +8,19 @@ class Vehicle_():
         x = Vehicle(vehicleID = vehicleID_, makeName = makeName_, model = model_, series = series_, year = year_, newPrice = newPrice_, enginesize = enginesize_, fuelSystem = fuelSystem_, tankcapacity = tankcapacity_, power = power_, seatingCapacity = seatingCapacity_, standardTransmission = standardTransmission_, bodyType = bodyType_, driveType = driveType_, wheelbase = wheelbase_, storeID = storeID_)
         x.save()
 
-    #searches for Vehicles that match the given arguments
-    def search(arg):
-        x = models.Vehicle.objects.filter(arg)
-        for each in x:
-            print(each)
-            return(each)
+#    #searches for Vehicles that match the given arguments (NW)
+#    def search(arg):
+#        x = Vehicle.objects.filter(arg)
+#        for each in x:
+#            print(str(each))
+#            return(each)
 
 class Customer_():
     def create(customerID_, firstName_, lastName_, streetAddress_, cityAddress_, postCodeAddress_, stateAddress_, DOB_, driverLicenceNumber_, gender_, occupation_, phoneNumber_, email_, userName_, password_, dateJoined_, lastLogin_):
-        x = Customer(customerID=customerID_, firstName=firstName_, lastName=lastName_, streetAddress=lastName_, cityAddress=cityAddress_, postCodeAddress=postCodeAddress_, stateAddress=stateAddress_, DOB=DOB_, driverLicenceNumber=driverLicenceNumber_, gender=gender_, occupation=occupation_, phoneNumber=phoneNumber_, email=email_, userName=userName_, password=password_, dateJoined=dateJoined_, lastLogin=lastLogin_):
+        x = Customer(customerID = customerID_, firstName = firstName_, lastName = lastName_, streetAddress = lastName_, cityAddress = cityAddress_, postCodeAddress = postCodeAddress_, stateAddress = stateAddress_, DOB = DOB_, driverLicenceNumber = driverLicenceNumber_, gender = gender_, occupation = occupation_, phoneNumber = phoneNumber_, email = email_, userName = userName_, password = password_, dateJoined = dateJoined_, lastLogin = lastLogin_)
         x.save()
 
-    def modify((customerID_, firstName_, lastName_, streetAddress_, cityAddress_, postCodeAddress_, stateAddress_, DOB_, driverLicenceNumber_, gender_, occupation_, phoneNumber_, email_, userName_, password_, dateJoined_, lastLogin_)):
+    def modify(customerID_, firstName_, lastName_, streetAddress_, cityAddress_, postCodeAddress_, stateAddress_, DOB_, driverLicenceNumber_, gender_, occupation_, phoneNumber_, email_, userName_, password_, dateJoined_, lastLogin_):
         x = Customer.objects.get(customerID_)
 
 
@@ -55,4 +55,31 @@ class Customer_():
             x.occupation = occupation_
 
         if (phoneNumber_  != ""):
-            
+            x.phoneNumber = phoneNumber_
+
+        if (email_ != ""):
+            x.email = email
+
+        if(userName_ != ""):
+            x.userName = userName_
+
+        if(password_ != ""):
+            x.password = password_
+
+        if(dateJoined_ != ""):
+            x.dateJoined = dateJoined_
+
+        if(lastLogin_ != ""):
+            x.lastLogin = lastLogin_
+
+        x.save()
+
+    #deletes Customer based on given ID
+    def delete(ID):
+        x = Customer.objects.get(customerID = ID)
+        x.delete()
+
+    def search(arg):
+        if(arg == ""):
+            for each in Customer.objects.all()[0:20]:
+                print(each.firstName)

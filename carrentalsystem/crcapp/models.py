@@ -14,6 +14,7 @@ class Store(models.Model):
         return self.choice_text
 
 class Customer(models.Model):
+    choice_text = 'Customer model'
     customerID = models.CharField(max_length=10, primary_key=True)
     firstName = models.CharField(max_length=50)
     lastName = models.CharField(max_length=50)
