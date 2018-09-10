@@ -3,6 +3,7 @@ from django.urls import path
 from django.http import HttpResponseRedirect
 from django.middleware.csrf import CsrfViewMiddleware
 from django.contrib.auth.hashers import make_password
+from crcapp.models import Store # If the model is used in the view file
 
 from . import views
 from crcapp.controllers import authentication
@@ -62,4 +63,10 @@ def staffCreateAction(request, messages=""):
     # messages = "Successfully logged off."
     # authentication.Authentication.logout(request)
     # return render(request, 'index.html', {'msg': messages, 'mtype': "i"})
-    return false
+    return False
+
+
+# sample view only will be deleted later
+def sample(request):
+    stores = Store.objects.all()
+    return render(request, 'sample/searchandtable.html', {'list': stores})
