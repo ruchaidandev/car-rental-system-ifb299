@@ -8,12 +8,12 @@ class Staff:
 
     # Creating a new staff account. If a username exist in the employee
     # database, do not create the account. else, create the account for
-    # the employee
+    # the employee (Still in progress)
     def createStaff(request, username=None ):
         username = request.POST.get("username", "")
         try:
             staff = Employee.objects.get(userName=username)
-            # staff.full_clean()
+            staff.full_clean()
             if staff != None:
                 return False
             else:

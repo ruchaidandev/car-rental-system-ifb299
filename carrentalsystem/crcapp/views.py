@@ -65,13 +65,9 @@ def staffCreateAction(request, messages=""):
         if reason:
             return index(request, messages="Token verification failed.", mtype="d")
         else:
-            result = staff.Staff.createStaff(request)
-            if result == False:
+            if(request.GET.get('mybtn')): 
+                result = staff.Staff.createStaff(request)
                 return redirect("../home")
-            elif result == True:
-                return index(request,messages="Login failed.", mtype="d")
-            else:
-                return index(request,messages=result, mtype="d")
     else:
         return index(request, messages="Opps, something went wrong.", mtype="d")
         
