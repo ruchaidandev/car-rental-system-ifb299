@@ -62,6 +62,16 @@ def staffCreate(request, messages=""):
 def staffCreateAction(request, messages=""):
     return False
 
+# Order Confirmation page
+def bookOrder(request, messages=""):
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        return render(request, 'booking/order.html', {'msg': messages, 'name': name, 'utype': utype})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
 
 # sample view only will be deleted later
 def sample(request):
