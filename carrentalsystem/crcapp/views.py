@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password
 from crcapp.models import Store # If the model is used in the view file
 
 from . import views
-from crcapp.controllers import authentication
+from crcapp.controllers import authentication, staff
 
 # Loading the index page
 def index(request, messages="", mtype="i"):
@@ -58,11 +58,8 @@ def staffCreate(request, messages=""):
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
-# Create staff action(still in progress)
+# Register new staff action
 def staffCreateAction(request, messages=""):
-    # messages = "Successfully logged off."
-    # authentication.Authentication.logout(request)
-    # return render(request, 'index.html', {'msg': messages, 'mtype': "i"})
     return False
 
 
