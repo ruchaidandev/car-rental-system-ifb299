@@ -49,7 +49,7 @@ def logoff(request, messages=""):
     authentication.Authentication.logout(request)
     return render(request, 'index.html', {'msg': messages, 'mtype': "i"})
 
-# Create staff member
+# Create staff member page
 def staffCreate(request, messages="", mtype=""):
     # Checking session exists
     if request.session.has_key('uid'):
@@ -74,8 +74,32 @@ def staffCreate(request, messages="", mtype=""):
             return render(request, 'staff/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+<<<<<<< HEAD
 
 
+=======
+    
+# Create customer member page
+def customerCreate(request, messages="", mtype=""):
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        stores = Store.objects.all()
+        return render(request, 'customer/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+# Order Confirmation page
+def bookOrder(request, messages=""):
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        return render(request, 'booking/order.html', {'msg': messages, 'name': name, 'utype': utype})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+>>>>>>> 8d87d6defa2ed98638a654a2ce2ca51b7b6db932
 
 
 # sample view only will be deleted later
