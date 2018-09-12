@@ -10,9 +10,13 @@ class Staff:
     # database, do not create the account. else, create the account for
     # the employee 
     def createStaff(request):
-        staffObj = Employee.objects.get()
+        staffObj = Employee.objects.raw("SELECT employeeID FROM `crcapp_employee` ORDER BY employeeID DESC LIMIT 1")
+        empID = staffObj.employeeID
+        empID = empID[1:]
+        
+        empID = "E"+str(++empID).zfill(5)
         try:
-
+            employeeID = empID
             firstname = request.POST.get("firstName")
             lastname = request.POST.get("lastName")
             streetAddress = request.POST.get("streetAddress")
@@ -28,7 +32,16 @@ class Staff:
             userType = request.POST.get("userType")
             dateJoined = "now()"
             lastLogin = "now()"
-            staff = Employee(firstname,lastname,streetAddress,city,postalCode,state,DOB,TFN,phoneNumber,email,username,password,userType,dateJoined,lastLogin)
+            storeID = request.POST.get("storeID")
+            staff = Employee(
+                employeeID,
+                firstname,
+                lastname,
+                streetAddress,
+                city,
+                postalCode,
+                state,DOB,TFN,phoneNumber,email,username,password,userType,dateJoined,lastLogin, storeID
+                )
             staff.full_clean()
             staff.save()
             return True
