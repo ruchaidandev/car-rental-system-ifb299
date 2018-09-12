@@ -48,7 +48,7 @@ def logoff(request, messages=""):
     authentication.Authentication.logout(request)
     return render(request, 'index.html', {'msg': messages, 'mtype': "i"})
 
-# Create staff member
+# Create staff member page
 def staffCreate(request, messages="", mtype=""):
     # Checking session exists
     if request.session.has_key('uid'):
@@ -84,6 +84,16 @@ def staffCreateAction(request, messages=""):
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
     
+# Create customer member page
+def customerCreate(request, messages="", mtype=""):
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        stores = Store.objects.all()
+        return render(request, 'customer/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
 # Order Confirmation page
 def bookOrder(request, messages=""):
