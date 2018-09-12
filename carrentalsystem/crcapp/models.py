@@ -11,7 +11,7 @@ class Store(models.Model):
     state = models.CharField(max_length = 30)
 
     def __str__(self):
-        return self.choice_text
+        return self.storeName
 
 class Customer(models.Model):
     choice_text = 'Customer model'
@@ -34,7 +34,7 @@ class Customer(models.Model):
     lastLogin = models.DateField()
 
     def __str__(self):
-            return self.choice_text
+            return (self.firstName + " " + self.lastName)
 
 
 class Employee(models.Model):
