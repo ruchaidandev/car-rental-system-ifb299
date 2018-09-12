@@ -9,11 +9,29 @@
 
 {% block content %}
 
+<!-- Error message box will be shown only if the msg variable has some value -->
+{% if msg != "" %}
+<div class="row"> 
+        <div class="col-md-12 col-sm-12">
+            <!-- Checking whether it is a danger type or info type needed for the box 
+                Will be checked by mtype is d or i 
+            -->
+            {% if mtype == "d" %}
+            <div class="alert alert-danger">
+            {% elif mtype == "i" %}
+            <div class="alert alert-info">
+            {% endif %}
+                {{ msg }}
+            </div>
+        </div>
+</div>    
+              
+{% endif %}
 
 <form action="/create/staff" method="post">
         {% csrf_token %}
         <div class="container">
-                <form class="form-horizontal" role="form" method="POST" action="/register">
+                <form class="form-horizontal" role="form" method="POST" action="/create/staff">
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
@@ -231,56 +249,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3 field-label-responsive">
-                            <label for="username">User Name</label>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                    <div class="input-group-addon"></i></div>
-                                    <input type="text" name="username" class="form-control" id="username"
-                                           placeholder="User Name" required autofocus>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-control-feedback">
-                                    <span class="text-danger align-middle">
-                                        <!-- Put user name validation error messages here -->
-                                    </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 field-label-responsive">
-                            <label for="password">Password</label>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group has-danger">
-                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                    <div class="input-group-addon"></i></div>
-                                    <input type="password" name="password" class="form-control" id="password"
-                                           placeholder="Password" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 field-label-responsive">
-                            <label for="password">Confirm Password</label>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                    <div class="input-group-addon"></i>
-                                    </div>
-                                    <input type="password" name="password-confirmation" class="form-control"
-                                           id="password-confirm" placeholder="Password" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="row">
                         <div class="col-md-3 field-label-responsive">
                             <label for="userType">User Type</label>
