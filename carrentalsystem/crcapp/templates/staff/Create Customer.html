@@ -1,0 +1,401 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Create Customer">
+    <meta name="author" content="Se7en">
+
+    <title>{% block title %}Create Customer{% endblock %} | Car Rental System</title>
+
+    <!-- Bootstrap and other plugins -->
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap-datepicker3.standalone.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap-timepicker.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/daterangepicker.css" %}">
+    <link rel="stylesheet" href="{% static "css/jquery.dataTables.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/select2.min.css" %}">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- CRC Styles -->
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                      <a class="navbar-brand" href="#">CRC System</a>
+                      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item font-blue pt-2 ml-2" style="text-transform: capitalize;">
+                          Welcome, {{ name }}
+                        </li>
+                        
+                      </ul>
+                      <div class="form-inline my-2 my-lg-0">
+                            <a href="/logoff"><i class="fas fa-power-off"></i> Logoff</a>
+                      </div>
+                    </div>
+                  </nav>
+       
+      </header>
+  
+      
+        <main role="main" class="container">
+            {% block content %}
+			<form action="/create/customer" method="post">
+        {% csrf_token %}
+        <div class="container">
+                <form class="form-horizontal" role="form" method="POST" action="/register">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <h2>Register New Customer</h2>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="firstName">First Name</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" ></i></div>
+                                    <input type="text" name="firstName" class="form-control" id="firstName"
+                                           placeholder="First Name" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-control-feedback">
+                                    <span class="text-danger align-middle">
+                                        <!-- Put first name validation error messages here -->
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+					
+                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="lastName">Last Name</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" ></i></div>
+                                    <input type="text" name="lastName" class="form-control" id="lastName"
+                                           placeholder="Last Name" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-control-feedback">
+                                    <span class="text-danger align-middle">
+                                        <!-- Put last name validation error messages here -->
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="streetAddress">Street Address</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" ></i></div>
+                                    <input type="text" name="streetAddress" class="form-control" id="streetAddress"
+                                           placeholder="Street" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-control-feedback">
+                                    <span class="text-danger align-middle">
+                                        <!-- Put street address validation error messages here -->
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="city">City</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" ></i></div>
+                                    <input type="text" name="city" class="form-control" id="city"
+                                           placeholder="City" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-control-feedback">
+                                    <span class="text-danger align-middle">
+                                        <!-- Put city validation error messages here -->
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="postalCode">Postal Code</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" ></i></div>
+                                    <input type="text" name="postalCode" class="form-control" id="postalCode"
+                                           placeholder="Postal Code" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-control-feedback">
+                                    <span class="text-danger align-middle">
+                                        <!-- Put postal code validation error messages here -->
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="state">State</label>
+                        </div>
+                        <div class="col-md-6">
+							<div class="form-group">
+								<select class="custom-select" required>
+									<option value="">Select a State</option>
+									<option value="1">New South Wales</option>
+									<option value="2">Queensland</option>
+                                    <option value="3">South Australia</option>
+                                    <option value="4">Tasmania</option>
+                                    <option value="5">Victoria</option>
+								</select>
+							</div>
+                        </div>
+                    </div>
+					                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="DriverLicenseNumber">Drivers License Number</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" ></i></div>
+										<input type="text" name="DriverLicenseNumber" class="form-control" id="DriverLicenseNumber"
+										   placeholder="Drivers License Number" required autofocus> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-control-feedback">
+                                    <span class="text-danger align-middle">
+                                        <!-- Put Driver's License Number validation error messages here -->
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="DOB">Date Of Birth</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" ></i></div>
+                                    <!-- <input type="text" name="DOB" class="form-control" id="DOB"
+										   placeholder="date of Birth" required autofocus> -->
+                                        <input data-date-format="dd/mm/yyyy" class="form-control"
+                                        id="datepicker" placeholder="dd/mm/yyyy" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-control-feedback">
+                                    <span class="text-danger align-middle">
+                                        <!-- Put DOB validation error messages here -->
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="phoneNumber">Phone Number</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon"></i></div>
+                                    <input type="text" name="phoneNumber" class="form-control" id="phoneNumber"
+                                           placeholder="Phone Number" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-control-feedback">
+                                    <span class="text-danger align-middle">
+                                        <!-- Put phone number validation error messages here -->
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="email">E-Mail Address</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon"></i></div>
+                                    <input type="text" name="email" class="form-control" id="email"
+                                           placeholder="you@example.com" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-control-feedback">
+                                    <span class="text-danger align-middle">
+                                        <!-- Put e-mail validation error messages here -->
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="username">User Name</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon"></i></div>
+                                    <input type="text" name="username" class="form-control" id="username"
+                                           placeholder="User Name" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-control-feedback">
+                                    <span class="text-danger align-middle">
+                                        <!-- Put user name validation error messages here -->
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group has-danger">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon"></i></div>
+                                    <input type="password" name="password" class="form-control" id="password"
+                                           placeholder="Password" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="password">Confirm Password</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon"></i>
+                                    </div>
+                                    <input type="password" name="password-confirmation" class="form-control"
+                                           id="password-confirm" placeholder="Password" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 field-label-responsive">
+                            <label for="occupation">Occupation</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" ></i></div>
+                                    <input type="text" name="occupation" class="form-control" id="occupation"
+                                           placeholder="Occupation" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-control-feedback">
+                                    <span class="text-danger align-middle">
+                                        <!-- Put first name validation error messages here -->
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="cancel" class="btn btn-danger"><i class="fas fa-ban"></i> Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+  </form>
+            {% endblock %}
+            
+    
+    
+        </main>
+      <footer class="footer">
+        <div class="container">
+          <div class="row justify-content-center text-center">
+            <div class="col-4">
+                <p class="mt-5 mb-3 text-muted">&copy; 2018 | Se7en | Team #23</p>
+            </div>
+            </div>
+        </div>
+      </footer>
+  </body>
+
+<!-- Scripts -->
+  <script src="{% static "js/jquery-3.3.1.min.js" %}" ></script>
+  <script src="{% static "js/popper.min.js" %}" ></script>
+  <script src="{% static "js/bootstrap.min.js" %}" ></script>
+  <script src="{% static "js/bootstrap-datepicker.min.js" %}" ></script>
+  <script src="{% static "js/bootstrap-timepicker.min.js" %}" ></script>
+  <script src="{% static "js/daterangepicker.js" %}" ></script>
+  <script src="{% static "js/jquery.dataTables.min.js" %}" ></script>
+  <script src="{% static "js/dataTables.editor.min.js" %}" ></script>
+  <script src="{% static "select2.min.js" %}" ></script>
+  <script src="https://cdn.datatables.net/select/1.2.6/js/dataTables.select.min.js" ></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js" ></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js" ></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js" ></script>
+  <script src="{% static "js/main.js" %}" ></script>
+  {% block scripts %}
+<script type="text/javascript">
+    $('#datepicker').datepicker({
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+    });
+</script>
+{% endblock %}
+</html>
