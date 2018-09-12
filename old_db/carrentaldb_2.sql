@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 12, 2018 at 06:34 AM
+-- Generation Time: Sep 06, 2018 at 11:03 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -332,8 +332,8 @@ CREATE TABLE IF NOT EXISTS `crcapp_employee` (
   `postCodeAddress` int(11) NOT NULL,
   `stateAddress` varchar(3) NOT NULL,
   `DOB` date NOT NULL,
-  `TFN` bigint(15) NOT NULL,
-  `phoneNumber` bigint(15) NOT NULL,
+  `TFN` int(11) NOT NULL,
+  `phoneNumber` int(11) NOT NULL,
   `email` varchar(254) NOT NULL,
   `userName` varchar(50) NOT NULL,
   `password` text NOT NULL,
@@ -350,8 +350,7 @@ CREATE TABLE IF NOT EXISTS `crcapp_employee` (
 --
 
 INSERT INTO `crcapp_employee` (`employeeID`, `firstName`, `lastName`, `streetAddress`, `cityAddress`, `postCodeAddress`, `stateAddress`, `DOB`, `TFN`, `phoneNumber`, `email`, `userName`, `password`, `userType`, `dateJoined`, `lastLogin`, `storeID_id`) VALUES
-('E00001', 'Dev', 'Team Bois', ' 2 George St', 'Brisbane ', 4000, 'QLD', '2018-08-05', 1, 1000000, 'admin@admin.com', 'dev', 'argon2$argon2i$v=19$m=512,t=2,p=2$dHJmeFhiNm5qd0s1$EPUBcr3FsVh4dLom/iytXw', 'Developer', '2018-09-05', '2018-09-05', NULL),
-('E00002', 'Jax', 'Lee', 'Test', 'Brisbane', 4000, 'QLD', '1998-09-12', 4548545558, 422325325, 'jax@jax.com', 'NULL', 'NULL', 'Manager', '2018-09-12', '2018-09-12', 'S0004');
+('E00001', 'Dev', 'Team', ' 2 George St', 'Brisbane ', 4000, 'QLD', '2018-08-05', 1, 1000000, 'admin@admin.com', 'dev', 'argon2$argon2i$v=19$m=512,t=2,p=2$dHJmeFhiNm5qd0s1$EPUBcr3FsVh4dLom/iytXw', 'Developer', '2018-09-05', '2018-09-05', NULL);
 
 -- --------------------------------------------------------
 
@@ -2118,20 +2117,6 @@ CREATE TABLE IF NOT EXISTS `django_session` (
   PRIMARY KEY (`session_key`),
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `django_session`
---
-
-INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('u0udefqo5k3tu0mfhaenx1c51kk87jyy', 'MTdhNTUyMDRlZTQxYWYwM2Y4NGQ3MzY3MGJiMTdjNzYwMzc0YjY0Yjp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0ifQ==', '2018-09-07 01:36:04.184980'),
-('6xb6ig40i2idviqabo7zuygpnwv94kr2', 'MTdhNTUyMDRlZTQxYWYwM2Y4NGQ3MzY3MGJiMTdjNzYwMzc0YjY0Yjp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0ifQ==', '2018-09-07 01:36:09.521212'),
-('x4zh3m0fltean4l759pj59n8rirnq6ft', 'ZDVlNjlhOTRkOGNhODU1MjZlMmZkZTU4MjQ0ZTBlYWNiMGMzZTA4ODp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-07 06:37:29.168058'),
-('pek3nnpeokfu9khafkdgx6a0emifkurs', 'ZDVlNjlhOTRkOGNhODU1MjZlMmZkZTU4MjQ0ZTBlYWNiMGMzZTA4ODp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-07 08:41:29.244178'),
-('kj694usvybvg0yoqp96u2f8tg6ilz27t', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-10 03:48:25.316179'),
-('xrao89svm9lqou2lyb4o1o5xg0v0arvi', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-10 12:14:20.333997'),
-('olz15b6hgv2rtpuzdb760fg34lln2jhu', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-11 08:30:07.393166'),
-('261ea1jo0cq93zzbk0l2i9iv7qcvv823', 'ZmNmYzRlNGEzYWY5Mzg3ZWY1ZmRmYjhiNTYyMzZiMGE2OTljYmM3Yzp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyIsInVpZCI6IkUwMDAwMSIsIm1lc3NhZ2VzIjoiU3RhZmYgY3JlYXRlZC4iLCJtdHlwZSI6ImkifQ==', '2018-09-12 07:20:14.537364');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

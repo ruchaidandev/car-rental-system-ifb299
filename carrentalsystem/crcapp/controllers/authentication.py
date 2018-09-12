@@ -2,6 +2,7 @@ from crcapp.models import Employee,Customer
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.exceptions import ValidationError
 from django.contrib.sessions.models import Session
+from django.utils import timezone
 
 class Authentication:
 
@@ -21,7 +22,7 @@ class Authentication:
                 request.session['uid'] = user.employeeID
                 request.session['utype'] = user.userType
                 request.session['name'] = user.firstName+" "+user.lastName
-                user.lastLogin = "now()"
+                user.lastLogin = timezone.now()
                 user.save()
                 return user.employeeID
             else:

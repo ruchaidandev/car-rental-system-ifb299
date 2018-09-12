@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.middleware.csrf import CsrfViewMiddleware
 from django.contrib.auth.hashers import make_password
 from crcapp.models import Store # If the model is used in the view file
+from django.utils import timezone
 
 from . import views
 from crcapp.controllers import authentication, staff
@@ -55,35 +56,26 @@ def staffCreate(request, messages="", mtype=""):
         name = request.session['name']
         utype = request.session['utype']
         stores = Store.objects.all()
-        return render(request, 'staff/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores})
-    else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
-
-# Register new staff action
-def staffCreateAction(request, messages=""):
-     # Checking session exists
-    if request.session.has_key('uid'):
-        name = request.session['name']
-        utype = request.session['utype']
-        stores = Store.objects.all()
         if request.method == 'POST':
             form = request.POST
             reason = CsrfViewMiddleware().process_view(request, None, (), {})
             # If the reason is true it means verification failed
             if reason:
-                return render(request, 'staff/create.html', {'msg': "Token verification failed.", 'name': name, 'mtype': "d", 'utype': utype, "stores": stores})
+                return render(request, 'staff/create.html', {'msg': 'Token verification failed!', 'mtype': "d"})
             else:
                 result = staff.Staff.createStaff(request)
-                if result:
-                    return render(request, 'staff/create.html', {'msg': "Staff created.", 'name': name, 'mtype': "i", 'utype': utype, "stores": stores})
+                if result == True:
+                    return render(request, 'staff/create.html', {'msg': 'Staff created.', 'mtype': "i"})
+                elif result == False:
+                    return render(request, 'staff/create.html', {'msg': 'Staff creation failed.', 'mtype': "d"})
                 else:
-                    return render(request, 'staff/create.html', {'msg': result, 'name': name, 'mtype': "d", 'utype': utype, "stores": stores})
-        else:
-            return render(request, 'staff/create.html', {'msg': "Opps, something went wrong.", 'name': name, 'mtype': "d", 'utype': utype, "stores": stores})
-         
+                    return render(request, 'staff/create.html', {'msg': result, 'mtype': "a"})
+        elif request.method == "GET":
+            return render(request, 'staff/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
-    
+
+
 
 
 # sample view only will be deleted later
