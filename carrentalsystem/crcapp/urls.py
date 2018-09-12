@@ -9,11 +9,10 @@ urlpatterns = [
     path('logoff', views.logoff, name='logoff'),
 
     # For viewing the page
-    path('staff/create', views.staffCreate, name='staffCreate'),
+    path('staff/create', views.staffCreate, name='staffCreate'), # This will do both
     path('customer/create', views.customerCreate, name='customerCreate'),
 
     # Action class to add the values to the db
-    path('create/staff', views.staffCreateAction, name='staffCreateAction'),
     path('booking/order', views.bookOrder, name='bookOrder'),
 
     path('sample', views.sample, name='staffCreateAction'),

@@ -16,19 +16,25 @@
             <!-- Checking whether it is a danger type or info type needed for the box
                 Will be checked by mtype is d or i
             -->
-            {% if mtype == "d" %}
+            {% if mtype == "d" or mtype == "a" %}
             <div class="alert alert-danger">
             {% elif mtype == "i" %}
             <div class="alert alert-info">
             {% endif %}
-                {{ msg }}
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {% if mtype == "a" %}
+                    {% for key, values in msg %}
+                        <p>{{ key }} : {{ values.0 }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>{{ msg }}</p>
+                {% endif %}
             </div>
         </div>
-</div>
-
+</div>    
 {% endif %}
 
-<form action="/create/staff" method="post">
+<form action="/staff/create" method="POST">
         {% csrf_token %}
         <div class="container">
                 <div class="row">
@@ -38,9 +44,9 @@
                         </div>
                 </div>
             <div class="row">
-                <form class="form-horizontal" role="form" method="POST" action="/create/staff">
-                    <div class="col-md-8">
 
+            <div class="col-md-8">
+                            
                                 <div class="row">
                                     <div class="col-md-3 field-label-responsive">
                                         <label for="firstName">First Name</label>
@@ -182,8 +188,8 @@
                                                 <div class="input-group-addon" ></i></div>
                                                 <!-- <input type="text" name="DOB" class="form-control" id="DOB"
                                                        placeholder="date of Birth" required autofocus> -->
-                                                    <input data-date-format="dd/mm/yyyy" class="form-control"
-                                                    id="datepicker" placeholder="dd/mm/yyyy" required autofocus>
+                                                    <input data-date-format="yyyy-mm-dd" name="dob" class="form-control"
+                                                    id="datepicker" placeholder="yyyy-mm-dd" required autofocus>
                                             </div>
                                         </div>
                                     </div>
@@ -301,8 +307,7 @@
 
                                         </div>
                     </div>
-
-                </form>
+                    
             </div>
             </div>
   </form>
