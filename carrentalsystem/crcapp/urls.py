@@ -11,6 +11,7 @@ urlpatterns = [
     path('staff/create', views.staffCreate, name='staffCreate'),
     # Action class to add the values to the db
     path('create/staff', views.staffCreateAction, name='staffCreateAction'),
-    
+    path('booking/order', views.bookOrder, name='bookOrder'),
+
     path('sample', views.sample, name='staffCreateAction'),
 ]
