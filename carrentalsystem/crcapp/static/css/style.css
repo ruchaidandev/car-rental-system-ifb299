@@ -62,3 +62,10 @@ html,body{
     padding: 20px;
     min-height: 100%;
 }
+a:hover{
+    text-decoration: none;
+    font-weight: 600;
+}
+.breadcrumb{
+    background-color: transparent !important;
+}
