@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import validate_email
 
+from operator import concat
+
 # Create your models here.
 class Store(models.Model):
     storeID = models.CharField(max_length=10, primary_key=True)
@@ -55,6 +57,9 @@ class Employee(models.Model):
     dateJoined = models.DateField()
     lastLogin = models.DateField()
     storeID = models.ForeignKey(Store, on_delete=models.DO_NOTHING,blank=True,null=True)
+
+    def __str__(self):
+        return self.firstName + " " + self.lastName
 
 
 class Vehicle(models.Model):
