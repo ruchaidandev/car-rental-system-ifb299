@@ -35,9 +35,7 @@
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                       <a class="navbar-brand" href="#">CRC System</a>
                       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
+                       
                         <li class="nav-item font-blue pt-2 ml-2" style="text-transform: capitalize;">
                           Welcome, {{ name }}
                         </li>
@@ -53,6 +51,14 @@
   
       
         <main role="main" class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                  {% block breadcrumb %}
+                  {% endblock %}
+                </ol>
+              </nav>
+            
             {% block content %}
             {% endblock %}
             

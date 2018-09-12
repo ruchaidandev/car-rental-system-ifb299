@@ -2,6 +2,11 @@
 
 {% block title %}Create Staff{% endblock %}
 
+{% block breadcrumb %}
+    
+<li class="breadcrumb-item active" aria-current="page">Create Staff</li>
+{% endblock %}
+
 {% block content %}
 
 
@@ -129,11 +134,13 @@
 							<div class="form-group">
 								<select class="custom-select" required>
 									<option value="">Select a State</option>
-									<option value="1">New South Wales</option>
-									<option value="2">Queensland</option>
-                                    <option value="3">South Australia</option>
-                                    <option value="4">Tasmania</option>
-                                    <option value="5">Victoria</option>
+                                    <option value="NSW">New South Wales</option>                                                              
+                                    <option value="NT">Northern Territory</option>
+									<option value="QLD">Queensland</option>
+                                    <option value="SA">South Australia</option>
+                                    <option value="TS">Tasmania</option>
+                                    <option value="VIC">Victoria</option>          
+                                    <option value="WA">Western Australia</option>
 								</select>
 							</div>
                         </div>
@@ -282,19 +289,19 @@
 							<div class="form-group">
 								<select class="custom-select" required>
 									<option value="">Select a user type</option>
-									<option value="1">Manager</option>
-									<option value="2">Staff</option>
-									<option value="3">Developer</option>
+									<option value="Manager">Manager</option>
+									<option value="Staff">Staff</option>
 								</select>
 							</div>
                         </div>
 					</div>
                     <div class="row">
                         <div class="col-md-3">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
+                                <button type="cancel" class="btn btn-danger"><i class="fas fa-ban"></i> Cancel</button>
                         </div>
                         <div class="col-md-6">
-                            <button type="cancel" class="btn btn-danger"><i class="fas fa-ban"></i> Cancel</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
+                            
                         </div>
                     </div>
                 </form>
