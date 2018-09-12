@@ -3,7 +3,7 @@
 {% block title %}Create Staff{% endblock %}
 
 {% block breadcrumb %}
-    
+
 <li class="breadcrumb-item active" aria-current="page">Create Staff</li>
 {% endblock %}
 
@@ -11,24 +11,35 @@
 
 <!-- Error message box will be shown only if the msg variable has some value -->
 {% if msg != "" %}
-<div class="row"> 
+<div class="row">
         <div class="col-md-12 col-sm-12">
-            <!-- Checking whether it is a danger type or info type needed for the box 
-                Will be checked by mtype is d or i 
+            <!-- Checking whether it is a danger type or info type needed for the box
+                Will be checked by mtype is d or i
             -->
-            {% if mtype == "d" %}
+            {% if mtype == "d" or mtype == "a" %}
             <div class="alert alert-danger">
             {% elif mtype == "i" %}
             <div class="alert alert-info">
             {% endif %}
-                {{ msg }}
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {% if mtype == "a" %}
+                    {% for key, values in msg %}
+                        <p>{{ key }} : {{ values.0 }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>{{ msg }}</p>
+                {% endif %}
             </div>
         </div>
+<<<<<<< HEAD
 </div>    
-              
+=======
+</div>
+
+>>>>>>> 8d87d6defa2ed98638a654a2ce2ca51b7b6db932
 {% endif %}
 
-<form action="/create/staff" method="post">
+<form action="/staff/create" method="POST">
         {% csrf_token %}
         <div class="container">
                 <div class="row">
@@ -36,13 +47,17 @@
                             <h2>Register New Staff</h2>
                             <hr>
                         </div>
-                    </div>
+                </div>
             <div class="row">
+<<<<<<< HEAD
 
-            
+            <div class="col-md-8">
+                            
+=======
                 <form class="form-horizontal" role="form" method="POST" action="/create/staff">
                     <div class="col-md-8">
-                            
+
+>>>>>>> 8d87d6defa2ed98638a654a2ce2ca51b7b6db932
                                 <div class="row">
                                     <div class="col-md-3 field-label-responsive">
                                         <label for="firstName">First Name</label>
@@ -161,12 +176,12 @@
                                                         <div class="form-group">
                                                             <select class="custom-select" name="state" required>
                                                                 <option value="">Select a State</option>
-                                                                <option value="NSW">New South Wales</option>                                                              
+                                                                <option value="NSW">New South Wales</option>
                                                                 <option value="NT">Northern Territory</option>
                                                                 <option value="QLD">Queensland</option>
                                                                 <option value="SA">South Australia</option>
                                                                 <option value="TS">Tasmania</option>
-                                                                <option value="VIC">Victoria</option>          
+                                                                <option value="VIC">Victoria</option>
                                                                 <option value="WA">Western Australia</option>
                                                             </select>
                                                         </div>
@@ -184,8 +199,8 @@
                                                 <div class="input-group-addon" ></i></div>
                                                 <!-- <input type="text" name="DOB" class="form-control" id="DOB"
                                                        placeholder="date of Birth" required autofocus> -->
-                                                    <input data-date-format="dd/mm/yyyy" class="form-control"
-                                                    id="datepicker" placeholder="dd/mm/yyyy" required autofocus>
+                                                    <input data-date-format="yyyy-mm-dd" name="dob" class="form-control"
+                                                    id="datepicker" placeholder="yyyy-mm-dd" required autofocus>
                                             </div>
                                         </div>
                                     </div>
@@ -260,9 +275,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                               
-                                
+
+
+
                     </div>
                     <div class="col-md-4">
                             <h5>Store Details</h5>
@@ -300,11 +315,15 @@
 
                                     <div class="row text-center pt-3 pl-5">
                                             <button type="submit" class="btn btn-flat btn-success"><i class="fa fa-user-plus"></i> Register</button>
-                                    
+
                                         </div>
                     </div>
+<<<<<<< HEAD
                     
+=======
+
                 </form>
+>>>>>>> 8d87d6defa2ed98638a654a2ce2ca51b7b6db932
             </div>
             </div>
   </form>
@@ -312,14 +331,14 @@
 
 {% endblock %}
 
-<!-- 
+<!--
     All components for the scripts per page goes here.
     Base.html will contain all the scripts neccessary to the project
     If you need any new js file add it under the block scripts
 -->
 {% block scripts %}
 <script type="text/javascript">
-    
+
 
     $(document).ready(function() {
         $('#datepicker').datepicker({
