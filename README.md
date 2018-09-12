@@ -6,7 +6,7 @@ This project is still in beta stage.
 
 * python 3.7.0
 * Django: `pip install Django`
-* django-bootstrap4: `pip install django-bootstrap4 `
+* django-bootstrap4: `pip install django-bootstrap4`
 * MySQL: MySQL server, MYSQL client, MYSQL workbench
 * MYSQL python connector: `pip install mysql-connector-python`
 * argon2-cffi library: `pip install django[argon2]`
