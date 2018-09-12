@@ -74,10 +74,6 @@ def staffCreate(request, messages="", mtype=""):
             return render(request, 'staff/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
-<<<<<<< HEAD
-
-
-=======
     
 # Create customer member page
 def customerCreate(request, messages="", mtype=""):
@@ -99,7 +95,6 @@ def bookOrder(request, messages=""):
         return render(request, 'booking/order.html', {'msg': messages, 'name': name, 'utype': utype})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
->>>>>>> 8d87d6defa2ed98638a654a2ce2ca51b7b6db932
 
 
 # sample view only will be deleted later
