@@ -1,4 +1,5 @@
 from django.urls import path, include
+from django.conf.urls import include, url
 
 from . import views
 
@@ -14,6 +15,12 @@ urlpatterns = [
 
     # Action class to add the values to the db
     path('booking/order', views.bookOrder, name='bookOrder'),
+
+    path('staff/login', views.viewStaffLogin, name='viewStaffLogin'),
+    # Getting staff from staff check 
+    path('staff/store', views.getStaffFromStore, name='getStaffFromStore'),
+    # passing values in the url
+    url(r'^staff/login/(?P<option>\S+)/$', views.viewStaffLoginDetails, name='viewStaffLoginDetails'),
 
     path('sample', views.sample, name='staffCreateAction'),
 ]
