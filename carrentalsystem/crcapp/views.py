@@ -63,7 +63,7 @@ def staffCreate(request, messages="", mtype=""):
             if reason:
                 return render(request, 'staff/create.html', {'msg': 'Token verification failed!', 'mtype': "d"})
             else:
-                result = staff.Staff.createStaff(request)
+                result = staff.StaffController.createStaff(request)
                 if result == True:
                     return render(request, 'staff/create.html', {'msg': 'Staff created.', 'mtype': "i"})
                 elif result == False:
