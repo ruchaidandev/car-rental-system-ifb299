@@ -1,7 +1,8 @@
-from crcapp.models import Employee,Customer
+from crcapp.models import Employee,Customer,Store
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.exceptions import ValidationError
 from django.contrib.sessions.models import Session
+from django.utils import timezone
 
 # Create functions related to staff
 class Staff:
@@ -13,37 +14,43 @@ class Staff:
         staffObj = Employee.objects.raw("SELECT employeeID FROM `crcapp_employee` ORDER BY employeeID DESC LIMIT 1")[0]
         empID = staffObj.employeeID
         empID = empID[1:]
-        empID = empID+1;
-        empID = "E"+ str(empID).zfill(5)
+        empID = int(empID)+1;
+        emploID = str(empID).zfill(5)
+
         try:
-            employeeID = empID
-            firstname = request.POST.get("firstName")
-            lastname = request.POST.get("lastName")
-            streetAddress = request.POST.get("streetAddress")
-            city = request.POST.get("city")
-            postalCode = request.POST.get("postalCode")
-            state = request.POST.get("state")
-            DOB = request.POST.get("DOB")
-            TFN = request.POST.get("TFN")
-            phoneNumber = request.POST.get("phoneNumber")
-            email = request.POST.get("email")
-            username = ""
-            password = ""
-            userType = request.POST.get("userType")
-            dateJoined = "now()"
-            lastLogin = "now()"
-            storeID = request.POST.get("storeID")
-            staff = Employee(
-                employeeID,
-                firstname,
-                lastname,
-                streetAddress,
-                city,
-                postalCode,
-                state,DOB,TFN,phoneNumber,email,username,password,userType,dateJoined,lastLogin, storeID
-                )
-            staff.full_clean()
-            staff.save()
-            return True
+            employeeID_ = "E"+emploID
+            firstName_ = request.POST.get("firstName")
+            lastName_ = request.POST.get("lastName")
+            streetAddress_ = request.POST.get("streetAddress")
+            cityAddress_ = request.POST.get("city")
+            postCodeAddress_ = request.POST.get("postalCode")
+            stateAddress_ = request.POST.get("state")
+            DOB_ = request.POST.get("dob")
+            TFN_ = request.POST.get("TFN")
+            phoneNumber_ = request.POST.get("phoneNumber")
+            email_ = request.POST.get("email")
+            userName_ = "NULL"
+            password_ = "NULL"
+            userType_ = request.POST.get("userType")
+            dateJoined_ = timezone.now()
+            lastLogin_ = timezone.now()
+            storeID_ = request.POST.get("storeID")
+            store = Store.objects.get(storeID=storeID_)
+            
+            # Sam change this according to your create function for now Iam adding this to test
+            staff = Employee(employeeID = employeeID_, firstName = firstName_, lastName = lastName_, 
+            streetAddress = streetAddress_, cityAddress = cityAddress_, postCodeAddress = postCodeAddress_, 
+            stateAddress = stateAddress_, DOB = DOB_, TFN = TFN_, phoneNumber = phoneNumber_, email = email_, 
+            userName = userName_, password = password_, userType = userType_, dateJoined = dateJoined_, 
+            lastLogin = lastLogin_, storeID = store)
+            vali = staff.full_clean()
+            if vali:
+                return vali
+            else:
+                staff.save()
+                return True
+            
+            return False
+            
         except ValidationError as e:
             return e
