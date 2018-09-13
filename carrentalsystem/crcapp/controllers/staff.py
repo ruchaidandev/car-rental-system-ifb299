@@ -5,7 +5,7 @@ from django.contrib.sessions.models import Session
 from django.utils import timezone
 
 # Create functions related to staff
-class Staff:
+class StaffController:
 
     # Creating a new staff account. If a username exist in the employee
     # database, do not create the account. else, create the account for
