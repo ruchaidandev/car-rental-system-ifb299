@@ -132,11 +132,40 @@ def getStaffFromStore(request):
     else:
         return HttpResponse("NULL")
 
+# will return a json arrray of the login usernames
+@csrf_exempt # to disable csrf token check
+def getUsernames(request):
+    # Checking session exists
+     
+    if request.method == 'POST':
+        employees = Employee.objects.all()
+        return HttpResponse(serialize('json', employees, cls=LazyEncoder))
+       
+    else:
+        return HttpResponse("NULL")
 
 # get start details to the login page
 def viewStaffLoginDetails(request, option):
-    return HttpResponse(option)
-
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        employee = Employee.objects.filter(employeeID=option).values()[0]
+        store = Store.objects.filter(storeID=employee['storeID_id']).values()[0]
+        
+        return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype, 'msg': '', 'mtype': '', 'employee':employee, 'store':store})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+    
+# sample view only will be deleted later
+def email(request):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        date = timezone.now()
+        return render(request, 'emaillayout.html', {'name': name, 'utype': utype, 'msg': '', 'mtype': '', 'date':date})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+    
 
 # sample view only will be deleted later
 def sample(request):

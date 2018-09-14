@@ -19,8 +19,13 @@ urlpatterns = [
     path('staff/login', views.viewStaffLogin, name='viewStaffLogin'),
     # Getting staff from staff check 
     path('staff/store', views.getStaffFromStore, name='getStaffFromStore'),
+    # Getting usernames
+    path('staff/usernames/list', views.getUsernames, name='getUsernames'),
     # passing values in the url
     url(r'^staff/login/(?P<option>\S+)/$', views.viewStaffLoginDetails, name='viewStaffLoginDetails'),
 
     path('sample', views.sample, name='staffCreateAction'),
+
+     # Getting staff from staff check 
+    path('email', views.email, name='email')
 ]
