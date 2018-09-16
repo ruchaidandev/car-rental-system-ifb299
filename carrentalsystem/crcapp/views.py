@@ -151,11 +151,21 @@ def viewStaffLoginDetails(request, option):
         utype = request.session['utype']
         employee = Employee.objects.filter(employeeID=option).values()[0]
         store = Store.objects.filter(storeID=employee['storeID_id']).values()[0]
-        
         return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype, 'msg': '', 'mtype': '', 'employee':employee, 'store':store})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
     
+# viewing the staff search page
+def searchStaff(request):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        stores = Store.objects.all()
+        return render(request, 'staff/search.html', {'name': name, 'utype': utype,'stores': stores})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+
 # sample view only will be deleted later ------ DO NOT USE IN PRODUCTION
 def email(request):
     if request.session.has_key('uid'):
