@@ -68,23 +68,26 @@ class StaffController:
         except ValidationError as e:
             return e
 
-    def modify(employeeID_,
-               firstName_,
-               lastName_,
-               streetAddress_,
-               cityAddress_,
-               postCodeAddress_,
-               stateAddress_,
-               DOB_,
-               TFN_,
-               phoneNumber_,
-               email_,
-               userName_,
-               password_,
-               userType_,
-               dateJoined_,
-               lastLogin_,
-               storeID_):
+    def modify():
+
+        customerID_ = request.POST.get("customerID")
+        firstName_ = request.POST.get("firstName")
+        lastName_ = request.POST.get("lastName")
+        streetAddress_ = request.POST.get("streetAddress")
+        cityAddress_ = request.POST.get("city")
+        postCodeAddress_ = request.POST.get("postalCode")
+        stateAddress_ = request.POST.get("state")
+        DOB_ = request.POST.get("dob")
+        TFN_ = request.POST.get("TFN")
+        phoneNumber_ = request.POST.get("phoneNumber")
+        email_ = request.POST.get("email")
+        userName_ = "NULL"
+        password_ = "NULL"
+        userType_ = request.POST.get("userType")
+        dateJoined_ = timezone.now()
+        lastLogin_ = timezone.now()
+        storeID_ = request.POST.get("storeID")
+        store = Store.objects.get(storeID=storeID_)
 
         x = Customer.objects.get(customerID_)
 
