@@ -7,7 +7,7 @@ search vehicle page and cancel the booking session. -->
 {% block title %}Order Confirmation{% endblock %}
 
 {% block content %}
-<form action="/booking/order" method="post">
+<form action="/booking/orderConfirm" method="post">
     {% csrf_token %}
     <div class="container">
         <form class="form-horizontal" role="form" method="POST" action="/order">

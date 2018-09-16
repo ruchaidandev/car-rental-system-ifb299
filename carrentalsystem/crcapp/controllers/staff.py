@@ -14,7 +14,7 @@ class StaffController:
         staffObj = Employee.objects.raw("SELECT employeeID FROM `crcapp_employee` ORDER BY employeeID DESC LIMIT 1")[0]
         empID = staffObj.employeeID
         empID = empID[1:]
-        empID = int(empID)+1;
+        empID = int(empID)+1
         emploID = str(empID).zfill(5)
 
         try:

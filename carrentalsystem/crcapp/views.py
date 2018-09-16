@@ -96,12 +96,12 @@ def customerCreate(request, messages="", mtype=""):
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
 # Order Confirmation page
-def bookOrder(request, messages=""):
+def bookOrderConfirm(request, messages=""):
     # Checking session exists
     if request.session.has_key('uid'):
         name = request.session['name']
         utype = request.session['utype']
-        return render(request, 'booking/order.html', {'msg': messages, 'name': name, 'utype': utype})
+        return render(request, 'booking/orderConfirm.html', {'msg': messages, 'name': name, 'utype': utype})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
@@ -156,7 +156,7 @@ def viewStaffLoginDetails(request, option):
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
     
-# sample view only will be deleted later
+# sample view only will be deleted later ------ DO NOT USE IN PRODUCTION
 def email(request):
     if request.session.has_key('uid'):
         name = request.session['name']
@@ -167,7 +167,7 @@ def email(request):
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
     
 
-# sample view only will be deleted later
+# sample view only will be deleted later ------ DO NOT USE IN PRODUCTION
 def sample(request):
     stores = Store.objects.all()
     return render(request, 'sample/searchandtable.html', {'list': stores})
