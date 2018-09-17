@@ -1,3 +1,4 @@
+from django.db import models
 from crcapp.models import Employee,Customer,Store
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.exceptions import ValidationError
@@ -133,5 +134,5 @@ class CustomerController:
 
     def search(arg):
         if(arg == ""):
-            for each in Customer.objects.all()[0:20]:
+            for each in Customer.objects.all():
                 print(each.all)
