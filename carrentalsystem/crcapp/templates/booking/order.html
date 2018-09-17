@@ -51,9 +51,6 @@
                 <td class="pdttable">{{ vehicle.storeID }}</td> 
             </tr>
         {% endfor %}
-     
-
-
   </tbody>
   <tfoot>
   <tr>
@@ -77,49 +74,105 @@
   </tfoot>
 </table>
 
+<form action="order/booking">
+<div class="row">
+			<div class="col-md-3 field-label-responsive">
+				<label for="pickup">Pickup Date</label>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<div class="input-group-addon" ></i></div>
+						<!-- <input type="text" name="DOB" class="form-control" id="DOB"
+							placeholder="date of Birth" required autofocus> -->
+						<input data-date-format="dd/mm/yyyy" class="form-control"
+							id="datepicker" placeholder="dd/mm/yyyy" required autofocus>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-control-feedback">
+					<span class="text-danger align-middle">
+						<!-- Put DOB validation error messages here -->
+					</span>
+				</div>
+			</div>
+  </div>
+  <div class="row">
+			<div class="col-md-3 field-label-responsive">
+				<label for="return">Return Date</label>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<div class="input-group-addon" ></i></div>
+						<!-- <input type="text" name="DOB" class="form-control" id="DOB"
+							placeholder="date of Birth" required autofocus> -->
+						<input data-date-format="dd/mm/yyyy" class="form-control"
+							id="datepicker" placeholder="dd/mm/yyyy" required autofocus>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-control-feedback">
+					<span class="text-danger align-middle">
+						<!-- Put DOB validation error messages here -->
+					</span>
+				</div>
+			</div>
+  </div>
+  <div class="row justify-content-md-center">
+    <div class="col-md-4 text-center">
+      <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Continue</button>
+    </div>
+  </div>
+</form>
+
 {% endblock %}
 
 {% block scripts %}
 <script>
-        $(function () {
-            // The tbl is the id value for the table
-          $('#tbl').DataTable({
-                            'paging'      : true, // for pagination
-                            'lengthChange': false,
-                            'searching'   : true, //searching
-                            'ordering'    : true, //sorting
-                            'info'        : true,
-                            'autoWidth'   : true, // keep this true
-                            'sScrollX': '100%', // this too
-                            "lengthMenu": [[20, 40, 60, -1], [20, 40, 60, "All"]], // for number of items
-      
-                              'dom': 'Bfrtip', //export buttons
-                              'buttons': [
-                                {
-                                  extend: 'copyHtml5',
-                                  text: 'Copy',
-                                  className: 'btn btn-flat btn-primary',
-                                },
-                                {
-                                  extend: 'excelHtml5',
-                                  text: 'Export to Excel',
-                                  className: 'btn btn-flat btn-primary',
-                                },
-                                {
-                                  extend: 'print',
-                                  className: 'btn btn-flat btn-primary',
-                                  customize: function ( win ) {
-                                    $(win.document.body).css('background', '#fff');
-                                    $(win.document.body).css('padding', '20px');
-                                  }
-      
-                                }
-      
-                              ]
-                          })
+
+    $(function () {
+        // The tbl is the id value for the table
+      $('#tbl').DataTable({
+        'paging'      : true, // for pagination
+        'lengthChange': false,
+        'searching'   : true, //searching
+        'ordering'    : true, //sorting
+        'info'        : true,
+        'autoWidth'   : true, // keep this true
+        'sScrollX': '100%', // this too
+        "lengthMenu": [[20, 40, 60, -1], [20, 40, 60, "All"]], // for number of items
+          'dom': 'Bfrtip', //export buttons
+          'buttons': [
+            {
+              extend: 'copyHtml5',
+              text: 'Copy',
+              className: 'btn btn-flat btn-primary',
+            },
+            {
+              extend: 'excelHtml5',
+              text: 'Export to Excel',
+              className: 'btn btn-flat btn-primary',
+            },
+            {
+              extend: 'print',
+              className: 'btn btn-flat btn-primary',
+              customize: function ( win ) {
+                $(win.document.body).css('background', '#fff');
+                $(win.document.body).css('padding', '20px');
+              }
+            }
+          ]
+      })
+    })
           
-          
-      
-        })
+  	$('#datepicker').datepicker({
+	    weekStart: 1,
+	    daysOfWeekHighlighted: "6,0",
+	    autoclose: true,
+	    todayHighlight: true,
+	  });
       </script>
 {% endblock %}
