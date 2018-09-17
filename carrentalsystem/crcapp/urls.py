@@ -27,7 +27,8 @@ urlpatterns = [
     # passing values in the url
     url(r'^staff/login/(?P<option>\S+)/$', views.viewStaffLoginDetails, name='viewStaffLoginDetails'),
 
-
+    # changing username and password of employees 
+    path('staff/createlogin', views.createLoginStaff, name='createLoginStaff'),
 
     ### Customer ###
     # For viewing the page

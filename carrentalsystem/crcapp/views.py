@@ -4,7 +4,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.middleware.csrf import CsrfViewMiddleware
 from django.views.decorators.csrf import csrf_exempt, csrf_protect # to use csrf exempt
 from django.contrib.auth.hashers import make_password
-from crcapp.models import Store,Employee # If the model is used in the view file
+from crcapp.models import Store,Employee,Customer # If the model is used in the view file
 from django.utils import timezone
 from django.core.serializers import serialize
 from django.core.serializers.json import DjangoJSONEncoder
@@ -145,27 +145,65 @@ def getUsernames(request):
         return HttpResponse("NULL")
 
 # get start details to the login page
-def viewStaffLoginDetails(request, option):
+def viewStaffLoginDetails(request, option, msg='',mtype=''):
     if request.session.has_key('uid'):
         name = request.session['name']
         utype = request.session['utype']
         employee = Employee.objects.filter(employeeID=option).values()[0]
         store = Store.objects.filter(storeID=employee['storeID_id']).values()[0]
         
-        return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype, 'msg': '', 'mtype': '', 'employee':employee, 'store':store})
+        return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype,  'msg': msg, 'mtype': mtype, 'employee':employee, 'store':store})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
     
-# sample view only will be deleted later ------ DO NOT USE IN PRODUCTION
-def email(request):
+# emails message will contain what to send and to whom 
+# message, id is for the employee id or customer id
+# by default it is sent to employees
+def email(request, message="Default Message", id = "E00001", isEmployee=True):
     if request.session.has_key('uid'):
         name = request.session['name']
         utype = request.session['utype']
         date = timezone.now()
-        return render(request, 'emaillayout.html', {'name': name, 'utype': utype, 'msg': '', 'mtype': '', 'date':date})
+        date_un = date.strftime("%Y%m%d")
+        if isEmployee:
+            items = Employee.objects.filter(employeeID=id).values()[0]
+        else:
+            items = Customer.objects.filter(customerID=id).values()[0]
+        
+        return render(request, 'emaillayout.html', {'name': name, 'utype': utype, 'msg': '', 'mtype': '', 'date':date, 'date_un': date_un, 'item':items, 'msgemail':message})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
-    
+
+# creating the login details of the employee
+def createLoginStaff(request):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        employee = Employee.objects.filter(employeeID=request.POST.get("empID", '')).values()[0]
+        store = Store.objects.filter(storeID=employee['storeID_id']).values()[0]
+        if request.method == 'POST':
+            reason = CsrfViewMiddleware().process_view(request, None, (), {})
+            # If the reason is true it means verification failed
+            if reason:
+                return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype, 'msg': 'Token verification failed!', 'mtype': 'd', 'employee':employee, 'store':store})
+            else:
+                result = staff.StaffController.changeLoginDetails(request, make_password(request.POST.get('password', '')))
+                if result == True:
+                    msg = { "subject": "", "message":""}
+                    msg['subject'] = "Your welcome guide for using the system."
+                    msg['message'] = "Good news. Your new account is ready for you to use. Below you will find your account details and additional information you may need as you get started. You can manage your profile by login to the system."
+                    msg['message'] += '</p><p class="ml-2 pl-5"><b>Username: </b> '+request.POST.get("username", '')+'<br><b>Password: </b> '+ request.POST.get("password", '')
+                    
+                    return email(request, msg, request.POST.get("empID",''))
+                elif result == False:
+                    return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype, 'msg': 'Opps, something happened, please try again later.', 'mtype': 'd', 'employee':employee, 'store':store})
+                else:
+                    return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype, 'msg': result, 'mtype': 'd', 'employee':employee, 'store':store})
+        elif request.method == "GET":
+            return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype, 'msg': 'HTTP request error', 'mtype': 'd', 'employee':employee, 'store':store})
+       
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
 # sample view only will be deleted later ------ DO NOT USE IN PRODUCTION
 def sample(request):
