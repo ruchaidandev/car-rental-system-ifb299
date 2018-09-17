@@ -4,7 +4,7 @@
 
 {% block breadcrumb %}
 
-<li class="breadcrumb-item active" aria-current="page">View Staff Login</li>
+<li class="breadcrumb-item active" aria-current="page">Search Staff</li>
 {% endblock %}
 
 
@@ -20,16 +20,16 @@
             </div>
             <div class="col-md-6">
                     <div class="form-group">
-                        <select class="form-control select2 p-2" style="width:280px;" name="storeID" id="storeID" required>
+                        <select class="form-control select2 p-2" style="width:280px;" name="staffID" id="staffID" required>
                             <option value="">Select category</option>
-                            {% for employee in employees %}
-                            <option value="{{ employee }}">{{ employee.name }}</option>
+                            {% for field in fields %}
+                            <option value="{{ field }}">{{ field.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
             </div>
             <div class="col-md-3">
-                    <div id="btnStore" class="btn btn-flat btn-primary">SELECT</div>
+                    <div id="btnStaff" class="btn btn-flat btn-primary">SELECT</div>
             </div>
     </div>
         
@@ -62,11 +62,26 @@
               </tr>
               </thead>
               <tbody id="records">
-                    <!-- Iterating through the list passed from the view -->
-                   
-                 
-            
-            
+                {% for employee in employees %}
+                <tr>
+                  <td class="pdttable">{{ employee.employeeID }}</td>
+                  <td class="pdttable">{{ employee.firstName }}</td>
+                  <td class="pdttable">{{ employee.lastname }}</td>
+                  <td class="pdttable">{{ employee.streetAddress }}</td>
+                  <td class="pdttable">{{ employee.cityAddress }}</td> 
+                  <td class="pdttable">{{ employee.postCodeAddress }}</td> 
+                  <td class="pdttable">{{ employee.stateAddress }}</td>
+                  <td class="pdttable">{{ employee.DOB }}</td>
+                  <td class="pdttable">{{ employee.TFN }}</td>  
+                  <td class="pdttable">{{ employee.phoneNumber }}</td> 
+                  <td class="pdttable">{{ employee.email }}</td>
+                  <td class="pdttable">{{ employee.userName }}</td>
+                  <td class="pdttable">{{ employee.userType }}</td>   
+                  <td class="pdttable">{{ employee.dateJoined }}</td> 
+                  <td class="pdttable">{{ employee.lastLogin }}</td> 
+                  <td class="pdttable">{{ employee.storeID }}</td> 
+                </tr>
+                {% endfor %}
               </tbody>
               <tfoot>
               <tr>
@@ -97,87 +112,52 @@
 
 {% block scripts %}
 <script>
+// datatable initialising
+  $('#tbl').DataTable({
+      'retrieve': true,
+      'paging'      : true, // for pagination
+      'lengthChange': false,
+      'searching'   : true, //searching
+      'ordering'    : true, //sorting
+      'info'        : true,
+      'autoWidth'   : true, // keep this true
+      'sScrollX': '100%', // this too
+      "lengthMenu": [[20, 40, 60, -1], [20, 40, 60, "All"]], // for number of items
+
+        'dom': 'Bfrtip', //export buttons
+        'buttons': [
+          {
+            extend: 'copyHtml5',
+            text: 'Copy',
+            className: 'btn btn-flat btn-primary',
+          },
+          {
+            extend: 'excelHtml5',
+            text: 'Export to Excel',
+            className: 'btn btn-flat btn-primary',
+          },
+          {
+            extend: 'print',
+            className: 'btn btn-flat btn-primary',
+            customize: function ( win ) {
+              $(win.document.body).css('background', '#fff');
+              $(win.document.body).css('padding', '20px');
+            }
+
+          }
+
+        ]
+    })
         
 
-         $(document).ready(function() {
-            $("#dtView").hide();
-            $('#storeID').select2();
-        });
-        
-        $("#btnStore").click(function(){
-            
-            $.ajax({
-                url: "/staff/store",
-                type : 'POST', 
-                data: {storeID:$('#storeID').val()},
-                contentType: 'application/x-www-form-urlencoded',
-                success: function(result){
-                    // converting the result string to JSON array
-                    var result = JSON.parse(result);
-                    var rows = ''; //initialising a string variable
-                    
-                    // Adding values to the string by iterating the array
-                    for(var i=0; i < result.length; i++ ){
-                        rows += '<tr>'+
-                                '<td><a href="/staff/login/'+result[i]['pk']+'">'+result[i]['pk']+'</a></td>'+
-                                '<td>'+result[i]['fields']['firstName']+' '+result[i]['fields']['firstName']+'</td>'+
-                                '<td>'+result[i]['fields']['email']+'</td>'+
-                                '<td>'+result[i]['fields']['userName']+'</td>'+
-                                '<td>'+result[i]['fields']['userType']+'</td>'+
-                                '<td>'+result[i]['fields']['dateJoined']+'</td>'+  
-                                '</tr>';
-                    }
+// $(document).ready(function() {
+//   $("#dtView").hide();
+//   $('#storeID').select2();
+// });
 
-                    // adding the rows string to #records component to populate as HTML
-                    $("#records").html(rows);
-                    // showing the table
-                    $("#dtView").show();
-                    
-                    
-                    // datatable initialising
-                        $('#tbl').DataTable({
-                            'retrieve': true,
-                            'paging'      : true, // for pagination
-                            'lengthChange': false,
-                            'searching'   : true, //searching
-                            'ordering'    : true, //sorting
-                            'info'        : true,
-                            'autoWidth'   : true, // keep this true
-                            'sScrollX': '100%', // this too
-                            "lengthMenu": [[20, 40, 60, -1], [20, 40, 60, "All"]], // for number of items
-                            'scrollX':        true, // for scrolling
-                            'crollCollapse': true,
-      
-                              'dom': 'Bfrtip', //export buttons
-                              'buttons': [
-                                {
-                                  extend: 'copyHtml5',
-                                  text: 'Copy',
-                                  className: 'btn btn-flat btn-primary',
-                                },
-                                {
-                                  extend: 'excelHtml5',
-                                  text: 'Export to Excel',
-                                  className: 'btn btn-flat btn-primary',
-                                },
-                                {
-                                  extend: 'print',
-                                  className: 'btn btn-flat btn-primary',
-                                  customize: function ( win ) {
-                                    $(win.document.body).css('background', '#fff');
-                                    $(win.document.body).css('padding', '20px');
-                                  }
-      
-                                }
-      
-                              ]
-                          })
-                    
-                }});
-            
-            
-        })
-      </script>
+// $("#btnStaff").click(function(){})
+
+</script>
 
 
 {% endblock %}

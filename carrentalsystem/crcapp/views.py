@@ -161,8 +161,9 @@ def searchStaff(request, msg='',mtype=''):
     if request.session.has_key('uid'):
         name = request.session['name']
         utype = request.session['utype']
-        employees = Employee._meta.get_fields()
-        return render(request, 'staff/search.html', {'employees': employees})
+        fields = Employee._meta.get_fields()
+        employees = Employee.objects.all()
+        return render(request, 'staff/search.html', {'fields': fields}, {'employees': employees})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
