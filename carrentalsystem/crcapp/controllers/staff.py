@@ -14,7 +14,7 @@ class StaffController:
         staffObj = Employee.objects.raw("SELECT employeeID FROM `crcapp_employee` ORDER BY employeeID DESC LIMIT 1")[0]
         empID = staffObj.employeeID
         empID = empID[1:]
-        empID = int(empID)+1;
+        empID = int(empID)+1
         emploID = str(empID).zfill(5)
 
         try:
@@ -151,3 +151,29 @@ class StaffController:
 
         except ValidationError as e:
             return e
+<<<<<<< HEAD
+=======
+
+    def changeLoginDetails(request, pw):
+        try:
+            employeeID_ = request.POST.get("empID")
+            userName_ = request.POST.get("username")
+            password_ = pw
+            
+            
+            # updating certain values
+            staff = Employee.objects.get(employeeID=employeeID_)
+            staff.userName=userName_
+            staff.password = password_
+            vali = staff.full_clean()
+            if vali:
+                return vali
+            else:
+                staff.save()
+                return True
+            
+            return False
+            
+        except ValidationError as e:
+            return e
+>>>>>>> 1436925e98a2e5fa62c5c29df6c9b33d912edcb8
