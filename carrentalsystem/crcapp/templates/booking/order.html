@@ -55,6 +55,13 @@
         $(function () {
             // The tbl is the id value for the table
           $('#tbl').DataTable({
+                            columnDefs:[{
+                                name: 'Store ID',
+                                orderable: true,
+                                searchable: true,
+                                targets: [0]
+                            }
+                            ],    
                             'paging'      : true, // for pagination
                             'lengthChange': false,
                             'searching'   : true, //searching
