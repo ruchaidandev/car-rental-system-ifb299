@@ -134,4 +134,4 @@ class CustomerController:
     def search(arg):
         if(arg == ""):
             for each in Customer.objects.all()[0:20]:
-                print(each.firstName)
+                print(each.all)
