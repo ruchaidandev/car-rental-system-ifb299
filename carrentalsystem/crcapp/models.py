@@ -16,12 +16,21 @@ class Store(models.Model):
 class Customer(models.Model):
     choice_text = 'Customer model'
     customerID = models.CharField(max_length=10, primary_key=True)
+<<<<<<< HEAD
+    firstName = models.CharField(max_length=50)
+    lastName = models.CharField(max_length=50)
+    streetAddress = models.CharField(max_length=50)
+    cityAddress = models.CharField(max_length=16)
+    postCodeAddress = models.IntegerField()
+    stateAddress = models.CharField(max_length = 30)
+=======
     firstName = models.CharField(max_length=80)
     lastName = models.CharField(max_length=80)
     streetAddress = models.CharField(max_length=50, null=True)
     cityAddress = models.CharField(max_length=16, null=True)
     postCodeAddress = models.IntegerField( null=True)
     stateAddress = models.CharField(max_length = 30, null=True)
+>>>>>>> 1436925e98a2e5fa62c5c29df6c9b33d912edcb8
     DOB = models.DateField(auto_now=False, auto_now_add=False)
     driverLicenceNumber = models.BigIntegerField(null=True)
     gender = models.CharField(max_length=2)
