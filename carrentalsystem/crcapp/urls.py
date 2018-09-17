@@ -28,7 +28,8 @@ urlpatterns = [
     # Searching 
     path('staff/search', views.searchStaff, name='searchStaff'),
 
-
+    # changing username and password of employees 
+    path('staff/createlogin', views.createLoginStaff, name='createLoginStaff'),
 
     ### Customer ###
     # For viewing the page

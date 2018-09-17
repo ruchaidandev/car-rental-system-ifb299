@@ -34,7 +34,6 @@
 </div>    
 {% endif %}
 
-<form action="/staff/create" method="POST">
         {% csrf_token %}
         <div class="container">
                 <div class="row">
@@ -207,6 +206,9 @@
 
                     </div>
                     <div class="col-md-6">
+                        
+                        <form action="/staff/createlogin" method="post">
+	                    {% csrf_token %}
                             <h5>Login Details</h5>
                             <hr>
                             <br>
@@ -219,7 +221,7 @@
                                                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                                         <div class="input-group-addon"></i></div>
                                                         <input type="text" class="form-control" id="uname"
-                                                               placeholder="The username" readonly="readonly" value="">
+                                                               placeholder="The username" name="username" readonly="readonly" value="">
                                                     </div>
                                                 </div>
                                     </div>
@@ -233,12 +235,12 @@
                                                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                                             <div class="input-group-addon"></i></div>
                                                             <input type="text" class="form-control" id="pw"
-                                                                   placeholder="The password" readonly="true" value="">
+                                                                   placeholder="The password" name="password" readonly="true" value="">
                                                         </div>
                                                     </div>
                                         </div>
                                     </div>
-
+                                    <input type="hidden" name="empID" value="{{ employee.employeeID }}"/>
                                     <div class="row text-center pt-3 pl-5">
                                             <button type="submit" class="btn btn-flat btn-success">Create Login</button>
 
@@ -247,6 +249,7 @@
                                         <br>
                                         <hr>
                                         <br>
+                                    </form>
                             <h5>Store Details</h5>
                             <hr>
                             <br>
@@ -282,7 +285,7 @@
                     
             </div>
             </div>
-  </form>
+  
 
 
 {% endblock %}

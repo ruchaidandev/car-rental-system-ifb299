@@ -54,3 +54,26 @@ class StaffController:
             
         except ValidationError as e:
             return e
+
+    def changeLoginDetails(request, pw):
+        try:
+            employeeID_ = request.POST.get("empID")
+            userName_ = request.POST.get("username")
+            password_ = pw
+            
+            
+            # updating certain values
+            staff = Employee.objects.get(employeeID=employeeID_)
+            staff.userName=userName_
+            staff.password = password_
+            vali = staff.full_clean()
+            if vali:
+                return vali
+            else:
+                staff.save()
+                return True
+            
+            return False
+            
+        except ValidationError as e:
+            return e
