@@ -69,3 +69,31 @@ a:hover{
 .breadcrumb{
     background-color: transparent !important;
 }
+
+.table th {
+    color:#4885ed !important;
+}
+
+.table, .table tr, .table .odd {
+    background-color: #fff !important;
+}
+.table thead, .table tfoot{
+    border-color: #4885ed !important;
+}
+
+.border-1{
+    border-width: 1px;
+    border-style: solid;
+}
+
+
+.border-2{
+    border-width: 2px;
+    border-style: solid;
+}
+
+
+.border-3{
+    border-width: 3px;
+    border-style: solid;
+}

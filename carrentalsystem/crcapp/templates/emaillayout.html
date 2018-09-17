@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Email{% endblock %}
+
+{% block breadcrumb %}
+
+<li class="breadcrumb-item active" aria-current="page">Email</li>
+{% endblock %}
+
+{% block content %}
+
+<!-- Error message box will be shown only if the msg variable has some value -->
+{% if msg != "" %}
+<div class="row">
+        <div class="col-md-12 col-sm-12">
+            <!-- Checking whether it is a danger type or info type needed for the box
+                Will be checked by mtype is d or i
+            -->
+            {% if mtype == "d" or mtype == "a" %}
+            <div class="alert alert-danger">
+            {% elif mtype == "i" %}
+            <div class="alert alert-info">
+            {% endif %}
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {% if mtype == "a" %}
+                    {% for key, values in msg %}
+                        <p>{{ key }} : {{ values.0 }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>{{ msg }}</p>
+                {% endif %}
+            </div>
+        </div>
+</div>    
+{% endif %}
+
+    <div class="row">
+        <div class="col-md-12 p-2 border-blue border-2" id="emailComponent">
+            <br>
+                <h2 class="font-blue text-center">Car Rental System</h2>
+            <br>
+            <hr>
+            <br>
+            <div class="row justify-content-end">
+                <div class="col-md-4">
+                        <p class="text-right">Date: {{ date }}</p>
+                </div>
+                
+            </div>
+
+            <div class="row p-2">
+
+
+            </div>
+            
+            <div class="row">
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+    $(document).ready(function() {
+       
+    });
+</script>
+
+
+{% endblock %}

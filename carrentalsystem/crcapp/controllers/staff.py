@@ -5,7 +5,7 @@ from django.contrib.sessions.models import Session
 from django.utils import timezone
 
 # Create functions related to staff
-class Staff:
+class StaffController:
 
     # Creating a new staff account. If a username exist in the employee
     # database, do not create the account. else, create the account for
@@ -14,7 +14,7 @@ class Staff:
         staffObj = Employee.objects.raw("SELECT employeeID FROM `crcapp_employee` ORDER BY employeeID DESC LIMIT 1")[0]
         empID = staffObj.employeeID
         empID = empID[1:]
-        empID = int(empID)+1;
+        empID = int(empID)+1
         emploID = str(empID).zfill(5)
 
         try:
