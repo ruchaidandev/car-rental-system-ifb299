@@ -16,6 +16,12 @@ class Store(models.Model):
 class Customer(models.Model):
     choice_text = 'Customer model'
     customerID = models.CharField(max_length=10, primary_key=True)
+    firstName = models.CharField(max_length=50)
+    lastName = models.CharField(max_length=50)
+    streetAddress = models.CharField(max_length=50)
+    cityAddress = models.CharField(max_length=16)
+    postCodeAddress = models.IntegerField()
+    stateAddress = models.CharField(max_length = 30)
     firstName = models.CharField(max_length=80)
     lastName = models.CharField(max_length=80)
     streetAddress = models.CharField(max_length=50, null=True)

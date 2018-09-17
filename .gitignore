@@ -4,3 +4,5 @@
 __pycache__/
 *.vscode
 carrentalsystem/settings.py
+/.vs/ifb299_project/v15
+/.vs
