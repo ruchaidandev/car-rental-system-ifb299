@@ -133,7 +133,7 @@ class CustomerController:
         x.delete()
 
     def search(arg):
-        if(arg == ""):
+        if(arg == "all"):
             for each in Customer.objects.all():
                 print(
                 each.customerID,
@@ -153,27 +153,27 @@ class CustomerController:
                 each.dateJoined,
                 each.lastLogin)
 
-        if(arg!= ""):
-            customerID_min = arg[0]
-            customerID_max = arg[1]
-            firstName = arg[2]
-            lastName = arg[3]
-            streetAdress = arg[4]
-            cityAddress = arg[5]
-            postCodeAddress = arg[6]
-            stateAddress = arg[7]
-            DOB_min = arg[8]
-            DOB_max = arg[9]
-            driverLicenceNumber = arg[10]
-            gender = arg[11]
-            occupation = arg[12]
-            phoneNumber = arg[13]
-            email = arg[14]
-            userName = arg[15]
-            dateJoined_min = arg[16]
-            dateJoined_max = arg[17]
-            lastLogin_min = arg[18]
-            lastLogin_max = arg[19]
+        if(arg!= "all"):
+            customerID_min = request.POST.get("customerID_min")
+            customerID_max = request.POST.get("customerID_max")
+            firstName = request.POST.get("firstName")
+            lastName = request.POST.get("lastName")
+            streetAdress = request.POST.get("streetAdress")
+            cityAddress = request.POST.get("cityAddress")
+            postCodeAddress = request.POST.get("postCodeAddress")
+            stateAddress = request.POST.get("stateAddress")
+            DOB_min = request.POST.get("DOB_min")
+            DOB_max = request.POST.get("DOB_max")
+            driverLicenceNumber = request.POST.get("driverLicenceNumber")]
+            gender = request.POST.get("gender")]
+            occupation = request.POST.get("occupation")]
+            phoneNumber = request.POST.get("phoneNumber")]
+            email = request.POST.get("email")]
+            userName = request.POST.get("userName")]
+            dateJoined_min = request.POST.get("dateJoined_min")]
+            dateJoined_max = request.POST.get("dateJoined_max")]
+            lastLogin_min = request.POST.get("lastLogin_min")]
+            lastLogin_max = request.POST.get("lastLogin_max")]
 
             condition = " "
 
