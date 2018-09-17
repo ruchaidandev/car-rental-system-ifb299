@@ -198,6 +198,7 @@ def createLoginStaff(request):
                     msg['subject'] = "Your welcome guide for using the system."
                     msg['message'] = "Good news. Your new account is ready for you to use. Below you will find your account details and additional information you may need as you get started. You can manage your profile by login to the system."
                     msg['message'] += '</p><p class="ml-2 pl-5"><b>Username: </b> '+request.POST.get("username", '')+'<br><b>Password: </b> '+ request.POST.get("password", '')
+                    
                     return email(request, msg, request.POST.get("empID",''))
                 elif result == False:
                     return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype, 'msg': 'Opps, something happened, please try again later.', 'mtype': 'd', 'employee':employee, 'store':store})
