@@ -156,6 +156,16 @@ def viewStaffLoginDetails(request, option, msg='',mtype=''):
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
+# Searching for staff
+def searchStaff(request, msg='',mtype=''):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        employees = Employee._meta.get_fields()
+        return render(request, 'staff/search.html', {'employees': employees})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
 # Booking page
 def bookingOrder(request):
     stores = Store.objects.all()
@@ -210,15 +220,6 @@ def createLoginStaff(request):
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
-# Searching for staff
-def searchStaff(request):
-    if request.session.has_key('uid'):
-        name = request.session['name']
-        utype = request.session['utype']
-        stores = Store.objects.all()
-        return render(request, 'staff/search.html', {'name': name, 'utype': utype,'stores': stores})
-    else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
 # sample view only will be deleted later ------ DO NOT USE IN PRODUCTION
 def sample(request):
