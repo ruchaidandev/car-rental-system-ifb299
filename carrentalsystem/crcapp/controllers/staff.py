@@ -151,8 +151,6 @@ class StaffController:
 
         except ValidationError as e:
             return e
-<<<<<<< HEAD
-=======
 
     def changeLoginDetails(request, pw):
         try:
@@ -176,4 +174,3 @@ class StaffController:
             
         except ValidationError as e:
             return e
->>>>>>> 1436925e98a2e5fa62c5c29df6c9b33d912edcb8
