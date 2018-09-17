@@ -38,6 +38,7 @@ urlpatterns = [
 
     ### Booking ###
     # For viewing page
+    path('booking/order', views.bookingOrder, name='bookingOrder'),
     path('booking/orderConfirm', views.bookOrderConfirm, name='bookOrderConfirm'),
 
 

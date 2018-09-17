@@ -154,6 +154,11 @@ def viewStaffLoginDetails(request, option):
         return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype, 'msg': '', 'mtype': '', 'employee':employee, 'store':store})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+# Booking page
+def bookingOrder(request):
+    stores = Store.objects.all()
+    return render(request, 'booking/order.html', {'list': stores})
     
 # viewing the staff search page
 def searchStaff(request):
