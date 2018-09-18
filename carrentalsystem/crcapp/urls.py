@@ -33,6 +33,8 @@ urlpatterns = [
     ### Customer ###
     # For viewing the page
     path('customer/create', views.customerCreate, name='customerCreate'),
+    # For modifying existing customer details
+    path('customer/modify', views.customerModify, name='customerModify'),
 
 
 

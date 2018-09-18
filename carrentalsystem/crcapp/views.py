@@ -95,6 +95,23 @@ def customerCreate(request, messages="", mtype=""):
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
+# Modify customer member page
+def customerModify(request, messages="", mtype=""):
+    # Checking if session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        stores = Store.objects.all()
+
+        customer = Customer.objects.get(firstName="Lauren")#example to grab random customer details to populate the form
+
+        currentOperation = "Modify"
+
+        return render(request, 'customer/modify.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores,
+        "currentOperation": currentOperation, "customer": customer})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
 # Order Confirmation page
 def bookOrderConfirm(request, messages=""):
     # Checking session exists
