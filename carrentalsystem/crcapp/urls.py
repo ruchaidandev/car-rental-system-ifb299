@@ -17,6 +17,7 @@ urlpatterns = [
     # For viewing the page
     path('staff/create', views.staffCreate, name='staffCreate'),
     path('staff/login', views.viewStaffLogin, name='viewStaffLogin'),
+    url(r'^staff/login/(?P<option>\S+)/$', views.viewStaffLoginDetails, name='viewStaffLoginDetails'),
 
     # Getting staff from staff check 
     path('staff/store', views.getStaffFromStore, name='getStaffFromStore'),
@@ -24,8 +25,8 @@ urlpatterns = [
     # Getting usernames
     path('staff/usernames/list', views.getUsernames, name='getUsernames'),
 
-    # passing values in the url
-    url(r'^staff/login/(?P<option>\S+)/$', views.viewStaffLoginDetails, name='viewStaffLoginDetails'),
+    # Searching 
+    path('staff/search', views.searchStaff, name='searchStaff'),
 
     # changing username and password of employees 
     path('staff/createlogin', views.createLoginStaff, name='createLoginStaff'),
@@ -38,6 +39,7 @@ urlpatterns = [
 
     ### Booking ###
     # For viewing page
+    path('booking/order', views.bookingOrder, name='bookingOrder'),
     path('booking/orderConfirm', views.bookOrderConfirm, name='bookOrderConfirm'),
 
 
