@@ -1,12 +1,11 @@
 {% extends '../base.html' %}
-{% block title %}Create Customer{% endblock %}
+{% block title %}{{currentOperation}} Customer{% endblock %}
 {% block breadcrumb %}
 <li class="breadcrumb-item active" aria-current="page">{{currentOperation}} Customer</li>
 {% endblock %}
 {% block content %}
 <!-- Error message box will be shown only if the msg variable has some value -->
 {% if msg != "" %}
-<div class="row">
 <div class="col-md-12 col-sm-12">
 	<!-- Checking whether it is a danger type or info type needed for the box
 		Will be checked by mtype is d or i
@@ -37,236 +36,108 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 text-center">
-                {% if currentOperation == "Modify" %}
-                    <h2>Modify Customer</h2>
-                {% else %}
-                    <h2>Register New Customer</h2>
-                {% endif %}
+				{% if currentOperation == "Modify" %}
+					<h2>Modify Customer</h2>
+				{% else %}
+					<h2>Register New Customer</h2>
+				{% endif %}
 				<hr>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<h5>Name</h5>
-				<div class="row pt-4">
-					<div class="col-md-6 row">
-						<div class="col-md-3 field-label-responsive">
-							<label for="firstName">First Name</label>
-						</div>
-						<div class="col-md-9">
-							<div class="form-group">
-								<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-									<div class="input-group-addon" ></i></div>
-									<input type="text" name="firstName" class="form-control" id="firstName"
-										placeholder="First Name" value="{{ customer.firstName }}" required autofocus>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 row">
-						<div class="col-md-3 field-label-responsive">
-							<label for="lastName">Last Name</label>
-						</div>
-						<div class="col-md-9">
-							<div class="form-group">
-								<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-									<div class="input-group-addon" ></i></div>
-									<input type="text" name="lastName" class="form-control" id="lastName"
-										placeholder="Last Name" value="{{ customer.lastName }}" required autofocus>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+		<div class="row col-md-12">
+		<h4>Name</h4>
+		</div>
+		<div class="form-group row">
+			<label for="firstName" class="col-sm-2 col-form-label">First Name</label>
+			<div class="col-sm-4">
+				<input type="text" name="firstName" class="form-control" id="firstName"
+				placeholder="First Name" value="{{ customer.firstName }}" required autofocus>
 			</div>
-        </div>
-        <div class="row">
-                <div class="col-md-12">
-                    <h5>Address</h5>
-                    <div class="row pt-4">
-                        <div class="col-md-6 row">
-                            <div class="col-md-3 field-label-responsive">
-                                    <label for="streetAddress">Street Address</label>
-                            </div>
-                            <div class="col-md-9">
-                                    <div class="form-group">
-                                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                                <div class="input-group-addon" ></i></div>
-                                                <input type="text" name="streetAddress" class="form-control" id="streetAddress"
-                                                    placeholder="Street" value="{{ customer.streetAddress }}" required autofocus>
-                                            </div>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 row">
-                                <div class="col-md-3 field-label-responsive">
-                                        <label for="city">City</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="form-group">
-                                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                                <div class="input-group-addon" ></i></div>
-                                                <input type="text" name="city" class="form-control" id="city"
-                                                    placeholder="City" required autofocus>
-                                            </div>
-                                        </div>
-                                    </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-3">
-                            <div class="col-md-6 row">
-                                    <div class="col-md-3 field-label-responsive">
-                                            <label for="postalCode">Postal Code</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                                    <div class="input-group-addon" ></i></div>
-                                                    <input type="text" name="postalCode" class="form-control" id="postalCode"
-                                                        placeholder="Postal Code" required autofocus>
-                                                </div>
-                                            </div>
-                                        </div>
-                            </div>
-                            <div class="col-md-6 row">
-                                    <div class="col-md-3 field-label-responsive">
-                                            <label for="state">State</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <select class="custom-select" name="state" required>
-                                                    <option value="">Select a State</option>
-                                                    <option value="NSW">New South Wales</option>
-                                                    <option value="NT">Northern Territory</option>
-                                                    <option value="QLD">Queensland</option>
-                                                    <option value="SA">South Australia</option>
-                                                    <option value="TS">Tasmania</option>
-                                                    <option value="VIC">Victoria</option>
-                                                    <option value="WA">Western Australia</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                            </div>
-                        </div>
-                        
-                </div>
-            </div>
-		<div class="row">
-			<div class="col-md-3 field-label-responsive">
-				<label for="DriverLicenseNumber">Drivers License Number</label>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-						<div class="input-group-addon" ></i></div>
-						<input type="text" name="DriverLicenseNumber" class="form-control" id="DriverLicenseNumber"
-							placeholder="Drivers License Number" required autofocus> 
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-control-feedback">
-					<span class="text-danger align-middle">
-						<!-- Put Driver's License Number validation error messages here -->
-					</span>
-				</div>
+			<label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
+			<div class="col-sm-4">
+				<input type="text" name="lastName" class="form-control" id="lastName"
+				placeholder="Last Name" value="{{ customer.lastName }}" required autofocus>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-3 field-label-responsive">
-				<label for="DOB">Date Of Birth</label>
+		<div class="row col-md-12">
+			<h4>Address</h4>
+		</div>
+		<div class="form-group row">
+			<label for="streetAddress" class="col-sm-2 col-form-label">Street Address</label>
+			<div class="col-sm-4">
+				<input type="text" name="streetAddress" class="form-control" id="streetAddress"
+				placeholder="Street" value="{{ customer.streetAddress }}" required autofocus>
 			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-						<div class="input-group-addon" ></i></div>
-						<!-- <input type="text" name="DOB" class="form-control" id="DOB"
-							placeholder="date of Birth" required autofocus> -->
-						<input data-date-format="yyyy-mm-dd" class="form-control"
-							id="datepicker" placeholder="yyyy-mm-dd" value="{{ customer.DOB }}" required autofocus>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-control-feedback">
-					<span class="text-danger align-middle">
-						<!-- Put DOB validation error messages here -->
-					</span>
-				</div>
+			<label for="city" class="col-sm-2 col-form-label">City</label>
+			<div class="col-sm-4">
+				<input type="text" name="city" class="form-control" id="city"
+				placeholder="City" value="{{ customer.city }}" required autofocus>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-3 field-label-responsive">
-				<label for="phoneNumber">Phone Number</label>
+		<div class="form-group row">
+			<label for="postalCode" class="col-sm-2 col-form-label">Postal Code</label>
+			<div class="col-sm-4">
+				<input type="text" name="postalCode" class="form-control" id="postalCode"
+				placeholder="Postal Code" value="{{ customer.postalCode }}" required autofocus>
 			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-						<div class="input-group-addon"></i></div>
-						<input type="text" name="phoneNumber" class="form-control" id="phoneNumber"
-							placeholder="Phone Number" required autofocus>
-					</div>
+			<label for="state" class="col-sm-2 col-form-label">State</label>
+				<div class="col-sm-4">
+					<select class="custom-select" name="state" required>
+						<option value="{{ customer.streetAddress }}">Select a State</option>
+						<option value="NSW">New South Wales</option>
+						<option value="NT">Northern Territory</option>
+						<option value="QLD">Queensland</option>
+						<option value="SA">South Australia</option>
+						<option value="TS">Tasmania</option>
+						<option value="VIC">Victoria</option>
+						<option value="WA">Western Australia</option>
+					</select>
 				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-control-feedback">
-					<span class="text-danger align-middle">
-						<!-- Put phone number validation error messages here -->
-					</span>
-				</div>
+		</div>
+		<div class="form-group row">
+			<label for="DriverLicenseNumber" class="col-sm-3 col-form-label">Drivers License Number</label>
+			<div class="col-sm-9">
+				<input type="text" name="DriverLicenseNumber" class="form-control" id="DriverLicenseNumber"
+				placeholder="Drivers License Number" value="{{ customer.DriverLicenseNumber }}" required autofocus>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-3 field-label-responsive">
-				<label for="email">Email Address</label>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-						<div class="input-group-addon"></i></div>
-						<input type="email" name="email" class="form-control" id="email"
-							placeholder="you@example.com" required autofocus>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-control-feedback">
-					<span class="text-danger align-middle">
-						<!-- Put e-mail validation error messages here -->
-					</span>
-				</div>
+		<div class="form-group row">
+			<label for="DOB" class="col-sm-3 col-form-label">Date Of Birth</label>
+			<div class="col-sm-9">
+				<input data-date-format="dd-mm-yyyy" class="form-control"
+				id="datepicker" placeholder="dd-mm-yyyy" value="{{ customer.DOB|date:"d-m-Y" }}" autofocus>
 			</div>
 		</div>
-		
-		<div class="row">
-			<div class="col-md-3 field-label-responsive">
-				<label for="occupation">Occupation</label>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-						<div class="input-group-addon" ></i></div>
-						<input type="text" name="occupation" class="form-control" id="occupation"
-							placeholder="Occupation" required autofocus>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-control-feedback">
-					<span class="text-danger align-middle">
-						<!-- Put first name validation error messages here -->
-					</span>
-				</div>
+		<div class="form-group row">
+			<label for="phoneNumber" class="col-sm-3 col-form-label">Phone Number</label>
+			<div class="col-sm-9">
+				<input type="text" name="phoneNumber" class="form-control" id="phoneNumber"
+				placeholder="Phone Number" value="{{ customer.phoneNumber }}" required autofocus>
 			</div>
 		</div>
-		<div class="row justify-content-md-center">
-			<div class="col-md-4 text-center">
-				<button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
+		<div class="form-group row">
+			<label for="email" class="col-sm-3 col-form-label">Email Address</label>
+			<div class="col-sm-9">
+				<input type="email" name="email" class="form-control" id="email"
+				placeholder="you@example.com" value="{{ customer.email }}" required autofocus>
 			</div>
 		</div>
-
-</div>
+		<div class="form-group row">
+				<label for="occupation" class="col-sm-3 col-form-label">Occupation</label>
+			<div class="col-sm-9">
+				<input type="text" name="occupation" class="form-control" id="occupation"
+				placeholder="Occupation" value="{{ customer.occupation }}" required autofocus>
+			</div>
+		</div>
+		<div class="form-group col-md-12">
+				{% if currentOperation == "Modify" %}
+					<button type="submit" class="btn btn-success btn-block"><i class="fas fa-save"></i> Save</button>
+				{% else %}
+					<button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
+					<button type = "submit" class = "btn btn-danger"><i class="far fa-times-circle"></i> Delete</button>
+				{% endif %}
+		</div>
+	</div>
 </form>
 {% endblock %}
 {% block scripts %}
