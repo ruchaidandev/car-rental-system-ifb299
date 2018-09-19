@@ -1,4 +1,4 @@
-from crcapp.models import Employee,Customer,Store
+from crcapp.models import Employee,Store
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.exceptions import ValidationError
 from django.contrib.sessions.models import Session
@@ -68,9 +68,10 @@ class StaffController:
         except ValidationError as e:
             return e
 
-    def modify():
+    # modifying the staff values
+    def modify(request, empID):
 
-        customerID_ = request.POST.get("customerID")
+        employeeID_ = empID
         firstName_ = request.POST.get("firstName")
         lastName_ = request.POST.get("lastName")
         streetAddress_ = request.POST.get("streetAddress")
@@ -81,64 +82,50 @@ class StaffController:
         TFN_ = request.POST.get("TFN")
         phoneNumber_ = request.POST.get("phoneNumber")
         email_ = request.POST.get("email")
-        userName_ = "NULL"
-        password_ = "NULL"
         userType_ = request.POST.get("userType")
-        dateJoined_ = timezone.now()
-        lastLogin_ = timezone.now()
         storeID_ = request.POST.get("storeID")
         store = Store.objects.get(storeID=storeID_)
 
-        x = Customer.objects.get(customerID_)
-
+        staff = Employee.objects.get(employeeID = employeeID_)
+        
         try:
             if(firstName_ != ""):
-                x.firstName = firstName_
+                staff.firstName = firstName_
 
             if(lastName_ != ""):
-                x.lastName = lastName_
+                staff.lastName = lastName_
 
             if(streetAddress_ != ""):
-                x.streetAddress = streetAddress_
+                staff.streetAddress = streetAddress_
 
             if(cityAddress_ != ""):
-                x.cityAddress = cityAddress_
+                staff.cityAddress = cityAddress_
 
             if(postCodeAddress_ != ""):
-                x.postCodeAddress = postCodeAddress_
+                staff.postCodeAddress = postCodeAddress_
 
             if(stateAddress_ != ""):
-                x.stateAddress = stateAddress_
+                staff.stateAddress = stateAddress_
 
             if(DOB_ != ""):
-                x.DOB = DOB_
+                staff.DOB = DOB_
 
             if(TFN_ != ""):
-                x.TFN = TFN_
+                staff.TFN = TFN_
 
             if(phoneNumber_ != ""):
-                x.phoneNumber = phoneNumber_
+                staff.phoneNumber = phoneNumber_
 
             if(email_ != ""):
-                x.email = email_
+                staff.email = email_
 
-            if(userName_ != ""):
-                x.userName = userName_
-
-            if(password_ != ""):
-                x.password = password_
 
             if(userType_ != ""):
-                x.userType = userType_
+                staff.userType = userType_
 
-            if(dateJoined_ != ""):
-                x.dateJoined = dateJoined_
-
-            if(lastLogin_ != ""):
-                x.lastLogin = lastLogin_
-
+         
             if(storeID_ != ""):
-                x.storeID = storeID_
+                staff.storeID = store
 
             vali = staff.full_clean()
             if vali:
@@ -151,6 +138,7 @@ class StaffController:
 
         except ValidationError as e:
             return e
+
 
     def changeLoginDetails(request, pw):
         try:

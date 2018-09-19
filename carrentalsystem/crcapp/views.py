@@ -83,7 +83,51 @@ def staffCreate(request, messages="", mtype=""):
             return render(request, 'staff/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
-    
+
+# get all staff
+def getAllStaff(request, messages="", mtype=""):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        stores = Store.objects.all()
+        employees = Employee.objects.all()
+        return render(request, 'staff/staffmanagementview.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "employees":employees, "stores": stores})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+# save changes of staff
+def changeStaffDetails(request, option,  name, utype, msg='',mtype=''):
+    if request.method == 'POST':
+        employee = Employee.objects.filter(employeeID=option).values()[0]
+        stores = Store.objects.all()
+        reason = CsrfViewMiddleware().process_view(request, None, (), {})
+        # If the reason is true it means verification failed
+        if reason:
+            return render(request, 'staff/staffdetailview.html', {'name': name, 'utype': utype,'msg': 'Token verification failed!', 'mtype': "d",'employee':employee, 'stores':stores})
+        else:
+            result = staff.StaffController.modify(request, option)
+            if result == True:
+                return render(request, 'staff/staffdetailview.html', {'name': name, 'utype': utype,'msg': 'Changes saved.', 'mtype': "i",'employee':employee, 'stores':stores})
+            elif result == False:
+                return render(request, 'staff/staffdetailview.html', {'name': name, 'utype': utype,'msg': 'Could not save all changes.', 'mtype': "d",'employee':employee, 'stores':stores})
+            else:
+                return render(request, 'staff/staffdetailview.html', {'name': name, 'utype': utype,'msg': result, 'mtype': "a", 'employee':employee, 'stores':stores})
+
+# get start details to the staff management page
+def getStaff(request, option, msg='',mtype=''):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        if request.method == 'POST':
+            return changeStaffDetails(request, option, msg, mtype, name, utype)
+        elif request.method == 'GET':
+            employee = Employee.objects.filter(employeeID=option).values()[0]
+            stores = Store.objects.all()
+            
+            return render(request, 'staff/staffdetailview.html', {'name': name, 'utype': utype,  'msg': '', 'mtype': mtype, 'employee':employee, 'stores':stores})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
 # Create customer member page
 def customerCreate(request, messages="", mtype=""):
     # Checking session exists
