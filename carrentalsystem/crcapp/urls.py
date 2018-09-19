@@ -5,8 +5,11 @@ from . import views
 
 urlpatterns = [
 
-    ### Home ###
+    ### public web
     path('', views.index, name='index'),
+
+    ### Home ###
+    path('login', views.loginIndex, name='loginIndex'),
     path('home', views.home, name='home'),
     path('login/employee', views.loginEmployee, name='login'),
     path('logoff', views.logoff, name='logoff'),

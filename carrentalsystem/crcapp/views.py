@@ -20,8 +20,11 @@ class LazyEncoder(DjangoJSONEncoder):
 
 # Loading the index page
 def index(request, messages="", mtype="i"):
-    return render(request, 'index.html', {'msg': messages, 'mtype': mtype})
+    return render(request, 'public/index.html', {'msg': messages, 'mtype': mtype})
 
+# Login page
+def loginIndex(request, messages="", mtype="i"):
+    return render(request, 'index.html', {'msg': messages, 'mtype': mtype})
 # Loading the home page
 def home(request, messages=""):
     # Checking session exists
@@ -66,7 +69,7 @@ def disableStaff(request, option, empID):
         return redirect('/staff/login/'+empID)
     else:
         return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
-        
+
 # Logoff action
 def logoff(request, messages=""):
     messages = "Successfully logged off."
