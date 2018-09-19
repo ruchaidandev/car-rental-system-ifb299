@@ -10,7 +10,6 @@ class Store(models.Model):
     city = models.CharField(max_length=30)
     state = models.CharField(max_length = 30)
 
-
 class Customer(models.Model):
     choice_text = 'Customer model'
     customerID = models.CharField(max_length=10, primary_key=True)

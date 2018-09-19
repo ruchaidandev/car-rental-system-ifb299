@@ -18,7 +18,7 @@ urlpatterns = [
     path('staff/create', views.staffCreate, name='staffCreate'),
     path('staff/login', views.viewStaffLogin, name='viewStaffLogin'),
     url(r'^staff/login/(?P<option>\S+)$', views.viewStaffLoginDetails, name='viewStaffLoginDetails'),
-
+    url(r'^staff/activity/(?P<option>\S+)/(?P<empID>\S+)$', views.disableStaff, name='disableStaff'),
     # Getting staff from staff check 
     path('staff/store', views.getStaffFromStore, name='getStaffFromStore'),
 

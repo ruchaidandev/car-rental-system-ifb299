@@ -51,7 +51,22 @@ def loginEmployee(request):
     else:
         return index(request, messages="Opps, something went wrong.", mtype="d")
 
-
+@csrf_exempt # to disable csrf token check
+def disableStaff(request, option, empID):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+   
+        staff = Employee.objects.get(employeeID = empID)
+        if option == "disable":
+            staff.userType = 'disabled'
+        else:
+            staff.userType = 'Staff'
+        staff.save()
+        return redirect('/staff/login/'+empID)
+    else:
+        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+        
 # Logoff action
 def logoff(request, messages=""):
     messages = "Successfully logged off."
@@ -199,6 +214,8 @@ def viewStaffLoginDetails(request, option, msg='',mtype=''):
         return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype,  'msg': msg, 'mtype': mtype, 'employee':employee, 'store':store})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+
 
 # Searching for staff
 def searchStaff(request, msg='',mtype=''):

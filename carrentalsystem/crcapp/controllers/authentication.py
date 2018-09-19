@@ -16,15 +16,18 @@ class Authentication:
             # correct data fields as in model
             user.full_clean()            
             if check_password(password, user.password):
-                # Sets 2 hours expiry date for sessions 
-                request.session.set_expiry(7200) 
-                # setting session values
-                request.session['uid'] = user.employeeID
-                request.session['utype'] = user.userType
-                request.session['name'] = user.firstName+" "+user.lastName
-                user.lastLogin = timezone.now()
-                user.save()
-                return user.employeeID
+                if user.userType == "disabled":
+                    return "Your account is disabled"
+                else:
+                    # Sets 2 hours expiry date for sessions 
+                    request.session.set_expiry(7200) 
+                    # setting session values
+                    request.session['uid'] = user.employeeID
+                    request.session['utype'] = user.userType
+                    request.session['name'] = user.firstName+" "+user.lastName
+                    user.lastLogin = timezone.now()
+                    user.save()
+                    return user.employeeID
             else:
                 return "NULL"
         except Employee.DoesNotExist:
