@@ -4,7 +4,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.middleware.csrf import CsrfViewMiddleware
 from django.views.decorators.csrf import csrf_exempt, csrf_protect # to use csrf exempt
 from django.contrib.auth.hashers import make_password
-from crcapp.models import Store,Employee,Customer # If the model is used in the view file
+from crcapp.models import Store,Employee,Customer,Vehicle # If the model is used in the view file
 from django.utils import timezone
 from django.core.serializers import serialize
 from django.core.serializers.json import DjangoJSONEncoder
@@ -172,6 +172,22 @@ def viewStaffLoginDetails(request, option, msg='',mtype=''):
         return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype,  'msg': msg, 'mtype': mtype, 'employee':employee, 'store':store})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+# Searching for staff
+def searchStaff(request, msg='',mtype=''):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        fields = Employee._meta.get_fields()
+        employees = Employee.objects.all()
+        return render(request, 'staff/search.html', {'fields': fields}, {'employees': employees})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+# Booking page
+def bookingOrder(request):
+    vehicles = Vehicle.objects.all()
+    return render(request, 'booking/order.html', {'vehicles': vehicles})
     
 # emails message will contain what to send and to whom 
 # message, id is for the employee id or customer id
@@ -221,6 +237,7 @@ def createLoginStaff(request):
        
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
 
 # sample view only will be deleted later ------ DO NOT USE IN PRODUCTION
 def sample(request):

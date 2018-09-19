@@ -1,9 +1,7 @@
 from django.db import models
 from django.core.validators import validate_email
 
-from operator import concat
-
-# Create your models here.
+# Store Model
 class Store(models.Model):
     storeID = models.CharField(max_length=10, primary_key=True)
     storeName = models.CharField(max_length=50)
@@ -15,20 +13,15 @@ class Store(models.Model):
     def __str__(self):
         return self.storeName
 
+# Customer Model
 class Customer(models.Model):
     choice_text = 'Customer model'
     customerID = models.CharField(max_length=10, primary_key=True)
-    firstName = models.CharField(max_length=50)
-    lastName = models.CharField(max_length=50)
-    streetAddress = models.CharField(max_length=50)
-    cityAddress = models.CharField(max_length=16)
-    postCodeAddress = models.IntegerField()
-    stateAddress = models.CharField(max_length = 30)
     firstName = models.CharField(max_length=80)
     lastName = models.CharField(max_length=80)
     streetAddress = models.CharField(max_length=50, null=True)
     cityAddress = models.CharField(max_length=16, null=True)
-    postCodeAddress = models.IntegerField( null=True)
+    postCodeAddress = models.IntegerField(null=True)
     stateAddress = models.CharField(max_length = 30, null=True)
     DOB = models.DateField(auto_now=False, auto_now_add=False)
     driverLicenceNumber = models.BigIntegerField(null=True)
@@ -44,7 +37,7 @@ class Customer(models.Model):
     def __str__(self):
             return (self.firstName + " " + self.lastName)
 
-
+# Employee Model
 class Employee(models.Model):
     employeeID = models.CharField(max_length=10, primary_key=True)
     firstName = models.CharField(max_length=50)
@@ -67,7 +60,7 @@ class Employee(models.Model):
     def __str__(self):
         return self.firstName + " " + self.lastName
 
-
+# Vehicle Model
 class Vehicle(models.Model):
     vehicleID = models.CharField(max_length=10, primary_key=True)
     makeName = models.CharField(max_length=50)
@@ -86,12 +79,14 @@ class Vehicle(models.Model):
     wheelbase = models.IntegerField()
     storeID = models.ForeignKey(Store, on_delete=models.DO_NOTHING,blank=True,null=True)
 
+# Inspect Model
 class Inspects(models.Model):
     employeeID = models.ForeignKey(Employee, on_delete=models.DO_NOTHING,blank=True,null=True)
     vehicleID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)
     class Meta:
         unique_together = ('employeeID', 'vehicleID')
 
+# Order Model
 class Order(models.Model):
     orderID = models.CharField(max_length=12, primary_key=True)
     orderDate = models.DateField(auto_now=False, auto_now_add=False)
@@ -103,12 +98,14 @@ class Order(models.Model):
     returnStoreID = models.ForeignKey(Store, related_name="returnstore", on_delete=models.DO_NOTHING,blank=True,null=True)
     employeeID = models.ForeignKey(Employee, on_delete=models.DO_NOTHING,blank=True,null=True)
 
+# ??? Why is this here
 class OrderFor(models.Model):
     orderID = models.ForeignKey(Order, on_delete=models.DO_NOTHING,blank=True,null=True)
     vehicleID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)
     class Meta:
         unique_together = ('orderID', 'vehicleID')
 
+# Invoice Model
 class Invoice(models.Model):
     invoiceID = models.CharField(max_length=10, primary_key=True)
     amount = models.DecimalField(max_digits=12,decimal_places=2)
