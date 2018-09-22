@@ -34,23 +34,36 @@ class VehicleController:
         wheelbase_ = request.POST.get(" wheelbase")
         storeID_ = request.POST.get(" storeID")
 
-        x = Vehicle(vehicleID = vehicleID_,
-                    makeName = makeName_,
-                    model = model_,
-                    series = series_,
-                    year = year_,
-                    newPrice = newPrice_,
-                    enginesize = enginesize_,
-                    fuelSystem = fuelSystem_,
-                    tankcapacity = tankcapacity_,
-                    power = power_,
-                    seatingCapacity = seatingCapacity_,
-                    standardTransmission = standardTransmission_,
-                    bodyType = bodyType_,
-                    driveType = driveType_,
-                    wheelbase = wheelbase_,
-                    storeID = storeID_)
-        x.save()
+        try:
+            x = Vehicle(
+            vehicleID = vehicleID_,
+            makeName = makeName_,
+            model = model_,
+            series = series_,
+            year = year_,
+            newPrice = newPrice_,
+            enginesize = enginesize_,
+            fuelSystem = fuelSystem_,
+            tankcapacity = tankcapacity_,
+            power = power_,
+            seatingCapacity = seatingCapacity_,
+            standardTransmission = standardTransmission_,
+            bodyType = bodyType_,
+            driveType = driveType_,
+            wheelbase = wheelbase_,
+            storeID = storeID_)
+
+            vali = x.full_clean()
+            if vali:
+                return vali
+            else:
+                x.save()
+                return True
+
+            return False
+
+        except ValidationError as e:
+            return e
 
     #searches for Vehicles that match the given arguments (NW)
     def search(arg):
@@ -209,31 +222,36 @@ class VehicleController:
        storeID_ = request.POST.get("storeID")
        store = Store.objects.get(storeID=storeID_)
 
+       try:
+           x = Customer.objects.get(vID_)
 
-       vehicle.makeName = makeName_
-       vehicle.model = model_
-       vehicle.series = series_
-       vehicle.year = year_,
-       vehicle.newPrice = newPrice_
-       vehicle.enginesize = enginesize_
-       vehicle.fuelSystem = fuelSystem_
-       vehicle.tankcapacity = tankcapacity_
-       vehicle.power = power_
-       vehicle.seatingCapacity = seatingCapacity_
-       vehicle.standardTransmission = standardTransmission_
-       vehicle.bodyType = bodyType_
-       vehicle.driveType = driveType_
-       vehicle.wheelbase = wheelbase_
-       vehicle.storeID = store
+           x.makeName = makeName_
+           x.model = model_
+           x.series = series_
+           x.year = year_,
+           x.newPrice = newPrice_
+           x.enginesize = enginesize_
+           x.fuelSystem = fuelSystem_
+           x.tankcapacity = tankcapacity_
+           x.power = power_
+           x.seatingCapacity = seatingCapacity_
+           x.standardTransmission = standardTransmission_
+           x.bodyType = bodyType_
+           x.driveType = driveType_
+           x.wheelbase = wheelbase_
+           x.storeID = store
 
-       vali = vehicle.full_clean()
-       if vali:
-           return vali
-       else:
-           vehicle.save()
-           return True
+           vali = x.full_clean()
+           if vali:
+               return vali
+           else:
+               x.save()
+               return True
 
-       return False
+           return False
+
+       except ValidationError as e:
+            return e
 
 
     def delete(ID):
