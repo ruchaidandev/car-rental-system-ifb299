@@ -20,4 +20,8 @@ from django.urls import include, path
 urlpatterns = [
     path('', include('crcapp.urls')),
     path('admin/', admin.site.urls),
+    path(controllers/customer, crcapp.controllers.customer)
+    path(controllers/staff, crcapp.controllers.staff)
+    path(controllers/vehicle, crcapp.controllers.vehicle)
+    path(controllers/orders, crcapp.controllers.orders)
 ]

@@ -172,7 +172,7 @@ class VehicleController:
             query = 'SELECT * FROM carrentaldb.crcapp_customer WHERE' + condition[:-5] +';'
 
             for each in Vehilce.objects.raw(query):
-                print(
+                return(
                 each.makeName,
                 each.model,
                 each.series,

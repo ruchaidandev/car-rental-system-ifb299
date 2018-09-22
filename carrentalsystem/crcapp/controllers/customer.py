@@ -135,7 +135,7 @@ class CustomerController:
     def search(arg):
         if(arg == "all"):
             for each in Customer.objects.all():
-                print(
+                return(
                 each.customerID,
                 each.firstName,
                 each.lastName,
@@ -221,7 +221,7 @@ class CustomerController:
             query = 'SELECT * FROM carrentaldb.crcapp_customer WHERE' + condition[:-5] +';'
 
             for each in Customer.objects.raw(query):
-                print(
+                return(
                 each.customerID,
                 each.firstName,
                 each.lastName,
