@@ -9,8 +9,8 @@ from django.utils import timezone
 class CustomerController:
     def create():
 
-        staffObj = Employee.objects.raw("SELECT customerID FROM `crcapp_customer` ORDER BY customerID DESC LIMIT 1")[0]
-        x = staffObj.employeeID
+        custObj = Employee.objects.raw("SELECT customerID FROM `crcapp_customer` ORDER BY customerID DESC LIMIT 1")[0]
+        x = custObj.employeeID
         x = x[1:]
         x = int(x)+1;
         x = str(x).zfill(5)
@@ -153,7 +153,7 @@ class CustomerController:
                 each.dateJoined,
                 each.lastLogin)
 
-        if(arg!= "all"):
+        if(arg!= "all"
             customerID_min = request.POST.get("customerID_min")
             customerID_max = request.POST.get("customerID_max")
             firstName = request.POST.get("firstName")
