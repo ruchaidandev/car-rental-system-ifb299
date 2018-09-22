@@ -234,3 +234,8 @@ class VehicleController:
            return True
 
        return False
+
+
+    def delete(ID):
+          x = Vehicle.objects.get(vehicleID = ID)
+          x.delete()
