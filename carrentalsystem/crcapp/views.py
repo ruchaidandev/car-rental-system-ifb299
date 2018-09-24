@@ -4,7 +4,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.middleware.csrf import CsrfViewMiddleware
 from django.views.decorators.csrf import csrf_exempt, csrf_protect # to use csrf exempt
 from django.contrib.auth.hashers import make_password
-from crcapp.models import Store,Employee,Customer,Vehicle # If the model is used in the view file
+from crcapp.models import Store, Employee, Customer, Vehicle # If the model is used in the view file
 from django.utils import timezone
 from django.core.serializers import serialize
 from django.core.serializers.json import DjangoJSONEncoder
@@ -155,6 +155,20 @@ def customerModify(request, messages="", mtype=""):
         "currentOperation": currentOperation, "customer": customer})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+# Viewing for customers
+def getAllCustomers(request, messages="", mtype=""):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        
+        stores = Store.objects.all()
+        customers = Customer.objects.all()
+
+        return render(request, 'customer/customermanagementview.html', {'msg': messages, 'name': name, 'mtype': mtype,
+        'utype': utype, "stores": stores, "customers": customers})
+    else:
+        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
 # Order Confirmation page
 def bookOrderConfirm(request, messages=""):

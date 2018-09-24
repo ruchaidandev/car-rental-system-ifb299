@@ -15,7 +15,6 @@ class Store(models.Model):
 
 # Customer Model
 class Customer(models.Model):
-    choice_text = 'Customer model'
     customerID = models.CharField(max_length=10, primary_key=True)
     firstName = models.CharField(max_length=80)
     lastName = models.CharField(max_length=80)
@@ -98,7 +97,7 @@ class Order(models.Model):
     returnStoreID = models.ForeignKey(Store, related_name="returnstore", on_delete=models.DO_NOTHING,blank=True,null=True)
     employeeID = models.ForeignKey(Employee, on_delete=models.DO_NOTHING,blank=True,null=True)
 
-# Many to many
+# Many to many for order and vehicle
 class OrderFor(models.Model):
     orderID = models.ForeignKey(Order, on_delete=models.DO_NOTHING,blank=True,null=True)
     vehicleID = models.ForeignKey(Vehicle, on_delete=models.DO_NOTHING,blank=True,null=True)

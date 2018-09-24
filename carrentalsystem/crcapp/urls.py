@@ -41,6 +41,8 @@ urlpatterns = [
     # For modifying existing customer details
     path('customer/modify', views.customerModify, name='customerModify'),
 
+    path('customer/search', views.getAllCustomers, name='getAllCustomers'),
+
 
 
     ### Booking ###
