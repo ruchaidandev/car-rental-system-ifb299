@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Se7en">
 
-    <title>{% block title %}Welcome{% endblock %} | Car Rental System</title>
+    <title>Welcome | Car Rental System</title>
     <!-- Bootstrap and other plugins -->
     <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
     <link rel="stylesheet" href="{% static "css/bootstrap-datepicker3.standalone.min.css" %}">
@@ -22,7 +22,6 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="{% static "css/style.css" %}">
     <link rel="stylesheet" href="{% static "css/publicstyles.css" %}">
 
   </head>
@@ -51,7 +50,7 @@
             <a class="nav-link js-scroll-trigger" href="#stores">Stores</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#login">Login</a>
+            <a class="nav-link js-scroll-trigger" href="/login">Login</a>
           </li>
          
         </ul>
@@ -76,22 +75,24 @@
           <div class="col-md-6">
             
               <div class="form-group">
-                <select class="form-control" id="pickupStore">
-                  <option value=""> SELECT PICKUP STORE  </option>
-                  {% for store in stores %}
-                    <option value="{{ store.storeID }}">{{ store.storeName }}</option>
-                  {% endfor %}
+                <select class="form-control" id="exampleSelect1">
+                  <option> SELECT PICKUP STORE  </option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
                 </select>
           
             </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <select class="form-control" id="returnStore">
-                  <option value=""> SELECT RETURN STORE  </option>
-                  {% for store in stores %}
-                    <option value="{{ store.storeID }}">{{ store.storeName }}</option>
-                  {% endfor %}
+                <select class="form-control" id="exampleSelect1">
+                  <option> SELECT RETURN STORE  </option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
                 </select>
               </div>
             </div>
@@ -106,14 +107,14 @@
                 
                   <div class="form-group">
                       <input data-date-format="yyyy-mm-dd" name="pickupdate" class="form-control"
-                      id="pickupdate" placeholder="Pickup Date: yyyy-mm-dd" required >
+                      id="datepicker" placeholder="Pickup Date: yyyy-mm-dd" required >
               
                 </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                       <input data-date-format="yyyy-mm-dd" name="returndate" class="form-control"
-                      id="returndate" placeholder="Return Date: yyyy-mm-dd" required >
+                      id="datepicker" placeholder="Return Date: yyyy-mm-dd" required >
                   </div>
                 </div>
     
@@ -132,12 +133,7 @@
 
       <section class="content-section p-3 p-lg-5 d-flex flex-column" id="vehicles">
         <h2 class="mb-5">Vehicles</h2>
-        <div class="row">
-          <div class="col-md-">
 
-          </div>
-
-        </div>
 
       </section>
 
@@ -150,45 +146,9 @@
         </div>
       </section>
 
-      <section class="content-section p-3 p-lg-5 d-flex flex-column" id="login">
-          <h2 class="mb-5">Car Rental System</h2>
-        <div class="container pt-5">
-          <div class="row justify-content-center">
-            
-            <div class="col-md-4 col-sm-12 pt-2 text-center">
-            
-                {% if msg != "" %}
-                  {% if mtype == "d" %}
-                    <div class="alert alert-danger">
-                  {% elif mtype == "i" %}
-                    <div class="alert alert-info">
-                  {% endif %}
-                        {{ msg }}
-                      </div>
-                {% endif %}
-                <h4 class="mb-3 font-weight-normal font-blue">Please sign in</h4>
-            
-    
-                <form action="/login/employee" method="post">
-                    {% csrf_token %}
-                    <div class="form-group font-black">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" required="true" placeholder="Enter username">
-                      </div>
-                      <div class="form-group font-black">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required="true" placeholder="Your Password">
-                      </div>
-                    <button type="submit">Login</button>
-                  </form>
-            </div>
-    
-          </div>
-      </div>
-    </section>
 
-      
-  <script src="{% static "js/jquery-3.3.1.min.js" %}" ></script>
+    </div>
+    <script src="{% static "js/jquery-3.3.1.min.js" %}" ></script>
   <script src="{% static "js/popper.min.js" %}" ></script>
   <script src="{% static "js/bootstrap.min.js" %}" ></script>
   <script src="{% static "js/bootstrap-datepicker.min.js" %}" ></script>
@@ -212,20 +172,12 @@
   <script src="{% static "js/publicmain.js" %}" ></script>
       
     <script>
-      $('#pickupdate').datepicker({
+      $('#datepicker').datepicker({
             weekStart: 1,
             daysOfWeekHighlighted: "6,0",
             autoclose: true,
             todayHighlight: true,
          });
-         $('#returndate').datepicker({
-          weekStart: 1,
-          daysOfWeekHighlighted: "6,0",
-          autoclose: true,
-          todayHighlight: true,
-       });
-       $("#pickupStore").select2();
-       $("#returnStore").select2();
          </script>
   </body>
 

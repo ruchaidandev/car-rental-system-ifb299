@@ -5,12 +5,13 @@ from . import views
 
 urlpatterns = [
 
-    ### Home ###
+    ### public web
     path('', views.index, name='index'),
+
+    ### Home ###
     path('home', views.home, name='home'),
     path('login/employee', views.loginEmployee, name='login'),
     path('logoff', views.logoff, name='logoff'),
-
 
 
     ### Staff ###
@@ -18,7 +19,7 @@ urlpatterns = [
     path('staff/create', views.staffCreate, name='staffCreate'),
     path('staff/login', views.viewStaffLogin, name='viewStaffLogin'),
     url(r'^staff/login/(?P<option>\S+)$', views.viewStaffLoginDetails, name='viewStaffLoginDetails'),
-
+    url(r'^staff/activity/(?P<option>\S+)/(?P<empID>\S+)$', views.disableStaff, name='disableStaff'),
     # Getting staff from staff check 
     path('staff/store', views.getStaffFromStore, name='getStaffFromStore'),
 
@@ -51,8 +52,11 @@ urlpatterns = [
     path('booking/orderConfirm', views.bookOrderConfirm, name='bookOrderConfirm'),
 
 
-
-
+    ### Vehicle ###
+    # For inserting page
+    path('vehicle', views.getAllVehicles, name='getAllVehicles'),
+    path('vehicle/create', views.createVehicle, name='createVehicle'),
+    url(r'^vehicle/id/(?P<option>\S+)$', views.getVehicle, name='getVehicle'),
 
     ### Sample ------ DO NOT USE IN PRODUCTION ###
     path('sample', views.sample, name='staffCreateAction'),

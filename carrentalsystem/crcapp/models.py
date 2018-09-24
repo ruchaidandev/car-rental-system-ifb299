@@ -31,10 +31,9 @@ class Customer(models.Model):
     userName = models.CharField(max_length=50,null=True)
     password = models.TextField(null=True)
     dateJoined = models.DateField(null=True)
-    lastLogin = models.DateField(null=True)
+    lastLogin = models.DateField(null=True)    
+    disable = models.BooleanField(default=0)
 
-    def __str__(self):
-            return (self.firstName + " " + self.lastName)
 
 # Employee Model
 class Employee(models.Model):
@@ -54,6 +53,7 @@ class Employee(models.Model):
     userType = models.CharField(max_length=16)
     dateJoined = models.DateField()
     lastLogin = models.DateField()
+    disable = models.BooleanField(default=0)
     storeID = models.ForeignKey(Store, on_delete=models.DO_NOTHING,blank=True,null=True)
 
     def __str__(self):
@@ -67,14 +67,14 @@ class Vehicle(models.Model):
     series = models.CharField(max_length = 50)
     year = models.IntegerField()
     newPrice = models.DecimalField(max_digits=10,decimal_places=2)
-    enginesize = models.DecimalField(max_digits=2,decimal_places=1)
-    fuelSystem = models.CharField(max_length=20)
+    enginesize = models.DecimalField(max_digits=4,decimal_places=1)
+    fuelSystem = models.CharField(max_length=50)
     tankcapacity = models.DecimalField(max_digits=7,decimal_places=1)
     power = models.IntegerField()
     seatingCapacity = models.IntegerField()
-    standardTransmission = models.CharField(max_length=10)
-    bodyType = models.CharField(max_length=30)
-    driveType = models.CharField(max_length=3)
+    standardTransmission = models.CharField(max_length=50)
+    bodyType = models.CharField(max_length=50)
+    driveType = models.CharField(max_length=30)
     wheelbase = models.IntegerField()
     storeID = models.ForeignKey(Store, on_delete=models.DO_NOTHING,blank=True,null=True)
 

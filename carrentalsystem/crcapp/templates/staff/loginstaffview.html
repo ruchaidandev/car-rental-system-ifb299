@@ -212,7 +212,9 @@
                             <h5>Login Details</h5>
                             <hr>
                             <br>
-                            <div class="row">
+                            
+                                {% if employee.disable != 1 %}
+                                <div class="row">
                                     <div class="col-md-3 field-label-responsive">
                                         <label for="userType">Username</label>
                                     </div>
@@ -240,16 +242,28 @@
                                                     </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="empID" value="{{ employee.employeeID }}"/>
-                                    <div class="row text-center pt-3 pl-5">
-                                            <button type="submit" class="btn btn-flat btn-success">Create Login</button>
-
+                                        <input type="hidden" name="empID" value="{{ employee.employeeID }}"/>
+                                        <div class="row text-center pt-3 pl-5">
+                                            <button type="submit" name="create" class="btn btn-flat btn-success">Create Login</button>
+                                            <div class="ml-2 btn btn-flat btn-danger" id="disableBtn">Disable Account</div>
                                         </div>
 
                                         <br>
                                         <hr>
                                         <br>
                                     </form>
+                                {% else %}
+                                <div class="row">
+                                    <div class="col-md-12 p-3 field-label-responsive">
+                                        <label for="userType" class="pl-3">The account is currently disabled</label>
+                                    </div>
+                                </div>
+                                    
+                                    <div class="row text-center pt-3 pl-5 mb-5">
+                                        <div class="ml-5 btn btn-flat btn-warning" id="enableBtn">Enable Account</div>
+                                    </div>
+
+                                {% endif %}
                             <h5>Store Details</h5>
                             <hr>
                             <br>
@@ -333,6 +347,26 @@
 
        
     });
+
+    $("#disableBtn").click(function(){
+        $.ajax({
+                url: "/staff/activity/disable/{{ employee.employeeID }}",
+                type : 'GET',
+                success: function(result){
+                    location.reload();
+                }});
+            
+    })
+
+    $("#enableBtn").click(function(){
+        $.ajax({
+                url: "/staff/activity/enable/{{ employee.employeeID }}",
+                type : 'GET',
+                success: function(result){
+                    location.reload();
+                }});
+            
+    })
 </script>
 
 
