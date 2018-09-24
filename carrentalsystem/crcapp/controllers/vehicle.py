@@ -74,7 +74,7 @@ class VehicleController:
             for each in Vehilce.objects.all():
                 print(
                 each.makeName,
-                each.model,
+                each.model, 
                 each.series,
                 each.year,
                 each.newPrice,
@@ -82,7 +82,7 @@ class VehicleController:
                 each.fuelSystem,
                 each.tankcapacity,
                 each.power,
-                each.seatingCapacity,,
+                each.seatingCapacity,
                 each.standardTransmission,
                 each.bodyType,
                 each.driveType,
@@ -197,7 +197,7 @@ class VehicleController:
                 each.fuelSystem,
                 each.tankcapacity,
                 each.power,
-                each.seatingCapacity,,
+                each.seatingCapacity,
                 each.standardTransmission,
                 each.bodyType,
                 each.driveType,
