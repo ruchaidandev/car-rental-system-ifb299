@@ -11,32 +11,30 @@
 		Will be checked by mtype is d or i
 		-->
 	{% if mtype == "d" or mtype == "a" %}
-	<div class="alert alert-danger">
-		{% elif mtype == "i" %}
+		<div class="alert alert-danger">
+	{% elif mtype == "i" %}
 		<div class="alert alert-info">
-			{% endif %}
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			{% if mtype == "a" %}
-			{% for key, values in msg %}
+	{% endif %}
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	{% if mtype == "a" %}
+		{% for key, values in msg %}
 			<p>{{ key }} : {{ values.0 }}</p>
-			{% endfor %}
-			{% else %}
-			<p>{{ msg }}</p>
-			{% endif %}
+		{% endfor %}
+	{% else %}
+		<p>{{ msg }}</p>
+	{% endif %}
 		</div>
 	</div>
 </div>
 {% endif %}
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12 text-center">
-				{% if currentOperation == "Modify" %}
-					<h2>Modify Customer</h2>
-				{% else %}
-					<h2>Register New Customer</h2>
-				{% endif %}
-				<hr>
-			</div>
+		{% if currentOperation == "Modify" %}
+			<h2 class="text-center">Modify Customer</h2>
+		{% else %}
+			<h2 class="text-center">Register New Customer</h2>
+		{% endif %}
+		<div class="col-md-12">
+			<hr>
 		</div>
 		{% if currentOperation == "Modify" %}
     		<form action="/modify/customer" method="post">
@@ -94,6 +92,9 @@
 					</select>
 				</div>
 		</div>
+		<div class="row col-md-12 mb-2">
+			<h4>Other Details</h4>
+		</div>
 		<div class="form-group row">
 			<label for="DriverLicenseNumber" class="col-sm-3 col-form-label">Drivers License Number</label>
 			<div class="col-sm-7 mb-2">
@@ -129,13 +130,20 @@
 				placeholder="Occupation" value="{{ customer.occupation }}" required autofocus>
 			</div>
 		</div>
-		<div class="form-group col-md-12">
-				{% if currentOperation == "Modify" %}
-					<button type="submit" class="btn btn-success btn-block"><i class="fas fa-save"></i> Save</button>
-				{% else %}
-					<button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
-					<button type = "submit" class = "btn btn-danger"><i class="far fa-times-circle"></i> Delete</button>
-				{% endif %}
+		<div class="form-group row">
+		{% if currentOperation == "Modify" %}
+			<div class="col-sm-6">
+				<button type="submit" class="btn btn-success btn-block" value="Save"><i class="fas fa-save"></i> Save</button>
+			</div>
+			<div class="col-sm-6">
+				{% comment %} <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModalCenter">
+						Launch demo modal
+				</button> {% endcomment %}
+				{% comment %} <button type="submit" class ="btn btn-danger btn-block" value="Delete"><i class="far fa-times-circle"></i> Delete</button> {% endcomment %}
+			</div>
+		{% else %}
+			<button type="submit" class="btn btn-success btn-block"><i class="fa fa-user-plus"></i> Register</button>
+		{% endif %}
 		</div>
 	</div>
 </form>

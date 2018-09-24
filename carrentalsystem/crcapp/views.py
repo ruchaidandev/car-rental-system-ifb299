@@ -211,6 +211,20 @@ def getAllCustomers(request, messages="", mtype=""):
     else:
         return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
+# Searching for customers
+def searchCustomers(request):
+     # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+
+        stores = Store.objects.all()
+        customers = Customer.objects.all()
+        
+        return render(request, 'customer/search.html', {'name': name, 'utype': utype,'stores': stores, customers: 'customers'})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
 # Order Confirmation page
 def bookOrderConfirm(request, messages=""):
     # Checking session exists
