@@ -16,7 +16,7 @@ class Authentication:
             # correct data fields as in model
             user.full_clean()            
             if check_password(password, user.password):
-                if user.userType == "disabled":
+                if user.disable == 1:
                     return "Your account is disabled"
                 else:
                     # Sets 2 hours expiry date for sessions 

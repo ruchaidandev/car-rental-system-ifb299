@@ -1,10 +1,11 @@
+<!-- Developer: Frank -->
 {% extends '../base.html' %}
 
-{% block title %}Staff Management{% endblock %}
+{% block title %}Vehicle Management{% endblock %}
 
 {% block breadcrumb %}
 
-<li class="breadcrumb-item active" aria-current="page">Staff Management</li>
+<li class="breadcrumb-item active" aria-current="page">Vehicle Management</li>
 {% endblock %}
 
 
@@ -17,38 +18,39 @@
         <table id="tbl" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%;">
               <thead>
               <tr>
-                <th>Employee ID</th>
-                <th>Name</th>
-                <th>Email</th>
+                <th>Vehicle ID</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Series</th>
+                <th>Year</th>
                 <th>Store</th>
-                <th>User Type</th>
-                <th>Date Joined</th>
               </tr>
               </thead>
               <tbody id="records">
-                    {% for staff in employees %}
+                    {% for vehicle in vehicles %}
                     
                     <tr>
-                            <td class="pdttable"><a href="/staff/id/{{ staff.employeeID }}">{{ staff.employeeID }}</a></td>
-                            <td class="pdttable">{{ staff.firstName }} {{ staff.lastName}}</td>
-                            <td class="pdttable">{{ staff.email }}</td>
+                            <td class="pdttable"><a href="/vehicle/id/{{ vehicle.vehicleID }}">{{ vehicle.vehicleID }}</a></td>
+                            <td class="pdttable">{{ vehicle.makeName }}</td>
+                            <td class="pdttable">{{ vehicle.model }}</td>
+                            
+                            <td class="pdttable">{{ vehicle.series }}</td> 
+                            <td class="pdttable">{{ vehicle.year }}</td> 
                             <td class="pdttable">
-                                    {{ staff.storeID.storeName }}
+                              {{ vehicle.storeID.storeName }}
 
-                            </td>  
-                            <td class="pdttable">{{ staff.userType }}</td> 
-                            <td class="pdttable">{{ staff.dateJoined }}</td>                        
+                      </td>                         
                         </tr>
                     {% endfor %}
               </tbody>
               <tfoot>
               <tr>
-                    <th>Employee ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Store</th>
-                    <th>User Type</th>
-                    <th>Date Joined</th>
+                <th>Vehicle ID</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Series</th>
+                <th>Year</th>
+                <th>Store</th>
               </tr>
               </tfoot>
             </table>

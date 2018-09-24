@@ -9,11 +9,9 @@ urlpatterns = [
     path('', views.index, name='index'),
 
     ### Home ###
-    path('login', views.loginIndex, name='loginIndex'),
     path('home', views.home, name='home'),
     path('login/employee', views.loginEmployee, name='login'),
     path('logoff', views.logoff, name='logoff'),
-
 
 
     ### Staff ###
@@ -50,8 +48,11 @@ urlpatterns = [
     path('booking/orderConfirm', views.bookOrderConfirm, name='bookOrderConfirm'),
 
 
-
-
+    ### Vehicle ###
+    # For inserting page
+    path('vehicle', views.getAllVehicles, name='getAllVehicles'),
+    path('vehicle/create', views.createVehicle, name='createVehicle'),
+    url(r'^vehicle/id/(?P<option>\S+)$', views.getVehicle, name='getVehicle'),
 
     ### Sample ------ DO NOT USE IN PRODUCTION ###
     path('sample', views.sample, name='staffCreateAction'),
