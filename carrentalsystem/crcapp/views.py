@@ -4,24 +4,37 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.middleware.csrf import CsrfViewMiddleware
 from django.views.decorators.csrf import csrf_exempt, csrf_protect # to use csrf exempt
 from django.contrib.auth.hashers import make_password
-from crcapp.models import Store,Employee,Customer # If the model is used in the view file
+from crcapp.models import Store,Employee,Customer,Vehicle # If the model is used in the view file
 from django.utils import timezone
 from django.core.serializers import serialize
 from django.core.serializers.json import DjangoJSONEncoder
 
 from . import views
-from crcapp.controllers import authentication, staff
+from crcapp.controllers import authentication, staff, vehicle
 
 
+
+# Developer: Aidan
 class LazyEncoder(DjangoJSONEncoder):
     def default(self, obj):
         return super().default(obj)
 
 
+# Developer: Aidan
 # Loading the index page
 def index(request, messages="", mtype="i"):
+    stores = Store.objects.all()
+    return render(request, 'index.html', {'msg': messages, 'mtype': mtype, 'stores': stores})
+
+
+# Developer: Aidan
+# Login page 
+# not use will modify later
+def loginIndex(request, messages="", mtype="i"):
     return render(request, 'index.html', {'msg': messages, 'mtype': mtype})
 
+    
+# Developer: Aidan
 # Loading the home page
 def home(request, messages=""):
     # Checking session exists
@@ -33,6 +46,7 @@ def home(request, messages=""):
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
     
 
+# Developer: Aidan
 # Form action class for login, this will be used for employee login only
 def loginEmployee(request):
     if request.method == 'POST':
@@ -52,12 +66,33 @@ def loginEmployee(request):
         return index(request, messages="Opps, something went wrong.", mtype="d")
 
 
+# Developer: Aidan
+@csrf_exempt # to disable csrf token check
+def disableStaff(request, option, empID):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+   
+        staff = Employee.objects.get(employeeID = empID)
+        if option == "disable":
+            staff.disable = 1
+        else:
+            staff.disable = 0
+        staff.save()
+        return redirect('/staff/login/'+empID)
+    else:
+        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+
+# Developer: Aidan
 # Logoff action
 def logoff(request, messages=""):
     messages = "Successfully logged off."
     authentication.Authentication.logout(request)
-    return render(request, 'index.html', {'msg': messages, 'mtype': "i"})
+    return redirect('/#login', {'msg': messages, 'mtype': "i"})
 
+
+# Developer: Aidan
 # Create staff member page
 def staffCreate(request, messages="", mtype=""):
     # Checking session exists
@@ -83,7 +118,57 @@ def staffCreate(request, messages="", mtype=""):
             return render(request, 'staff/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
-    
+
+
+# Developer: Aidan
+# get all staff
+def getAllStaff(request, messages="", mtype=""):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        stores = Store.objects.all()
+        employees = Employee.objects.all()
+        return render(request, 'staff/staffmanagementview.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "employees":employees, "stores": stores})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+
+# Developer: Aidan
+# save changes of staff
+def changeStaffDetails(request, option,  name, utype, msg='',mtype=''):
+    if request.method == 'POST':
+        employee = Employee.objects.filter(employeeID=option).values()[0]
+        stores = Store.objects.all()
+        reason = CsrfViewMiddleware().process_view(request, None, (), {})
+        # If the reason is true it means verification failed
+        if reason:
+            return render(request, 'staff/staffdetailview.html', {'name': name, 'utype': utype,'msg': 'Token verification failed!', 'mtype': "d",'employee':employee, 'stores':stores})
+        else:
+            result = staff.StaffController.modify(request, option)
+            if result == True:
+                return render(request, 'staff/staffdetailview.html', {'name': name, 'utype': utype,'msg': 'Changes saved.', 'mtype': "i",'employee':employee, 'stores':stores})
+            elif result == False:
+                return render(request, 'staff/staffdetailview.html', {'name': name, 'utype': utype,'msg': 'Could not save all changes.', 'mtype': "d",'employee':employee, 'stores':stores})
+            else:
+                return render(request, 'staff/staffdetailview.html', {'name': name, 'utype': utype,'msg': result, 'mtype': "a", 'employee':employee, 'stores':stores})
+
+
+# Developer: Aidan
+# get start details to the staff management page
+def getStaff(request, option, msg='',mtype=''):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        if request.method == 'POST':
+            return changeStaffDetails(request, option, msg, mtype, name, utype)
+        elif request.method == 'GET':
+            employee = Employee.objects.filter(employeeID=option).values()[0]
+            stores = Store.objects.all()
+            
+            return render(request, 'staff/staffdetailview.html', {'name': name, 'utype': utype,  'msg': '', 'mtype': mtype, 'employee':employee, 'stores':stores})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
 # Create customer member page
 def customerCreate(request, messages="", mtype=""):
     # Checking session exists
@@ -106,6 +191,7 @@ def bookOrderConfirm(request, messages=""):
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
 
+# Developer: Aidan
 # viewing the staff login management page
 def viewStaffLogin(request):
      # Checking session exists
@@ -118,6 +204,8 @@ def viewStaffLogin(request):
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
        
    
+   
+# Developer: Aidan
 # will return a json arrray to populate in datatable 
 # post variable will get the value sent by ajax
 @csrf_exempt # to disable csrf token check
@@ -132,6 +220,8 @@ def getStaffFromStore(request):
     else:
         return HttpResponse("NULL")
 
+
+# Developer: Aidan
 # will return a json arrray of the login usernames
 @csrf_exempt # to disable csrf token check
 def getUsernames(request):
@@ -144,6 +234,8 @@ def getUsernames(request):
     else:
         return HttpResponse("NULL")
 
+
+# Developer: Aidan
 # get start details to the login page
 def viewStaffLoginDetails(request, option, msg='',mtype=''):
     if request.session.has_key('uid'):
@@ -155,7 +247,27 @@ def viewStaffLoginDetails(request, option, msg='',mtype=''):
         return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype,  'msg': msg, 'mtype': mtype, 'employee':employee, 'store':store})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
-    
+
+
+
+# Searching for staff
+def searchStaff(request, msg='',mtype=''):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        fields = Employee._meta.get_fields()
+        employees = Employee.objects.all()
+        return render(request, 'staff/search.html', {'fields': fields}, {'employees': employees})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+# Booking page
+def bookingOrder(request):
+    vehicles = Vehicle.objects.all()
+    return render(request, 'booking/order.html', {'vehicles': vehicles})
+
+
+# Developer: Aidan
 # emails message will contain what to send and to whom 
 # message, id is for the employee id or customer id
 # by default it is sent to employees
@@ -174,6 +286,8 @@ def email(request, message="Default Message", id = "E00001", isEmployee=True):
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
+
+# Developer: Aidan
 # creating the login details of the employee
 def createLoginStaff(request):
     if request.session.has_key('uid'):
@@ -205,7 +319,82 @@ def createLoginStaff(request):
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
+# Developer: Aidan
 # sample view only will be deleted later ------ DO NOT USE IN PRODUCTION
 def sample(request):
     stores = Store.objects.all()
     return render(request, 'sample/searchandtable.html', {'list': stores})
+
+
+# Developer: Aidan 
+# Create vehicle member page
+def createVehicle(request, messages="", mtype=""):
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        stores = Store.objects.all()
+        if request.method == 'POST':
+            reason = CsrfViewMiddleware().process_view(request, None, (), {})
+            # If the reason is true it means verification failed
+            if reason:
+                return render(request, 'vehicle/create.html', {'msg': 'Token verification failed!', 'mtype': "d"})
+            else:
+                result = vehicle.VehicleController.create(request)
+                if result == True:
+                    return render(request, 'vehicle/create.html', {'msg': 'Vehicle inserted.', 'mtype': "i"})
+                elif result == False:
+                    return render(request, 'vehicle/create.html', {'msg': 'Vehicle insertion failed.', 'mtype': "d"})
+                else:
+                    return render(request, 'vehicle/create.html', {'msg': result, 'mtype': "a"})
+        elif request.method == "GET":
+            return render(request, 'vehicle/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, 'stores': stores})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+# Developer: Aidan
+# save changes of vehicle
+def changeVehicleDetails(request, option, utype, msg='',mtype=''):
+    if request.method == 'POST':
+        vehicle = Vehicle.objects.filter(vehicleID=option).values()[0]
+        stores = Store.objects.all()
+        reason = CsrfViewMiddleware().process_view(request, None, (), {})
+        # If the reason is true it means verification failed
+        if reason:
+            return render(request, 'vehicle/vehicleDetail.html', {'name': name, 'utype': utype,'msg': 'Token verification failed!', 'mtype': "d",'vehicle':vehicle, 'stores':stores})
+        else:
+            result = vehicle.VehicleController.modify(request, option)
+            if result == True:
+                return render(request, 'vehicle/vehicleDetail.html', {'name': name, 'utype': utype,'msg': 'Changes saved.', 'mtype': "i",'vehicle':vehicle, 'stores':stores})
+            elif result == False:
+                return render(request, 'vehicle/vehicleDetail.html', {'name': name, 'utype': utype,'msg': 'Could not save all changes.', 'mtype': "d",'vehicle':vehicle, 'stores':stores})
+            else:
+                return render(request, 'vehicle/vehicleDetail.html', {'name': name, 'utype': utype,'msg': result, 'mtype': "a", 'vehicle':vehicle, 'stores':stores})
+
+# Developer: Aidan
+# get all vehicles to the view page
+def getAllVehicles(request, messages="", mtype=""):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        stores = Store.objects.all()
+        vehicles = Vehicle.objects.all()
+        return render(request, 'vehicle/vehiclemanagementview.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "vehicles":vehicles, "stores": stores})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+# Developer: Aidan
+# get vehicle details to modify page
+def getVehicle(request, option, msg='',mtype=''):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        if request.method == 'POST':
+            return changeVehicleDetails(request, option, msg, mtype, name, utype)
+        elif request.method == 'GET':
+            vehicle = Vehicle.objects.filter(vehicleID=option).values()[0]
+            stores = Store.objects.all()
+            
+            return render(request, 'vehicle/detailview.html', {'name': name, 'utype': utype,  'msg': '', 'mtype': mtype, 'vehicle':vehicle, 'stores':stores})
+    else:
+       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
