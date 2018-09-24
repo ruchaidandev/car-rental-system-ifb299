@@ -9,8 +9,8 @@ from django.utils import timezone
 class CustomerController:
     def create():
 
-        staffObj = Employee.objects.raw("SELECT customerID FROM `crcapp_customer` ORDER BY customerID DESC LIMIT 1")[0]
-        x = staffObj.employeeID
+        custObj = Employee.objects.raw("SELECT customerID FROM `crcapp_customer` ORDER BY customerID DESC LIMIT 1")[0]
+        x = custObj.employeeID
         x = x[1:]
         x = int(x)+1;
         x = str(x).zfill(5)
@@ -135,7 +135,7 @@ class CustomerController:
     def search(arg):
         if(arg == "all"):
             for each in Customer.objects.all():
-                print(
+                return(
                 each.customerID,
                 each.firstName,
                 each.lastName,
@@ -153,7 +153,7 @@ class CustomerController:
                 each.dateJoined,
                 each.lastLogin)
 
-        if(arg!= "all"):
+        if(arg!= "all"
             customerID_min = request.POST.get("customerID_min")
             customerID_max = request.POST.get("customerID_max")
             firstName = request.POST.get("firstName")
@@ -221,7 +221,7 @@ class CustomerController:
             query = 'SELECT * FROM carrentaldb.crcapp_customer WHERE' + condition[:-5] +';'
 
             for each in Customer.objects.raw(query):
-                print(
+                return(
                 each.customerID,
                 each.firstName,
                 each.lastName,
