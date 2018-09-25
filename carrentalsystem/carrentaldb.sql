@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 20, 2018 at 01:57 AM
+-- Generation Time: Sep 24, 2018 at 11:24 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -366,10 +366,10 @@ CREATE TABLE IF NOT EXISTS `crcapp_employee` (
 --
 
 INSERT INTO `crcapp_employee` (`employeeID`, `firstName`, `lastName`, `streetAddress`, `cityAddress`, `postCodeAddress`, `stateAddress`, `DOB`, `TFN`, `phoneNumber`, `email`, `userName`, `password`, `dateJoined`, `lastLogin`, `storeID_id`, `userType`, `disable`) VALUES
-('E00001', 'Dev', 'Team Bois', ' 2 George St', 'Brisbane ', 4000, 'QLD', '2018-08-05', 1, 1000000, 'admin@admin.com', 'dev', 'argon2$argon2i$v=19$m=512,t=2,p=2$dHJmeFhiNm5qd0s1$EPUBcr3FsVh4dLom/iytXw', '2018-09-05', '2018-09-20', 'S0020', 'Developer', 0),
+('E00001', 'Dev', 'Team Bois', ' 2 George St', 'Brisbane ', 4000, 'QLD', '2018-08-05', 1, 1000000, 'admin@admin.com', 'dev', 'argon2$argon2i$v=19$m=512,t=2,p=2$dHJmeFhiNm5qd0s1$EPUBcr3FsVh4dLom/iytXw', '2018-09-05', '2018-09-24', 'S0020', 'Developer', 0),
 ('E00002', 'Jax', 'Lee', 'Test', 'Brisbane', 4000, 'QLD', '1998-09-12', 4548545558, 422325325, 'jax@jax.com', 'gsjaxl', 'argon2$argon2i$v=19$m=512,t=2,p=2$dTUxWW1ydEZWYnhM$LvDMKxTis3QPiXYTxngH4Q', '2018-09-12', '2018-09-17', 'S0004', 'Manager', 0),
 ('E00003', 'Frank', 'King', 'Test', 'Brisbane', 4000, 'QLD', '1992-06-19', 1234567898, 412121212, 'sample@sample.com', 'csfrankk1', 'argon2$argon2i$v=19$m=512,t=2,p=2$T1N4ejc5NEJkSnly$ULISu+PtY7h8FnCJQm6Dew', '2018-09-17', '2018-09-17', 'S0021', 'Staff', 0),
-('E00004', 'Oscar', 'Li', 'Test', 'Brisbane', 4000, 'QLD', '1998-09-12', 544545454, 45454545, 'sample@sample.com', 'ssoscarl', 'argon2$argon2i$v=19$m=512,t=2,p=2$dHJmeFhiNm5qd0s1$EPUBcr3FsVh4dLom/iytXw', '2018-09-17', '2018-09-19', 'S0018', 'Staff', 0);
+('E00004', 'Oscar', 'Li', 'Test', 'Sydeny', 4000, 'QLD', '1998-09-12', 544545454, 45454545, 'sample@sample.com', 'ssoscarl1', 'argon2$argon2i$v=19$m=512,t=2,p=2$cEJlR0xhTFdzeDZY$00WNEd8BCYW38zsWSwph4Q', '2018-09-17', '2018-09-19', 'S0018', 'Staff', 0);
 
 -- --------------------------------------------------------
 
@@ -2031,7 +2031,8 @@ INSERT INTO `crcapp_vehicle` (`vehicleID`, `makeName`, `model`, `series`, `year`
 ('V15089', 'VOLVO', 'V50', 'MY07 2.4 LE', 2007, '47950.00', '2.4', 'MULTI POINT F/INJ', '62.0', 125, 5, '5AG', '4D WAGON', 'FWD', 2640, ''),
 ('V15121', 'VOLVO', 'S40', 'MY06 T5 AWD', 2006, '54950.00', '2.5', 'TURBO MPFI', '57.0', 162, 5, '5AG', '4D SEDAN', 'AWD', 2640, ''),
 ('V15125', 'NISSAN', '200', 'S15 SX SPEC S', 2002, '40990.00', '2.0', 'TURBO MPFI', '65.0', 147, 4, '6M', '2D COUPE', 'RWD', 2525, ''),
-('V15126', 'NISSAN', '200', 'S15 SX SPEC R GT', 2002, '46490.00', '2.0', 'TURBO MPFI', '65.0', 147, 4, '6M', '2D COUPE', 'RWD', 2525, '');
+('V15126', 'NISSAN', '200', 'S15 SX SPEC R GT', 2002, '46490.00', '2.0', 'TURBO MPFI', '65.0', 147, 4, '6M', '2D COUPE', 'RWD', 2525, ''),
+('V15401', 'MERCEDES BENZ', 'CLA200', 'CLA CLASS', 2018, '53000.00', '1.6', 'PREMIUM UNLEADED PETROL', '50.0', 115, 5, '7A', '4D SEDAN', 'FWD', 2699, 'S0020');
 
 -- --------------------------------------------------------
 
@@ -2164,7 +2165,11 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('3dkof5w081q4pf33m7maazw3e2rlx2v8', 'NTRkY2U4YTZmZGJkZjhkZGQ3NzE5ZjZiNTZjYjk1ZWJmNDhiMzNmYzp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyIsInVpZCI6IkUwMDAwMSJ9', '2018-09-19 04:29:45.742567'),
 ('uygo3ft6lecnhlptuq614tmb8lhalfli', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-19 07:03:28.932721'),
 ('t8dy6j29qnrfhnvc0zenknli9qwi1fcs', 'ZWZjN2JjYjQxNDVkNTkwODM5ZGYyYjQ1MTQzZTgyNzgxODI4N2Y3OTp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJTdGFmZiIsIm5hbWUiOiJPc2NhciBMaSJ9', '2018-09-19 07:39:21.020071'),
-('gui5u9nchtoikmn1cgfifsi6on1szuwg', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-20 02:22:00.409988');
+('gui5u9nchtoikmn1cgfifsi6on1szuwg', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-20 02:22:00.409988'),
+('a1ush70nlwaig2wut0zxgrowiv4911hz', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-20 04:28:21.065963'),
+('omxi4qkdvv227l7xq7k31wkh7gooww8c', 'ZDVlNjlhOTRkOGNhODU1MjZlMmZkZTU4MjQ0ZTBlYWNiMGMzZTA4ODp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-21 05:19:14.262227'),
+('low99aj7w8uu3o932jm4ypfl8v0wildh', 'ZDVlNjlhOTRkOGNhODU1MjZlMmZkZTU4MjQ0ZTBlYWNiMGMzZTA4ODp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-21 08:08:20.984325'),
+('szvbmnfqilk7y1s59wt0it4i9hixlw1i', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-24 05:43:49.944617');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
