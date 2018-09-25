@@ -26,25 +26,26 @@
     </tr>
   </thead>
   <tbody id="records">
-    <!-- {% for person in customers %} -->
+    {% for customer in customers %}
+    <tr>
+      <td class="pdttable">{{ customer.customerID }}</td>
+      <td class="pdttable">Hello</td>
+      <td class="pdttable">Hello</td>
+      <td class="pdttable">Hello</td>
+      <td class="pdttable">Hello</td>
+      <td class="pdttable">Hello</td>
+      <td class="pdttable">Hello</td>
+      <td class="pdttable">Hello</td>
+    </tr>
+    {% endfor %}
     <!-- <td class="pdttable"><a href="/customer/id/{{ person.customerID }}">{{ person.customerID }}</a></td>
-    <td class="pdttable">{{ person.firstName }} {{ person.lastName}}</td>
-    <td class="pdttable">{{ person.streetAddress }}</td>
-    <td class="pdttable">{{ person.cityAddress }}</td>  
-    <td class="pdttable">{{ person.stateAddress }}</td> 
-    <td class="pdttable">{{ person.DOB }}</td>
-    <td class="pdttable">{{ person.gender }}</td>
-    <td class="pdttable">{{ person.email }}</td> -->
-
-    <!-- <td class="pdttable">Hello</td>
-    <td class="pdttable">Hello</td>
-    <td class="pdttable">Hello</td>
-    <td class="pdttable">Hello</td>
-    <td class="pdttable">Hello</td>
-    <td class="pdttable">Hello</td>
-    <td class="pdttable">Hello</td>
-    <td class="pdttable">Hello</td> -->
-    <!-- {% endfor %} -->
+      <td class="pdttable">{{ person.firstName }} {{ person.lastName}}</td>
+      <td class="pdttable">{{ person.streetAddress }}</td>
+      <td class="pdttable">{{ person.cityAddress }}</td>  
+      <td class="pdttable">{{ person.stateAddress }}</td> 
+      <td class="pdttable">{{ person.DOB }}</td>
+      <td class="pdttable">{{ person.gender }}</td>
+      <td class="pdttable">{{ person.email }}</td> -->
   </tbody>
   <tfoot>
     <tr>
