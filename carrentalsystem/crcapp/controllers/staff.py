@@ -219,16 +219,16 @@ class StaffController:
                 condition = condition + "employeeID <= \'" + employeeID_max + "\' AND "
 
             if (firstName != ""):
-                condition = condition + "firstName = \'" + firstName + "\' AND "
+                condition = condition + "firstName CONTAINS \'" + firstName + "\' AND "
 
             if (lastName != ""):
-                condition = condition + "lastName = \'" + lastName + "\' AND "
+                condition = condition + "lastName CONTAINS \'" + lastName + "\' AND "
 
             if (streetAddress != ""):
-                condition = condition + "streetAddress = \'" + streetAddress + "\' AND "
+                condition = condition + "streetAddress CONTAINS \'" + streetAddress + "\' AND "
 
             if (cityAddress != ""):
-                condition = condition + "cityAddress = \'" + cityAddress + "\' AND "
+                condition = condition + "cityAddress CONTAINS \'" + cityAddress + "\' AND "
 
             if (postCodeAddress_min != ""):
                 condition = condition + "postCodeAddress >= \'" + postCodeAddress_min + "\' AND "
@@ -237,7 +237,7 @@ class StaffController:
                 condition = condition + "postCodeAddress <= \'" + postCodeAddress_max + "\' AND "
 
             if (stateAddress != ""):
-                condition = condition + "stateAddress = \'" + stateAddress + "\' AND "
+                condition = condition + "stateAddress CONTAINS \'" + stateAddress + "\' AND "
 
             if (DOB_min != ""):
                 condition = condition + "DOB >= \'" + DOB_min + "\' AND "
@@ -255,10 +255,7 @@ class StaffController:
                 condition = condition + "email = \'" + email + "\' AND "
 
             if (userName != ""):
-                condition = condition + "userName = \'" + userName + "\' AND "
-
-            if (password != ""):
-                condition = condition + "password = \'" + password + "\' AND "
+                condition = condition + "userName CONTAINS \'" + userName + "\' AND "
 
             if (userType != ""):
                 condition = condition + "userType = \'" + userType + "\' AND "

@@ -117,13 +117,13 @@ class VehicleController:
             condition = " "
 
             if (makeName != ''):
-                condition = condition + "makeName = \'" + makeName + "\' AND "
+                condition = condition + "makeName CONTAINS \'" + makeName + "\' AND "
 
             if (model != ''):
-                condition = condition + "model = \'" + model + "\' AND "
+                condition = condition + "model CONTAINS \'" + model + "\' AND "
 
             if (series != ''):
-                condition = condition + "series = \'" + series + "\' AND "
+                condition = condition + "series CONTAINS \'" + series + "\' AND "
 
             if (year_min != ''):
                 condition = condition + "year >= \'" + year_min + "\' AND "
@@ -165,13 +165,13 @@ class VehicleController:
                 condition = condition + "seatingCapacity <= \'" + seatingCapacity_max + "\' AND "
 
             if (standardTransmission != ''):
-                condition = condition + "standardTransmission = \'" + standardTransmission + "\' AND "
+                condition = condition + "standardTransmission CONTAINS \'" + standardTransmission + "\' AND "
 
             if (bodyType != ''):
-                condition = condition + "bodyType = \'" + bodyType + "\' AND "
+                condition = condition + "bodyType CONTAINS \'" + bodyType + "\' AND "
 
             if (driveType != ''):
-                condition = condition + "driveType = \'" + driveType + "\' AND "
+                condition = condition + "driveType CONTAINS \'" + driveType + "\' AND "
 
             if (wheelbase_min != ''):
                 condition = condition + "wheelbase >= \'" + wheelbase_min + "\' AND "
