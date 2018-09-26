@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 24, 2018 at 11:24 AM
+-- Generation Time: Sep 17, 2018 at 02:16 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -214,7 +214,6 @@ CREATE TABLE IF NOT EXISTS `crcapp_customer` (
   `dateJoined` date DEFAULT NULL,
   `lastLogin` date DEFAULT NULL,
   `gender` varchar(2) NOT NULL,
-  `disable` tinyint(1) NOT NULL,
   PRIMARY KEY (`customerID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -222,114 +221,114 @@ CREATE TABLE IF NOT EXISTS `crcapp_customer` (
 -- Dumping data for table `crcapp_customer`
 --
 
-INSERT INTO `crcapp_customer` (`customerID`, `firstName`, `lastName`, `streetAddress`, `cityAddress`, `postCodeAddress`, `stateAddress`, `DOB`, `driverLicenceNumber`, `occupation`, `phoneNumber`, `email`, `userName`, `password`, `dateJoined`, `lastLogin`, `gender`, `disable`) VALUES
-('C0011010', 'Jacquelyn', 'S', '7800 Corrinne Court', NULL, NULL, NULL, '1968-02-16', NULL, 'Labour', 111543535016, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011011', 'Curtis', 'L', '1224 Shoenic', NULL, NULL, NULL, '1967-11-14', NULL, 'Labour', 111543535011, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011012', 'Lauren', 'W', '4785 Scott Street', NULL, NULL, NULL, '1972-01-28', NULL, 'Labour', 717535016, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011013', 'Ian', 'J', '7902 Hudson Ave.', NULL, NULL, NULL, '1972-08-16', NULL, 'Labour', 817535018, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011014', 'Sydney', 'B', '9011 Tank Drive', NULL, NULL, NULL, '1972-05-19', NULL, 'Labour', 431535015, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011015', 'Chloe', 'Y', '244 Willow Pass Road', NULL, NULL, NULL, '1983-02-10', NULL, 'Labour', 208535014, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011016', 'Wyatt', 'H', '9666 Northridge Ct.', NULL, NULL, NULL, '1983-04-18', NULL, 'Labour', 135535017, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011017', 'Shannon', 'W', '7330 Saddlehill Lane', NULL, NULL, NULL, '1948-06-16', NULL, 'Labour', 111543535019, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011018', 'Clarence', 'R', '244 Rivewview', NULL, NULL, NULL, '1948-10-19', NULL, 'Labour', 111543535013, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011019', 'Luke', 'L', '7832 Landing Dr', NULL, NULL, NULL, '1982-03-10', NULL, 'Labour', 262535011, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011050', 'Alan', 'Z', '2741 Gainborough Dr.', NULL, NULL, NULL, '1955-09-10', NULL, 'Labour', 111543535013, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011051', 'Daniel', 'J', '8085 Sunnyvale Avenue', NULL, NULL, NULL, '1955-08-14', NULL, 'Labour', 111543535015, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011052', 'Heidi', 'L', '2514 Via Cordona', NULL, NULL, NULL, '1955-08-10', NULL, 'Labour', 111543535016, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011053', 'Ana', 'P', '1660 Stonyhill Circle', NULL, NULL, NULL, '1984-08-10', NULL, 'Labour', 859535011, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011054', 'Deanna', 'M', '5825 B Way', NULL, NULL, NULL, '1956-03-20', NULL, 'Labour', 111543535019, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011055', 'Gilbert', 'R', '8811 The Trees Dr.', NULL, NULL, NULL, '1956-03-15', NULL, 'Labour', 111543535012, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011056', 'Michele', 'N', '5464 Janin Pl.', NULL, NULL, NULL, '1957-04-13', NULL, 'Labour', 111543535017, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011057', 'Carl', 'A', '6930 Lake Nadine Place', NULL, NULL, NULL, '1957-10-21', NULL, 'Labour', 111543535018, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011058', 'Marc', 'D', '6645 Sinaloa', NULL, NULL, NULL, '1958-04-10', NULL, 'Labour', 111543535014, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011059', 'Ashlee', 'A', '8255 Highland Road', NULL, NULL, NULL, '1958-04-13', NULL, 'Labour', 111543535011, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011111', 'Meredith', 'G', '7610 Northridge Ct.', NULL, NULL, NULL, '1966-02-13', NULL, 'Labour', 111543535017, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011112', 'Crystal', 'W', '2773 Kirkwood Dr', NULL, NULL, NULL, '1966-09-19', NULL, 'Labour', 111543535013, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011113', 'Micheal', 'B', '596 Marfargoa Drive', NULL, NULL, NULL, '1966-02-13', NULL, 'Labour', 111543535013, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011114', 'Leslie', 'M', '7941 Cristobal', NULL, NULL, NULL, '1966-05-18', NULL, 'Labour', 111543535011, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011115', 'Alvin', 'C', '7759 Azalea Avenue', NULL, NULL, NULL, '1966-02-21', NULL, 'Labour', 111543535019, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011116', 'Clinton', 'C', '7943 Cunha Ct.', NULL, NULL, NULL, '1966-10-10', NULL, 'Labour', 111543535018, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011117', 'April', 'D', '485 Ash Lane', NULL, NULL, NULL, '1965-02-13', NULL, 'Labour', 111543535018, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011119', 'Evan', 'J', '4157 Sierra Ridge', NULL, NULL, NULL, '1939-04-20', NULL, 'Retiree', 111543535018, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011150', 'Russell', 'S', '4755 Easley Drive', NULL, NULL, NULL, '1945-03-25', NULL, 'Retiree', 111543535019, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011151', 'Melinda', 'G', '805 Rainier Dr.', NULL, NULL, NULL, '1946-02-15', NULL, 'Labour', 111543535011, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011152', 'James', 'W', '6827 Seagull Court', NULL, NULL, NULL, '1980-01-20', NULL, 'Labour', 355535015, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011153', 'Angela', 'J', '8877 Weatherly Drive', NULL, NULL, NULL, '1980-06-13', NULL, 'Labour', 847535011, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011154', 'Megan', 'W', '6898 Holiday Hills', NULL, NULL, NULL, '1980-08-13', NULL, 'Labour', 918535018, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011155', 'Hunter', 'R', '8356 Mori Court', NULL, NULL, NULL, '1980-01-16', NULL, 'Labour', 891535012, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011156', 'Maria', 'R', '9452 Mariposa Ct.', NULL, NULL, NULL, '1980-02-10', NULL, 'Labour', 158535019, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011157', 'Hannah', 'L', '1832 Preston Ct.', NULL, NULL, NULL, '1979-06-23', NULL, 'Labour', 974535017, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011158', 'Jason', 'W', '6771 Bundros Court', NULL, NULL, NULL, '1979-10-18', NULL, 'Labour', 694535017, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011159', 'Brianna', 'H', '6793 Bonifacio St.', NULL, NULL, NULL, '1979-09-20', NULL, 'Labour', 319535018, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011210', 'Edward', 'W', '1039 Adelaide St.', NULL, NULL, NULL, '1952-06-18', NULL, 'Researcher', 229535011, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011213', 'Stephanie', 'M', '5514 Grant Street', NULL, NULL, NULL, '1953-05-24', NULL, 'Researcher', 293535015, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011214', 'Charles', 'M', '2719 Little Dr', NULL, NULL, NULL, '1953-11-10', NULL, 'Researcher', 389535011, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011215', 'Ana', 'P', '3114 Arlington Way', NULL, NULL, NULL, '1954-06-13', NULL, 'Researcher', 446535013, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011216', 'Jasmine', 'T', '8328 San Francisco', NULL, NULL, NULL, '1954-05-10', NULL, 'Researcher', 939535013, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011217', 'Natalie', 'A', '6592 Bent Tree Lane', NULL, NULL, NULL, '1954-02-23', NULL, 'Researcher', 300535015, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011218', 'Olivia', 'B', '3964 Stony Hill Circle', NULL, NULL, NULL, '1954-09-23', NULL, 'Researcher', 414535014, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011219', 'Charles', 'C', '6871 Bel Air Dr.', NULL, NULL, NULL, '1954-12-11', NULL, 'Researcher', 755535011, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011250', 'Shannon', 'L', '4185 Keywood Ct.', NULL, NULL, NULL, '1959-03-21', NULL, 'Manager', 111543535011, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011251', 'Xavier', 'L', '9245 Dantley Way', NULL, NULL, NULL, '1936-07-14', NULL, 'Retiree', 243535011, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011252', 'Nicholas', 'T', '504 O St.', NULL, NULL, NULL, '1936-06-10', NULL, 'Retiree', 377535014, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011253', 'José', 'H', '5703 Donald Dr.', NULL, NULL, NULL, '1937-02-18', NULL, 'Retiree', 712535013, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011254', 'Johnathan', 'V', '9430 Versailles Pl', NULL, NULL, NULL, '1937-03-13', NULL, 'Retiree', 494535016, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011255', 'Colin', 'L', '6083 San Jose', NULL, NULL, NULL, '1937-04-14', NULL, 'Retiree', 599535013, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011256', 'Katelyn', 'H', '7496 Deerfield Dr.', NULL, NULL, NULL, '1937-09-10', NULL, 'Retiree', 249535011, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011257', 'Jacqueline', 'P', '4076 Northwood Dr', NULL, NULL, NULL, '1937-01-16', NULL, 'Retiree', 796535011, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011258', 'Xavier', 'H', '2707 Virgil Street', NULL, NULL, NULL, '1937-06-18', NULL, 'Retiree', 559535014, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011259', 'Victoria', 'S', '3623 Barquentine Court', NULL, NULL, NULL, '1969-03-10', NULL, 'Manager', 230535013, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011310', 'Erin', 'S', '7541 Black Point Pl', NULL, NULL, NULL, '1957-07-19', NULL, 'Manager', 233535016, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011311', 'Gabrielle', 'L', '8619 Parkside Dr.', NULL, NULL, NULL, '1957-08-14', NULL, 'Manager', 783535017, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011312', 'Sara', 'R', '7375 Kipling Court', NULL, NULL, NULL, '1957-04-13', NULL, 'Manager', 296535017, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011313', 'Trevor', 'J', '4697 Yosemite Dr.', NULL, NULL, NULL, '1957-02-10', NULL, 'Manager', 120535012, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011314', 'Mya', 'F', '8439 Rio Grande Drive', NULL, NULL, NULL, '1957-12-13', NULL, 'Manager', 522535014, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011315', 'Hailey', 'W', '6321 Maya', NULL, NULL, NULL, '1957-10-13', NULL, 'Manager', 767535015, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011316', 'Luke', 'A', '419 Deermeadow Way', NULL, NULL, NULL, '1957-11-20', NULL, 'Manager', 786535013, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011317', 'Victoria', 'R', '9268 Keller Ridge', NULL, NULL, NULL, '1956-09-20', NULL, 'Manager', 663535019, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011318', 'Jessica', 'W', '1652 Willcrest Circle', NULL, NULL, NULL, '1956-10-16', NULL, 'Manager', 702535018, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011319', 'Jade', 'B', '8119 Northridge Ct', NULL, NULL, NULL, '1941-04-10', NULL, 'Retiree', 819535016, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011350', 'Cara', 'Z', '7280 Greendell Pl', NULL, NULL, NULL, '1941-01-24', NULL, 'Retiree', 111543535011, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011351', 'Anne', 'R', '7113 Eastgate Ave.', NULL, NULL, NULL, '1943-04-16', NULL, 'Retiree', 111543535014, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011352', 'Raymond', 'R', '24, impasse Ste-Madeleine', NULL, NULL, NULL, '1944-03-10', NULL, 'Retiree', 111543535013, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011353', 'Carrie', 'O', '1883 Cowell Rd.', NULL, NULL, NULL, '1945-06-23', NULL, 'Retiree', 111543535011, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011354', 'Deanna', 'S', 'Dunckerstr 22525', NULL, NULL, NULL, '1946-02-13', NULL, 'Manager', 111543535014, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011355', 'Roberto', 'G', '3545 Chickpea Ct.', NULL, NULL, NULL, '1946-12-18', NULL, 'Manager', 111543535012, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011356', 'Terrence', 'C', '6613 Thornhill Place', NULL, NULL, NULL, '1984-05-10', NULL, 'Manager', 111543535018, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011357', 'Ramon', 'Y', '3245 Vista Oak Dr.', NULL, NULL, NULL, '1983-03-13', NULL, 'Manager', 111543535014, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011358', 'Cynthia', 'M', '6757 Pamplona Ct.', NULL, NULL, NULL, '1982-11-23', NULL, 'Manager', 111543535018, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011359', 'Jarrod', 'P', '7657 H St.', NULL, NULL, NULL, '1982-09-14', NULL, 'Manager', 111543535015, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011410', 'Maurice', 'G', '15, avenue de la Gare', NULL, NULL, NULL, '1972-08-15', NULL, 'Manager', 111543535017, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011411', 'Devin', 'R', 'Postenweg 2428', NULL, NULL, NULL, '1958-02-21', NULL, 'Manager', 111543535017, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011412', 'Sydney', 'B', 'Postfach 99 92 92', NULL, NULL, NULL, '1958-04-19', NULL, 'Manager', 111543535015, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011413', 'Megan', 'S', '8192 Seagull Court', NULL, NULL, NULL, '1958-04-25', NULL, 'Manager', 111543535011, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011414', 'Ian', 'R', '726 W. Buchanan Rd.', NULL, NULL, NULL, '1958-03-28', NULL, 'Manager', 111543535011, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011415', 'Randy', 'S', 'Ro?str 5538', NULL, NULL, NULL, '1948-06-15', NULL, 'Manager', 111543535014, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011416', 'Katrina', 'B', '8205, rue Malar', NULL, NULL, NULL, '1949-03-29', NULL, 'Manager', 111543535015, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011417', 'Lacey', 'Z', '4, rue de Linois', NULL, NULL, NULL, '1949-02-16', NULL, 'Manager', 111543535017, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011418', 'Rafael', 'H', 'Zeiter Weg 7765', NULL, NULL, NULL, '1949-02-19', NULL, 'Manager', 111543535015, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011419', 'Kyle', 'S', '9381 Alpine Rd.', NULL, NULL, NULL, '1949-02-28', NULL, 'Manager', 111543535017, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011459', 'Tasha', 'D', '9627 Kendall Rd', NULL, NULL, NULL, '1976-10-23', NULL, 'Nurse', 111543535017, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011510', 'Seth', 'R', '5989 Concord Ave', NULL, NULL, NULL, '1957-07-23', NULL, 'Nurse', 199535014, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011511', 'Caleb', 'P', '2324 Cherry Street', NULL, NULL, NULL, '1957-06-24', NULL, 'Nurse', 786535013, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011512', 'Natalie', 'C', '3481 Broadmoor Drive', NULL, NULL, NULL, '1958-08-23', NULL, 'Nurse', 178535014, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011513', 'Alyssa', 'H', '5780 Conifer Terrace', NULL, NULL, NULL, '1958-09-10', NULL, 'Nurse', 805535018, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011514', 'Dalton', 'D', '8033 Danesta Dr.', NULL, NULL, NULL, '1958-04-10', NULL, 'Nurse', 994535015, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011515', 'Shannon', 'H', '4679 Duke Way', NULL, NULL, NULL, '1958-02-15', NULL, 'Nurse', 458535011, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011516', 'Mya', 'G', '8826 Fine Drive', NULL, NULL, NULL, '1958-10-13', NULL, 'Nurse', 211535011, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011517', 'Katherine', 'B', '8761 Dancing Court', NULL, NULL, NULL, '1958-06-10', NULL, 'Nurse', 802535013, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011518', 'Edward', 'W', '2747 Carmel Dr.', NULL, NULL, NULL, '1959-05-20', NULL, 'Nurse', 446535017, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011519', 'Jerome', 'N', '9537 Ridgewood Drive', NULL, NULL, NULL, '1959-03-20', NULL, 'Nurse', 934535019, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011535', 'Alexandria', 'H', '11, rue de la Cavalerie', NULL, NULL, NULL, '1930-07-18', NULL, 'Retiree', 111543535018, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011550', 'Deb', 'T', '7553 Harness Circle', NULL, NULL, NULL, '1972-08-18', NULL, 'Nurse', 111543535012, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011551', 'Shannon', 'A', '268, avenue de l?Europe', NULL, NULL, NULL, '1971-05-15', NULL, 'Nurse', 111543535015, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011552', 'Eddie', 'R', 'Heiderplatz 662', NULL, NULL, NULL, '1971-05-10', NULL, 'Nurse', 111543535015, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011553', 'Sharon', 'L', '6804 Coldwater Drive', NULL, NULL, NULL, '1971-09-19', NULL, 'Nurse', 111543535011, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011554', 'Sydney', 'S', '88, avenue de l? Union Centrale', NULL, NULL, NULL, '1930-09-18', NULL, 'Retiree', 111543535019, NULL, NULL, NULL, NULL, NULL, 'F', 0),
-('C0011556', 'Lucas', 'E', '3663 A St.', NULL, NULL, NULL, '1971-05-24', NULL, 'Nurse', 111543535015, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011557', 'Felicia', 'R', '9557 Steven Circle', NULL, NULL, NULL, '1971-01-25', NULL, 'Nurse', 111543535019, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011558', 'Ivan', 'M', '5086 Nottingham Place', NULL, NULL, NULL, '1971-08-11', NULL, 'Nurse', 111543535019, NULL, NULL, NULL, NULL, NULL, 'M', 0),
-('C0011559', 'Frederick', 'S', 'Rotth?user Weg 636', NULL, NULL, NULL, '1971-12-26', NULL, 'Nurse', 111543535011, NULL, NULL, NULL, NULL, NULL, 'M', 0);
+INSERT INTO `crcapp_customer` (`customerID`, `firstName`, `lastName`, `streetAddress`, `cityAddress`, `postCodeAddress`, `stateAddress`, `DOB`, `driverLicenceNumber`, `occupation`, `phoneNumber`, `email`, `userName`, `password`, `dateJoined`, `lastLogin`, `gender`) VALUES
+('C0011010', 'Jacquelyn', 'S', '7800 Corrinne Court', NULL, NULL, NULL, '1968-02-16', NULL, 'Labour', 111543535016, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011011', 'Curtis', 'L', '1224 Shoenic', NULL, NULL, NULL, '1967-11-14', NULL, 'Labour', 111543535011, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011012', 'Lauren', 'W', '4785 Scott Street', NULL, NULL, NULL, '1972-01-28', NULL, 'Labour', 717535016, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011013', 'Ian', 'J', '7902 Hudson Ave.', NULL, NULL, NULL, '1972-08-16', NULL, 'Labour', 817535018, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011014', 'Sydney', 'B', '9011 Tank Drive', NULL, NULL, NULL, '1972-05-19', NULL, 'Labour', 431535015, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011015', 'Chloe', 'Y', '244 Willow Pass Road', NULL, NULL, NULL, '1983-02-10', NULL, 'Labour', 208535014, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011016', 'Wyatt', 'H', '9666 Northridge Ct.', NULL, NULL, NULL, '1983-04-18', NULL, 'Labour', 135535017, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011017', 'Shannon', 'W', '7330 Saddlehill Lane', NULL, NULL, NULL, '1948-06-16', NULL, 'Labour', 111543535019, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011018', 'Clarence', 'R', '244 Rivewview', NULL, NULL, NULL, '1948-10-19', NULL, 'Labour', 111543535013, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011019', 'Luke', 'L', '7832 Landing Dr', NULL, NULL, NULL, '1982-03-10', NULL, 'Labour', 262535011, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011050', 'Alan', 'Z', '2741 Gainborough Dr.', NULL, NULL, NULL, '1955-09-10', NULL, 'Labour', 111543535013, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011051', 'Daniel', 'J', '8085 Sunnyvale Avenue', NULL, NULL, NULL, '1955-08-14', NULL, 'Labour', 111543535015, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011052', 'Heidi', 'L', '2514 Via Cordona', NULL, NULL, NULL, '1955-08-10', NULL, 'Labour', 111543535016, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011053', 'Ana', 'P', '1660 Stonyhill Circle', NULL, NULL, NULL, '1984-08-10', NULL, 'Labour', 859535011, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011054', 'Deanna', 'M', '5825 B Way', NULL, NULL, NULL, '1956-03-20', NULL, 'Labour', 111543535019, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011055', 'Gilbert', 'R', '8811 The Trees Dr.', NULL, NULL, NULL, '1956-03-15', NULL, 'Labour', 111543535012, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011056', 'Michele', 'N', '5464 Janin Pl.', NULL, NULL, NULL, '1957-04-13', NULL, 'Labour', 111543535017, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011057', 'Carl', 'A', '6930 Lake Nadine Place', NULL, NULL, NULL, '1957-10-21', NULL, 'Labour', 111543535018, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011058', 'Marc', 'D', '6645 Sinaloa', NULL, NULL, NULL, '1958-04-10', NULL, 'Labour', 111543535014, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011059', 'Ashlee', 'A', '8255 Highland Road', NULL, NULL, NULL, '1958-04-13', NULL, 'Labour', 111543535011, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011111', 'Meredith', 'G', '7610 Northridge Ct.', NULL, NULL, NULL, '1966-02-13', NULL, 'Labour', 111543535017, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011112', 'Crystal', 'W', '2773 Kirkwood Dr', NULL, NULL, NULL, '1966-09-19', NULL, 'Labour', 111543535013, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011113', 'Micheal', 'B', '596 Marfargoa Drive', NULL, NULL, NULL, '1966-02-13', NULL, 'Labour', 111543535013, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011114', 'Leslie', 'M', '7941 Cristobal', NULL, NULL, NULL, '1966-05-18', NULL, 'Labour', 111543535011, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011115', 'Alvin', 'C', '7759 Azalea Avenue', NULL, NULL, NULL, '1966-02-21', NULL, 'Labour', 111543535019, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011116', 'Clinton', 'C', '7943 Cunha Ct.', NULL, NULL, NULL, '1966-10-10', NULL, 'Labour', 111543535018, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011117', 'April', 'D', '485 Ash Lane', NULL, NULL, NULL, '1965-02-13', NULL, 'Labour', 111543535018, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011119', 'Evan', 'J', '4157 Sierra Ridge', NULL, NULL, NULL, '1939-04-20', NULL, 'Retiree', 111543535018, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011150', 'Russell', 'S', '4755 Easley Drive', NULL, NULL, NULL, '1945-03-25', NULL, 'Retiree', 111543535019, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011151', 'Melinda', 'G', '805 Rainier Dr.', NULL, NULL, NULL, '1946-02-15', NULL, 'Labour', 111543535011, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011152', 'James', 'W', '6827 Seagull Court', NULL, NULL, NULL, '1980-01-20', NULL, 'Labour', 355535015, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011153', 'Angela', 'J', '8877 Weatherly Drive', NULL, NULL, NULL, '1980-06-13', NULL, 'Labour', 847535011, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011154', 'Megan', 'W', '6898 Holiday Hills', NULL, NULL, NULL, '1980-08-13', NULL, 'Labour', 918535018, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011155', 'Hunter', 'R', '8356 Mori Court', NULL, NULL, NULL, '1980-01-16', NULL, 'Labour', 891535012, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011156', 'Maria', 'R', '9452 Mariposa Ct.', NULL, NULL, NULL, '1980-02-10', NULL, 'Labour', 158535019, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011157', 'Hannah', 'L', '1832 Preston Ct.', NULL, NULL, NULL, '1979-06-23', NULL, 'Labour', 974535017, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011158', 'Jason', 'W', '6771 Bundros Court', NULL, NULL, NULL, '1979-10-18', NULL, 'Labour', 694535017, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011159', 'Brianna', 'H', '6793 Bonifacio St.', NULL, NULL, NULL, '1979-09-20', NULL, 'Labour', 319535018, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011210', 'Edward', 'W', '1039 Adelaide St.', NULL, NULL, NULL, '1952-06-18', NULL, 'Researcher', 229535011, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011213', 'Stephanie', 'M', '5514 Grant Street', NULL, NULL, NULL, '1953-05-24', NULL, 'Researcher', 293535015, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011214', 'Charles', 'M', '2719 Little Dr', NULL, NULL, NULL, '1953-11-10', NULL, 'Researcher', 389535011, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011215', 'Ana', 'P', '3114 Arlington Way', NULL, NULL, NULL, '1954-06-13', NULL, 'Researcher', 446535013, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011216', 'Jasmine', 'T', '8328 San Francisco', NULL, NULL, NULL, '1954-05-10', NULL, 'Researcher', 939535013, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011217', 'Natalie', 'A', '6592 Bent Tree Lane', NULL, NULL, NULL, '1954-02-23', NULL, 'Researcher', 300535015, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011218', 'Olivia', 'B', '3964 Stony Hill Circle', NULL, NULL, NULL, '1954-09-23', NULL, 'Researcher', 414535014, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011219', 'Charles', 'C', '6871 Bel Air Dr.', NULL, NULL, NULL, '1954-12-11', NULL, 'Researcher', 755535011, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011250', 'Shannon', 'L', '4185 Keywood Ct.', NULL, NULL, NULL, '1959-03-21', NULL, 'Manager', 111543535011, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011251', 'Xavier', 'L', '9245 Dantley Way', NULL, NULL, NULL, '1936-07-14', NULL, 'Retiree', 243535011, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011252', 'Nicholas', 'T', '504 O St.', NULL, NULL, NULL, '1936-06-10', NULL, 'Retiree', 377535014, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011253', 'José', 'H', '5703 Donald Dr.', NULL, NULL, NULL, '1937-02-18', NULL, 'Retiree', 712535013, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011254', 'Johnathan', 'V', '9430 Versailles Pl', NULL, NULL, NULL, '1937-03-13', NULL, 'Retiree', 494535016, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011255', 'Colin', 'L', '6083 San Jose', NULL, NULL, NULL, '1937-04-14', NULL, 'Retiree', 599535013, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011256', 'Katelyn', 'H', '7496 Deerfield Dr.', NULL, NULL, NULL, '1937-09-10', NULL, 'Retiree', 249535011, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011257', 'Jacqueline', 'P', '4076 Northwood Dr', NULL, NULL, NULL, '1937-01-16', NULL, 'Retiree', 796535011, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011258', 'Xavier', 'H', '2707 Virgil Street', NULL, NULL, NULL, '1937-06-18', NULL, 'Retiree', 559535014, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011259', 'Victoria', 'S', '3623 Barquentine Court', NULL, NULL, NULL, '1969-03-10', NULL, 'Manager', 230535013, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011310', 'Erin', 'S', '7541 Black Point Pl', NULL, NULL, NULL, '1957-07-19', NULL, 'Manager', 233535016, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011311', 'Gabrielle', 'L', '8619 Parkside Dr.', NULL, NULL, NULL, '1957-08-14', NULL, 'Manager', 783535017, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011312', 'Sara', 'R', '7375 Kipling Court', NULL, NULL, NULL, '1957-04-13', NULL, 'Manager', 296535017, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011313', 'Trevor', 'J', '4697 Yosemite Dr.', NULL, NULL, NULL, '1957-02-10', NULL, 'Manager', 120535012, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011314', 'Mya', 'F', '8439 Rio Grande Drive', NULL, NULL, NULL, '1957-12-13', NULL, 'Manager', 522535014, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011315', 'Hailey', 'W', '6321 Maya', NULL, NULL, NULL, '1957-10-13', NULL, 'Manager', 767535015, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011316', 'Luke', 'A', '419 Deermeadow Way', NULL, NULL, NULL, '1957-11-20', NULL, 'Manager', 786535013, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011317', 'Victoria', 'R', '9268 Keller Ridge', NULL, NULL, NULL, '1956-09-20', NULL, 'Manager', 663535019, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011318', 'Jessica', 'W', '1652 Willcrest Circle', NULL, NULL, NULL, '1956-10-16', NULL, 'Manager', 702535018, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011319', 'Jade', 'B', '8119 Northridge Ct', NULL, NULL, NULL, '1941-04-10', NULL, 'Retiree', 819535016, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011350', 'Cara', 'Z', '7280 Greendell Pl', NULL, NULL, NULL, '1941-01-24', NULL, 'Retiree', 111543535011, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011351', 'Anne', 'R', '7113 Eastgate Ave.', NULL, NULL, NULL, '1943-04-16', NULL, 'Retiree', 111543535014, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011352', 'Raymond', 'R', '24, impasse Ste-Madeleine', NULL, NULL, NULL, '1944-03-10', NULL, 'Retiree', 111543535013, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011353', 'Carrie', 'O', '1883 Cowell Rd.', NULL, NULL, NULL, '1945-06-23', NULL, 'Retiree', 111543535011, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011354', 'Deanna', 'S', 'Dunckerstr 22525', NULL, NULL, NULL, '1946-02-13', NULL, 'Manager', 111543535014, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011355', 'Roberto', 'G', '3545 Chickpea Ct.', NULL, NULL, NULL, '1946-12-18', NULL, 'Manager', 111543535012, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011356', 'Terrence', 'C', '6613 Thornhill Place', NULL, NULL, NULL, '1984-05-10', NULL, 'Manager', 111543535018, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011357', 'Ramon', 'Y', '3245 Vista Oak Dr.', NULL, NULL, NULL, '1983-03-13', NULL, 'Manager', 111543535014, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011358', 'Cynthia', 'M', '6757 Pamplona Ct.', NULL, NULL, NULL, '1982-11-23', NULL, 'Manager', 111543535018, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011359', 'Jarrod', 'P', '7657 H St.', NULL, NULL, NULL, '1982-09-14', NULL, 'Manager', 111543535015, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011410', 'Maurice', 'G', '15, avenue de la Gare', NULL, NULL, NULL, '1972-08-15', NULL, 'Manager', 111543535017, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011411', 'Devin', 'R', 'Postenweg 2428', NULL, NULL, NULL, '1958-02-21', NULL, 'Manager', 111543535017, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011412', 'Sydney', 'B', 'Postfach 99 92 92', NULL, NULL, NULL, '1958-04-19', NULL, 'Manager', 111543535015, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011413', 'Megan', 'S', '8192 Seagull Court', NULL, NULL, NULL, '1958-04-25', NULL, 'Manager', 111543535011, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011414', 'Ian', 'R', '726 W. Buchanan Rd.', NULL, NULL, NULL, '1958-03-28', NULL, 'Manager', 111543535011, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011415', 'Randy', 'S', 'Ro?str 5538', NULL, NULL, NULL, '1948-06-15', NULL, 'Manager', 111543535014, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011416', 'Katrina', 'B', '8205, rue Malar', NULL, NULL, NULL, '1949-03-29', NULL, 'Manager', 111543535015, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011417', 'Lacey', 'Z', '4, rue de Linois', NULL, NULL, NULL, '1949-02-16', NULL, 'Manager', 111543535017, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011418', 'Rafael', 'H', 'Zeiter Weg 7765', NULL, NULL, NULL, '1949-02-19', NULL, 'Manager', 111543535015, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011419', 'Kyle', 'S', '9381 Alpine Rd.', NULL, NULL, NULL, '1949-02-28', NULL, 'Manager', 111543535017, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011459', 'Tasha', 'D', '9627 Kendall Rd', NULL, NULL, NULL, '1976-10-23', NULL, 'Nurse', 111543535017, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011510', 'Seth', 'R', '5989 Concord Ave', NULL, NULL, NULL, '1957-07-23', NULL, 'Nurse', 199535014, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011511', 'Caleb', 'P', '2324 Cherry Street', NULL, NULL, NULL, '1957-06-24', NULL, 'Nurse', 786535013, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011512', 'Natalie', 'C', '3481 Broadmoor Drive', NULL, NULL, NULL, '1958-08-23', NULL, 'Nurse', 178535014, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011513', 'Alyssa', 'H', '5780 Conifer Terrace', NULL, NULL, NULL, '1958-09-10', NULL, 'Nurse', 805535018, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011514', 'Dalton', 'D', '8033 Danesta Dr.', NULL, NULL, NULL, '1958-04-10', NULL, 'Nurse', 994535015, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011515', 'Shannon', 'H', '4679 Duke Way', NULL, NULL, NULL, '1958-02-15', NULL, 'Nurse', 458535011, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011516', 'Mya', 'G', '8826 Fine Drive', NULL, NULL, NULL, '1958-10-13', NULL, 'Nurse', 211535011, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011517', 'Katherine', 'B', '8761 Dancing Court', NULL, NULL, NULL, '1958-06-10', NULL, 'Nurse', 802535013, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011518', 'Edward', 'W', '2747 Carmel Dr.', NULL, NULL, NULL, '1959-05-20', NULL, 'Nurse', 446535017, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011519', 'Jerome', 'N', '9537 Ridgewood Drive', NULL, NULL, NULL, '1959-03-20', NULL, 'Nurse', 934535019, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011535', 'Alexandria', 'H', '11, rue de la Cavalerie', NULL, NULL, NULL, '1930-07-18', NULL, 'Retiree', 111543535018, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011550', 'Deb', 'T', '7553 Harness Circle', NULL, NULL, NULL, '1972-08-18', NULL, 'Nurse', 111543535012, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011551', 'Shannon', 'A', '268, avenue de l?Europe', NULL, NULL, NULL, '1971-05-15', NULL, 'Nurse', 111543535015, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011552', 'Eddie', 'R', 'Heiderplatz 662', NULL, NULL, NULL, '1971-05-10', NULL, 'Nurse', 111543535015, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011553', 'Sharon', 'L', '6804 Coldwater Drive', NULL, NULL, NULL, '1971-09-19', NULL, 'Nurse', 111543535011, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011554', 'Sydney', 'S', '88, avenue de l? Union Centrale', NULL, NULL, NULL, '1930-09-18', NULL, 'Retiree', 111543535019, NULL, NULL, NULL, NULL, NULL, 'F'),
+('C0011556', 'Lucas', 'E', '3663 A St.', NULL, NULL, NULL, '1971-05-24', NULL, 'Nurse', 111543535015, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011557', 'Felicia', 'R', '9557 Steven Circle', NULL, NULL, NULL, '1971-01-25', NULL, 'Nurse', 111543535019, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011558', 'Ivan', 'M', '5086 Nottingham Place', NULL, NULL, NULL, '1971-08-11', NULL, 'Nurse', 111543535019, NULL, NULL, NULL, NULL, NULL, 'M'),
+('C0011559', 'Frederick', 'S', 'Rotth?user Weg 636', NULL, NULL, NULL, '1971-12-26', NULL, 'Nurse', 111543535011, NULL, NULL, NULL, NULL, NULL, 'M');
 
 -- --------------------------------------------------------
 
@@ -356,7 +355,6 @@ CREATE TABLE IF NOT EXISTS `crcapp_employee` (
   `lastLogin` date NOT NULL,
   `storeID_id` varchar(10) DEFAULT NULL,
   `userType` varchar(16) NOT NULL,
-  `disable` tinyint(1) NOT NULL,
   PRIMARY KEY (`employeeID`),
   KEY `crcapp_employee_storeID_id_df63687d` (`storeID_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -365,11 +363,10 @@ CREATE TABLE IF NOT EXISTS `crcapp_employee` (
 -- Dumping data for table `crcapp_employee`
 --
 
-INSERT INTO `crcapp_employee` (`employeeID`, `firstName`, `lastName`, `streetAddress`, `cityAddress`, `postCodeAddress`, `stateAddress`, `DOB`, `TFN`, `phoneNumber`, `email`, `userName`, `password`, `dateJoined`, `lastLogin`, `storeID_id`, `userType`, `disable`) VALUES
-('E00001', 'Dev', 'Team Bois', ' 2 George St', 'Brisbane ', 4000, 'QLD', '2018-08-05', 1, 1000000, 'admin@admin.com', 'dev', 'argon2$argon2i$v=19$m=512,t=2,p=2$dHJmeFhiNm5qd0s1$EPUBcr3FsVh4dLom/iytXw', '2018-09-05', '2018-09-24', 'S0020', 'Developer', 0),
-('E00002', 'Jax', 'Lee', 'Test', 'Brisbane', 4000, 'QLD', '1998-09-12', 4548545558, 422325325, 'jax@jax.com', 'gsjaxl', 'argon2$argon2i$v=19$m=512,t=2,p=2$dTUxWW1ydEZWYnhM$LvDMKxTis3QPiXYTxngH4Q', '2018-09-12', '2018-09-17', 'S0004', 'Manager', 0),
-('E00003', 'Frank', 'King', 'Test', 'Brisbane', 4000, 'QLD', '1992-06-19', 1234567898, 412121212, 'sample@sample.com', 'csfrankk1', 'argon2$argon2i$v=19$m=512,t=2,p=2$T1N4ejc5NEJkSnly$ULISu+PtY7h8FnCJQm6Dew', '2018-09-17', '2018-09-17', 'S0021', 'Staff', 0),
-('E00004', 'Oscar', 'Li', 'Test', 'Sydeny', 4000, 'QLD', '1998-09-12', 544545454, 45454545, 'sample@sample.com', 'ssoscarl1', 'argon2$argon2i$v=19$m=512,t=2,p=2$cEJlR0xhTFdzeDZY$00WNEd8BCYW38zsWSwph4Q', '2018-09-17', '2018-09-19', 'S0018', 'Staff', 0);
+INSERT INTO `crcapp_employee` (`employeeID`, `firstName`, `lastName`, `streetAddress`, `cityAddress`, `postCodeAddress`, `stateAddress`, `DOB`, `TFN`, `phoneNumber`, `email`, `userName`, `password`, `dateJoined`, `lastLogin`, `storeID_id`, `userType`) VALUES
+('E00001', 'Dev', 'Team Bois', ' 2 George St', 'Brisbane ', 4000, 'QLD', '2018-08-05', 1, 1000000, 'admin@admin.com', 'dev', 'argon2$argon2i$v=19$m=512,t=2,p=2$dHJmeFhiNm5qd0s1$EPUBcr3FsVh4dLom/iytXw', '2018-09-05', '2018-09-17', 'S0020', 'Developer'),
+('E00002', 'Jax', 'Lee', 'Test', 'Brisbane', 4000, 'QLD', '1998-09-12', 4548545558, 422325325, 'jax@jax.com', 'gsjaxl', 'argon2$argon2i$v=19$m=512,t=2,p=2$dTUxWW1ydEZWYnhM$LvDMKxTis3QPiXYTxngH4Q', '2018-09-12', '2018-09-17', 'S0004', 'Manager'),
+('E00003', 'Frank', 'King', 'Test', 'Brisbane', 4000, 'QLD', '1992-06-19', 4545454545, 445454545, 'sample@sample.com', 'csfrankk', 'argon2$argon2i$v=19$m=512,t=2,p=2$eXU0dHhOdzladEd5$Uh/phea246NaQ3Ve1AeQEA', '2018-09-17', '2018-09-17', 'S0021', 'Staff');
 
 -- --------------------------------------------------------
 
@@ -1723,14 +1720,14 @@ CREATE TABLE IF NOT EXISTS `crcapp_vehicle` (
   `series` varchar(50) NOT NULL,
   `year` int(11) NOT NULL,
   `newPrice` decimal(10,2) NOT NULL,
-  `enginesize` decimal(4,1) NOT NULL,
-  `fuelSystem` varchar(50) NOT NULL,
+  `enginesize` decimal(2,1) NOT NULL,
+  `fuelSystem` varchar(20) NOT NULL,
   `tankcapacity` decimal(7,1) NOT NULL,
   `power` int(11) NOT NULL,
   `seatingCapacity` int(11) NOT NULL,
-  `standardTransmission` varchar(50) NOT NULL,
-  `bodyType` varchar(50) NOT NULL,
-  `driveType` varchar(30) NOT NULL,
+  `standardTransmission` varchar(10) NOT NULL,
+  `bodyType` varchar(30) NOT NULL,
+  `driveType` varchar(3) NOT NULL,
   `wheelbase` int(11) NOT NULL,
   `storeID_id` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`vehicleID`),
@@ -2031,8 +2028,7 @@ INSERT INTO `crcapp_vehicle` (`vehicleID`, `makeName`, `model`, `series`, `year`
 ('V15089', 'VOLVO', 'V50', 'MY07 2.4 LE', 2007, '47950.00', '2.4', 'MULTI POINT F/INJ', '62.0', 125, 5, '5AG', '4D WAGON', 'FWD', 2640, ''),
 ('V15121', 'VOLVO', 'S40', 'MY06 T5 AWD', 2006, '54950.00', '2.5', 'TURBO MPFI', '57.0', 162, 5, '5AG', '4D SEDAN', 'AWD', 2640, ''),
 ('V15125', 'NISSAN', '200', 'S15 SX SPEC S', 2002, '40990.00', '2.0', 'TURBO MPFI', '65.0', 147, 4, '6M', '2D COUPE', 'RWD', 2525, ''),
-('V15126', 'NISSAN', '200', 'S15 SX SPEC R GT', 2002, '46490.00', '2.0', 'TURBO MPFI', '65.0', 147, 4, '6M', '2D COUPE', 'RWD', 2525, ''),
-('V15401', 'MERCEDES BENZ', 'CLA200', 'CLA CLASS', 2018, '53000.00', '1.6', 'PREMIUM UNLEADED PETROL', '50.0', 115, 5, '7A', '4D SEDAN', 'FWD', 2699, 'S0020');
+('V15126', 'NISSAN', '200', 'S15 SX SPEC R GT', 2002, '46490.00', '2.0', 'TURBO MPFI', '65.0', 147, 4, '6M', '2D COUPE', 'RWD', 2525, '');
 
 -- --------------------------------------------------------
 
@@ -2103,7 +2099,7 @@ CREATE TABLE IF NOT EXISTS `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `django_migrations`
@@ -2130,11 +2126,7 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (18, 'sessions', '0001_initial', '2018-09-17 02:05:00.309525'),
 (19, 'crcapp', '0004_auto_20180917_1211', '2018-09-17 02:11:38.891998'),
 (20, 'crcapp', '0005_auto_20180917_1213', '2018-09-17 02:13:10.631120'),
-(21, 'crcapp', '0006_auto_20180917_1213', '2018-09-17 02:14:04.499050'),
-(22, 'crcapp', '0007_auto_20180917_1528', '2018-09-20 01:56:19.491321'),
-(23, 'crcapp', '0008_auto_20180920_1150', '2018-09-20 01:56:20.523593'),
-(24, 'crcapp', '0009_auto_20180920_1156', '2018-09-20 01:56:21.158062'),
-(25, 'crcapp', '0010_auto_20180920_1157', '2018-09-20 01:57:43.061275');
+(21, 'crcapp', '0006_auto_20180917_1213', '2018-09-17 02:14:04.499050');
 
 -- --------------------------------------------------------
 
@@ -2150,26 +2142,6 @@ CREATE TABLE IF NOT EXISTS `django_session` (
   PRIMARY KEY (`session_key`),
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `django_session`
---
-
-INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('3n3wuj0v0fux0we6e2wzk8rb3qlxwnxz', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-17 04:27:37.436923'),
-('96plk0wna0y4sm5e9d0w4wmqq9a2726w', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-17 06:46:03.377342'),
-('3wf02w7scuryw5awknmj36unh5t3elr6', 'YmQyNWI0M2M1M2U0M2Y3MWFlZDA2ODlmOTZjYWYyNGVmYTBjNjdjNDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJNYW5hZ2VyIiwibmFtZSI6Ik9zY2FyIExpIn0=', '2018-09-17 06:48:31.788257'),
-('n4wxaebo4l6vd47olmpaqwnrim9um167', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-19 01:52:11.462011'),
-('og6mddarkunycpe12xig4d474rlrqocr', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-19 03:56:10.966121'),
-('ksxn4v1a0ghepeyjvlj9ymqa0enfieil', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-19 03:56:10.968146'),
-('3dkof5w081q4pf33m7maazw3e2rlx2v8', 'NTRkY2U4YTZmZGJkZjhkZGQ3NzE5ZjZiNTZjYjk1ZWJmNDhiMzNmYzp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyIsInVpZCI6IkUwMDAwMSJ9', '2018-09-19 04:29:45.742567'),
-('uygo3ft6lecnhlptuq614tmb8lhalfli', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-19 07:03:28.932721'),
-('t8dy6j29qnrfhnvc0zenknli9qwi1fcs', 'ZWZjN2JjYjQxNDVkNTkwODM5ZGYyYjQ1MTQzZTgyNzgxODI4N2Y3OTp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJTdGFmZiIsIm5hbWUiOiJPc2NhciBMaSJ9', '2018-09-19 07:39:21.020071'),
-('gui5u9nchtoikmn1cgfifsi6on1szuwg', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-20 02:22:00.409988'),
-('a1ush70nlwaig2wut0zxgrowiv4911hz', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-20 04:28:21.065963'),
-('omxi4qkdvv227l7xq7k31wkh7gooww8c', 'ZDVlNjlhOTRkOGNhODU1MjZlMmZkZTU4MjQ0ZTBlYWNiMGMzZTA4ODp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-21 05:19:14.262227'),
-('low99aj7w8uu3o932jm4ypfl8v0wildh', 'ZDVlNjlhOTRkOGNhODU1MjZlMmZkZTU4MjQ0ZTBlYWNiMGMzZTA4ODp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-21 08:08:20.984325'),
-('szvbmnfqilk7y1s59wt0it4i9hixlw1i', 'ZWI1N2M5YzJkZGQ4YTkxYTY3MzkzMzU3NWY5ZTU2MjY3ODViYjU1MDp7Il9zZXNzaW9uX2V4cGlyeSI6NzIwMCwidWlkIjoiRTAwMDAxIiwidXR5cGUiOiJEZXZlbG9wZXIiLCJuYW1lIjoiRGV2IFRlYW0gQm9pcyJ9', '2018-09-24 05:43:49.944617');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

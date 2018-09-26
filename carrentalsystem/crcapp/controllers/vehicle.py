@@ -8,6 +8,7 @@ from django.utils import timezone
 
 # Create functions related to staff
 class VehicleController:
+      # Developer: Sam
     #creates vehicle entry in the database using provided values
     def create():
 
@@ -33,7 +34,8 @@ class VehicleController:
         driveType_ = request.POST.get(" driveType")
         wheelbase_ = request.POST.get(" wheelbase")
         storeID_ = request.POST.get(" storeID")
-
+        # Passes the store instance to the model
+        store = Store.objects.get(storeID=storeID_)
         try:
             x = Vehicle(
             vehicleID = vehicleID_,
@@ -51,7 +53,7 @@ class VehicleController:
             bodyType = bodyType_,
             driveType = driveType_,
             wheelbase = wheelbase_,
-            storeID = storeID_)
+            storeID = store)
 
             vali = x.full_clean()
             if vali:
@@ -72,7 +74,7 @@ class VehicleController:
             for each in Vehilce.objects.all():
                 print(
                 each.makeName,
-                each.model,
+                each.model, 
                 each.series,
                 each.year,
                 each.newPrice,
@@ -80,7 +82,7 @@ class VehicleController:
                 each.fuelSystem,
                 each.tankcapacity,
                 each.power,
-                each.seatingCapacity,,
+                each.seatingCapacity,
                 each.standardTransmission,
                 each.bodyType,
                 each.driveType,
@@ -195,7 +197,7 @@ class VehicleController:
                 each.fuelSystem,
                 each.tankcapacity,
                 each.power,
-                each.seatingCapacity,,
+                each.seatingCapacity,
                 each.standardTransmission,
                 each.bodyType,
                 each.driveType,
@@ -223,23 +225,21 @@ class VehicleController:
        store = Store.objects.get(storeID=storeID_)
 
        try:
-           x = Customer.objects.get(vID_)
-
-           x.makeName = makeName_
-           x.model = model_
-           x.series = series_
-           x.year = year_,
-           x.newPrice = newPrice_
-           x.enginesize = enginesize_
-           x.fuelSystem = fuelSystem_
-           x.tankcapacity = tankcapacity_
-           x.power = power_
-           x.seatingCapacity = seatingCapacity_
-           x.standardTransmission = standardTransmission_
-           x.bodyType = bodyType_
-           x.driveType = driveType_
-           x.wheelbase = wheelbase_
-           x.storeID = store
+           vehicle.makeName = makeName_
+           vehicle.model = model_
+           vehicle.series = series_
+           vehicle.year = year_,
+           vehicle.newPrice = newPrice_
+           vehicle.enginesize = enginesize_
+           vehicle.fuelSystem = fuelSystem_
+           vehicle.tankcapacity = tankcapacity_
+           vehicle.power = power_
+           vehicle.seatingCapacity = seatingCapacity_
+           vehicle.standardTransmission = standardTransmission_
+           vehicle.bodyType = bodyType_
+           vehicle.driveType = driveType_
+           vehicle.wheelbase = wheelbase_
+           vehicle.storeID = store
 
            vali = x.full_clean()
            if vali:

@@ -7,6 +7,7 @@ from django.utils import timezone
 # Create functions related to staff
 class StaffController:
 
+    # Developer: Sam
     # Creating a new staff account. If a username exist in the employee
     # database, do not create the account. else, create the account for
     # the employee
@@ -68,6 +69,7 @@ class StaffController:
         except ValidationError as e:
             return e
 
+    # Developer: Sam
     # modifying the staff values
     def modify(request, empID):
 
@@ -139,7 +141,7 @@ class StaffController:
         except ValidationError as e:
             return e
 
-
+      # Developer: Aidan
     def changeLoginDetails(request, pw):
         try:
             employeeID_ = request.POST.get("empID")
@@ -163,6 +165,7 @@ class StaffController:
         except ValidationError as e:
             return e
 
+      # Developer: Sam
     def search(arg):
         if (arg == False):
             for each in Customer.objects.all():
