@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse  
 from django.urls import path
 from django.http import HttpResponse,HttpResponseRedirect
 from django.middleware.csrf import CsrfViewMiddleware
@@ -8,6 +8,7 @@ from crcapp.models import Store,Employee,Customer,Vehicle # If the model is used
 from django.utils import timezone
 from django.core.serializers import serialize
 from django.core.serializers.json import DjangoJSONEncoder
+from django.contrib.sessions.models import Session
 
 from . import views
 from crcapp.controllers import authentication, staff, vehicle
@@ -19,10 +20,21 @@ class LazyEncoder(DjangoJSONEncoder):
     def default(self, obj):
         return super().default(obj)
 
-
 # Developer: Aidan
 # Loading the index page
 def index(request, messages="", mtype="i"):
+
+    # Will get the session variables for the message
+    # and delete it after wards
+    msg = request.session.get('msg', '')
+    mtp = request.session.get('mtp', '')
+    if msg != "":
+        messages =  msg
+        del request.session['msg']
+    if mtp != "":
+        mtype = mtp
+        del request.session['mtype']
+    
     stores = Store.objects.all()
     return render(request, 'index.html', {'msg': messages, 'mtype': mtype, 'stores': stores})
 
@@ -33,6 +45,12 @@ def index(request, messages="", mtype="i"):
 def loginIndex(request, messages="", mtype="i"):
     return render(request, 'index.html', {'msg': messages, 'mtype': mtype})
 
+# Developer: Aidan
+def notLoggedIn(request):
+    messages = "Access Denied!"
+    request.session['msg'] = messages
+    request.session['mtype'] = 'd'
+    return redirect('/#login')
     
 # Developer: Aidan
 # Loading the home page
@@ -43,7 +61,7 @@ def home(request, messages=""):
         utype = request.session['utype']
         return render(request, 'home.html', {'msg': messages, 'name': name, 'utype': utype})
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       return notLoggedIn(request)
     
 
 # Developer: Aidan
@@ -53,17 +71,29 @@ def loginEmployee(request):
         form = request.POST
         reason = CsrfViewMiddleware().process_view(request, None, (), {})
         if reason:
-            return index(request, messages="Token verification failed.", mtype="d")
+            messages = "Token verification failed."
+            request.session['msg'] = messages
+            request.session['mtype'] = 'd'
+            return redirect('/#login')
         else:
             result = authentication.Authentication.login(request)
             if result != "NULL":
                 return redirect("../home")
             elif result == "NULL":
-                return index(request,messages="Login failed.", mtype="d")
+                messages = "Login failed."
+                request.session['msg'] = messages
+                request.session['mtype'] = 'd'
+                return redirect('/#login')
             else:
-                return index(request,messages=result, mtype="d")
+                messages = result
+                request.session['msg'] = messages
+                request.session['mtype'] = 'd'
+                return redirect('/#login')
     else:
-        return index(request, messages="Opps, something went wrong.", mtype="d")
+        messages = "Opps, something went wrong."
+        request.session['msg'] = messages
+        request.session['mtype'] = 'd'
+        return redirect('/#login')
 
 
 # Developer: Aidan
@@ -81,7 +111,7 @@ def disableStaff(request, option, empID):
         staff.save()
         return redirect('/staff/login/'+empID)
     else:
-        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+        notLoggedIn(request)
 
 
 # Developer: Aidan
@@ -89,7 +119,9 @@ def disableStaff(request, option, empID):
 def logoff(request, messages=""):
     messages = "Successfully logged off."
     authentication.Authentication.logout(request)
-    return redirect('/#login', {'msg': messages, 'mtype': "i"})
+    request.session['msg'] = messages
+    request.session['mtype'] = 'i'
+    return redirect('/#login')
 
 
 # Developer: Aidan
@@ -117,7 +149,7 @@ def staffCreate(request, messages="", mtype=""):
         elif request.method == "GET":
             return render(request, 'staff/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores})
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       notLoggedIn(request)
 
 
 # Developer: Aidan
@@ -130,7 +162,7 @@ def getAllStaff(request, messages="", mtype=""):
         employees = Employee.objects.all()
         return render(request, 'staff/staffmanagementview.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "employees":employees, "stores": stores})
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       notLoggedIn(request)
 
 
 # Developer: Aidan
@@ -167,7 +199,7 @@ def getStaff(request, option, msg='',mtype=''):
             
             return render(request, 'staff/staffdetailview.html', {'name': name, 'utype': utype,  'msg': '', 'mtype': mtype, 'employee':employee, 'stores':stores})
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       notLoggedIn(request)
 
 # Create customer member page
 def customerCreate(request, messages="", mtype=""):
@@ -178,7 +210,7 @@ def customerCreate(request, messages="", mtype=""):
         stores = Store.objects.all()
         return render(request, 'customer/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores})
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       notLoggedIn(request)
 
 # Order Confirmation page
 def bookOrderConfirm(request, messages=""):
@@ -188,7 +220,7 @@ def bookOrderConfirm(request, messages=""):
         utype = request.session['utype']
         return render(request, 'booking/orderConfirm.html', {'msg': messages, 'name': name, 'utype': utype})
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       notLoggedIn(request)
 
 
 # Developer: Aidan
@@ -201,7 +233,7 @@ def viewStaffLogin(request):
         stores = Store.objects.all()
         return render(request, 'staff/loginmanagementview.html', {'name': name, 'utype': utype,'stores': stores})
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       notLoggedIn(request)
        
    
    
@@ -246,7 +278,7 @@ def viewStaffLoginDetails(request, option, msg='',mtype=''):
         
         return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype,  'msg': msg, 'mtype': mtype, 'employee':employee, 'store':store})
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       notLoggedIn(request)
 
 
 
@@ -259,7 +291,7 @@ def searchStaff(request, msg='',mtype=''):
         employees = Employee.objects.all()
         return render(request, 'staff/search.html', {'fields': fields}, {'employees': employees})
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       notLoggedIn(request)
 
 # Booking page
 def bookingOrder(request):
@@ -284,7 +316,7 @@ def email(request, message="Default Message", id = "E00001", isEmployee=True):
         
         return render(request, 'emaillayout.html', {'name': name, 'utype': utype, 'msg': '', 'mtype': '', 'date':date, 'date_un': date_un, 'item':items, 'msgemail':message})
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       notLoggedIn(request)
 
 
 # Developer: Aidan
@@ -317,7 +349,7 @@ def createLoginStaff(request):
             return render(request, 'staff/loginstaffview.html', {'name': name, 'utype': utype, 'msg': 'HTTP request error', 'mtype': 'd', 'employee':employee, 'store':store})
        
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       notLoggedIn(request)
 
 # Developer: Aidan
 # sample view only will be deleted later ------ DO NOT USE IN PRODUCTION
@@ -350,7 +382,7 @@ def createVehicle(request, messages="", mtype=""):
         elif request.method == "GET":
             return render(request, 'vehicle/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, 'stores': stores})
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       notLoggedIn(request)
 
 # Developer: Aidan
 # save changes of vehicle
@@ -381,7 +413,7 @@ def getAllVehicles(request, messages="", mtype=""):
         vehicles = Vehicle.objects.all()
         return render(request, 'vehicle/vehiclemanagementview.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "vehicles":vehicles, "stores": stores})
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       notLoggedIn(request)
 
 # Developer: Aidan
 # get vehicle details to modify page
@@ -397,4 +429,4 @@ def getVehicle(request, option, msg='',mtype=''):
             
             return render(request, 'vehicle/detailview.html', {'name': name, 'utype': utype,  'msg': '', 'mtype': mtype, 'vehicle':vehicle, 'stores':stores})
     else:
-       return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+       notLoggedIn(request)
