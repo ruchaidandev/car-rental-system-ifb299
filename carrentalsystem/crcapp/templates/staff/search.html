@@ -14,31 +14,28 @@
 <hr>
 <br>
 <div id="searchTab p-2 mb-5">
-    <div class="row">
+    <div class="form-row">
             <div class="col-md-3 field-label-responsive">
                     <label for="userType">Select category to view staff</label>
             </div>
-            <div class="col-md-6">
-                    <div class="form-group">
-                        <select class="form-control select2 p-2" style="width:280px;" name="staffID" id="staffID" required>
-                            <option value="">Select category</option>
-                            {% for field in fields %}
-                            {% if field.name == "order" %}
-                            {% elif field.name == "inspects" %}
-                            {% elif field.name == "disable" %}
-                            {% else %}
-                            <option value="{{ field }}">{{ field.name }}</option>
-                            {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
+            <div class="form-group col-md-6">
+                <select class="form-control select2 p-2" style="width:280px;" name="staffID" id="staffID" required>
+                    <option value="">Select category</option>
+                    {% for field in fields %}
+                    {% if field.name == "order" %}
+                    {% elif field.name == "inspects" %}
+                    {% elif field.name == "disable" %}
+                    {% else %}
+                    <option value="{{ field }}">{{ field.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+                <input class="form-control" type="text" style="width:280px;" placeholder="Search.." id="SearchInput">
             </div>
             <div class="col-md-3">
                     <div id="btnStaff" class="btn btn-flat btn-primary">SELECT</div>
             </div>
     </div>
-        
-
 </div>
 <br>
 <hr>
@@ -67,26 +64,7 @@
               </tr>
               </thead>
               <tbody id="records">
-                <!-- {% for employee in employees %}
-                <tr>
-                  <td class="pdttable">{{ employee.employeeID }}</td>
-                  <td class="pdttable">{{ employee.firstName }}</td>
-                  <td class="pdttable">{{ employee.lastname }}</td>
-                  <td class="pdttable">{{ employee.streetAddress }}</td>
-                  <td class="pdttable">{{ employee.cityAddress }}</td> 
-                  <td class="pdttable">{{ employee.postCodeAddress }}</td> 
-                  <td class="pdttable">{{ employee.stateAddress }}</td>
-                  <td class="pdttable">{{ employee.DOB }}</td>
-                  <td class="pdttable">{{ employee.TFN }}</td>  
-                  <td class="pdttable">{{ employee.phoneNumber }}</td> 
-                  <td class="pdttable">{{ employee.email }}</td>
-                  <td class="pdttable">{{ employee.userName }}</td>
-                  <td class="pdttable">{{ employee.userType }}</td>   
-                  <td class="pdttable">{{ employee.dateJoined }}</td> 
-                  <td class="pdttable">{{ employee.lastLogin }}</td> 
-                  <td class="pdttable">{{ employee.storeID }}</td> 
-                </tr> -->
-                {% endfor %}
+
               </tbody>
               <tfoot>
               <tr>
@@ -153,7 +131,7 @@
                             'retrieve': true,
                             'paging'      : true, // for pagination
                             'lengthChange': false,
-                            'searching'   : true, //searching
+                            'searching'   : false, //searching
                             'ordering'    : true, //sorting
                             'info'        : true,
                             'autoWidth'   : true, // keep this true
