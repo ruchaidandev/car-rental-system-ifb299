@@ -92,7 +92,7 @@ def logoff(request, messages=""):
     return redirect('/#login', {'msg': messages, 'mtype': "i"})
 
 
-# Developer: Aidan
+# Developer: Jax
 # Create staff member page
 def staffCreate(request, messages="", mtype=""):
     # Checking session exists
@@ -260,6 +260,7 @@ def searchStaff(request, msg='',mtype=''):
         return render(request, 'staff/search.html', {'fields': fields}, {'employees': employees})
     else:
        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
 
 # Booking page
 def bookingOrder(request):

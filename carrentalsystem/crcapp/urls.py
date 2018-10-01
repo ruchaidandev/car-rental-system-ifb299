@@ -23,6 +23,7 @@ urlpatterns = [
     # Getting staff from staff check 
     path('staff/store', views.getStaffFromStore, name='getStaffFromStore'),
 
+
     # Getting usernames
     path('staff/usernames/list', views.getUsernames, name='getUsernames'),
 
