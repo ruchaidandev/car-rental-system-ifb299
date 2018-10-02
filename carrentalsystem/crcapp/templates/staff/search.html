@@ -14,7 +14,7 @@
 <hr>
 <br>
 <div id="searchTab p-2 mb-5">
-    <div class="form-row">
+    <div class="form-group row">
             <div class="col-md-3 field-label-responsive">
                     <label for="userType">Select category to view staff</label>
             </div>
@@ -30,11 +30,18 @@
                     {% endif %}
                     {% endfor %}
                 </select>
-                <input class="form-control" type="text" style="width:280px;" placeholder="Search.." id="SearchInput">
             </div>
             <div class="col-md-3">
                     <div id="btnStaff" class="btn btn-flat btn-primary">SELECT</div>
             </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="userType">Input search field</label>
+      </div>
+      <div class="form-group col-md-6">
+        <input class="form-control" type="text" style="width:280px;" placeholder="Input Search" id="SearchInput">
+      </div>
     </div>
 </div>
 <br>
