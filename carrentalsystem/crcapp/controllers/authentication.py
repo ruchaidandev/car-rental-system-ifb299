@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.sessions.models import Session
 from django.utils import timezone
 
+# Developer: Aidan
 class Authentication:
 
     def login(request, username=None, password=None):
@@ -37,3 +38,5 @@ class Authentication:
 
     def logout(request):
         del request.session['uid']
+        del request.session['utype']
+        del request.session['name']
