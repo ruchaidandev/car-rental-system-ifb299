@@ -74,7 +74,7 @@ class VehicleController:
             for each in Vehilce.objects.all():
                 print(
                 each.makeName,
-                each.model, 
+                each.model,
                 each.series,
                 each.year,
                 each.newPrice,
@@ -224,34 +224,31 @@ class VehicleController:
        storeID_ = request.POST.get("storeID")
        store = Store.objects.get(storeID=storeID_)
 
-       try:
-           vehicle.makeName = makeName_
-           vehicle.model = model_
-           vehicle.series = series_
-           vehicle.year = year_,
-           vehicle.newPrice = newPrice_
-           vehicle.enginesize = enginesize_
-           vehicle.fuelSystem = fuelSystem_
-           vehicle.tankcapacity = tankcapacity_
-           vehicle.power = power_
-           vehicle.seatingCapacity = seatingCapacity_
-           vehicle.standardTransmission = standardTransmission_
-           vehicle.bodyType = bodyType_
-           vehicle.driveType = driveType_
-           vehicle.wheelbase = wheelbase_
-           vehicle.storeID = store
 
-           vali = x.full_clean()
-           if vali:
-               return vali
-           else:
-               x.save()
-               return True
+       vehicle.makeName = makeName_
+       vehicle.model = model_
+       vehicle.series = series_
+       vehicle.year = year_,
+       vehicle.newPrice = newPrice_
+       vehicle.enginesize = enginesize_
+       vehicle.fuelSystem = fuelSystem_
+       vehicle.tankcapacity = tankcapacity_
+       vehicle.power = power_
+       vehicle.seatingCapacity = seatingCapacity_
+       vehicle.standardTransmission = standardTransmission_
+       vehicle.bodyType = bodyType_
+       vehicle.driveType = driveType_
+       vehicle.wheelbase = wheelbase_
+       vehicle.storeID = store
 
-           return False
+       vali = vehicle.full_clean()
+       if vali:
+           return vali
+       else:
+           vehicle.save()
+           return True
 
-       except ValidationError as e:
-            return e
+       return False
 
 
     def delete(ID):
