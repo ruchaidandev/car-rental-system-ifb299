@@ -1,6 +1,31 @@
 {% extends 'base.html' %}
 {% block title %}Home Page{% endblock %}
 {% block content %}
+
+{% if msg != "" %}
+<div class="row">
+        <div class="col-md-12 col-sm-12">
+            <!-- Checking whether it is a danger type or info type needed for the box
+                Will be checked by mtype is d or i
+            -->
+            {% if mtype == "d" or mtype == "a" %}
+            <div class="alert alert-danger">
+            {% elif mtype == "i" %}
+            <div class="alert alert-info">
+            {% endif %}
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {% if mtype == "a" %}
+                    {% for key, values in msg %}
+                        <p>{{ key }} : {{ values.0 }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>{{ msg }}</p>
+                {% endif %}
+            </div>
+        </div>
+</div>    
+{% endif %}
+
 <div class="row">
    <div class="col-md-12">
       <h4>Bookings</h4>
@@ -30,6 +55,7 @@
    </div>
 </div>
 <br>
+{% if request.session.utype != "Customer" %}
 <div class="row">
    <div class="col-md-12">
       <h4>Vehicle Management</h4>
@@ -59,6 +85,7 @@
      </div>
 </div>
 <br>
+
 <div class="row">
         <div class="col-md-12">
                 <h4>Customer Management</h4>
@@ -87,7 +114,9 @@
                     </a>
                  </div>
 </div>
+{% endif %}
 <br>
+{% if request.session.utype == "Manager" or  request.session.utype == "Developer" %}
 <div class="row">
         <div class="col-md-12">
                 <h4>Staff Management</h4>
@@ -134,4 +163,5 @@
              </div>
             
 </div>
+{% endif %}
 {% endblock %}
