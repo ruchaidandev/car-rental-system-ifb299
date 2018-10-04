@@ -74,7 +74,7 @@ class VehicleController:
             for each in Vehicle.objects.all():
                 print(
                 each.makeName,
-                each.model, 
+                each.model,
                 each.series,
                 each.year,
                 each.newPrice,
@@ -119,13 +119,13 @@ class VehicleController:
             condition = " "
 
             if (makeName != ''):
-                condition = condition + "makeName = \'" + makeName + "\' AND "
+                condition = condition + "makeName CONTAINS \'" + makeName + "\' AND "
 
             if (model != ''):
-                condition = condition + "model = \'" + model + "\' AND "
+                condition = condition + "model CONTAINS \'" + model + "\' AND "
 
             if (series != ''):
-                condition = condition + "series = \'" + series + "\' AND "
+                condition = condition + "series CONTAINS \'" + series + "\' AND "
 
             if (year_min != ''):
                 condition = condition + "year >= \'" + year_min + "\' AND "
@@ -167,13 +167,13 @@ class VehicleController:
                 condition = condition + "seatingCapacity <= \'" + seatingCapacity_max + "\' AND "
 
             if (standardTransmission != ''):
-                condition = condition + "standardTransmission = \'" + standardTransmission + "\' AND "
+                condition = condition + "standardTransmission CONTAINS \'" + standardTransmission + "\' AND "
 
             if (bodyType != ''):
-                condition = condition + "bodyType = \'" + bodyType + "\' AND "
+                condition = condition + "bodyType CONTAINS \'" + bodyType + "\' AND "
 
             if (driveType != ''):
-                condition = condition + "driveType = \'" + driveType + "\' AND "
+                condition = condition + "driveType CONTAINS \'" + driveType + "\' AND "
 
             if (wheelbase_min != ''):
                 condition = condition + "wheelbase >= \'" + wheelbase_min + "\' AND "
@@ -224,34 +224,31 @@ class VehicleController:
        storeID_ = request.POST.get("storeID")
        store = Store.objects.get(storeID=storeID_)
 
-       try:
-           vehicle.makeName = makeName_
-           vehicle.model = model_
-           vehicle.series = series_
-           vehicle.year = year_,
-           vehicle.newPrice = newPrice_
-           vehicle.enginesize = enginesize_
-           vehicle.fuelSystem = fuelSystem_
-           vehicle.tankcapacity = tankcapacity_
-           vehicle.power = power_
-           vehicle.seatingCapacity = seatingCapacity_
-           vehicle.standardTransmission = standardTransmission_
-           vehicle.bodyType = bodyType_
-           vehicle.driveType = driveType_
-           vehicle.wheelbase = wheelbase_
-           vehicle.storeID = store
 
-           vali = x.full_clean()
-           if vali:
-               return vali
-           else:
-               x.save()
-               return True
+       vehicle.makeName = makeName_
+       vehicle.model = model_
+       vehicle.series = series_
+       vehicle.year = year_,
+       vehicle.newPrice = newPrice_
+       vehicle.enginesize = enginesize_
+       vehicle.fuelSystem = fuelSystem_
+       vehicle.tankcapacity = tankcapacity_
+       vehicle.power = power_
+       vehicle.seatingCapacity = seatingCapacity_
+       vehicle.standardTransmission = standardTransmission_
+       vehicle.bodyType = bodyType_
+       vehicle.driveType = driveType_
+       vehicle.wheelbase = wheelbase_
+       vehicle.storeID = store
 
-           return False
+       vali = vehicle.full_clean()
+       if vali:
+           return vali
+       else:
+           vehicle.save()
+           return True
 
-       except ValidationError as e:
-            return e
+       return False
 
 
     def delete(ID):
