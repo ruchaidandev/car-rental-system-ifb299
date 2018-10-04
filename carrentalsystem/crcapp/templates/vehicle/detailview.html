@@ -38,6 +38,15 @@
 				<hr>
 			</div>
 		</div>
+		<div class="row pt-4 pb-4">
+			<div class="col-md-6">
+				
+			</div>
+			<div class="col-md-6">
+				<div class="btn btn-flat btn-warning p-2">Save Changes</div>
+				<div class="btn btn-flat btn-danger p-2">Delete</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-6">
 				<h5>Vehicle Details</h5>
@@ -52,7 +61,7 @@
 							<div class="input-group mb-2 mr-sm-2 mb-sm-0">
 								<div class="input-group-addon" ></i></div>
 								<input type="text" name="makeName" class="form-control" id="makeName"
-									placeholder="Vehicle Make" required value="" autocomplete="on">
+									placeholder="Vehicle Make" required value="{{ vehicle.makeName }}" autocomplete="on">
 							</div>
 						</div>
 					</div>
@@ -66,7 +75,7 @@
 							<div class="input-group mb-2 mr-sm-2 mb-sm-0">
 								<div class="input-group-addon" ></i></div>
 								<input type="text" name="model" class="form-control" id="model"
-									placeholder="Vehicle Model" required value="" autocomplete="on">
+									placeholder="Vehicle Model" required value="{{ vehicle.model }}" autocomplete="on">
 							</div>
 						</div>
 					</div>
@@ -80,7 +89,7 @@
 							<div class="input-group mb-2 mr-sm-2 mb-sm-0">
 								<div class="input-group-addon" ></i></div>
 								<input type="text" name="series" class="form-control" id="series"
-									placeholder="Vehicle Series" required value="" autocomplete="on">
+									placeholder="Vehicle Series" required value="{{ vehicle.series }}" autocomplete="on">
 							</div>
 						</div>
 					</div>
@@ -94,7 +103,7 @@
 							<div class="input-group mb-2 mr-sm-2 mb-sm-0">
 								<div class="input-group-addon" ></i></div>
 								<input type="number" name="year" class="form-control" id="year"
-									placeholder="eg: 2018" required autocomplete="on" value="" min=0 step=1 max=2500>
+									placeholder="eg: 2018" required autocomplete="on" value="{{ vehicle.year }}" min=0 step=1 max=2500>
 							</div>
 						</div>
 					</div>
@@ -107,7 +116,7 @@
 						<div class="form-group has-feedback">
 							<div class="input-group mb-2 mr-sm-2 mb-sm-0 ">
 								<input type="number" name="enginesize" class="form-control" id="enginesize"
-									placeholder="Engine Size" required value="" autocomplete="on" min=0.0 step=0.1>
+									placeholder="Engine Size" required value="{{ vehicle.enginesize }}" autocomplete="on" min=0.0 step=0.1>
 								<div class="input-group-prepend">
 									<div class="input-group-text">L</div>
 								</div>
@@ -123,7 +132,7 @@
 						<div class="form-group">
 							<div class="input-group mb-2 mr-sm-2 mb-sm-0">
 								<input type="number" name="seatingCapacity" class="form-control" id="seatingCapacity"
-									placeholder="Seating Capacity" required value="" autocomplete="on" min=0 step=1>
+									placeholder="Seating Capacity" required value="{{ vehicle.seatingCapacity }}" autocomplete="on" min=0 step=1>
 							</div>
 						</div>
 					</div>
@@ -140,7 +149,7 @@
 						<div class="form-group">
 							<div class="input-group mb-2 mr-sm-2 mb-sm-0">
 								<input type="text" name="fuelSystem" class="form-control" id="fuelSystem"
-									placeholder="Fuel System" required value="" autocomplete="on">
+									placeholder="Fuel System" required value="{{ vehicle.fuelSystem }}" autocomplete="on">
 							</div>
 						</div>
 					</div>
@@ -153,7 +162,7 @@
 						<div class="form-group">
 							<div class="input-group mb-2 mr-sm-2 mb-sm-0">
 								<input type="number" name="tankcapacity" class="form-control" id="tankcapacity"
-									placeholder="Tank Capacity" required autocomplete="on" min=0.0 >
+									placeholder="Tank Capacity" value="{{ vehicle.tankcapacity }}" required autocomplete="on" min=0.0 >
 								<div class="input-group-prepend">
 									<div class="input-group-text">L</div>
 								</div>
@@ -169,7 +178,7 @@
 						<div class="form-group">
 							<div class="input-group mb-2 mr-sm-2 mb-sm-0">
 								<input type="number" name="power" class="form-control" id="power"
-									placeholder="Power" required autocomplete="on" min=0 >
+									placeholder="Power" value = "{{ vehicle.power }}" required autocomplete="on" min=0 >
 								<div class="input-group-prepend">
 									<div class="input-group-text">kW</div>
 								</div>
@@ -185,7 +194,7 @@
 						<div class="form-group">
 							<div class="input-group mb-2 mr-sm-2 mb-sm-0">
 								<input type="text" name="standardTransmission" class="form-control" id="standardTransmission"
-									placeholder="Standard Transmission" required autocomplete="on" >
+									placeholder="Standard Transmission" value="{{ vehicle.standardTransmission }}" required autocomplete="on" >
 							</div>
 						</div>
 					</div>
@@ -198,7 +207,7 @@
 						<div class="form-group">
 							<div class="input-group mb-2 mr-sm-2 mb-sm-0">
 								<input type="number" name="wheelBase" class="form-control" id="wheelBase"
-									placeholder="Wheel Base" required autocomplete="on" min=0 >
+									placeholder="Wheel Base" required value="{{ vehicle.wheelbase }}" autocomplete="on" min=0 >
 								<div class="input-group-prepend">
 									<div class="input-group-text">mm</div>
 								</div>
@@ -213,7 +222,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                    <input type="text" name="bodyType" class="form-control" id="bodyType"
+                                    <input type="text" name="bodyType" value="{{ vehicle.bodyType }}" class="form-control" id="bodyType"
                                         placeholder="Body Type" required autocomplete="on">
                                 </div>
                             </div>
@@ -228,10 +237,10 @@
 							<div class="input-group mb-2 mr-sm-2 mb-sm-0">
 								<select class="form-control select2" style="width:200px;" name="driveType" id="driveType" required>
 									<option value="">Select Drive Type</option>
-									<option value="AWD">AWD</option>
-									<option value="FWD">FWD</option>
-									<option value="RWD">RWD</option>
-									<option value="4WD">4WD</option>
+									<option value="AWD" {% if vehicle.driveType == "AWD" %}  selected="selected" {% endif %}>AWD</option>
+									<option value="FWD" {% if vehicle.driveType == "FWD" %}  selected="selected" {% endif %}>FWD</option>
+									<option value="RWD" {% if vehicle.driveType == "RWD" %}  selected="selected" {% endif %}>RWD</option>
+									<option value="4WD" {% if vehicle.driveType == "4WD" %}  selected="selected" {% endif %}>4WD</option>
 									
 								</select>
 							</div>
@@ -255,7 +264,7 @@
                                     <select class="form-control select2" style="width:180px;" name="storeID" id="storeID" required>
                                         <option value="">Select store</option>
                                         {% for s in stores %}
-                                        <option value="{{ s.storeID }}">{{ s.storeName }}</option>
+                                        <option value="{{ s.storeID }}" {% if vehicle.storeID_id == s.storeID %}  selected="selected" {% endif %}>{{ s.storeName }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -275,14 +284,14 @@
                                         <div class="input-group-text">$</div>
                                     </div>
                                     <input type="number" name="newPrice" class="form-control" id="newPrice"
-                                        placeholder="Price" required autocomplete="on" min=0.00 step=0.10 >
+                                        placeholder="Price" required autocomplete="on" value="{{ vehicle.newPrice }}" min=0.00 step=0.10 >
                                 </div>
                             </div>
                         </div>
                 </div>
             </div>
             <div class="col-md-4 pl-5">
-                <button type="submit" id="submit" class="btn btn-flat btn-success"><i class="fa fa-user-plus"></i> Insert</button>
+               
                        
             </div>
         </div>
