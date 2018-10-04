@@ -222,16 +222,16 @@ class StaffController:
                 condition = condition + "employeeID <= \'" + employeeID_max + "\' AND "
 
             if (firstName != ""):
-                condition = condition + "firstName CONTAINS \'" + firstName + "\' AND "
+                condition = condition + "firstName LIKE \'%" + firstName + "%\' AND "
 
             if (lastName != ""):
-                condition = condition + "lastName CONTAINS \'" + lastName + "\' AND "
+                condition = condition + "lastName LIKE \'%" + lastName + "%\' AND "
 
             if (streetAddress != ""):
-                condition = condition + "streetAddress CONTAINS \'" + streetAddress + "\' AND "
+                condition = condition + "streetAddress LIKE \'%" + streetAddress + "%\' AND "
 
             if (cityAddress != ""):
-                condition = condition + "cityAddress CONTAINS \'" + cityAddress + "\' AND "
+                condition = condition + "cityAddress LIKE \'%" + cityAddress + "%\' AND "
 
             if (postCodeAddress_min != ""):
                 condition = condition + "postCodeAddress >= \'" + postCodeAddress_min + "\' AND "
@@ -240,7 +240,7 @@ class StaffController:
                 condition = condition + "postCodeAddress <= \'" + postCodeAddress_max + "\' AND "
 
             if (stateAddress != ""):
-                condition = condition + "stateAddress CONTAINS \'" + stateAddress + "\' AND "
+                condition = condition + "stateAddress LIKE \'%" + stateAddress + "%\' AND "
 
             if (DOB_min != ""):
                 condition = condition + "DOB >= \'" + DOB_min + "\' AND "
@@ -255,10 +255,10 @@ class StaffController:
                 condition = condition + "phoneNumber = \'" + phoneNumber + "\' AND "
 
             if (email != ""):
-                condition = condition + "email = \'" + email + "\' AND "
+                condition = condition + "email LIKE \'%" + email + "%\' AND "
 
             if (userName != ""):
-                condition = condition + "userName CONTAINS \'" + userName + "\' AND "
+                condition = condition + "userName LIKE \'%" + userName + "%\' AND "
 
             if (userType != ""):
                 condition = condition + "userType = \'" + userType + "\' AND "
