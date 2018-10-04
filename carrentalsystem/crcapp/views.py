@@ -143,7 +143,7 @@ def logoff(request, messages=""):
     return redirect('/#login')
 
 
-# Developer: Aidan
+# Developer: Jax
 # Create staff member page
 def staffCreate(request, messages="", mtype=""):
     # Checking session exists
@@ -321,7 +321,6 @@ def viewStaffLoginDetails(request, option, msg='',mtype=''):
        return notLoggedIn(request)
 
 
-
 # Searching for staff
 def searchStaff(request, msg='',mtype=''):
     if request.session.has_key('uid'):
@@ -329,9 +328,16 @@ def searchStaff(request, msg='',mtype=''):
         utype = request.session['utype']
         fields = Employee._meta.get_fields()
         employees = Employee.objects.all()
+
+        # if request.method == 'POST':
+        #     return changeStaffDetails(request, option, msg, mtype, name, utype)
+        # elif request.method == 'GET':
+        #     employee = Employee.objects.filter(employeeID=option).values()[0]
+        #     stores = Store.objects.all()
         return render(request, 'staff/search.html', {'fields': fields}, {'employees': employees})
     else:
        return notLoggedIn(request)
+
 
 # Booking page
 def bookingOrder(request):

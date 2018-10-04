@@ -71,7 +71,7 @@ class VehicleController:
     def search(arg):
 
         if(arg == false):
-            for each in Vehilce.objects.all():
+            for each in Vehicle.objects.all():
                 print(
                 each.makeName,
                 each.model, 
