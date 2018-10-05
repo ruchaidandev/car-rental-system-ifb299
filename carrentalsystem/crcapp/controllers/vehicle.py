@@ -206,25 +206,25 @@ class VehicleController:
 
     # edit vehicle entry in the database using provided values
     def modify(vID):
-       vehicle = Vehicle.objects.get(vehicleID = vID)
-       makeName_  = request.POST.get("makeName")
-       model_  = request.POST.get("model")
-       series_  = request.POST.get("series")
-       year_  = request.POST.get("year")
-       newPrice_  = request.POST.get("newPrice")
-       enginesize_ = request.POST.get("enginesize")
-       fuelSystem_ = request.POST.get("fuelSystem")
-       tankcapacity_ = request.POST.get("tankcapacity")
-       power_ = request.POST.get("power")
-       seatingCapacity_ = request.POST.get("seatingCapacity")
-       standardTransmission_ = request.POST.get("standardTransmission")
-       bodyType_ = request.POST.get("bodyType")
-       driveType_ = request.POST.get("driveType")
-       wheelbase_ = request.POST.get("wheelBase")
-       storeID_ = request.POST.get("storeID")
-       store = Store.objects.get(storeID=storeID_)
+        vehicle = Vehicle.objects.get(vehicleID = vID)
+        makeName_  = request.POST.get("makeName")
+        model_  = request.POST.get("model")
+        series_  = request.POST.get("series")
+        year_  = request.POST.get("year")
+        newPrice_  = request.POST.get("newPrice")
+        enginesize_ = request.POST.get("enginesize")
+        fuelSystem_ = request.POST.get("fuelSystem")
+        tankcapacity_ = request.POST.get("tankcapacity")
+        power_ = request.POST.get("power")
+        seatingCapacity_ = request.POST.get("seatingCapacity")
+        standardTransmission_ = request.POST.get("standardTransmission")
+        bodyType_ = request.POST.get("bodyType")
+        driveType_ = request.POST.get("driveType")
+        wheelbase_ = request.POST.get("wheelBase")
+        storeID_ = request.POST.get("storeID")
+        store = Store.objects.get(storeID=storeID_)
 
-       if(makeName_ != ""):
+        if(makeName_ != ""):
            vehicle.makeName = makeName_
 
         if(model_ != ""):
@@ -269,14 +269,14 @@ class VehicleController:
         if(store != ""):
             vehicle.storeID = store
 
-       vali = vehicle.full_clean()
-       if vali:
+        vali = vehicle.full_clean()
+        if vali:
            return vali
-       else:
+        else:
            vehicle.save()
            return True
 
-       return False
+        return False
 
 
     def delete(ID):
