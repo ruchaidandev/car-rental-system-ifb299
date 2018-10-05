@@ -71,7 +71,7 @@ class VehicleController:
     def search(arg):
 
         if(arg == false):
-            for each in Vehilce.objects.all():
+            for each in Vehicle.objects.all():
                 print(
                 each.makeName,
                 each.model,
@@ -119,13 +119,13 @@ class VehicleController:
             condition = " "
 
             if (makeName != ''):
-                condition = condition + "makeName CONTAINS \'" + makeName + "\' AND "
+                condition = condition + "makeName LIKE \'%" + makeName + "%\' AND "
 
             if (model != ''):
-                condition = condition + "model CONTAINS \'" + model + "\' AND "
+                condition = condition + "model LIKE \'%" + model + "%\' AND "
 
             if (series != ''):
-                condition = condition + "series CONTAINS \'" + series + "\' AND "
+                condition = condition + "series LIKE \'%" + series + "%\' AND "
 
             if (year_min != ''):
                 condition = condition + "year >= \'" + year_min + "\' AND "
@@ -167,7 +167,7 @@ class VehicleController:
                 condition = condition + "seatingCapacity <= \'" + seatingCapacity_max + "\' AND "
 
             if (standardTransmission != ''):
-                condition = condition + "standardTransmission CONTAINS \'" + standardTransmission + "\' AND "
+                condition = condition + "standardTransmission LIKE \'%" + standardTransmission + "%\' AND "
 
             if (bodyType != ''):
                 condition = condition + "bodyType CONTAINS \'" + bodyType + "\' AND "

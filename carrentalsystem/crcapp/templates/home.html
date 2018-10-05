@@ -1,137 +1,33 @@
 {% extends 'base.html' %}
 {% block title %}Home Page{% endblock %}
 {% block content %}
+
+{% if msg != "" %}
 <div class="row">
-   <div class="col-md-12">
-      <h4>Bookings</h4>
-      <hr>
-      <br>
-   </div>
-   <div class="col-md-3 col-sm-6 text-center">
-      <a href="booking/order">
-         <i class="fas fa-shopping-cart" style="font-size:36px;"></i>
-         <br>
-         <p>Book Vehicle</p>
-      </a>
-   </div>
-   <div class="col-md-3 col-sm-6 text-center">
-      <a href="">
-         <i class="fas fa-car" style="font-size:36px;"></i>
-         <br>
-         <p>Inspect Vehicle</p>
-      </a>
-   </div>
-   <div class="col-md-3 col-sm-6 text-center">
-      <a href="">
-         <i class="fas fa-file-invoice" style="font-size:36px;"></i>
-         <br>
-         <p>Invoices</p>
-      </a>
-   </div>
-</div>
-<br>
+        <div class="col-md-12 col-sm-12">
+            <!-- Checking whether it is a danger type or info type needed for the box
+                Will be checked by mtype is d or i
+            -->
+            {% if mtype == "d" or mtype == "a" %}
+            <div class="alert alert-danger">
+            {% elif mtype == "i" %}
+            <div class="alert alert-info">
+            {% endif %}
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {% if mtype == "a" %}
+                    {% for key, values in msg %}
+                        <p>{{ key }} : {{ values.0 }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>{{ msg }}</p>
+                {% endif %}
+            </div>
+        </div>
+</div>    
+{% endif %}
+
 <div class="row">
-   <div class="col-md-12">
-      <h4>Vehicle Management</h4>
-      <hr>
-      <br>
-   </div>
-   <div class="col-md-3 col-sm-6 text-center">
-      <a href="vehicle/create">
-         <i class="fas fa-plus" style="font-size:36px;"></i>
-         <br>
-         <p>Insert Vehicle</p>
-      </a>
-   </div>
-   <div class="col-md-3 col-sm-6 text-center">
-      <a href="vehicle">
-         <i class="far fa-eye" style="font-size:36px;"></i>
-         <br>
-         <p>View Vehicles</p>
-      </a>
-   </div>
-   <div class="col-md-3 col-sm-6 text-center">
-        <a href="">
-           <i class="fas fa-search" style="font-size:36px;"></i>
-           <br>
-           <p>Search Vehicles</p>
-        </a>
-     </div>
-</div>
-<br>
-<div class="row">
-        <div class="col-md-12">
-                <h4>Customer Management</h4>
-                <hr>
-                <br>
-             </div>
-             <div class="col-md-3 col-sm-6 text-center">
-                <a href="customer/create">
-                   <i class="fas fa-plus" style="font-size:36px;"></i>
-                   <br>
-                   <p>Insert Customer</p>
-                </a>
-             </div>
-             <div class="col-md-3 col-sm-6 text-center">
-                <a href="">
-                   <i class="far fa-eye" style="font-size:36px;"></i>
-                   <br>
-                   <p>View Customers</p>
-                </a>
-             </div>
-             <div class="col-md-3 col-sm-6 text-center">
-                    <a href="">
-                       <i class="fas fa-search" style="font-size:36px;"></i>
-                       <br>
-                       <p>Search Customer</p>
-                    </a>
-                 </div>
-</div>
-<br>
-<div class="row">
-        <div class="col-md-12">
-                <h4>Staff Management</h4>
-                <hr>
-                <br>
-             </div>
-             <div class="col-md-3 col-sm-6 text-center">
-                <a href="staff/create">
-                   <i class="fas fa-plus" style="font-size:36px;"></i>
-                   <br>
-                   <p>Insert Staff</p>
-                </a>
-             </div>
-             <div class="col-md-3 col-sm-6 text-center">
-                <a href="staff">
-                   <i class="far fa-eye" style="font-size:36px;"></i>
-                   <br>
-                   <p>View Staff</p>
-                </a>
-             </div>
             
-             <div class="col-md-3 col-sm-6 text-center">
-                    <a href="staff/search">
-                       <i class="fas fa-search" style="font-size:36px;"></i>
-                       <br>
-                       <p>Search Staff</p>
-                    </a>
-                 </div>
-             <div class="col-md-3 col-sm-6 text-center">
-                    <a href="staff/login">
-                       <i class="fas fa-sign-in-alt" style="font-size:36px;"></i>
-                       <br>
-                       <p>Login Management</p>
-                    </a>
-                 </div>
 </div>
 
-<br>
-<div class="row">
-        <div class="col-md-12">
-                <h4>Reports</h4>
-                <hr>
-                <br>
-             </div>
-            
-</div>
 {% endblock %}

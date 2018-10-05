@@ -68,6 +68,7 @@ a:hover{
 }
 .breadcrumb{
     background-color: transparent !important;
+    font-size:12px;
 }
 
 .table th {
@@ -104,4 +105,69 @@ a:hover{
 .border-5{
     border-width: 5px;
     border-style: solid;
+}
+
+
+/* Nav bar */
+.navbar{
+    border-bottom:1px solid #4885ed;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
+    background-color: #fff !important;
+}
+.navbar a{
+    color:#4885ed !important;
+}
+.navbar input {
+    background-color: #fff;
+    border: 0px;
+}
+
+.navbar input:active, .navbar input:focus, .navbar input:focus:hover {
+    border:1px solid #4885ed !important;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(72,133,237,0.6);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(72,133,237,0.6);
+    box-shadow: 0px 0px 10px 0px rgba(72,133,237,0.6);
+}
+
+/* side bar */
+.sidebar{
+    background-color: #4885ed !important;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
+}
+.sidebar .nav-item{
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top:0px;
+    padding-bottom:0px;
+    color: #fff;
+   
+}
+
+.sidebar .nav-item a{
+    color:#ccc;
+    font-size:12px;
+}
+.sidebar .nav-item a span{
+    margin-right:6px;
+}
+.sidebar .nav-item a:hover{
+    color:#f6f6f6;
+}
+
+.sidebar p{
+    font-size:16px;
+    font-weight:bold !important;
+    text-transform: uppercase;
+    padding-top: 5px;
+    color:#fff;
+}
+.border-down{
+    border-bottom:1px solid #ccc;
+}
+.border-up{
+    border-top:1px solid #ccc;
 }
