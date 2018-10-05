@@ -11,7 +11,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.sessions.models import Session
 
 #from . import views
-from crcapp.controllers import authentication, staff, vehicle
+from crcapp.controllers import authentication, staff, vehicle, customer
 
 
 # Developer: Aidan
@@ -247,7 +247,7 @@ def customerCreate(request, messages="", mtype=""):
 
 # Developer: Tom
 # Modify customer member page
-def customerModify(request, messages="", mtype=""):
+""" def customerModify(request, messages="", mtype=""):
     # Checking if session exists
     if request.session.has_key('uid'):
         name = request.session['name']
@@ -261,21 +261,60 @@ def customerModify(request, messages="", mtype=""):
         return render(request, 'customer/modify.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores,
         "currentOperation": currentOperation, "customer": customer})
     else:
-        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"}) """
 
-# Viewing for customers
+# Developer: Tom
+# Viewing all the customers
 def viewCustomers(request, messages="", mtype=""):
     if request.session.has_key('uid'):
         name = request.session['name']
         utype = request.session['utype']
 
-        stores = Store.objects.all()
         customers = Customer.objects.all()
 
         return render(request, 'customer/viewCustomers.html', {'msg': messages, 'name': name, 'mtype': mtype,
         'utype': utype, "stores": stores, "customers": customers})
     else:
         return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+    
+# Developer: Tom
+# Modify customer page
+def customerModify(request, option, msg='', mtype=''):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        
+        if request.method == 'POST':
+            return changeCustomerDetails(request, option, msg, mtype, name, utype)
+        elif request.method == 'GET':
+            currentOperation = "Modify"#for visual differences on the same form 
+            customer = Customer.objects.filter(customerID=option).values()[0]
+            
+            return render(request, 'customer/modify.html', {'name': name, 'utype': utype,  'msg': '', 'mtype': mtype,
+            'customer': customer, "currentOperation": currentOperation})
+    else:
+       return notLoggedIn(request)
+
+# Developer: Tom
+# Update existing details of staff
+def changeCustomerDetails(request, option,  name, utype, msg='',mtype=''):
+    name = request.session['name']
+    utype = request.session['utype']
+
+    existingCustomer = Customer.objects.filter(customerID=option).values()
+    reason = CsrfViewMiddleware().process_view(request, None, (), {})
+    # If the reason is true it means verification failed
+    if reason:
+        return render(request, 'customer/modify.html', {'name': name, 'utype': utype,  'msg': '', 'mtype': mtype, 'customer': existingCustomer, "currentOperation": currentOperation})
+    else:
+        result = customer.CustomerController.modify(request, option)
+
+        if result == True:
+            return render(request, 'customer/modify.html', {'name': name, 'utype': utype, 'msg': 'Changes saved.', 'mtype': "i", 'customer': existingCustomer, "customerOperation": currentOperation})
+        elif result == False:
+            return render(request, 'customer/modify.html', {'name': name, 'utype': utype, 'msg': 'Could not save all changes.', 'mtype': "d", 'customer': existingCustomer, "customerOperation": currentOperation})
+        else:
+            return render(request, 'customer/modify.html', {'name': name, 'utype': utype, 'msg': result, 'mtype': "a", 'customer': existingCustomer, "customerOperation": currentOperation})
 
 # Searching for customers
 def searchCustomers(request):

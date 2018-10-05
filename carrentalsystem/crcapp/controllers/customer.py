@@ -54,9 +54,9 @@ class CustomerController:
 
         x.save()
 
-    def modify():
+    def modify(request, customerID):
 
-        customerID_ = request.POST.get("customerID")
+        customerID_ = customerID
         firstName_ = request.POST.get("firstName")
         lastName_ = request.POST.get("lastName")
         streetAddress_ = request.POST.get("streetAddress")
@@ -69,63 +69,55 @@ class CustomerController:
         occupation_ = request.POST.get("occupation")
         phoneNumber_ = request.POST.get("phoneNumber")
         email_ = request.POST.get("email")
-        userName_ = request.POST.get("userName")
-        password_ = request.POST.get("password")
-        dateJoined_ = request.POST.get("dateJoined")
-        lastLogin_ = request.POST.get("lastLogin")
 
-        x = Customer.objects.get(customerID_)
+        existingCustomer = Customer.objects.get(customerID_)
 
+        try:
+            if (firstName_ != ""):
+                existingCustomer.firstName = firstName_
 
-        if (firstName_ != ""):
-            x.firstName = firstName_
+            if (lastName_ != ""):
+                existingCustomer.lastName = lastName_
 
-        if (lastName_ != ""):
-            x.lastName = lastName_
+            if (streetAddress_ != ""):
+                existingCustomer.streetAddress = streetAddress_
 
-        if (streetAddress_ != ""):
-            x.streetAddress = streetAddress_
+            if (cityAddress_ != ""):
+                existingCustomer.streetAddress = streetAddress_
 
-        if (cityAddress_ != ""):
-            x.streetAddress = streetAddress_
+            if (postCodeAddress_ != ""):
+                existingCustomer.postCodeAddress = postCodeAddress_
 
-        if (postCodeAddress_ != ""):
-            x.postCodeAddress = postCodeAddress_
+            if (stateAddress_ != ""):
+                existingCustomer.stateAddress = stateAddress_
 
-        if (stateAddress_ != ""):
-            x.stateAddress = stateAddress_
+            if (DOB_ != ""):
+                existingCustomer.DOB = DOB_
 
-        if (DOB_ != ""):
-            x.DOB = DOB_
+            if (driverLicenceNumber_ != ""):
+                existingCustomer.driverLicenceNumber = driverLicenceNumber_
 
-        if (driverLicenceNumber_ != ""):
-            x.driverLicenceNumber = driverLicenceNumber_
+            if (gender_ != ""):
+                existingCustomer.gender = gender_
 
-        if (gender_ != ""):
-            x.gender = gender_
+            if (occupation_ != ""):
+                existingCustomer.occupation = occupation_
 
-        if (occupation_ != ""):
-            x.occupation = occupation_
+            if (phoneNumber_  != ""):
+                existingCustomer.phoneNumber = phoneNumber_
 
-        if (phoneNumber_  != ""):
-            x.phoneNumber = phoneNumber_
-
-        if (email_ != ""):
-            x.email = email
-
-        if(userName_ != ""):
-            x.userName = userName_
-
-        if(password_ != ""):
-            x.password = password_
-
-        if(dateJoined_ != ""):
-            x.dateJoined = dateJoined_
-
-        if(lastLogin_ != ""):
-            x.lastLogin = lastLogin_
-
-        x.save()
+            if (email_ != ""):
+                existingCustomer.email = email
+            
+            vali = existingCustomer.full_clean()
+            if vali:
+                return vali
+            else:
+                existingCustomer.save()
+                return True
+            return False
+        except ValidationError as e:
+            return e
 
     #deletes Customer based on given ID
     def delete(ID):
@@ -153,7 +145,7 @@ class CustomerController:
                 each.dateJoined,
                 each.lastLogin)
 
-        if(arg!= "all"
+        if(arg!= "all"):
             customerID_min = request.POST.get("customerID_min")
             customerID_max = request.POST.get("customerID_max")
             firstName = request.POST.get("firstName")
@@ -164,16 +156,16 @@ class CustomerController:
             stateAddress = request.POST.get("stateAddress")
             DOB_min = request.POST.get("DOB_min")
             DOB_max = request.POST.get("DOB_max")
-            driverLicenceNumber = request.POST.get("driverLicenceNumber")]
-            gender = request.POST.get("gender")]
-            occupation = request.POST.get("occupation")]
-            phoneNumber = request.POST.get("phoneNumber")]
-            email = request.POST.get("email")]
-            userName = request.POST.get("userName")]
-            dateJoined_min = request.POST.get("dateJoined_min")]
-            dateJoined_max = request.POST.get("dateJoined_max")]
-            lastLogin_min = request.POST.get("lastLogin_min")]
-            lastLogin_max = request.POST.get("lastLogin_max")]
+            driverLicenceNumber = request.POST.get("driverLicenceNumber")
+            gender = request.POST.get("gender")
+            occupation = request.POST.get("occupation")
+            phoneNumber = request.POST.get("phoneNumber")
+            email = request.POST.get("email")
+            userName = request.POST.get("userName")
+            dateJoined_min = request.POST.get("dateJoined_min")
+            dateJoined_max = request.POST.get("dateJoined_max")
+            lastLogin_min = request.POST.get("lastLogin_min")
+            lastLogin_max = request.POST.get("lastLogin_max")
 
             condition = " "
 

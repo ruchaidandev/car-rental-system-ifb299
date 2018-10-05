@@ -41,6 +41,8 @@ urlpatterns = [
     path('customer/create', views.customerCreate, name='customerCreate'),
     # For modifying existing customer details
     path('customer/modify', views.customerModify, name='customerModify'),
+    
+    url(r'^customer/id/(?P<option>\S+)$', views.customerModify, name='customerModify'),
     # View all customers
     path('customer/search', views.viewCustomers, name='viewCustomers'),
     # Search customers

@@ -1,7 +1,8 @@
 {% extends '../base.html' %}
 {% block title %}{{currentOperation}} Customer{% endblock %}
 {% block breadcrumb %}
-<li class="breadcrumb-item active" aria-current="page">{{currentOperation}} Customer</li>
+<li class="breadcrumb-item"><a href="{% url 'viewCustomers' %}">View Customers</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{ customer.firstName }} {{ customer.lastName }}</li>
 {% endblock %}
 {% block content %}
 <!-- Error message box will be shown only if the msg variable has some value -->
@@ -37,11 +38,12 @@
 			<hr>
 		</div>
 		{% if currentOperation == "Modify" %}
-    		<form action="/modify/customer" method="post">
+		    <form action="/customer/id/{{ customer.customerID }}" method="POST">
 		{% else %}
    			<form action="/create/customer" method="post">
 		{% endif %}
 		{% csrf_token %}
+		<input type="hidden" name="customerID" value="{{ customer.customerID }}"/>
 		<div class="row col-md-12">
 		<h4>Name</h4>
 		</div>
