@@ -205,8 +205,8 @@ class VehicleController:
                 each.storeID)
 
     # edit vehicle entry in the database using provided values
-    def modify(request, vID):
-       vehicle = Vehicle.objects.get(vehicleID=vID)
+    def modify(vID):
+       vehicle = Vehicle.objects.get(vehicleID = vID)
        makeName_  = request.POST.get("makeName")
        model_  = request.POST.get("model")
        series_  = request.POST.get("series")
@@ -224,22 +224,50 @@ class VehicleController:
        storeID_ = request.POST.get("storeID")
        store = Store.objects.get(storeID=storeID_)
 
+       if(makeName_ != ""):
+           vehicle.makeName = makeName_
 
-       vehicle.makeName = makeName_
-       vehicle.model = model_
-       vehicle.series = series_
-       vehicle.year = year_,
-       vehicle.newPrice = newPrice_
-       vehicle.enginesize = enginesize_
-       vehicle.fuelSystem = fuelSystem_
-       vehicle.tankcapacity = tankcapacity_
-       vehicle.power = power_
-       vehicle.seatingCapacity = seatingCapacity_
-       vehicle.standardTransmission = standardTransmission_
-       vehicle.bodyType = bodyType_
-       vehicle.driveType = driveType_
-       vehicle.wheelbase = wheelbase_
-       vehicle.storeID = store
+        if(model_ != ""):
+            vehicle.model = model_
+
+        if(series_ != ""):
+            vehicle.series = series_
+
+        if(year_ != ""):
+            vehicle.year = year_,
+
+        if(newPrice_ != ""):
+            vehicle.newPrice = newPrice_
+
+        if(enginesize_ != ""):
+            vehicle.enginesize = enginesize_
+
+        if(fuelSystem_ != ""):
+            vehicle.fuelSystem = fuelSystem_
+
+        if(tankcapacity_ != ""):
+            vehicle.tankcapacity = tankcapacity_
+
+        if(power_ != ""):
+            vehicle.power = power_
+
+        if(seatingCapacity_ != ""):
+            vehicle.seatingCapacity = seatingCapacity_
+
+        if(standardTransmission_ != ""):
+            vehicle.standardTransmission = standardTransmission_
+
+        if(bodyType_ != ""):
+            vehicle.bodyType = bodyType_
+
+        if(driveType_ != ""):
+            vehicle.driveType = driveType_
+
+        if(wheelbase_ != ""):
+            vehicle.wheelbase = wheelbase_
+
+        if(store != ""):
+            vehicle.storeID = store
 
        vali = vehicle.full_clean()
        if vali:
