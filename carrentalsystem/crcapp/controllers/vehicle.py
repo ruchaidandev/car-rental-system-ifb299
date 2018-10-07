@@ -205,50 +205,78 @@ class VehicleController:
                 each.storeID)
 
     # edit vehicle entry in the database using provided values
-    def modify(request, vID):
-       vehicle = Vehicle.objects.get(vehicleID=vID)
-       makeName_  = request.POST.get("makeName")
-       model_  = request.POST.get("model")
-       series_  = request.POST.get("series")
-       year_  = request.POST.get("year")
-       newPrice_  = request.POST.get("newPrice")
-       enginesize_ = request.POST.get("enginesize")
-       fuelSystem_ = request.POST.get("fuelSystem")
-       tankcapacity_ = request.POST.get("tankcapacity")
-       power_ = request.POST.get("power")
-       seatingCapacity_ = request.POST.get("seatingCapacity")
-       standardTransmission_ = request.POST.get("standardTransmission")
-       bodyType_ = request.POST.get("bodyType")
-       driveType_ = request.POST.get("driveType")
-       wheelbase_ = request.POST.get("wheelBase")
-       storeID_ = request.POST.get("storeID")
-       store = Store.objects.get(storeID=storeID_)
+    def modify(vID):
+        vehicle = Vehicle.objects.get(vehicleID = vID)
+        makeName_  = request.POST.get("makeName")
+        model_  = request.POST.get("model")
+        series_  = request.POST.get("series")
+        year_  = request.POST.get("year")
+        newPrice_  = request.POST.get("newPrice")
+        enginesize_ = request.POST.get("enginesize")
+        fuelSystem_ = request.POST.get("fuelSystem")
+        tankcapacity_ = request.POST.get("tankcapacity")
+        power_ = request.POST.get("power")
+        seatingCapacity_ = request.POST.get("seatingCapacity")
+        standardTransmission_ = request.POST.get("standardTransmission")
+        bodyType_ = request.POST.get("bodyType")
+        driveType_ = request.POST.get("driveType")
+        wheelbase_ = request.POST.get("wheelBase")
+        storeID_ = request.POST.get("storeID")
+        store = Store.objects.get(storeID=storeID_)
 
+        if(makeName_ != ""):
+           vehicle.makeName = makeName_
 
-       vehicle.makeName = makeName_
-       vehicle.model = model_
-       vehicle.series = series_
-       vehicle.year = year_,
-       vehicle.newPrice = newPrice_
-       vehicle.enginesize = enginesize_
-       vehicle.fuelSystem = fuelSystem_
-       vehicle.tankcapacity = tankcapacity_
-       vehicle.power = power_
-       vehicle.seatingCapacity = seatingCapacity_
-       vehicle.standardTransmission = standardTransmission_
-       vehicle.bodyType = bodyType_
-       vehicle.driveType = driveType_
-       vehicle.wheelbase = wheelbase_
-       vehicle.storeID = store
+        if(model_ != ""):
+            vehicle.model = model_
 
-       vali = vehicle.full_clean()
-       if vali:
+        if(series_ != ""):
+            vehicle.series = series_
+
+        if(year_ != ""):
+            vehicle.year = year_,
+
+        if(newPrice_ != ""):
+            vehicle.newPrice = newPrice_
+
+        if(enginesize_ != ""):
+            vehicle.enginesize = enginesize_
+
+        if(fuelSystem_ != ""):
+            vehicle.fuelSystem = fuelSystem_
+
+        if(tankcapacity_ != ""):
+            vehicle.tankcapacity = tankcapacity_
+
+        if(power_ != ""):
+            vehicle.power = power_
+
+        if(seatingCapacity_ != ""):
+            vehicle.seatingCapacity = seatingCapacity_
+
+        if(standardTransmission_ != ""):
+            vehicle.standardTransmission = standardTransmission_
+
+        if(bodyType_ != ""):
+            vehicle.bodyType = bodyType_
+
+        if(driveType_ != ""):
+            vehicle.driveType = driveType_
+
+        if(wheelbase_ != ""):
+            vehicle.wheelbase = wheelbase_
+
+        if(store != ""):
+            vehicle.storeID = store
+
+        vali = vehicle.full_clean()
+        if vali:
            return vali
-       else:
+        else:
            vehicle.save()
            return True
 
-       return False
+        return False
 
 
     def delete(ID):
