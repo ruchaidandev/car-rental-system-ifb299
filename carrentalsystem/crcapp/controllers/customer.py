@@ -153,7 +153,7 @@ class CustomerController:
                 each.dateJoined,
                 each.lastLogin)
 
-        if(arg!= "all"
+        if(arg!= "all"):
             customerID_min = request.POST.get("customerID_min")
             customerID_max = request.POST.get("customerID_max")
             firstName = request.POST.get("firstName")
@@ -202,7 +202,7 @@ class CustomerController:
             if (gender != ""):
                 condition = condition + "gender = \'" + gender + "\' AND "
             if (occupation != ""):
-                condition = condition + "occupation LIKE \'%" + occupation + "%\' AND "
+                condition = condition + "occupation LIKE \'%" + occupation + "\' AND "
             if (phoneNumber != ""):
                 condition = condition + "phoneNumber = \'" + phoneNumber + "\' AND "
             if (email != ""):

@@ -53,6 +53,8 @@ urlpatterns = [
     # For inserting page
     path('vehicle', views.getAllVehicles, name='getAllVehicles'),
     path('vehicle/create', views.createVehicle, name='createVehicle'),
+    path('vehicle/edit', views.editVehicle, name='editVehicle'),
+    url(r'^vehicle/delete/(?P<option>\S+)$', views.deleteVehicle, name='deleteVehicle'),
     url(r'^vehicle/id/(?P<option>\S+)$', views.getVehicle, name='getVehicle'),
 
     ### Sample ------ DO NOT USE IN PRODUCTION ###
