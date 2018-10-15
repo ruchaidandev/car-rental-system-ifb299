@@ -435,6 +435,47 @@ def createVehicle(request, messages="", mtype=""):
     else:
        return notLoggedIn(request)
 
+# Developer: Aidan 
+# edit changes
+def editVehicle(request, messages="", mtype=""):
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        if utype != "Customer":
+            stores = Store.objects.all()
+            if request.method == 'POST':
+                reason = CsrfViewMiddleware().process_view(request, None, (), {})
+                # If the reason is true it means verification failed
+                if reason:
+                    return render(request, 'vehicle/vehicleDetail.html', {'msg': 'Token verification failed!', 'mtype': "d"})
+                else:
+                    result = vehicle.VehicleController.modify(request, request.POST.get("vID"))
+                    if result == True:
+                        return render(request, 'vehicle/vehicleDetail.html', {'msg': 'Vehicle updated.', 'mtype': "i"})
+                    elif result == False:
+                        return render(request, 'vehicle/vehicleDetail.html', {'msg': 'Vehicle updating failed.', 'mtype': "d"})
+                    else:
+                        return render(request, 'vehicle/vehicleDetail.html', {'msg': result, 'mtype': "a"})
+            
+        else:
+            return accessDeniedHome(request) 
+    else:
+       return notLoggedIn(request)
+
+@csrf_exempt 
+def deleteVehicle(request, option):
+    utype = request.session['utype']
+    if utype != "Customer":
+        result = vehicle.VehicleController.delete(option)
+        if result:
+            return HttpResponse("True")
+        else:
+            return HttpResponse("False")
+    else:
+        return accessDeniedHome(request)
+
+
 # Developer: Aidan
 # save changes of vehicle
 def changeVehicleDetails(request, option, utype, msg='',mtype=''):

@@ -29,7 +29,7 @@
 	</div>
 </div>
 {% endif %}
-<form action="/vehicle/create" method="POST" id="vform">
+<form action="/vehicle/edit" method="POST" id="vform">
 	{% csrf_token %}
 	<div class="container">
 		<div class="row">
@@ -39,12 +39,12 @@
 			</div>
 		</div>
 		<div class="row pt-4 pb-4">
-			<div class="col-md-6">
+			<div class="col-md-8">
 				
 			</div>
-			<div class="col-md-6">
-				<div class="btn btn-flat btn-warning p-2">Save Changes</div>
-				<div class="btn btn-flat btn-danger p-2">Delete</div>
+			<div class="col-md-4">
+				<input type="submit" class="btn btn-flat btn-primary p-2 mr-4" value="Save Changes"/>
+				<div class="btn btn-flat btn-danger p-2" id="deleteBtn">Delete</div>
 			</div>
 		</div>
 		<div class="row">
@@ -53,6 +53,7 @@
 				<hr>
 				<br>
 				<div class="row">
+					<input type="hidden" name="vID" value="{{ vehicle.vehicleID }}"/>
 					<div class="col-md-3 field-label-responsive">
 						<label for="makeName">Make</label>
 					</div>
@@ -206,7 +207,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-								<input type="number" name="wheelBase" class="form-control" id="wheelBase"
+								<input type="number" name="wheelbase" class="form-control" id="wheelBase"
 									placeholder="Wheel Base" required value="{{ vehicle.wheelbase }}" autocomplete="on" min=0 >
 								<div class="input-group-prepend">
 									<div class="input-group-text">mm</div>
@@ -321,6 +322,23 @@
 			})
 		})
 		
+		$("#deleteBtn").click(function(){
+			var res = confirm("Are your sure, you want to delete the vehicle: {{ vehicle.vehicleID }}");
+			if(res){
+				$.ajax({
+					url: "/vehicle/delete/{{ vehicle.vehicleID }}",
+					type : 'GET',
+					success: function(result){
+						if(result == "True"){
+							alert("Vehicle Deleted");
+							location.href = "/vehicle";
+						}
+						else if(result == "False"){
+							alert("Sorry, something happened.");
+						}
+					}});
+			}
+		})
 		
 	});
 </script>
