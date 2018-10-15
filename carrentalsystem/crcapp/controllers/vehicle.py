@@ -10,7 +10,7 @@ from django.utils import timezone
 class VehicleController:
       # Developer: Sam
     #creates vehicle entry in the database using provided values
-    def create():
+    def create(request):
 
         vehicleObj = Vehicle.objects.raw("SELECT vehicleID FROM `crcapp_vehicle` ORDER BY vehicleID DESC LIMIT 1")[0]
         x = vehicleObj.vehicleID

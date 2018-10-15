@@ -435,7 +435,7 @@ def createVehicle(request, messages="", mtype=""):
     else:
        return notLoggedIn(request)
 
-# Developer: Aidan
+# Developer: Aidan 
 # edit changes
 def editVehicle(request, messages="", mtype=""):
     # Checking session exists

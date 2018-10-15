@@ -132,13 +132,18 @@ a:hover{
 }
 
 /* side bar */
-.sidebar{
-    display: block;
-    height: 100vh;
+.subtopbar{
+    display: none;
     background-color: #336dd1 !important;
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
     -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
+    max-height: 150px;
+}
+.scroll{
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
 }
 @media screen and (max-width: 768px) {
     
@@ -150,32 +155,46 @@ a:hover{
         text-align: center;
     }
 }
-.sidebar .nav-item{
+
+.subtopbar .nav-item{
     padding-left: 2px;
     padding-right: 2px;
     padding-top:0px;
     padding-bottom:0px;
     color: #fff;
-   
+    float:left;
+    width:auto;
+}
+.subtopbar .nav{
+    flex: 1 1 0 !important;
+    flex-wrap: nowrap !important;
+}
+.subtopbar .nav-item > .active{
+    color:#000;
+    background-color:#fff !important;
 }
 
-.sidebar .nav-item a{
+.subtopbar .nav-item a{
     color:#ccc;
     font-size:12px;
 }
-.sidebar .nav-item a span{
+.subtopbar .nav-item a span{
     margin-right:6px;
 }
-.sidebar .nav-item a:hover{
+.subtopbar .nav-item a:hover{
     color:#f6f6f6;
 }
 
-.sidebar p{
+.subtopbar p{
     font-size:16px;
     font-weight:bold !important;
     text-transform: uppercase;
-    padding-top: 10px;
+    padding-top: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
     padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     color:#fff;
 }
 .border-down{

@@ -1,9 +1,10 @@
 
 $(document).ready(function(){
     $("#collapse").click(function(e){
-        $("#sidebar").toggle( "slide" );
-        $("#mainContent").toggleClass("col-md-12");
+        $("#subtopbar").toggle( "slide" );
+
         e.preventDefault();
       });
-    
+        $('.subtopbar nav-link.active').removeClass('active');
+        $('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
 });
