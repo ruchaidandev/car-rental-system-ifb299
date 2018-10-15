@@ -36,28 +36,27 @@ def index(request, messages="", mtype="i"):
         del request.session['mtype']
     
     stores = Store.objects.all()
-    return render(request, 'index.html', {'msg': messages, 'mtype': mtype, 'stores': stores})
+    return render(request, 'public/index.html', {'msg': messages, 'mtype': mtype, 'stores': stores})
 
 
 # Developer: Aidan
 # Login page 
-# not use will modify later
 def loginIndex(request, messages="", mtype="i"):
-    return render(request, 'index.html', {'msg': messages, 'mtype': mtype})
+    return render(request, 'public/login.html', {'msg': messages, 'mtype': mtype})
 
 # Developer: Aidan
 def notLoggedIn(request):
     messages = "Access Denied!"
     request.session['msg'] = messages
     request.session['mtype'] = 'd'
-    return redirect('/#login')
+    return redirect('/login')
 
 # Developer: Aidan
 def accessDeniedHome(request):
     messages = "Access Denied!"
     request.session['msg'] = messages
     request.session['mtp'] = 'd'
-    return redirect('/home')
+    return redirect('/management/home')
     
 
 # Developer: Aidan
@@ -95,22 +94,22 @@ def loginEmployee(request):
         else:
             result = authentication.Authentication.login(request)
             if result != "NULL":
-                return redirect("../home")
+                return redirect("/management/home")
             elif result == "NULL":
                 messages = "Login failed."
                 request.session['msg'] = messages
                 request.session['mtype'] = 'd'
-                return redirect('/#login')
+                return redirect('/login')
             else:
                 messages = result
                 request.session['msg'] = messages
                 request.session['mtype'] = 'd'
-                return redirect('/#login')
+                return redirect('/login')
     else:
         messages = "Opps, something went wrong."
         request.session['msg'] = messages
         request.session['mtype'] = 'd'
-        return redirect('/#login')
+        return redirect('/login')
 
 
 # Developer: Aidan
@@ -140,7 +139,7 @@ def logoff(request, messages=""):
     authentication.Authentication.logout(request)
     request.session['msg'] = messages
     request.session['mtype'] = 'i'
-    return redirect('/#login')
+    return redirect('/login')
 
 
 # Developer: Jax

@@ -1,0 +1,39 @@
+{% extends '../index.html' %}
+{% block content %}
+<section class="content-section p-3 p-lg-5 d-flex flex-column" id="login">
+        <h2 class="mb-5">Car Rental System</h2>
+      <div class="container pt-5">
+        <div class="row justify-content-center">
+          
+          <div class="col-md-4 col-sm-12 pt-2 text-center">
+          
+              {% if msg != "" %}
+                {% if mtype == "d" %}
+                  <div class="alert alert-danger">
+                {% elif mtype == "i" %}
+                  <div class="alert alert-info">
+                {% endif %}
+                      {{ msg }}
+                    </div>
+              {% endif %}
+              <h4 class="mb-3 font-weight-normal font-blue">Please sign in</h4>
+          
+  
+              <form action="/system/login/employee" method="post">
+                  {% csrf_token %}
+                  <div class="form-group font-black">
+                      <label for="username">Username</label>
+                      <input type="text" class="form-control" id="username" name="username" required="true" placeholder="Enter username">
+                    </div>
+                    <div class="form-group font-black">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" id="password" name="password" required="true" placeholder="Your Password">
+                    </div>
+                  <button type="submit">Login</button>
+                </form>
+          </div>
+  
+        </div>
+    </div>
+  </section>
+  {% endblock %}
