@@ -18,3 +18,26 @@
     -moz-box-shadow: 0px 0px 10px 0px rgba(72,133,237,0.6);
     box-shadow: 0px 0px 10px 0px rgba(72,133,237,0.6);
 }
+
+.items{
+  border:1px solid #4885ed !important;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(72,133,237,0.2);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(72,133,237,0.2);
+    box-shadow: 0px 0px 10px 0px rgba(72,133,237,0.2);
+}
+
+.img-center{
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+.verticalScrollContainer{
+  white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+}
+.verticalScrollContainer>div{
+  flex: 1 1 0 !important;
+  flex-wrap: nowrap !important;
+}

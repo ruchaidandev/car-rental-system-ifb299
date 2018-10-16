@@ -36,7 +36,8 @@ def index(request, messages="", mtype="i"):
         del request.session['mtype']
     
     stores = Store.objects.all()
-    return render(request, 'public/index.html', {'msg': messages, 'mtype': mtype, 'stores': stores})
+    vehicles = Vehicle.objects.order_by('-vehicleID')[:6]
+    return render(request, 'public/index.html', {'msg': messages, 'mtype': mtype, 'stores': stores, 'vehicles': vehicles})
 
 
 # Developer: Aidan
@@ -90,7 +91,7 @@ def loginEmployee(request):
             messages = "Token verification failed."
             request.session['msg'] = messages
             request.session['mtype'] = 'd'
-            return redirect('/#login')
+            return redirect('/login')
         else:
             result = authentication.Authentication.login(request)
             if result != "NULL":
