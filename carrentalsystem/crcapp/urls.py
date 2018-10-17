@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf.urls import include, url
 
 from . import views
@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^staff/activity/(?P<option>\S+)/(?P<empID>\S+)$', views.disableStaff, name='disableStaff'),
     # Getting staff from staff check 
     path('staff/store', views.getStaffFromStore, name='getStaffFromStore'),
+
 
     # Getting usernames
     path('staff/usernames/list', views.getUsernames, name='getUsernames'),

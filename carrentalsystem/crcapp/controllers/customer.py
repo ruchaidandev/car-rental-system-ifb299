@@ -174,13 +174,13 @@ class CustomerController:
             if (customerID_max != ""):
                 condition = condition + "customerID <= \'" + customerID_max + "\' AND "
             if (firstName != ""):
-                condition = condition + "firstName = \'" + firstName + "\' AND "
+                condition = condition + "firstName LIKE \'%" + firstName + "%\' AND "
             if (lastName != ""):
-                condition = condition + "lastName = \'" + lastName + "\' AND "
+                condition = condition + "lastName LIKE \'%" + lastName + "%\' AND "
             if (streetAdress != ""):
-                condition = condition + "streetAdress = \'" + streetAdress + "\' AND "
+                condition = condition + "streetAdress LIKE \'%" + streetAdress + "%\' AND "
             if (cityAddress != ""):
-                condition = condition + "cityAddress = \'" + cityAddress + "\' AND "
+                condition = condition + "cityAddress LIKE \'%" + cityAddress + "%\' AND "
             if (postCodeAddress != ""):
                 condition = condition + "postCodeAddress = \'" + postCodeAddress + "\' AND "
             if (stateAddress != ""):
@@ -194,7 +194,7 @@ class CustomerController:
             if (gender != ""):
                 condition = condition + "gender = \'" + gender + "\' AND "
             if (occupation != ""):
-                condition = condition + "occupation = \'" + occupation + "\' AND "
+                condition = condition + "occupation LIKE \'%" + occupation + "%\' AND "
             if (phoneNumber != ""):
                 condition = condition + "phoneNumber = \'" + phoneNumber + "\' AND "
             if (email != ""):
