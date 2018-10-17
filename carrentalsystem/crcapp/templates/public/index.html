@@ -57,7 +57,7 @@
               </div>
               <div class="row justify-content-center mt-5">
                   <div class="col-md-3">
-                      <div class="form-group pl-5">
+                      <div class="form-group">
                           <div class="btn btn-flat btn-primary pl-5 pr-5" id="selectBtn">SELECT</div>
                         </div>
                   </div>
@@ -73,12 +73,15 @@
     <div class="row flex verticalScrollContainer">
 
         {% for item in vehicles  %}
-     <div class="col-md-3 items p-3 text-center">
-          <h5>Make: {{ item.makeName | title }}</h5>
-          <p>Model: {{ item.model | title  }}</p>
-          <p>Series: {{ item.series | title }}</p>
-          <p>Year: {{ item.year }}</p>
-          <img src="static/images/carIcon.png" class="img-responsive img-center" width="50%">
+     <div class="col-md-3 items p-2 text-center">
+        <div class="item p-2">
+            <h5>Make: {{ item.makeName | title }}</h5>
+            <p>Model: {{ item.model | title  }}</p>
+            <p>Series: {{ item.series | title }}</p>
+            <p>Year: {{ item.year }}</p>
+            <img src="static/images/carIcon.png" class="img-responsive img-center" width="50%">
+            <a href="/vehicle/{{ item.vehicleID }}"> <div class="btn btn-primary btn-sm">View More Details</div></a>
+     </div>
         
       </div>
       {% endfor %}

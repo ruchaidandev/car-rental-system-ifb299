@@ -326,7 +326,7 @@
 			var res = confirm("Are your sure, you want to delete the vehicle: {{ vehicle.vehicleID }}");
 			if(res){
 				$.ajax({
-					url: "/vehicle/delete/{{ vehicle.vehicleID }}",
+					url: "/management/vehicle/delete/{{ vehicle.vehicleID }}",
 					type : 'GET',
 					success: function(result){
 						if(result == "True"){
