@@ -207,7 +207,7 @@
                     </div>
                     <div class="col-md-6">
                         
-                        <form action="/staff/createlogin" method="post">
+                        <form action="/management/staff/createlogin" method="post">
 	                    {% csrf_token %}
                             <h5>Login Details</h5>
                             <hr>
@@ -330,7 +330,7 @@
         // last name first letter and to lower case
         var uname = store.trim()+$("#firstName").val().toLowerCase().trim()+$("#lastName").val().charAt(0).toLowerCase().trim();
         $.ajax({
-                url: "/staff/usernames/list",
+                url: "/management/staff/usernames/list",
                 type : 'POST', 
                 success: function(result){
                     // converting the result string to JSON array
@@ -350,7 +350,7 @@
 
     $("#disableBtn").click(function(){
         $.ajax({
-                url: "/staff/activity/disable/{{ employee.employeeID }}",
+                url: "/management/staff/activity/disable/{{ employee.employeeID }}",
                 type : 'GET',
                 success: function(result){
                     location.reload();
@@ -360,7 +360,7 @@
 
     $("#enableBtn").click(function(){
         $.ajax({
-                url: "/staff/activity/enable/{{ employee.employeeID }}",
+                url: "/management/staff/activity/enable/{{ employee.employeeID }}",
                 type : 'GET',
                 success: function(result){
                     location.reload();

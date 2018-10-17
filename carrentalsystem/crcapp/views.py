@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.core.serializers import serialize
 from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.sessions.models import Session
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from . import views
 from crcapp.controllers import authentication, staff, vehicle
@@ -43,7 +44,55 @@ def index(request, messages="", mtype="i"):
 # Developer: Aidan
 # Login page 
 def loginIndex(request, messages="", mtype="i"):
+     # Will get the session variables for the message
+    # and delete it after wards
+    msg = request.session.get('msg', '')
+    mtp = request.session.get('mtype', '')
+    if msg != "":
+        messages =  msg
+        del request.session['msg']
+    if mtp != "":
+        mtype = mtp
+        del request.session['mtype']
     return render(request, 'public/login.html', {'msg': messages, 'mtype': mtype})
+
+# Developer: Aidan
+# Login page 
+def registerIndex(request, messages="", mtype="i"):
+    return render(request, 'public/register.html', {'msg': messages, 'mtype': mtype})
+
+# Developer: Aidan
+# Login page 
+def storesIndex(request, messages="", mtype="i"):
+    return render(request, 'public/stores.html', {'msg': messages, 'mtype': mtype})
+
+# Developer: Aidan
+# get vehicle details to modify page
+def getVehicleIndex(request, option, msg='',mtype=''):
+    vehicle = Vehicle.objects.filter(vehicleID=option).values()[0]
+    if vehicle['storeID_id'] != "":
+        store = Store.objects.get(storeID = vehicle['storeID_id'] )
+    else:
+        store = { 'storeName' : "Not Found" }            
+    return render(request, 'public/vehicle.html', {'msg': '', 'mtype': mtype, 'vehicle':vehicle, 'store':store})
+      
+
+# Developer: Aidan
+# Login page 
+def vehicleIndex(request, messages="", mtype="i"):
+    vehicles_list = Vehicle.objects.order_by('-vehicleID')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(vehicles_list, 18)
+    try:
+        vehicles = paginator.page(page)
+    except PageNotAnInteger:
+        vehicles = paginator.page(1)
+    except EmptyPage:
+        vehicles = paginator.page(paginator.num_pages)
+
+    return render(request, 'public/vehicles.html', {'msg': messages, 'mtype': mtype, 'vehicles': vehicles })
+
 
 # Developer: Aidan
 def notLoggedIn(request):

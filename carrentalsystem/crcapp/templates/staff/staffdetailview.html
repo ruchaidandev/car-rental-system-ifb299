@@ -3,7 +3,7 @@
 {% block title %}{{ employee.firstName }} {{ employee.lastName }} {% endblock %}
 
 {% block breadcrumb %}
-<li class="breadcrumb-item"><a href="/staff">View Staff</a></li>
+<li class="breadcrumb-item"><a href="/management/staff">View Staff</a></li>
 <li class="breadcrumb-item active" aria-current="page">{{ employee.firstName }} {{ employee.lastName }}</li>
 {% endblock %}
 
@@ -41,7 +41,7 @@
                             <hr>
                         </div>
                 </div>
-                <form action="/staff/id/{{ employee.employeeID}}" method="POST">
+                <form action="/management/staff/id/{{ employee.employeeID}}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="empID" value="{{ employee.employeeID }}" />
             <div class="row justify-content-end mb-4">
