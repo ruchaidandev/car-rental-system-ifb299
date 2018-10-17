@@ -8,10 +8,11 @@ urlpatterns = [
     ### public web
     path('', views.index, name='index'),
     path('login', views.loginIndex, name='loginIndex'),
-    path('register', views.registerIndex, name='registerIndex'),
+    path('signup', views.registerIndex, name='registerIndex'),
     path('stores', views.storesIndex, name='storesIndex'),
     path('vehicles', views.vehicleIndex, name='vehicleIndex'),
-     url(r'^vehicle/(?P<option>\S+)$', views.getVehicleIndex, name='getVehicleIndex'),
+    url(r'^vehicle/(?P<option>\S+)$', views.getVehicleIndex, name='getVehicleIndex'),
+    path('customer/usernames/list', views.getUsernamesCustomers, name='getUsernames'),
 
     ### Home ###
     path('management/home', views.home, name='home'),
