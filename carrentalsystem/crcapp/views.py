@@ -35,28 +35,28 @@ def index(request, messages="", mtype="i"):
         del request.session['mtype']
     
     stores = Store.objects.all()
-    return render(request, 'index.html', {'msg': messages, 'mtype': mtype, 'stores': stores})
+    vehicles = Vehicle.objects.order_by('-vehicleID')[:6]
+    return render(request, 'public/index.html', {'msg': messages, 'mtype': mtype, 'stores': stores, 'vehicles': vehicles})
 
 
 # Developer: Aidan
-# Login page
-# not use will modify later
+# Login page 
 def loginIndex(request, messages="", mtype="i"):
-    return render(request, 'index.html', {'msg': messages, 'mtype': mtype})
+    return render(request, 'public/login.html', {'msg': messages, 'mtype': mtype})
 
 # Developer: Aidan
 def notLoggedIn(request):
     messages = "Access Denied!"
     request.session['msg'] = messages
     request.session['mtype'] = 'd'
-    return redirect('/#login')
+    return redirect('/login')
 
 # Developer: Aidan
 def accessDeniedHome(request):
     messages = "Access Denied!"
     request.session['msg'] = messages
     request.session['mtp'] = 'd'
-    return redirect('/home')
+    return redirect('/management/home')
     
 
 # Developer: Aidan
@@ -90,26 +90,26 @@ def loginEmployee(request):
             messages = "Token verification failed."
             request.session['msg'] = messages
             request.session['mtype'] = 'd'
-            return redirect('/#login')
+            return redirect('/login')
         else:
             result = authentication.Authentication.login(request)
             if result != "NULL":
-                return redirect("../home")
+                return redirect("/management/home")
             elif result == "NULL":
                 messages = "Login failed."
                 request.session['msg'] = messages
                 request.session['mtype'] = 'd'
-                return redirect('/#login')
+                return redirect('/login')
             else:
                 messages = result
                 request.session['msg'] = messages
                 request.session['mtype'] = 'd'
-                return redirect('/#login')
+                return redirect('/login')
     else:
         messages = "Opps, something went wrong."
         request.session['msg'] = messages
         request.session['mtype'] = 'd'
-        return redirect('/#login')
+        return redirect('/login')
 
 
 # Developer: Aidan
@@ -139,7 +139,7 @@ def logoff(request, messages=""):
     authentication.Authentication.logout(request)
     request.session['msg'] = messages
     request.session['mtype'] = 'i'
-    return redirect('/#login')
+    return redirect('/login')
 
 
 # Developer: Jax
@@ -518,6 +518,47 @@ def createVehicle(request, messages="", mtype=""):
             return accessDeniedHome(request) 
     else:
        return notLoggedIn(request)
+
+# Developer: Aidan 
+# edit changes
+def editVehicle(request, messages="", mtype=""):
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        if utype != "Customer":
+            stores = Store.objects.all()
+            if request.method == 'POST':
+                reason = CsrfViewMiddleware().process_view(request, None, (), {})
+                # If the reason is true it means verification failed
+                if reason:
+                    return render(request, 'vehicle/vehicleDetail.html', {'msg': 'Token verification failed!', 'mtype': "d"})
+                else:
+                    result = vehicle.VehicleController.modify(request, request.POST.get("vID"))
+                    if result == True:
+                        return render(request, 'vehicle/vehicleDetail.html', {'msg': 'Vehicle updated.', 'mtype': "i"})
+                    elif result == False:
+                        return render(request, 'vehicle/vehicleDetail.html', {'msg': 'Vehicle updating failed.', 'mtype': "d"})
+                    else:
+                        return render(request, 'vehicle/vehicleDetail.html', {'msg': result, 'mtype': "a"})
+            
+        else:
+            return accessDeniedHome(request) 
+    else:
+       return notLoggedIn(request)
+
+@csrf_exempt 
+def deleteVehicle(request, option):
+    utype = request.session['utype']
+    if utype != "Customer":
+        result = vehicle.VehicleController.delete(option)
+        if result:
+            return HttpResponse("True")
+        else:
+            return HttpResponse("False")
+    else:
+        return accessDeniedHome(request)
+
 
 # Developer: Aidan
 # save changes of vehicle

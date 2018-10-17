@@ -194,7 +194,7 @@ class CustomerController:
             if (gender != ""):
                 condition = condition + "gender = \'" + gender + "\' AND "
             if (occupation != ""):
-                condition = condition + "occupation LIKE \'%" + occupation + "%\' AND "
+                condition = condition + "occupation LIKE \'%" + occupation + "\' AND "
             if (phoneNumber != ""):
                 condition = condition + "phoneNumber = \'" + phoneNumber + "\' AND "
             if (email != ""):

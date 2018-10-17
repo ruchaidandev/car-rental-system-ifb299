@@ -132,37 +132,69 @@ a:hover{
 }
 
 /* side bar */
-.sidebar{
-    background-color: #4885ed !important;
+.subtopbar{
+    display: none;
+    background-color: #336dd1 !important;
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
     -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
+    max-height: 150px;
 }
-.sidebar .nav-item{
+.scroll{
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+}
+@media screen and (max-width: 768px) {
+    
+    .topbar{
+        text-align: center !important;
+    }
+    .topbar .navbar-nav{
+        margin:0 auto;
+        text-align: center;
+    }
+}
+
+.subtopbar .nav-item{
     padding-left: 2px;
     padding-right: 2px;
     padding-top:0px;
     padding-bottom:0px;
     color: #fff;
-   
+    float:left;
+    width:auto;
+}
+.subtopbar .nav{
+    flex: 1 1 0 !important;
+    flex-wrap: nowrap !important;
+}
+.subtopbar .nav-item > .active{
+    color:#000;
+    background-color:#fff !important;
 }
 
-.sidebar .nav-item a{
+.subtopbar .nav-item a{
     color:#ccc;
     font-size:12px;
 }
-.sidebar .nav-item a span{
+.subtopbar .nav-item a span{
     margin-right:6px;
 }
-.sidebar .nav-item a:hover{
+.subtopbar .nav-item a:hover{
     color:#f6f6f6;
 }
 
-.sidebar p{
+.subtopbar p{
     font-size:16px;
     font-weight:bold !important;
     text-transform: uppercase;
     padding-top: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     color:#fff;
 }
 .border-down{
@@ -170,4 +202,53 @@ a:hover{
 }
 .border-up{
     border-top:1px solid #ccc;
+}
+.sideNavColp{
+    padding-bottom: 5px;
+    margin-bottom: 0 !important;
+}
+.sideNavColp:hover{
+    cursor: pointer;
+    background-color: #fff;
+    color:#4885ed;
+}
+
+
+[data-toggle="collapse"]:before{
+    transform: rotate(0deg);
+}
+[data-toggle="collapse"]:after {
+    display: inline-block;
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      content: "\f0da";
+      transform: rotate(90deg);
+      transition: all linear 0.25s;
+      }   
+    [data-toggle="collapse"].collapsed:after {
+      transform: rotate(0deg) ;
+    }
+.box-container{
+    background-color: #fff !important;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
+    padding: 40px;
+}
+.boxes{
+    border:2px solid #fff;
+    padding-bottom: 20px;
+    padding-top:20px;
+    text-align: center;
+}
+.boxes:hover{
+    background-color: #4885ed;
+    color:#fff;
+}
+.boxes:hover > a{
+    color:#fff;
 }
