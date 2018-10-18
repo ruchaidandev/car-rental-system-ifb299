@@ -11,15 +11,17 @@ import unittest, time, re, os, platform
 from crcapp.tests import BaseTest
 
 # Test for incorrect detaills for login
-class LoginFail(BaseTest):
+class Logout(BaseTest):
 
-    def test_loginFail(self):
+    def test_Logout(self):
         driver = self.driver
         driver.get("http://127.0.0.1:8000/")
         driver.find_element_by_link_text("Login").click()
         driver.find_element_by_id("username").click()
-        driver.find_element_by_id("username").send_keys("test")
-        driver.find_element_by_id("password").send_keys("test")
+        driver.find_element_by_id("username").send_keys("dev")
+        driver.find_element_by_id("password").send_keys("dev")
         driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::button[1]").click()
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Login'])[2]/following::div[4]")))
-        self.assertEqual("Login failed.", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Login'])[2]/following::div[4]").text)
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.LINK_TEXT, "Logout")))
+        driver.find_element_by_link_text("Logout").click()
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "username")))
+        self.assertEqual("Successfully logged off.", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Login'])[2]/following::div[4]").text)

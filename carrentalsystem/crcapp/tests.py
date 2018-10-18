@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
+from selenium.webdriver.chrome.options import Options
 import unittest, time, re, os, platform
 
 class BaseTest(unittest.TestCase):
@@ -14,8 +15,12 @@ class BaseTest(unittest.TestCase):
             DRIVER = os.path.join(PROJECT_ROOT, "../drivers/chromedriver")
         elif platform.system() == 'Windows':
             DRIVER = os.path.join(PROJECT_ROOT, "../drivers/chromedriver.exe")
-
-        self.driver = webdriver.Chrome(DRIVER)
+        
+        options = Options()
+        options.add_argument('--headless') # comment this out to show chrome windows runnning
+        options.add_argument('--disable-gpu')
+        options.add_argument('start-maximized')
+        self.driver = webdriver.Chrome(DRIVER,chrome_options=options)
         self.driver.implicitly_wait(30)
         self.verificationErrors = []
         self.accept_next_alert = True
