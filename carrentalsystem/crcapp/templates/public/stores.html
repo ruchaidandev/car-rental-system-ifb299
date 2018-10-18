@@ -106,6 +106,31 @@
       </div>
       {% endfor %}
     </div>
+      <!-- <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+              New South Wales</a>
+            </h4>
+          </div>
+          <div id="collapse1" class="panel-collapse collapse in">
+            <div class="panel-body">
+              {% for store in NSW  %}
+              <div class="col-md-2 items p-2 text-center">
+                  <div class="item p-3">
+                          <h5>{{store.storeName}}</h5>
+                          <p><small>Street:</small> {{store.street}}</p>
+                          <p><small>City:</small> {{store.city}}</p>
+                          <p><small>State:</small> {{store.state }}</p>
+                          <p><small>Contact Number:</small> {{store.storePhone}}</p>
+                  </div>
+                </div>
+                {% endfor %}            
+            </div>
+          </div>
+        </div>
+      </div> -->
 </section>
 
 {% endblock %}
