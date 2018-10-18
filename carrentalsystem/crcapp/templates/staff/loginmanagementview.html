@@ -86,7 +86,7 @@
         
         $("#btnStore").click(function(){
             $.ajax({
-                url: "/staff/store",
+                url: "/management/staff/store",
                 type : 'POST', 
                 data: {storeID:$('#storeID').val()},
                 contentType: 'application/x-www-form-urlencoded',
@@ -98,7 +98,7 @@
                     // Adding values to the string by iterating the array
                     for(var i=0; i < result.length; i++ ){
                         rows += '<tr>'+
-                                '<td><a href="/staff/login/'+result[i]['pk']+'">'+result[i]['pk']+'</a></td>'+
+                                '<td><a href="/management/staff/login/'+result[i]['pk']+'">'+result[i]['pk']+'</a></td>'+
                                 '<td>'+result[i]['fields']['firstName']+' '+result[i]['fields']['lastName']+'</td>'+
                                 '<td>'+result[i]['fields']['email']+'</td>'+
                                 '<td>'+result[i]['fields']['userName']+'</td>'+

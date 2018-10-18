@@ -7,13 +7,13 @@ from django.utils import timezone
 
 # Create functions related to staff
 class CustomerController:
-    def create():
+    def create(request):
 
-        custObj = Employee.objects.raw("SELECT customerID FROM `crcapp_customer` ORDER BY customerID DESC LIMIT 1")[0]
-        x = custObj.employeeID
+        custObj = Customer.objects.raw("SELECT customerID FROM `crcapp_customer` ORDER BY customerID DESC LIMIT 1")[0]
+        x = custObj.customerID
         x = x[1:]
         x = int(x)+1;
-        x = str(x).zfill(5)
+        x = str(x).zfill(7)
 
         customerID_ = "C"+x
         firstName_ = request.POST.get("firstName")
@@ -23,38 +23,49 @@ class CustomerController:
         postCodeAddress_ = request.POST.get("postalCodeAddres")
         stateAddress_ = request.POST.get("stateAddress")
         DOB_ = request.POST.get("DOB")
-        driverLicenceNumber_ = request.POST.get("driverLicenceNumber")
+        driverLicenceNumber_ = request.POST.get("driverLicenceNumber", 0)
         gender_ = request.POST.get("gender")
-        occupation_ = request.POST.get("occupation")
+        occupation_ = request.POST.get("occupation", "NULL")
         phoneNumber_ = request.POST.get("phoneNumber")
         email_ = request.POST.get("email")
         userName_ = request.POST.get("userName")
-        password_ = request.POST.get("password")
-        dateJoined_ = request.POST.get("dateJoined")
-        lastLogin_ = request.POST.get("lastLogin")
+        password_ =  make_password(request.POST.get('password', ''))
+        dateJoined_ = timezone.now()
+        lastLogin_ = timezone.now() 
 
-        x = Customer(
-        customerID = customerID_,
-        firstName = firstName_,
-        lastName = lastName_,
-        streetAddress = lastName_,
-        cityAddress = cityAddress_,
-        postCodeAddress = postCodeAddress_,
-        stateAddress = stateAddress_,
-        DOB = DOB_,
-        driverLicenceNumber = driverLicenceNumber_,
-        gender = gender_,
-        occupation = occupation_,
-        phoneNumber = phoneNumber_,
-        email = email_,
-        userName = userName_,
-        password = password_,
-        dateJoined = dateJoined_,
-        lastLogin = lastLogin_)
+        try:
+            x = Customer(
+            customerID = customerID_,
+            firstName = firstName_,
+            lastName = lastName_,
+            streetAddress = lastName_,
+            cityAddress = cityAddress_,
+            postCodeAddress = postCodeAddress_,
+            stateAddress = stateAddress_,
+            DOB = DOB_,
+            driverLicenceNumber = driverLicenceNumber_,
+            gender = gender_,
+            occupation = occupation_,
+            phoneNumber = phoneNumber_,
+            email = email_,
+            userName = userName_,
+            password = password_,
+            dateJoined = dateJoined_,
+            lastLogin = lastLogin_,
+            disable = 0)
 
-        x.save()
+            vali = x.full_clean()
+            if vali:
+                return vali
+            else:
+                x.save()
+                return True
 
-    def modify(request, customerID):
+            return False
+        except ValidationError as e:
+            return e
+
+    def modify(request):
 
         customerID_ = customerID
         firstName_ = request.POST.get("firstName")
