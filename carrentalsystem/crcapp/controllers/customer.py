@@ -5,35 +5,68 @@ from django.core.exceptions import ValidationError
 from django.contrib.sessions.models import Session
 from django.utils import timezone
 
-# Create functions related to staff
+# Functions related to Customer
 class CustomerController:
     def create(request):
-
         custObj = Customer.objects.raw("SELECT customerID FROM `crcapp_customer` ORDER BY customerID DESC LIMIT 1")[0]
-        x = custObj.customerID
-        x = x[1:]
-        x = int(x)+1;
-        x = str(x).zfill(7)
-
-        customerID_ = "C"+x
-        firstName_ = request.POST.get("firstName")
-        lastName_ = request.POST.get("lastName")
-        streetAddress_ = request.POST.get("streetAddress")
-        cityAddress_ = request.POST.get("cityAddress")
-        postCodeAddress_ = request.POST.get("postalCodeAddres")
-        stateAddress_ = request.POST.get("stateAddress")
-        DOB_ = request.POST.get("DOB")
-        driverLicenceNumber_ = request.POST.get("driverLicenceNumber", 0)
-        gender_ = request.POST.get("gender")
-        occupation_ = request.POST.get("occupation", "NULL")
-        phoneNumber_ = request.POST.get("phoneNumber")
-        email_ = request.POST.get("email")
-        userName_ = request.POST.get("userName")
-        password_ =  make_password(request.POST.get('password', ''))
-        dateJoined_ = timezone.now()
-        lastLogin_ = timezone.now() 
-
+        custID = custObj.customerID
+        custID = custID[1:]
+        custID = int(custID)+1
+        custID = str(custID).zfill(7)
         try:
+            customerID_ = "C"+custID
+            firstName_ = request.POST.get("firstName")
+            lastName_ = request.POST.get("lastName")
+            gender_ = request.POST.get("gender")
+            DOB_ = request.POST.get("DOB")
+
+
+            if request.POST.get("streetAddress") == "":
+                streetAddress_ = "NULL"
+            else:
+                streetAddress_ = request.POST.get("streetAddress")
+            
+            if request.POST.get("cityAddress") == "":
+                cityAddress_ = "NULL"
+            else:
+                cityAddress_ = request.POST.get("cityAddress")
+            
+            if request.POST.get("postCodeAddress") == "":
+                postCodeAddress_ = "NULL"
+            else:
+                postCodeAddress_ = request.POST.get("postCodeAddress")
+            
+            if request.POST.get("stateAddress") == "":
+                stateAddress_ = "NULL"
+            else:
+                stateAddress_ = request.POST.get("stateAddress")
+            
+            if request.POST.get("driverLicenceNumber") == "":
+                driverLicenceNumber_ = "NULL"
+            else:
+                driverLicenceNumber_ = request.POST.get("driverLicenceNumber")
+            
+            if request.POST.get("occupation") == "":
+                occupation_ = "NULL"
+            else:
+                occupation_ = request.POST.get("occupation")
+            
+            if request.POST.get("phoneNumber") == "":
+                phoneNumber_ = "NULL"
+            else:
+                phoneNumber_ = request.POST.get("phoneNumber")
+
+            if request.POST.get("email") == "":
+                email_ = "NULL"
+            else:
+                email_ = request.POST.get("email")
+            
+
+            userName_ = "NULL"
+            password_ =  "NULL"
+            dateJoined_ = timezone.now()
+            lastLogin_ = timezone.now() 
+
             x = Customer(
             customerID = customerID_,
             firstName = firstName_,
@@ -54,13 +87,13 @@ class CustomerController:
             lastLogin = lastLogin_,
             disable = 0)
 
-            vali = x.full_clean()
+            vali = customer.full_clean()
+
             if vali:
                 return vali
             else:
                 x.save()
                 return True
-
             return False
         except ValidationError as e:
             return e

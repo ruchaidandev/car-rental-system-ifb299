@@ -1,20 +1,4 @@
-from django.shortcuts import render, redirect, reverse  
-from django.urls import path
-from django.http import HttpResponse, HttpResponseRedirect
-from django.middleware.csrf import CsrfViewMiddleware
-from django.views.decorators.csrf import csrf_exempt, csrf_protect#to use csrf exempt
-from django.contrib.auth.hashers import make_password
-from crcapp.models import Store, Employee, Customer, Vehicle#If the model is used in the view file
-from django.utils import timezone
-from django.core.serializers import serialize
-from django.core.serializers.json import DjangoJSONEncoder
-from django.contrib.sessions.models import Session
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-from . import views
-from crcapp.controllers import authentication, staff, vehicle, customer
-
-
+from .modules import *
 
 # Developer: Aidan
 class LazyEncoder(DjangoJSONEncoder):
@@ -115,19 +99,7 @@ def vehicleIndex(request, messages="", mtype="i"):
     return render(request, 'public/vehicles.html', {'msg': messages, 'mtype': mtype, 'vehicles': vehicles })
 
 
-# Developer: Aidan
-def notLoggedIn(request):
-    messages = "Access Denied!"
-    request.session['msg'] = messages
-    request.session['mtype'] = 'd'
-    return redirect('/login')
 
-# Developer: Aidan
-def accessDeniedHome(request):
-    messages = "Access Denied!"
-    request.session['msg'] = messages
-    request.session['mtp'] = 'd'
-    return redirect('/management/home')
     
 
 # Developer: Aidan
@@ -203,14 +175,7 @@ def disableStaff(request, option, empID):
         return notLoggedIn(request)
 
 
-# Developer: Aidan
-# Logoff action
-def logoff(request, messages=""):
-    messages = "Successfully logged off."
-    authentication.Authentication.logout(request)
-    request.session['msg'] = messages
-    request.session['mtype'] = 'i'
-    return redirect('/login')
+
 
 
 # Developer: Jax
@@ -302,104 +267,7 @@ def getStaff(request, option, msg='', mtype=''):
     else:
        return notLoggedIn(request)
 
-# Create customer member page
-def customerCreate(request, messages="", mtype=""):
-    # Checking session exists
-    if request.session.has_key('uid'):
-        name = request.session['name']
-        utype = request.session['utype']
-        if utype != "Customer":
-            stores = Store.objects.all()
-            return render(request, 'customer/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores})
-        else:
-            return accessDeniedHome(request)
-    else:
-        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
-# Developer: Tom
-# Modify customer member page
-""" def customerModify(request, messages="", mtype=""):
-    # Checking if session exists
-    if request.session.has_key('uid'):
-        name = request.session['name']
-        utype = request.session['utype']
-        stores = Store.objects.all()#grab all the stores from the database
-
-        customer = Customer.objects.get(firstName="Lauren")#example to grab random customer details to populate the form
-
-        currentOperation = "Modify"#for visual differences on the same form
-
-        return render(request, 'customer/modify.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores,
-        "currentOperation": currentOperation, "customer": customer})
-    else:
-        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"}) """
-
-# Developer: Tom
-# Viewing all the customers
-def viewCustomers(request, messages="", mtype=""):
-    if request.session.has_key('uid'):
-        name = request.session['name']
-        utype = request.session['utype']
-
-        customers = Customer.objects.all()
-
-        return render(request, 'customer/viewCustomers.html', {'msg': messages, 'name': name, 'mtype': mtype,
-        'utype': utype, "stores": stores, "customers": customers})
-    else:
-        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
-    
-# Developer: Tom
-# Modify customer page
-def customerModify(request, option, msg='', mtype=''):
-    if request.session.has_key('uid'):
-        name = request.session['name']
-        utype = request.session['utype']
-        
-        if request.method == 'POST':
-            return changeCustomerDetails(request, option, msg, mtype, name, utype)
-        elif request.method == 'GET':
-            currentOperation = "Modify"#for visual differences on the same form 
-            customer = Customer.objects.filter(customerID=option).values()[0]
-            
-            return render(request, 'customer/modify.html', {'name': name, 'utype': utype,  'msg': '', 'mtype': mtype,
-            'customer': customer, "currentOperation": currentOperation})
-    else:
-       return notLoggedIn(request)
-
-# Developer: Tom
-# Update existing details of staff
-def changeCustomerDetails(request, option,  name, utype, msg='',mtype=''):
-    name = request.session['name']
-    utype = request.session['utype']
-
-    existingCustomer = Customer.objects.filter(customerID=option).values()
-    reason = CsrfViewMiddleware().process_view(request, None, (), {})
-    # If the reason is true it means verification failed
-    if reason:
-        return render(request, 'customer/modify.html', {'name': name, 'utype': utype,  'msg': '', 'mtype': mtype, 'customer': existingCustomer, "currentOperation": currentOperation})
-    else:
-        result = customer.CustomerController.modify(request, option)
-
-        if result == True:
-            return render(request, 'customer/modify.html', {'name': name, 'utype': utype, 'msg': 'Changes saved.', 'mtype': "i", 'customer': existingCustomer, "customerOperation": currentOperation})
-        elif result == False:
-            return render(request, 'customer/modify.html', {'name': name, 'utype': utype, 'msg': 'Could not save all changes.', 'mtype': "d", 'customer': existingCustomer, "customerOperation": currentOperation})
-        else:
-            return render(request, 'customer/modify.html', {'name': name, 'utype': utype, 'msg': result, 'mtype': "a", 'customer': existingCustomer, "customerOperation": currentOperation})
-
-# Searching for customers
-def searchCustomers(request):
-     # Checking session exists
-    if request.session.has_key('uid'):
-        name = request.session['name']
-        utype = request.session['utype']
-
-        stores = Store.objects.all()
-        customers = Customer.objects.all()
-
-        return render(request, 'customer/search.html', {'name': name, 'utype': utype,'stores': stores, customers: 'customers'})
-    else:
-        return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
 
 # Order Confirmation page
 def bookOrderConfirm(request, messages=""):
