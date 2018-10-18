@@ -82,10 +82,16 @@ def registerIndex(request, messages="", mtype="i"):
 
         return render(request, 'public/register.html', {'msg': messages, 'mtype': mtype})
 
-# Developer: Aidan
+# Developer: Jax
 # Login page 
 def storesIndex(request, messages="", mtype="i"):
-    return render(request, 'public/stores.html', {'msg': messages, 'mtype': mtype})
+    NSW = Store.objects.filter(state = "New South Wales")
+    QLD = Store.objects.filter(state = "Queensland")
+    SA = Store.objects.filter(state = "South Australia")
+    TAS = Store.objects.filter(state = "Tasmania")
+    VIC = Store.objects.filter(state = "Victoria")
+
+    return render(request, 'public/stores.html', {'msg': messages, 'mtype': mtype, 'NSW': NSW, 'QLD': QLD, 'SA': SA, 'TAS' : TAS, 'VIC' : VIC })
 
 # Developer: Aidan
 # get vehicle details to modify page
