@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'mysql.connector.django',
         'NAME': 'carrentaldb',
         'USER': 'root',
-        'PASSWORD': 'gohero18',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }
