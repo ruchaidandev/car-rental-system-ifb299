@@ -316,6 +316,7 @@ def customerCreate(request, messages="", mtype=""):
     else:
        return notLoggedIn(request)
 
+# Developer: Jax
 # Order Confirmation page
 def bookOrderConfirm(request, messages=""):
     # Checking session exists
@@ -404,6 +405,7 @@ def viewStaffLoginDetails(request, option, msg='',mtype=''):
        return notLoggedIn(request)
 
 
+# Developer: Jax
 # Searching for staff
 def searchStaff(request, msg='',mtype=''):
     if request.session.has_key('uid'):
@@ -422,6 +424,7 @@ def searchStaff(request, msg='',mtype=''):
        return notLoggedIn(request)
 
 
+# Developer: Jax
 # Booking page
 def bookingOrder(request):
     vehicles = Vehicle.objects.all()
