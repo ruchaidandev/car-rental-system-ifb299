@@ -148,7 +148,9 @@
             <h4 class="text-center mt-5">Currently in store: {{ store.storeName }} </h4>
             <i class="fas fa-store-alt fa-7x mt-4"></i>
             <br>
-            <div class="row pt-3 justify-content-center mt-5">
+            <p class="text-center mt-2">Address: {{ store.street }} <br>{{ store.city }} <br>{{ store.state }} </p>
+            <p class="text-center mt-2">Store Phone: <a href="tel:{{ store.storePhone }}">{{ store.storePhone }} </a></p>
+            <div class="row pt-2 justify-content-center mt-2">
                 <div class="btn btn-primary btn-sm divs-center">Add to Order</div>
             </div>
          </div>      

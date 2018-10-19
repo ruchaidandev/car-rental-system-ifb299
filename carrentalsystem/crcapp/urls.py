@@ -11,12 +11,14 @@ urlpatterns = [
     path('signup', views.registerIndex, name='registerIndex'),
     path('stores', views.storesIndex, name='storesIndex'),
     path('vehicles', views.vehicleIndex, name='vehicleIndex'),
+    path('profile', views.profileIndex, name='profileIndex'),
     url(r'^vehicle/(?P<option>\S+)$', views.getVehicleIndex, name='getVehicleIndex'),
     path('customer/usernames/list', views.getUsernamesCustomers, name='getUsernames'),
 
     ### Home ###
+    path('management', views.home, name='home'),
     path('management/home', views.home, name='home'),
-    path('system/login/employee', views.login, name='login'),
+    path('system/login', views.login, name='login'),
     path('system/logoff', views.logoff, name='logoff'),
 
 
@@ -45,6 +47,7 @@ urlpatterns = [
 
     ### Customer ###
     # For viewing the page
+     path('management/customer', views.viewCustomers, name='viewCustomers'),
     path('management/customer/create', views.customerCreate, name='customerCreate'),
 
 
