@@ -153,7 +153,7 @@ def home(request, messages=""):
 
 # Developer: Aidan
 # Form action class for login, this will be used for employee login only
-def loginEmployee(request):
+def login(request):
     if request.method == 'POST':
         form = request.POST
         reason = CsrfViewMiddleware().process_view(request, None, (), {})
