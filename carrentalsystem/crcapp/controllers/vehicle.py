@@ -15,7 +15,7 @@ class VehicleController:
         vehicleObj = Vehicle.objects.raw("SELECT vehicleID FROM `crcapp_vehicle` ORDER BY vehicleID DESC LIMIT 1")[0]
         x = vehicleObj.vehicleID
         x = x[1:]
-        x = int(x)+1;
+        x = int(x)+1
         x = str(x).zfill(5)
 
         vehicleID_ = "V"+x
