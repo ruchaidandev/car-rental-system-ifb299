@@ -1,5 +1,5 @@
 {% extends '../index.html' %}
-{% block title %}{{ vehicle.makeName | title }} {{ vehicle.model | title}} {% endblock %}
+{% block title %}{{ customer.firstName | title }} {{ customer.lastName| title}} Profile{% endblock %}
 {% block content %}
 
 
@@ -8,152 +8,190 @@
                 <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                           <li class="breadcrumb-item"><a href="/">Home</a></li>
-                          <li class="breadcrumb-item"><a href="/vehicles">Vehicles</a></li>
-                          <li class="breadcrumb-item">{{ vehicle.makeName |title }} {{ vehicle.model | title}}</li>
+                          <li class="breadcrumb-item">{{ customer.firstName | title }} {{ customer.lastName| title}}</li>
                         </ol>
                       </nav>
           </div>
     <div class="row">
-        <div class="col-md-8">
-
-                       
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <h5>Vehicle Details</h5>
+            <div class="container">
+                    <div class="row">
+                          <div class="col-sm-10"><h4>{{ customer.userName }}</h4></div>
+                    </div>
+                    <div class="row">
+                          <div class="col-sm-3"><!--left col-->
+                              
+                          
+                          <ul class="list-group pt-5">
+                            <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+                            <li class="list-group-item text-right"><span class="pull-left"><strong>Last Login</strong></span> {{ customer.lastLogin}}</li>
+                            <li class="list-group-item text-right"><span class="pull-left"><strong>Member Since</strong></span> {{ customer.dateJoined}}</li>
+                            <li class="list-group-item text-right"><span class="pull-left"><strong>Total Orders</strong></span> 37</li>
+                          </ul> 
+                               
+                         
+                          
+                        </div><!--/col-3-->
+                        <div class="col-sm-9">
+                                <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#orders">Home</a></li>
+                                        <li><a href="#profile">Menu 1</a></li>
+                                        <li><a href="#">Menu 2</a></li>
+                                        <li><a href="#">Menu 3</a></li>
+                                      </ul>
+                
+                              
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="orders">
                                 <hr>
-                                <br>
-                                <div class="row">
-                                    
-                                    <div class="col-md-6 field-label-responsive">
-                                        <label for="makeName">Make:</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                       {{ vehicle.makeName | title }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 field-label-responsive">
-                                        <label for="model">Model:</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ vehicle.model | title }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 field-label-responsive">
-                                        <label for="series">Series: </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                       {{ vehicle.series | title }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 field-label-responsive">
-                                        <label for="year">Year: </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ vehicle.year }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 field-label-responsive">
-                                        <label for="enginesize">Engine Size:</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group has-feedback">
-                                            {{ vehicle.enginesize }} L
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 field-label-responsive">
-                                        <label for="seatingCapacity">Seating Capacity: </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        {% for p in "x"|ljust:vehicle.seatingCapacity %}
-                                            <i class="fas fa-male fa-2x"></i>
-                                        {% endfor %}
-                                        <small>[ {{vehicle.seatingCapacity}} ]</small>
-                                    </div>
-                                </div>
-                                
-                                
-                            </div>
-                            <div class="col-md-6 col-sm-12 mt-5 pt-4">
-                                <div class="row">
-                                    <div class="col-md-6 field-label-responsive">
-                                        <label for="fuelSystem">Fuel System:</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ vehicle.fuelSystem | title }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 field-label-responsive">
-                                        <label for="tankCapacity">Tank Capacity:</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ vehicle.tankcapacity }} L
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 field-label-responsive">
-                                        <label for="power">Power:</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            {{ vehicle.power }} kW
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 field-label-responsive">
-                                        <label for="standardTransmission">Standard Transmission:</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ vehicle.standardTransmission }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 field-label-responsive">
-                                        <label for="wheelBase">Wheel Base: </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ vehicle.wheelbase }} mm
-                                    </div>
-                                </div>
-                                <div class="row">
-                                        <div class="col-md-6 field-label-responsive">
-                                            <label for="bodyType">Body Type: </label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            {{ vehicle.bodyType }}
-                                        </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 field-label-responsive">
-                                        <label for="driveType">Drive Type: </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                       {{ vehicle.driveType }}
-                                    </div>
-                            </div>
-                                
-                                
-                            </div>
-                        </div>
-              
-        </div>
-         <div class=" col-md-4 p-2 boxed mt-5 text-center ">
-            <h4 class="text-center mt-5">Currently in store: {{ store.storeName }} </h4>
-            <i class="fas fa-store-alt fa-7x mt-4"></i>
-            <br>
-            <p class="text-center mt-2">Address: {{ store.street }} <br>{{ store.city }} <br>{{ store.state }} </p>
-            <p class="text-center mt-2">Store Phone: <a href="tel:{{ store.storePhone }}">{{ store.storePhone }} </a></p>
-            <div class="row pt-2 justify-content-center mt-2">
-                <div class="btn btn-primary btn-sm divs-center">Add to Order</div>
-            </div>
-         </div>      
+                                  <form class="form" action="##" method="post" id="registrationForm">
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                              <label for="first_name"><h4>First name</h4></label>
+                                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                            <label for="last_name"><h4>Last name</h4></label>
+                                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                                          </div>
+                                      </div>
+                          
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                              <label for="phone"><h4>Phone</h4></label>
+                                              <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                                          </div>
+                                      </div>
+                          
+                                      <div class="form-group">
+                                          <div class="col-xs-6">
+                                             <label for="mobile"><h4>Mobile</h4></label>
+                                              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                              <label for="email"><h4>Email</h4></label>
+                                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                              <label for="email"><h4>Location</h4></label>
+                                              <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                              <label for="password"><h4>Password</h4></label>
+                                              <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                            <label for="password2"><h4>Verify</h4></label>
+                                              <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                           <div class="col-xs-12">
+                                                <br>
+                                                  <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                                   <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                                            </div>
+                                      </div>
+                                  </form>
+                              
+                              <hr>
+                              
+                             </div><!--/tab-pane-->
+                             <div class="tab-pane" id="profile">
+                               
+                               <h2></h2>
+                               
+                               <hr>
+                                  <form class="form" action="##" method="post" id="registrationForm">
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                              <label for="first_name"><h4>First name</h4></label>
+                                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                            <label for="last_name"><h4>Last name</h4></label>
+                                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                                          </div>
+                                      </div>
+                          
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                              <label for="phone"><h4>Phone</h4></label>
+                                              <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                                          </div>
+                                      </div>
+                          
+                                      <div class="form-group">
+                                          <div class="col-xs-6">
+                                             <label for="mobile"><h4>Mobile</h4></label>
+                                              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                              <label for="email"><h4>Email</h4></label>
+                                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                              <label for="email"><h4>Location</h4></label>
+                                              <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                              <label for="password"><h4>Password</h4></label>
+                                              <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          
+                                          <div class="col-xs-6">
+                                            <label for="password2"><h4>Verify</h4></label>
+                                              <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                           <div class="col-xs-12 divs-center">
+                                                <br>
+                                                  <button class="btn btn-sm btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Change Details</button>
+                                            </div>
+                                      </div>
+                                  </form>
+                               
+                             </div><!--/tab-pane-->
+                       
+                               
+                              </div><!--/tab-pane-->
+                          </div><!--/tab-content-->
+                
+                        </div><!--/col-9-->
+                    </div> 
           
 
     </div>
@@ -161,4 +199,17 @@
    
 
   </section>
+  {% endblock %}
+
+
+  {% block scripts %}
+  <script>
+        $(document).ready(function() {
+            
+            $('ul.nav-tabs li a').click(function (e) {
+                $('ul.nav-tabs li.active').removeClass('active')
+                $(this).parent('li').addClass('active')
+              })
+        })
+  </script>
   {% endblock %}

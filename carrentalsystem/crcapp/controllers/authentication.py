@@ -11,14 +11,17 @@ class Authentication:
     
         username = request.POST.get("username", "")
         password = request.POST.get("password", "")
-        typeOfUser = ""
+        ID = ""
+        userType = ""
         try:
             if username[0:3] == "crc":
                 user = Customer.objects.get(userName=username)
-                typeOfUser = "Customer"
+                userType = "Customer"
+                ID = user.customerID
             else:
                 user = Employee.objects.get(userName=username)
-                typeOfUser = "Employee"
+                userType = user.userType
+                ID = user.employeeID
             # Executing a full clean will validate all entries to be in the 
             # correct data fields as in model
             user.full_clean()            
@@ -30,16 +33,12 @@ class Authentication:
                     request.session.set_expiry(7200) 
                     # setting session values
                     
-                    if typeOfUser == "Customer":
-                        request.session['uid'] = user.customerID
-                        request.session['utype'] = "Customer"
-                    else:
-                        request.session['uid'] = user.employeeID
-                        request.session['utype'] = user.userType
+                    request.session['uid'] = ID
+                    request.session['utype'] = userType
                     request.session['name'] = user.firstName+" "+user.lastName
                     user.lastLogin = timezone.now()
                     user.save()
-                    return user.employeeID
+                    return ID
             else:
                 return "NULL"
         except Employee.DoesNotExist:
