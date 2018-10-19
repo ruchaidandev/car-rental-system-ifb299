@@ -16,7 +16,7 @@ urlpatterns = [
 
     ### Home ###
     path('management/home', views.home, name='home'),
-    path('system/login/employee', views.loginEmployee, name='login'),
+    path('system/login/employee', views.login, name='login'),
     path('system/logoff', views.logoff, name='logoff'),
 
 
