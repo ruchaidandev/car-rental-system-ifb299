@@ -11,6 +11,7 @@ import unittest, time, re, os, platform
 from crcapp.tests import BaseTest
 
 class StoreLocation(BaseTest):
+    # Test for store in staff webpage
     def test_storeLocation(self):
         driver = self.driver
         driver.get("http://127.0.0.1:8000/")
