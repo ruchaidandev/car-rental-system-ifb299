@@ -10,15 +10,16 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re, os, platform
 from crcapp.tests import BaseTest
 
-class LoginSuccessful(BaseTest):
-    # Test for login successfull
-    def test_LoginSuccessful(self):
+class StoreLocation(BaseTest):
+    def test_storeLocation(self):
         driver = self.driver
         driver.get("http://127.0.0.1:8000/")
         driver.find_element_by_link_text("Login").click()
         driver.find_element_by_id("username").click()
+        driver.find_element_by_id("username").clear()
         driver.find_element_by_id("username").send_keys("dev")
+        driver.find_element_by_id("password").clear()
         driver.find_element_by_id("password").send_keys("dev")
-        driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::button[1]").click()
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.LINK_TEXT, "Logout")))
-        self.assertEqual("Logout", driver.find_element_by_link_text("Logout").text)
+        driver.find_element_by_id("password").send_keys(Keys.ENTER)
+        driver.find_element_by_link_text("Store Locations").click()
+        self.assertEqual("Stores", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Stores'])[1]/following::h3[1]").text)
