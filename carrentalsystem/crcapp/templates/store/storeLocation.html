@@ -1,0 +1,117 @@
+{% extends '../base.html' %}
+
+{% block title %}Stores{% endblock %}
+
+{% block breadcrumb %}
+
+<li class="breadcrumb-item active" aria-current="page">Stores</li>
+{% endblock %}
+{% block content %}
+
+  <section class="content-section p-3 p-lg-5 d-flex flex-column" id="stores">
+        <!-- <div class="row pt-4">
+                <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="/">Home</a></li>
+                          <li class="breadcrumb-item">Stores</li>
+                        </ol>
+                      </nav>
+          </div> -->
+    <h3 class="mb-5 mt-2">Stores</h3>
+    <div class="row">
+      <div class="col-md-12 text-left">
+        <hr>
+        <h4>New South Wales</h4>
+        <br>
+      </div>
+    {% for store in NSW  %}
+     <div class="col-md-2 items p-2 text-center">
+         <div class="item p-3">
+                <h5>{{store.storeName}}</h5>
+                <p><small>Street:</small> {{store.street}}</p>
+                <p><small>City:</small> {{store.city}}</p>
+                <p><small>State:</small> {{store.state }}</p>
+                <p><small>Contact Number:</small> {{store.storePhone}}</p>
+         </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-left">
+        <br>
+        <hr>
+        <h4>Queensland</h4>
+        <br>
+      </div>
+    {% for store in QLD  %}
+     <div class="col-md-2 items p-2 text-center">
+         <div class="item p-3">
+                <h5>{{store.storeName}}</h5>
+                <p><small>Street:</small> {{store.street}}</p>
+                <p><small>City:</small> {{store.city}}</p>
+                <p><small>State:</small> {{store.state }}</p>
+                <p><small>Contact Number:</small> {{store.storePhone}}</p>
+         </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-left">
+        <br>
+        <hr>
+        <h4>South Australia</h4>
+        <br>
+      </div>
+    {% for store in SA  %}
+     <div class="col-md-2 items p-2 text-center">
+         <div class="item p-3">
+                <h5>{{store.storeName}}</h5>
+                <p><small>Street:</small> {{store.street}}</p>
+                <p><small>City:</small> {{store.city}}</p>
+                <p><small>State:</small> {{store.state }}</p>
+                <p><small>Contact Number:</small> {{store.storePhone}}</p>
+         </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-left">
+        <br>
+        <hr>
+        <h4>Tasmania</h4>
+        <br>
+      </div>
+    {% for store in TAS  %}
+     <div class="col-md-2 items p-2 text-center">
+         <div class="item p-3">
+                <h5>{{store.storeName}}</h5>
+                <p><small>Street:</small> {{store.street}}</p>
+                <p><small>City:</small> {{store.city}}</p>
+                <p><small>State:</small> {{store.state }}</p>
+                <p><small>Contact Number:</small> {{store.storePhone}}</p>
+         </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-left">
+        <br>
+        <hr>
+        <h4>Victoria</h4>
+        <br>
+      </div>
+    {% for store in VIC  %}
+     <div class="col-md-2 items p-2 text-center">
+         <div class="item p-3">
+                <h5>{{store.storeName}}</h5>
+                <p><small>Street:</small> {{store.street}}</p>
+                <p><small>City:</small> {{store.city}}</p>
+                <p><small>State:</small> {{store.state }}</p>
+                <p><small>Contact Number:</small> {{store.storePhone}}</p>
+         </div>
+      </div>
+      {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

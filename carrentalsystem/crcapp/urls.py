@@ -70,7 +70,10 @@ urlpatterns = [
     path('management/sample', views.sample, name='staffCreateAction'),
 
     # Getting staff from staff check 
-    path('management/email', views.email, name='email')
+    path('management/email', views.email, name='email'),
+
+    ### Store ###
+    path('management/store', views.storesStaff, name='storesStaff'),
 
 
 ]
