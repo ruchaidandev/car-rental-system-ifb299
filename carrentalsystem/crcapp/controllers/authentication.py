@@ -13,7 +13,7 @@ class Authentication:
         password = request.POST.get("password", "")
         typeOfUser = ""
         try:
-            if username[0:2] == "crc":
+            if username[0:3] == "crc":
                 user = Customer.objects.get(userName=username)
                 typeOfUser = "Customer"
             else:
@@ -29,10 +29,12 @@ class Authentication:
                     # Sets 2 hours expiry date for sessions 
                     request.session.set_expiry(7200) 
                     # setting session values
-                    request.session['uid'] = user.employeeID
+                    
                     if typeOfUser == "Customer":
+                        request.session['uid'] = user.customerID
                         request.session['utype'] = "Customer"
                     else:
+                        request.session['uid'] = user.employeeID
                         request.session['utype'] = user.userType
                     request.session['name'] = user.firstName+" "+user.lastName
                     user.lastLogin = timezone.now()
