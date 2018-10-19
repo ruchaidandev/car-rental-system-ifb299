@@ -1,16 +1,14 @@
-{% extends '../index.html' %}
+{% extends '../base.html' %}
+
 {% block title %}Stores{% endblock %}
+
+{% block breadcrumb %}
+
+<li class="breadcrumb-item active" aria-current="page">Stores</li>
+{% endblock %}
 {% block content %}
 
   <section class="content-section p-3 p-lg-5 d-flex flex-column" id="stores">
-        <div class="row pt-4">
-                <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                          <li class="breadcrumb-item"><a href="/">Home</a></li>
-                          <li class="breadcrumb-item">Stores</li>
-                        </ol>
-                      </nav>
-          </div>
     <h3 class="mb-5 mt-2">Stores</h3>
       <div class="panel-group" id="accordion">
         <div class="card">
