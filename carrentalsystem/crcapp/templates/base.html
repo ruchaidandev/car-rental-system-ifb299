@@ -26,6 +26,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!-- CRC Styles -->
     <link href="{% static "css/style.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/publicstyles.css" %}">
   </head>
 
   <body>
@@ -157,6 +158,12 @@
                           <small class="pr-2">Administration</small>               
                        </p>
                            <div id="rt" class="collapse" aria-labelledby="Administration" data-parent="#accordion">
+                              <li class="nav-item">
+                                <a class="nav-link" href="{% url 'storesStaff' %}">
+                                  <span><i class="fas fa-sign-in-alt"></i></span>
+                                Store location
+                                </a>
+                              </li>
                               <li class="nav-item">
                                   <a class="nav-link" href="/management/reports">
                                     <span><i class="fas fa-sign-in-alt"></i></span>
