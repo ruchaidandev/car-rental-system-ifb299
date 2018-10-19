@@ -1,20 +1,4 @@
-from django.shortcuts import render, redirect, reverse  
-from django.urls import path
-from django.http import HttpResponse,HttpResponseRedirect
-from django.middleware.csrf import CsrfViewMiddleware
-from django.views.decorators.csrf import csrf_exempt, csrf_protect # to use csrf exempt
-from django.contrib.auth.hashers import make_password
-from crcapp.models import Store,Employee,Customer,Vehicle # If the model is used in the view file
-from django.utils import timezone
-from django.core.serializers import serialize
-from django.core.serializers.json import DjangoJSONEncoder
-from django.contrib.sessions.models import Session
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-from . import views
-from crcapp.controllers import authentication, staff, vehicle, customer
-
-
+from .modules import *
 
 # Developer: Aidan
 class LazyEncoder(DjangoJSONEncoder):
@@ -121,19 +105,7 @@ def vehicleIndex(request, messages="", mtype="i"):
     return render(request, 'public/vehicles.html', {'msg': messages, 'mtype': mtype, 'vehicles': vehicles })
 
 
-# Developer: Aidan
-def notLoggedIn(request):
-    messages = "Access Denied!"
-    request.session['msg'] = messages
-    request.session['mtype'] = 'd'
-    return redirect('/login')
 
-# Developer: Aidan
-def accessDeniedHome(request):
-    messages = "Access Denied!"
-    request.session['msg'] = messages
-    request.session['mtp'] = 'd'
-    return redirect('/management/home')
     
 
 # Developer: Aidan
@@ -209,14 +181,7 @@ def disableStaff(request, option, empID):
         return notLoggedIn(request)
 
 
-# Developer: Aidan
-# Logoff action
-def logoff(request, messages=""):
-    messages = "Successfully logged off."
-    authentication.Authentication.logout(request)
-    request.session['msg'] = messages
-    request.session['mtype'] = 'i'
-    return redirect('/login')
+
 
 
 # Developer: Jax
@@ -291,7 +256,7 @@ def changeStaffDetails(request, option,  name, utype, msg='',mtype=''):
 
 # Developer: Aidan
 # get start details to the staff management page
-def getStaff(request, option, msg='',mtype=''):
+def getStaff(request, option, msg='', mtype=''):
     if request.session.has_key('uid'):
         name = request.session['name']
         utype = request.session['utype']
@@ -308,19 +273,7 @@ def getStaff(request, option, msg='',mtype=''):
     else:
        return notLoggedIn(request)
 
-# Create customer member page
-def customerCreate(request, messages="", mtype=""):
-    # Checking session exists
-    if request.session.has_key('uid'):
-        name = request.session['name']
-        utype = request.session['utype']
-        if utype != "Customer":
-            stores = Store.objects.all()
-            return render(request, 'customer/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, "stores": stores})
-        else:
-            return accessDeniedHome(request)
-    else:
-       return notLoggedIn(request)
+
 
 # Developer: Jax
 # Order Confirmation page
@@ -357,12 +310,12 @@ def viewStaffLogin(request):
 @csrf_exempt # to disable csrf token check
 def getStaffFromStore(request):
     # Checking session exists
-     
+  
     if request.method == 'POST':
         storeID = request.POST.get('storeID', '')
         employees = Employee.objects.raw("SELECT * FROM `crcapp_employee` WHERE storeID_id = '"+storeID+"' ORDER BY dateJoined DESC")
         return HttpResponse(serialize('json', employees, cls=LazyEncoder))
-       
+     
     else:
         return HttpResponse("NULL")
 
