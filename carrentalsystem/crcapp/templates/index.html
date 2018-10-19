@@ -52,12 +52,27 @@
           </div>
           <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
               <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                      <a class="nav-link" href="/login">Login</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="/signup">New user? Sign up</a>
-                  </li>
+                    {% if request.session.uid != "" and request.session.uid != NULL %}
+                        {% if request.session.utype == "Customer" %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/profile">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logoff">Logoff</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/management">Home</a>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/signup">New user? Sign up</a>
+                        </li>
+                  {% endif %}
               </ul>
           </div>
       </nav>

@@ -41,6 +41,25 @@ def loginIndex(request, messages="", mtype="i"):
     return render(request, 'public/login.html', {'msg': messages, 'mtype': mtype})
 
 # Developer: Aidan
+# Customer Profile Page
+def profileIndex(request, messages="", mtype="i"):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        
+        msg = request.session.get('msg', '')
+        mtype = request.session.get('mtp', '')
+        if msg != "":
+            messages =  msg
+            del request.session['msg']
+        if mtype != "":
+            del request.session['mtp']
+        customer = Customer.objects.get(customerID=request.session['uid'])
+        return render(request, 'public/profile.html', {'msg': messages, 'mtype': mtype,'name': name, 'utype': utype, 'customer': customer})
+    else:
+       return notLoggedIn(request)
+
+# Developer: Aidan
 # Login page 
 def registerIndex(request, messages="", mtype="i"):
     if request.method == 'POST':
@@ -131,7 +150,7 @@ def home(request, messages=""):
 
 # Developer: Aidan
 # Form action class for login, this will be used for employee login only
-def loginEmployee(request):
+def login(request):
     if request.method == 'POST':
         form = request.POST
         reason = CsrfViewMiddleware().process_view(request, None, (), {})
@@ -143,7 +162,10 @@ def loginEmployee(request):
         else:
             result = authentication.Authentication.login(request)
             if result != "NULL":
-                return redirect("/management/home")
+                if request.session['utype'] == "Customer":
+                    return  redirect("/profile")
+                else:
+                    return redirect("/management/home")
             elif result == "NULL":
                 messages = "Login failed."
                 request.session['msg'] = messages
