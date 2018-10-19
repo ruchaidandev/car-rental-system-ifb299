@@ -10,9 +10,8 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re, os, platform
 from crcapp.tests import BaseTest
 
-# Test for incorrect detaills for login
 class LoginFail(BaseTest):
-
+    # Test for incorrect details for login
     def test_loginFail(self):
         driver = self.driver
         driver.get("http://127.0.0.1:8000/")

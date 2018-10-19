@@ -19,7 +19,6 @@ class BaseTest(unittest.TestCase):
         options = Options()
         options.add_argument('--headless') # comment this out to show chrome windows runnning
         options.add_argument('--disable-gpu')
-        options.add_argument('start-maximized')
         self.driver = webdriver.Chrome(DRIVER,chrome_options=options)
         self.driver.implicitly_wait(30)
         self.verificationErrors = []
