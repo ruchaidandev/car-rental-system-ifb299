@@ -47,6 +47,7 @@ class Authentication:
             return e
 
     def logout(request):
-        del request.session['uid']
-        del request.session['utype']
-        del request.session['name']
+        if request.session.has_key('uid'):
+            del request.session['uid']
+            del request.session['utype']
+            del request.session['name']

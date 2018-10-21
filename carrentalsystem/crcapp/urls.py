@@ -12,6 +12,8 @@ urlpatterns = [
     path('stores', views.storesIndex, name='storesIndex'),
     path('vehicles', views.vehicleIndex, name='vehicleIndex'),
     path('profile', views.profileIndex, name='profileIndex'),
+    path('booking/store', views.setStore, name='setStore'),
+    path('booking', views.confirmOrder, name='confirmOrder'),
     url(r'^vehicle/(?P<option>\S+)$', views.getVehicleIndex, name='getVehicleIndex'),
     path('customer/usernames/list', views.getUsernamesCustomers, name='getUsernames'),
 

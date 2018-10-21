@@ -9,7 +9,7 @@
                         <ol class="breadcrumb">
                           <li class="breadcrumb-item"><a href="/">Home</a></li>
                           <li class="breadcrumb-item"><a href="/vehicles">Vehicles</a></li>
-                          <li class="breadcrumb-item">{{ vehicle.makeName |title }} {{ vehicle.model | title}}</li>
+                          <li class="breadcrumb-item active">{{ vehicle.makeName |title }} {{ vehicle.model | title}}</li>
                         </ol>
                       </nav>
           </div>
@@ -151,7 +151,7 @@
             <p class="text-center mt-2">Address: {{ store.street }} <br>{{ store.city }} <br>{{ store.state }} </p>
             <p class="text-center mt-2">Store Phone: <a href="tel:{{ store.storePhone }}">{{ store.storePhone }} </a></p>
             <div class="row pt-2 justify-content-center mt-2">
-                <div class="btn btn-primary btn-sm divs-center">Add to Order</div>
+                <div class="btn btn-default btn-sm divs-center disabled">Add to Order</div>
             </div>
          </div>      
           
