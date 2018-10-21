@@ -10,9 +10,8 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re, os, platform
 from crcapp.tests import BaseTest
 
-# Test for incorrect detaills for login
 class Logout(BaseTest):
-
+    # Test for logout successfull
     def test_Logout(self):
         driver = self.driver
         driver.get("http://127.0.0.1:8000/")
@@ -25,3 +24,4 @@ class Logout(BaseTest):
         driver.find_element_by_link_text("Logout").click()
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "username")))
         self.assertEqual("Successfully logged off.", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Login'])[2]/following::div[4]").text)
+    
