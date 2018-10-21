@@ -5,9 +5,11 @@ from django.core.exceptions import ValidationError
 from django.contrib.sessions.models import Session
 from django.utils import timezone
 
+
+
 # Functions related to Customer
 class CustomerController:
-    def create(request):
+    def create(request , purpose=""):
         custObj = Customer.objects.raw("SELECT customerID FROM `crcapp_customer` ORDER BY customerID DESC LIMIT 1")[0]
         custID = custObj.customerID
         custID = custID[1:]
@@ -61,9 +63,13 @@ class CustomerController:
             else:
                 email_ = request.POST.get("email")
             
-
-            userName_ = "NULL"
-            password_ =  "NULL"
+            if purpose == "singup":
+                userName_ = request.POST.get("userName")
+                password_ =  make_password(request.POST.get('password', ''))
+                
+            else:
+                userName_ = "NULL"
+                password_ =  "NULL"
             dateJoined_ = timezone.now()
             lastLogin_ = timezone.now() 
 
@@ -100,21 +106,21 @@ class CustomerController:
 
     def modify(request):
 
-        customerID_ = customerID
+        customerID_ = request.POST.get("customerID")
         firstName_ = request.POST.get("firstName")
         lastName_ = request.POST.get("lastName")
         streetAddress_ = request.POST.get("streetAddress")
         cityAddress_ = request.POST.get("cityAddress")
-        postCodeAddress_ = request.POST.get("postalCodeAddres")
+        postCodeAddress_ = request.POST.get("postCodeAddress")
         stateAddress_ = request.POST.get("stateAddress")
-        DOB_ = request.POST.get("DOB")
+        DOB_ = request.POST.get("dob")
         driverLicenceNumber_ = request.POST.get("driverLicenceNumber")
         gender_ = request.POST.get("gender")
         occupation_ = request.POST.get("occupation")
         phoneNumber_ = request.POST.get("phoneNumber")
         email_ = request.POST.get("email")
 
-        existingCustomer = Customer.objects.get(customerID_)
+        existingCustomer = Customer.objects.get(customerID=customerID_)
 
         try:
             if (firstName_ != ""):
@@ -127,7 +133,7 @@ class CustomerController:
                 existingCustomer.streetAddress = streetAddress_
 
             if (cityAddress_ != ""):
-                existingCustomer.streetAddress = streetAddress_
+                existingCustomer.cityAddress = cityAddress_
 
             if (postCodeAddress_ != ""):
                 existingCustomer.postCodeAddress = postCodeAddress_
@@ -151,17 +157,17 @@ class CustomerController:
                 existingCustomer.phoneNumber = phoneNumber_
 
             if (email_ != ""):
-                existingCustomer.email = email
+                existingCustomer.email = email_
             
             vali = existingCustomer.full_clean()
             if vali:
                 return vali
             else:
                 existingCustomer.save()
-                return True
+                return True 
             return False
         except ValidationError as e:
-            return e
+            return e.message_dict
 
     #deletes Customer based on given ID
     def delete(ID):
@@ -274,3 +280,22 @@ class CustomerController:
                 each.userName,
                 each.dateJoined,
                 each.lastLogin)
+
+    def changePW(request):
+        customerID_ = request.POST.get("customerID")
+        password_ = make_password(request.POST.get('password', ''))
+
+        existingCustomer = Customer.objects.get(customerID=customerID_)
+
+        try:
+            existingCustomer.password = password_
+            
+            vali = existingCustomer.full_clean()
+            if vali:
+                return vali
+            else:
+                existingCustomer.save()
+                return True 
+            return False
+        except ValidationError as e:
+            return e.message_dict

@@ -30,7 +30,9 @@ urlpatterns = [
     url(r'^management/staff/activity/(?P<option>\S+)/(?P<empID>\S+)$', views.disableStaff, name='disableStaff'),
     # Getting staff from staff check 
     path('management/staff/store', views.getStaffFromStore, name='getStaffFromStore'),
-
+    path('management/profile', views.profile, name='profile'),
+    path('management/profile/update', views.changeStaffProfile, name='changeStaffProfile'),
+    path('management/profile/update/password', views.changeStaffProfilePassword, name='changeStaffProfilePassword'),
 
     # Getting usernames
     path('management/staff/usernames/list', views.getUsernames, name='getUsernames'),
@@ -47,10 +49,10 @@ urlpatterns = [
 
     ### Customer ###
     # For viewing the page
-     path('management/customer', views.viewCustomers, name='viewCustomers'),
+    path('management/customer', views.viewCustomers, name='viewCustomers'),
     path('management/customer/create', views.customerCreate, name='customerCreate'),
-
-
+    path('profile/update', views.changeProfile, name='changeProfile'),
+    path('profile/update/password', views.changeProfilePassword, name='changeProfilePassword'),
 
     ### Booking ###
     # For viewing page

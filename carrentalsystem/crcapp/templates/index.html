@@ -59,12 +59,15 @@
                                 <a class="nav-link" href="/profile">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/logoff">Logoff</a>
+                                <a class="nav-link" href="/system/logoff">Logoff</a>
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="/management">Home</a>
+                                <a class="nav-link" href="/management">Management</a>
                             </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href="/system/logoff">Logoff</a>
+                                </li>
                         {% endif %}
                     {% else %}
                         <li class="nav-item">
@@ -102,6 +105,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js" ></script>
   <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js" ></script>
   <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js" ></script>
+ 
   <script src="{% static "js/html2canvas.min.js" %}" ></script>
   <script src="{% static "js/jspdf.debug.js" %}" ></script>
   <script src="{% static "js/jquery.easing.min.js" %}" ></script>
