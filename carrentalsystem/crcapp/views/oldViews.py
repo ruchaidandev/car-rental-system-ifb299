@@ -176,8 +176,11 @@ def home(request, messages=""):
             del request.session['msg']
         if mtype != "":
             del request.session['mtp']
-
-        return render(request, 'home.html', {'msg': messages, 'mtype': mtype,'name': name, 'utype': utype})
+        counts = { 'vehicles': Vehicle.objects.all().count(), 
+        'stores': Store.objects.all().count(), 
+        'customers': Customer.objects.all().count(), 
+        'orders': Order.objects.all().count() }
+        return render(request, 'home.html', {'msg': messages, 'mtype': mtype,'name': name, 'utype': utype, 'counts': counts})
     else:
        return notLoggedIn(request)
     
