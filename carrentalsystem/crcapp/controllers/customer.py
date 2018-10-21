@@ -8,75 +8,42 @@ from django.utils import timezone
 # Functions related to Customer
 class CustomerController:
     def create(request):
+        # Grab the customer with the largest customerID from the database
         custObj = Customer.objects.raw("SELECT customerID FROM `crcapp_customer` ORDER BY customerID DESC LIMIT 1")[0]
-        custID = custObj.customerID
+        custID = custObj.customerID#grab the customerID
         custID = custID[1:]
-        custID = int(custID)+1
+        custID = int(custID)+1#increment by one
         custID = str(custID).zfill(7)
+
         try:
-            customerID_ = "C"+custID
+            customerID_ = "C" + custID
             firstName_ = request.POST.get("firstName")
             lastName_ = request.POST.get("lastName")
-            gender_ = request.POST.get("gender")
+            streetAddress_ = request.POST.get("streetAddress")
+            cityAddress_ = request.POST.get("cityAddress")
+            postCodeAddress_ = request.POST.get("postCodeAddress")
+            stateAddress_ = request.POST.get("stateAddress")
             DOB_ = request.POST.get("DOB")
-
-
-            if request.POST.get("streetAddress") == "":
-                streetAddress_ = "NULL"
-            else:
-                streetAddress_ = request.POST.get("streetAddress")
-            
-            if request.POST.get("cityAddress") == "":
-                cityAddress_ = "NULL"
-            else:
-                cityAddress_ = request.POST.get("cityAddress")
-            
-            if request.POST.get("postCodeAddress") == "":
-                postCodeAddress_ = "NULL"
-            else:
-                postCodeAddress_ = request.POST.get("postCodeAddress")
-            
-            if request.POST.get("stateAddress") == "":
-                stateAddress_ = "NULL"
-            else:
-                stateAddress_ = request.POST.get("stateAddress")
-            
-            if request.POST.get("driverLicenceNumber") == "":
-                driverLicenceNumber_ = "NULL"
-            else:
-                driverLicenceNumber_ = request.POST.get("driverLicenceNumber")
-            
-            if request.POST.get("occupation") == "":
-                occupation_ = "NULL"
-            else:
-                occupation_ = request.POST.get("occupation")
-            
-            if request.POST.get("phoneNumber") == "":
-                phoneNumber_ = "NULL"
-            else:
-                phoneNumber_ = request.POST.get("phoneNumber")
-
-            if request.POST.get("email") == "":
-                email_ = "NULL"
-            else:
-                email_ = request.POST.get("email")
-            
-
+            driverLicenseNumber_ = request.POST.get("driverLicenseNumber")
+            gender_ = request.POST.get("gender")
+            occupation_ = request.POST.get("occupation")
+            phoneNumber_ = request.POST.get("phoneNumber")
+            email_ = request.POST.get("email")
             userName_ = "NULL"
             password_ =  "NULL"
             dateJoined_ = timezone.now()
             lastLogin_ = timezone.now() 
 
-            x = Customer(
+            newCustomer = Customer(
             customerID = customerID_,
             firstName = firstName_,
             lastName = lastName_,
-            streetAddress = lastName_,
+            streetAddress = streetAddress_,
             cityAddress = cityAddress_,
             postCodeAddress = postCodeAddress_,
             stateAddress = stateAddress_,
             DOB = DOB_,
-            driverLicenceNumber = driverLicenceNumber_,
+            driverLicenceNumber = driverLicenseNumber_,
             gender = gender_,
             occupation = occupation_,
             phoneNumber = phoneNumber_,
@@ -87,12 +54,12 @@ class CustomerController:
             lastLogin = lastLogin_,
             disable = 0)
 
-            vali = customer.full_clean()
+            vali = newCustomer.full_clean()
 
             if vali:
                 return vali
             else:
-                x.save()
+                newCustomer.save()
                 return True
             return False
         except ValidationError as e:
@@ -108,11 +75,51 @@ class CustomerController:
         postCodeAddress_ = request.POST.get("postalCodeAddres")
         stateAddress_ = request.POST.get("stateAddress")
         DOB_ = request.POST.get("DOB")
-        driverLicenceNumber_ = request.POST.get("driverLicenceNumber")
+        driverLicenseNumber_ = request.POST.get("driverLicenseNumber")
         gender_ = request.POST.get("gender")
         occupation_ = request.POST.get("occupation")
         phoneNumber_ = request.POST.get("phoneNumber")
         email_ = request.POST.get("email")
+
+        if request.POST.get("streetAddress") == "":
+            streetAddress_ = "NULL"
+        else:
+            streetAddress_ = request.POST.get("streetAddress")
+        
+        if request.POST.get("cityAddress") == "":
+            cityAddress_ = "NULL"
+        else:
+            cityAddress_ = request.POST.get("cityAddress")
+        
+        if request.POST.get("postCodeAddress") == "":
+            postCodeAddress_ = "NULL"
+        else:
+            postCodeAddress_ = request.POST.get("postCodeAddress")
+        
+        if request.POST.get("stateAddress") == "":
+            stateAddress_ = "NULL"
+        else:
+            stateAddress_ = request.POST.get("stateAddress")
+        
+        if request.POST.get("driverLicenceNumber") == "":
+            driverLicenceNumber_ = "NULL"
+        else:
+            driverLicenceNumber_ = request.POST.get("driverLicenceNumber")
+        
+        if request.POST.get("occupation") == "":
+            occupation_ = "NULL"
+        else:
+            occupation_ = request.POST.get("occupation")
+        
+        if request.POST.get("phoneNumber") == "":
+            phoneNumber_ = "NULL"
+        else:
+            phoneNumber_ = request.POST.get("phoneNumber")
+
+        if request.POST.get("email") == "":
+            email_ = "NULL"
+        else:
+            email_ = request.POST.get("email")
 
         existingCustomer = Customer.objects.get(customerID_)
 

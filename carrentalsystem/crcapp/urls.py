@@ -44,7 +44,9 @@ urlpatterns = [
     url(r'^management/staff/id/(?P<option>\S+)$', views.getStaff, name='getStaff'),
 
     ### Customer ###
-    # For viewing the page
+    # For viewing all customers
+    path('management/customer', views.viewCustomers, name='viewCustomers'),
+    # For creating a new customer
     path('management/customer/create', views.customerCreate, name='customerCreate'),
 
 

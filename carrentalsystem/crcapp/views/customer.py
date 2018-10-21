@@ -22,10 +22,8 @@ def customerCreate(request, messages="", mtype=""):
                     result = customer.CustomerController.create(request)
                     if result == True:
                         return render(request, "customer/modify.html", {"msg": "Customer created.", "mtype": "i"})
-                    elif result == False:
-                        return render(request, "customer/modify.html", {"msg": "Customer creation failed.", "mtype": "d"})
                     else:
-                        return render(request, "customer/modify.html", {"msg": result, "mtype": "a"})
+                        return render(request, "customer/modify.html", {"msg": result, "mtype": "a", "form": customer})
             elif request.method == "GET":
                 return render(request, "customer/modify.html", {"msg": messages, "name": name, "mtype": mtype, "utype": utype})
         else:
@@ -54,14 +52,15 @@ def customerCreate(request, messages="", mtype=""):
 # Developer: Tom
 # Viewing all the customers
 def viewCustomers(request, messages="", mtype=""):
+    # Checking if session exists
     if request.session.has_key('uid'):
         name = request.session['name']
         utype = request.session['utype']
 
-        customers = Customer.objects.all()
+        customers = Customer.objects.all()#grab all customers
 
         return render(request, 'customer/viewCustomers.html', {'msg': messages, 'name': name, 'mtype': mtype,
-        'utype': utype, "stores": stores, "customers": customers})
+        'utype': utype, "customers": customers})
     else:
         return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
     

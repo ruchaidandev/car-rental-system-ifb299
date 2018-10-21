@@ -121,8 +121,8 @@
 		<div class="form-group row">
 			<label for="DOB" class="col-sm-3 col-form-label">Date Of Birth</label>
 			<div class="col-sm-7 mb-2">
-				<input data-date-format="dd-mm-yyyy" class="form-control"
-				id="datepicker" placeholder="dd-mm-yyyy" value="{{ customer.DOB|date:'d-m-Y' }}" required>
+				<input data-date-format="yyyy-mm-dd" class="form-control"
+				id="DOB" name="DOB" placeholder="yyyy-mm-dd" value="{{ customer.DOB }}" required>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -169,7 +169,7 @@
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript">
-	$("#datepicker").datepicker({
+	$("#DOB").datepicker({
 	    weekStart: 1,
 	    daysOfWeekHighlighted: "6,0",
 	    autoclose: true,

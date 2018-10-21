@@ -28,7 +28,7 @@
   <tbody id="records">
     {% for customer in customers %}
     <tr>
-      <td class="pdttable"><a href="/customer/id/{{ customer.customerID }}">{{ customer.customerID }}</a></td>
+      <td class="pdttable"><a href="/customer/{{ customer.customerID }}">{{ customer.customerID }}</a></td>
       <td class="pdttable">{{ customer.firstName }} {{ customer.lastName }}</td>
       <td class="pdttable">{{ customer.streetAddress }}</td>
       <td class="pdttable">{{ customer.cityAddress }}</td>  
@@ -62,6 +62,7 @@
   $(document).ready(function() {
     // Datatable initialising
     $('#tbl').DataTable({
+      'retrieve': true,
       'paging'      : true, // for pagination
       'lengthChange': false,
       'searching'   : true, //searching
@@ -70,7 +71,6 @@
       'autoWidth'   : true, // keep this true
       'sScrollX': '100%', // this too
       "lengthMenu": [[20, 40, 60, -1], [20, 40, 60, "All"]], // for number of items 
-
       'dom': 'Bfrtip', //export buttons
       'buttons': [
         {
