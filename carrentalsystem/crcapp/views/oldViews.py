@@ -719,4 +719,36 @@ def changeStaffProfilePassword(request):
             return accessDeniedHome(request) 
     else:
        return notLoggedIn(request)
-       
+
+# Developer: Aidan
+# # Confirming order
+def confirmOrder(request):    
+
+    if request.session.has_key('bookings'):
+        booking = request.session.get('bookings', '')
+        
+        pickupStore = Store.objects.get(storeID= booking['pickUpStore'])
+        returnStore = Store.objects.get(storeID= booking['returnStore'])
+        vehicles = Vehicle.objects.filter(storeID = pickupStore )
+        returnDate = booking['pickupdate']
+        pickupDate = booking['returndate']
+        return render(request, 'public/booking.html', {'bookings': booking, 'vehicles': vehicles, 'returnStore': returnStore, 'pickupStore': pickupStore,
+     'pickupDate':pickupDate, 'returnDate':returnDate}) 
+    else:
+        return redirect("/")
+
+
+# Developer: Aidan
+# Setting stores to the order
+def setStore(request):
+    if request.method == 'POST':
+        reason = CsrfViewMiddleware().process_view(request, None, (), {})
+        # If the reason is true it means verification failed
+        if reason:
+            return redirect('/')
+        else:
+            bookings = { 'pickUpStore':request.POST.get("pickUpStore") , 'returnStore': request.POST.get("returnStore"),
+             'pickupdate':request.POST.get("pickupdate") , 'returndate': request.POST.get("returndate")}
+            request.session['bookings'] =bookings 
+            return redirect('/booking')
+    return redirect('/')
