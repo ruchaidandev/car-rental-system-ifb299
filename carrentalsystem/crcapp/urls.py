@@ -11,12 +11,14 @@ urlpatterns = [
     path('signup', views.registerIndex, name='registerIndex'),
     path('stores', views.storesIndex, name='storesIndex'),
     path('vehicles', views.vehicleIndex, name='vehicleIndex'),
+    path('profile', views.profileIndex, name='profileIndex'),
     url(r'^vehicle/(?P<option>\S+)$', views.getVehicleIndex, name='getVehicleIndex'),
     path('customer/usernames/list', views.getUsernamesCustomers, name='getUsernames'),
 
     ### Home ###
+    path('management', views.home, name='home'),
     path('management/home', views.home, name='home'),
-    path('system/login/employee', views.loginEmployee, name='login'),
+    path('system/login', views.login, name='login'),
     path('system/logoff', views.logoff, name='logoff'),
 
 
@@ -69,7 +71,10 @@ urlpatterns = [
     path('management/sample', views.sample, name='staffCreateAction'),
 
     # Getting staff from staff check 
-    path('management/email', views.email, name='email')
+    path('management/email', views.email, name='email'),
+
+    ### Store ###
+    path('management/store', views.storesStaff, name='storesStaff'),
 
 
 ]

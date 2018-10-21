@@ -9,8 +9,9 @@ This project is still in beta stage.
 * django-bootstrap4: `pip install django-bootstrap4`
 * MySQL: MySQL server, MYSQL client, MYSQL workbench
 * MYSQL python connector: `pip install mysql-connector-python`
-* argon2-cffi library: `pip install django[argon2]`
-*   Install argon2-cffi to enable the password hashing
+* argon2-cffi library to enable the password hashing: `pip install django[argon2]`
+* selenium in environment: `pip install selenium`
+* Selenium IDE in chrome
 
 ### Contribution guidelines ###
 

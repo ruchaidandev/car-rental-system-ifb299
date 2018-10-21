@@ -41,6 +41,25 @@ def loginIndex(request, messages="", mtype="i"):
     return render(request, 'public/login.html', {'msg': messages, 'mtype': mtype})
 
 # Developer: Aidan
+# Customer Profile Page
+def profileIndex(request, messages="", mtype="i"):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        
+        msg = request.session.get('msg', '')
+        mtype = request.session.get('mtp', '')
+        if msg != "":
+            messages =  msg
+            del request.session['msg']
+        if mtype != "":
+            del request.session['mtp']
+        customer = Customer.objects.get(customerID=request.session['uid'])
+        return render(request, 'public/profile.html', {'msg': messages, 'mtype': mtype,'name': name, 'utype': utype, 'customer': customer})
+    else:
+       return notLoggedIn(request)
+
+# Developer: Aidan
 # Login page 
 def registerIndex(request, messages="", mtype="i"):
     if request.method == 'POST':
@@ -66,10 +85,28 @@ def registerIndex(request, messages="", mtype="i"):
 
         return render(request, 'public/register.html', {'msg': messages, 'mtype': mtype})
 
-# Developer: Aidan
+# Developer: Jax
 # Login page 
 def storesIndex(request, messages="", mtype="i"):
-    return render(request, 'public/stores.html', {'msg': messages, 'mtype': mtype})
+    NSW = Store.objects.filter(state = "New South Wales")
+    QLD = Store.objects.filter(state = "Queensland")
+    SA = Store.objects.filter(state = "South Australia")
+    TAS = Store.objects.filter(state = "Tasmania")
+    VIC = Store.objects.filter(state = "Victoria")
+
+    return render(request, 'public/stores.html', {'msg': messages, 'mtype': mtype, 'NSW': NSW, 'QLD': QLD, 'SA': SA, 'TAS' : TAS, 'VIC' : VIC })
+
+
+# Developer: Jax
+# Staff stores page 
+def storesStaff(request, messages="", mtype="i"):
+    NSW = Store.objects.filter(state = "New South Wales")
+    QLD = Store.objects.filter(state = "Queensland")
+    SA = Store.objects.filter(state = "South Australia")
+    TAS = Store.objects.filter(state = "Tasmania")
+    VIC = Store.objects.filter(state = "Victoria")
+
+    return render(request, 'store/storeLocation.html', {'msg': messages, 'mtype': mtype, 'NSW': NSW, 'QLD': QLD, 'SA': SA, 'TAS' : TAS, 'VIC' : VIC })
 
 # Developer: Aidan
 # get vehicle details to modify page
@@ -125,7 +162,7 @@ def home(request, messages=""):
 
 # Developer: Aidan
 # Form action class for login, this will be used for employee login only
-def loginEmployee(request):
+def login(request):
     if request.method == 'POST':
         form = request.POST
         reason = CsrfViewMiddleware().process_view(request, None, (), {})
@@ -137,7 +174,10 @@ def loginEmployee(request):
         else:
             result = authentication.Authentication.login(request)
             if result != "NULL":
-                return redirect("/management/home")
+                if request.session['utype'] == "Customer":
+                    return  redirect("/profile")
+                else:
+                    return redirect("/management/home")
             elif result == "NULL":
                 messages = "Login failed."
                 request.session['msg'] = messages
@@ -269,6 +309,7 @@ def getStaff(request, option, msg='', mtype=''):
 
 
 
+# Developer: Jax
 # Order Confirmation page
 def bookOrderConfirm(request, messages=""):
     # Checking session exists
@@ -357,6 +398,7 @@ def viewStaffLoginDetails(request, option, msg='',mtype=''):
        return notLoggedIn(request)
 
 
+# Developer: Jax
 # Searching for staff
 def searchStaff(request, msg='',mtype=''):
     if request.session.has_key('uid'):
@@ -375,6 +417,7 @@ def searchStaff(request, msg='',mtype=''):
        return notLoggedIn(request)
 
 
+# Developer: Jax
 # Booking page
 def bookingOrder(request):
     vehicles = Vehicle.objects.all()
