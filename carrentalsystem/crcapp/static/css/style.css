@@ -256,3 +256,11 @@ a:hover{
 .boxes:hover > a{
     color:#fff;
 }
+.pill{
+    background-color: #154da4;
+    border: 1px solid #0A2A5B;
+    color:#fff;
+    font-weight: 600;
+    padding: 10px;
+    height:120px;
+}
