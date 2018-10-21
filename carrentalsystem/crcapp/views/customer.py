@@ -35,7 +35,7 @@ def customerCreate(request, messages="", mtype=""):
 
 # Developer: Tom
 # Modify customer member page
-""" def customerModify(request, messages="", mtype=""):
+""" def customerEdit(request, messages="", mtype=""):
     # Checking if session exists
     if request.session.has_key('uid'):
         name = request.session['name']
@@ -84,7 +84,7 @@ def customerModify(request, option, msg='', mtype=''):
        return notLoggedIn(request)
 
 # Developer: Tom
-# Update existing details of staff
+# Update existing details of customer
 def changeCustomerDetails(request, option,  name, utype, msg='',mtype=''):
     name = request.session['name']
     utype = request.session['utype']
@@ -117,3 +117,83 @@ def searchCustomers(request):
         return render(request, 'customer/search.html', {'name': name, 'utype': utype,'stores': stores, customers: 'customers'})
     else:
         return render(request, 'index.html', {'msg': 'Access denied!', 'mtype': "d"})
+
+
+# Developer: Aidan
+# Change customer profile
+def changeProfile(request):
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        if utype == "Customer":
+            if request.method == 'POST':
+                reason = CsrfViewMiddleware().process_view(request, None, (), {})
+                # If the reason is true it means verification failed
+                if reason:
+                    messages = "Token verification failed."
+                    request.session['msg'] = messages
+                    request.session['mtp'] = 'd'
+                    return redirect('/profile')
+                else:
+                    result = customer.CustomerController.modify(request)
+                    if result == True:
+                        messages = "Profile saved."
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'i'
+                        return redirect('/profile')
+                    elif result == False:
+                        messages = "Opps, something happened, please try again later."
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'd'
+                        return redirect('/profile')
+                    else:
+                        messages = result
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'a'
+                        return redirect('/profile')
+            
+        else:
+            return accessDeniedHome(request) 
+    else:
+       return notLoggedIn(request)
+
+# Developer: Aidan
+# Change customer passwords
+def changeProfilePassword(request):
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        if utype == "Customer":
+            if request.method == 'POST':
+                reason = CsrfViewMiddleware().process_view(request, None, (), {})
+                # If the reason is true it means verification failed
+                if reason:
+                    messages = "Token verification failed."
+                    request.session['msg'] = messages
+                    request.session['mtp'] = 'd'
+                    return redirect('/profile')
+                else:
+                    result = customer.CustomerController.changePW(request)
+                    if result == True:
+                        messages = "Profile saved."
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'i'
+                        return redirect('/profile')
+                    elif result == False:
+                        messages = "Opps, something happened, please try again later."
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'd'
+                        return redirect('/profile')
+                    else:
+                        messages = result
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'a'
+                        return redirect('/profile')
+            
+        else:
+            return accessDeniedHome(request) 
+    else:
+       return notLoggedIn(request)
+       
