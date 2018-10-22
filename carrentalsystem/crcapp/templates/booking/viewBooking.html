@@ -35,13 +35,13 @@
                         <td class="pdttable">{{ order.customerID.firstName }} {{ order.customerID.lastName }}</td>
                         <!-- <td class="pdttable">{{ order.employeeID }}</td> -->
                         {% if order.pickupStoreID == "" %}
-                        <td class="pdttable">Pending</td>
+                        <td class="pdttable">-</td>
                         {% else %}
                         <td class="pdttable">{{ order.pickupStoreID }}</td>
                         {% endif %}
                         
                         {% if order.returnStoreID == "" %}
-                        <td class="pdttable">Pending</td>
+                        <td class="pdttable">-</td>
                         {% else %}
                         <td class="pdttable">{{ order.returnStoreID }}</td>
                         {% endif %}

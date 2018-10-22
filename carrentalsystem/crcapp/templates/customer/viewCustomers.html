@@ -17,11 +17,11 @@
       <tr>
         <th>Customer ID</th>
         <th>Name</th>
+        <th>DOB</th>
+        <th class="select-filter">Gender</th>
         <th>Street Address</th>
         <th class="select-filter">City</th>
         <th class="select-filter">State</th>
-        <th>DOB</th>
-        <th class="select-filter">Gender</th>
         <th>Email</th>
       </tr>
     </thead>
@@ -30,12 +30,28 @@
       <tr>
         <td class="pdttable"><a href="{{ request.get_full_path }}/{{ customer.customerID }}">{{ customer.customerID }}</a></td>
         <td class="pdttable">{{ customer.firstName }} {{ customer.lastName }}</td>
-        <td class="pdttable">{{ customer.streetAddress }}</td>
-        <td class="pdttable">{{ customer.cityAddress }}</td>  
-        <td class="pdttable">{{ customer.stateAddress }}</td> 
         <td class="pdttable">{{ customer.DOB }}</td>
         <td class="pdttable">{{ customer.gender }}</td>
-        <td class="pdttable">{{ customer.email }}</td>
+        <td class="pdttable">{{ customer.streetAddress }}</td>
+
+        {% if order.cityAddress == null %}
+        <td class="pdttable">-</td>
+        {% else %}
+        <td class="pdttable">{{ order.cityAddress }}</td>
+        {% endif %}
+
+        {% if order.stateAddress == null %}
+        <td class="pdttable">-</td>
+        {% else %}
+        <td class="pdttable">{{ order.stateAddress }}</td>
+        {% endif %}
+
+        {% if order.email == null %}
+        <td class="pdttable">-</td>
+        {% else %}
+        <td class="pdttable">{{ order.email }}</td>
+        {% endif %}
+
       </tr>
       {% endfor %}
     </tbody>
@@ -43,11 +59,11 @@
       <tr>
         <th>Customer ID</th>
         <th>Name</th>
+        <th>DOB</th>
+        <th>Gender</th>
         <th>Street Address</th>
         <th>City</th>
         <th>State</th>
-        <th>DOB</th>
-        <th>Gender</th>
         <th>Email</th>
       </tr>
     </tfoot>
