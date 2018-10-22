@@ -18,10 +18,10 @@
         <th>Customer ID</th>
         <th>Name</th>
         <th>Street Address</th>
-        <th>City</th>
-        <th>State</th>
+        <th class="select-filter">City</th>
+        <th class="select-filter">State</th>
         <th>DOB</th>
-        <th>Gender</th>
+        <th class="select-filter">Gender</th>
         <th>Email</th>
       </tr>
     </thead>
@@ -60,9 +60,29 @@
   $(document).ready(function() {
     // Datatable initialising
     $('#tbl').DataTable({
+      initComplete: function () {
+        this.api().columns('.select-filter').every( function () {
+        var column = this;
+        var select = $('<select><option value=""></option></select>')
+            .appendTo( $(column.footer()).empty() )
+            .on( 'change', function () {
+                var val = $.fn.dataTable.util.escapeRegex(
+                    $(this).val()
+                );
+
+                column
+                    .search( val ? '^'+val+'$' : '', true, false )
+                    .draw();
+            } );
+
+        column.data().unique().sort().each( function ( d, j ) {
+            select.append( '<option value="'+d+'">'+d+'</option>' )
+        } );
+        } );
+      },
       'paging'      : true, // for pagination
       'lengthChange': true,
-      'searching'   : false, //searching
+      // 'searching'   : false, //searching
       'ordering'    : true, //sorting
       'info'        : true,
       'autoWidth'   : true, // keep this true
