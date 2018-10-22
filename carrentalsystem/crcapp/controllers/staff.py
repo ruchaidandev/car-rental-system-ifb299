@@ -39,7 +39,7 @@ class StaffController:
             store = Store.objects.get(storeID=storeID_)
 
             # Sam change this according to your create function for now Iam adding this to test
-            x = Employee(employeeID = employeeID_,
+            staff = Employee(employeeID = employeeID_,
                         firstName = firstName_,
                         lastName = lastName_,
                         streetAddress = streetAddress_,
