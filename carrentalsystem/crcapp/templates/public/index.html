@@ -5,6 +5,8 @@
     <div class="row justify-content-md-center mt-1 p-5 mb-5">
 
       <div class="col-md-8 boxed pt-5 mt-5">
+        <form method="POST" action="/booking/store">
+          {% csrf_token %}
           <h4 class="font-blue text-center">Select the store</h4>
           <br>
         <div class="row">
@@ -12,7 +14,7 @@
           <div class="col-md-6 p-3">
         
               <div class="form-group">
-                <select class="form-control" id="pickupStore">
+                <select class="form-control" name="pickUpStore" id="pickupStore" required>
                   <option value=""> SELECT PICKUP STORE  </option>
                   {% for store in stores %}
                     <option value="{{ store.storeID }}">{{ store.storeName }}</option>
@@ -23,7 +25,7 @@
             </div>
             <div class="col-md-6 p-3">
               <div class="form-group">
-                <select class="form-control" id="returnStore">
+                <select class="form-control" name="returnStore" id="returnStore" required>
                   <option value=""> SELECT RETURN STORE  </option>
                   {% for store in stores %}
                     <option value="{{ store.storeID }}">{{ store.storeName }}</option>
@@ -58,11 +60,12 @@
               <div class="row justify-content-center mt-5">
                   <div class="col-md-3">
                       <div class="form-group">
-                          <div class="btn btn-flat btn-primary pl-5 pr-5" id="selectBtn">SELECT</div>
+                          <input type="submit" class="btn btn-flat btn-primary pl-5 pr-5" id="selectBtn" value="SELECT" />
                         </div>
                   </div>
              
       </div>
+    </form>
     </div>
   </section>
 
