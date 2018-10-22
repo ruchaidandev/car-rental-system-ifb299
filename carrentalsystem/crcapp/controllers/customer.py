@@ -7,6 +7,8 @@ from django.utils import timezone
 
 # Functions related to Customer
 class CustomerController:
+    # Developer: Sam, Tom and with fixes and debugging done by Aidan
+    # Create a new customer
     def create(request):
         # Grab the customer with the largest customerID from the database
         custObj = Customer.objects.raw("SELECT customerID FROM `crcapp_customer` ORDER BY customerID DESC LIMIT 1")[0]
@@ -16,6 +18,7 @@ class CustomerController:
         custID = str(custID).zfill(7)
 
         try:
+            # Get all the form data and put into relted variables. Also prepare the other variables
             customerID_ = "C" + custID
             firstName_ = request.POST.get("firstName")
             lastName_ = request.POST.get("lastName")
@@ -34,6 +37,7 @@ class CustomerController:
             dateJoined_ = timezone.now()
             lastLogin_ = timezone.now() 
 
+            # Create a new customer
             newCustomer = Customer(
             customerID = customerID_,
             firstName = firstName_,
@@ -54,123 +58,86 @@ class CustomerController:
             lastLogin = lastLogin_,
             disable = 0)
 
+            # Check that the new customer data is correct and valid
             vali = newCustomer.full_clean()
 
-            if vali:
+            if vali:#if errors occurred return those
                 return vali
-            else:
+            else:#else the data must be valid and can therefore be saved to the database
                 newCustomer.save()
                 return True
-            return False
+        # If there is an error validating the data then return the error
         except ValidationError as e:
             return e
 
+    # Developer Sam, Tom and with fixes and debugging done by Aidan
     def modify(request):
-
-        customerID_ = customerID
-        firstName_ = request.POST.get("firstName")
-        lastName_ = request.POST.get("lastName")
-        streetAddress_ = request.POST.get("streetAddress")
-        cityAddress_ = request.POST.get("cityAddress")
-        postCodeAddress_ = request.POST.get("postalCodeAddres")
-        stateAddress_ = request.POST.get("stateAddress")
-        DOB_ = request.POST.get("DOB")
-        driverLicenseNumber_ = request.POST.get("driverLicenseNumber")
-        gender_ = request.POST.get("gender")
-        occupation_ = request.POST.get("occupation")
-        phoneNumber_ = request.POST.get("phoneNumber")
-        email_ = request.POST.get("email")
-
-        if request.POST.get("streetAddress") == "":
-            streetAddress_ = "NULL"
-        else:
-            streetAddress_ = request.POST.get("streetAddress")
-        
-        if request.POST.get("cityAddress") == "":
-            cityAddress_ = "NULL"
-        else:
+        try:
+            # Get all the form data and put into relted variables. Also prepare the other variables
+            customerID_ = request.POST.get("customerID")#supplied
+            firstName_ = request.POST.get("firstName")#required
+            lastName_ = request.POST.get("lastName")#required
+            streetAddress_ = request.POST.get("streetAddress")#required
             cityAddress_ = request.POST.get("cityAddress")
-        
-        if request.POST.get("postCodeAddress") == "":
-            postCodeAddress_ = "NULL"
-        else:
             postCodeAddress_ = request.POST.get("postCodeAddress")
-        
-        if request.POST.get("stateAddress") == "":
-            stateAddress_ = "NULL"
-        else:
             stateAddress_ = request.POST.get("stateAddress")
-        
-        if request.POST.get("driverLicenceNumber") == "":
-            driverLicenceNumber_ = "NULL"
-        else:
-            driverLicenceNumber_ = request.POST.get("driverLicenceNumber")
-        
-        if request.POST.get("occupation") == "":
-            occupation_ = "NULL"
-        else:
-            occupation_ = request.POST.get("occupation")
-        
-        if request.POST.get("phoneNumber") == "":
-            phoneNumber_ = "NULL"
-        else:
-            phoneNumber_ = request.POST.get("phoneNumber")
-
-        if request.POST.get("email") == "":
-            email_ = "NULL"
-        else:
+            DOB_ = request.POST.get("DOB")#required
+            driverLicenceNumber_ = request.POST.get("driverLicenseNumber")
+            gender_ = request.POST.get("gender")#required
+            occupation_ = request.POST.get("occupation")#required
+            phoneNumber_ = request.POST.get("phoneNumber")#required
             email_ = request.POST.get("email")
 
-        existingCustomer = Customer.objects.get(customerID_)
+            # Get the exisitng customer from the database
+            existingCustomer = Customer.objects.get(customerID__exact=customerID_)
 
-        try:
-            if (firstName_ != ""):
-                existingCustomer.firstName = firstName_
+            # Update the details of the customer
+            existingCustomer.firstName = firstName_
+            existingCustomer.lastName = lastName_
+            existingCustomer.streetAddress = streetAddress_
 
-            if (lastName_ != ""):
-                existingCustomer.lastName = lastName_
-
-            if (streetAddress_ != ""):
-                existingCustomer.streetAddress = streetAddress_
-
+            # For each non-required field check if anything was entered and if so then update the field
             if (cityAddress_ != ""):
-                existingCustomer.streetAddress = streetAddress_
+                existingCustomer.cityAddress = cityAddress_
+            else:
+                existingCustomer.cityAddress = "NULL"
 
             if (postCodeAddress_ != ""):
                 existingCustomer.postCodeAddress = postCodeAddress_
+            #else:
+               # existingCustomer.postCodeAddress = "NULL"
 
             if (stateAddress_ != ""):
                 existingCustomer.stateAddress = stateAddress_
+            else:
+                existingCustomer.stateAddress = "NULL"
 
-            if (DOB_ != ""):
-                existingCustomer.DOB = DOB_
+            existingCustomer.DOB = DOB_
 
             if (driverLicenceNumber_ != ""):
                 existingCustomer.driverLicenceNumber = driverLicenceNumber_
-
-            if (gender_ != ""):
-                existingCustomer.gender = gender_
-
-            if (occupation_ != ""):
-                existingCustomer.occupation = occupation_
-
-            if (phoneNumber_  != ""):
-                existingCustomer.phoneNumber = phoneNumber_
+            
+            existingCustomer.gender = gender_
+            existingCustomer.occupation = occupation_
+            existingCustomer.phoneNumber = phoneNumber_
 
             if (email_ != ""):
                 existingCustomer.email = email
             
+            # Check that the new customer details are correct and valid
             vali = existingCustomer.full_clean()
-            if vali:
+
+            if vali:#if errors occurred return those
                 return vali
-            else:
-                existingCustomer.save()
+            else:#else the data must be valid and can therefore be saved to the database
+                newCustomer.save()
                 return True
-            return False
+        # If there is an error validating the data then return the error
         except ValidationError as e:
             return e
 
-    #deletes Customer based on given ID
+    # Developer : ?
+    # Deletes Customer based on given ID
     def delete(ID):
         x = Customer.objects.get(customerID = ID)
         x.delete()

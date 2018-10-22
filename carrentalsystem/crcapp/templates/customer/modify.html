@@ -1,11 +1,8 @@
 {% extends '../base.html' %}
 {% block title %}{{currentOperation}} Customer{% endblock %}
 {% block breadcrumb %}
-{% if currentOperation == "Modify" %}
-	<li class="breadcrumb-item active" aria-current="page">{{ customer.firstName }} {{ customer.lastName }}</li>
-{% else %}
-	<li class="breadcrumb-item active" aria-current="page">Register New Customer</li>
-{% endif %}
+<li class="breadcrumb-item"><a href="{% url 'viewCustomers' %}">Customer Management</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{ customer.firstName }} {{ customer.lastName }}</li>
 {% endblock %}
 {% block content %}
 <!-- Error message box will be shown only if the msg variable has some value -->
@@ -32,23 +29,15 @@
 </div>
 {% endif %}
 	<div class="container">
-		{% if currentOperation == "Modify" %}
-			<h2 class="text-center">Modify Customer</h2>
-		{% else %}
-			<h2 class="text-center">Register New Customer</h2>
-		{% endif %}
-		<div class="col-md-12">
+		<div class="col-md-12 text-center">
+			<h2>{{ customer.firstName }} {{ customer.lastName }}</h2>
 			<hr>
 		</div>
-		{% if currentOperation == "Modify" %}
-		    <form action="/customer/id/{{ customer.customerID }}" method="POST">
-		{% else %}
-   			<form action="{% url 'customerCreate' %}" method="POST">
-		{% endif %}
+		<form action="{{ request.get_full_path }}" method="POST">
 		{% csrf_token %}
 		<input type="hidden" name="customerID" value="{{ customer.customerID }}"/>
 		<div class="row col-md-12">
-		<h4>Name</h4>
+			<h4>Name</h4>
 		</div>
 		<div class="form-group row">
 			<label for="firstName" class="col-sm-2 col-form-label">First Name</label>
@@ -66,10 +55,10 @@
 			<label for="gender" class="col-sm-2 col-form-label">Gender</label>
 			<div class="col-sm-10">
 				<select class="custom-select" name="gender" required>
-					<option value="{{ customer.gender }}">Select a Gender</option>
-					<option value="M">Male</option>
-					<option value="F">Female</option>
-					<option value="O">Other</option>
+					<option value="" selected disabled>Select a Gender</option>
+					<option value="M" {% if employee.gender == "M" %}  selected="selected" {% endif %}>Male</option>
+					<option value="F" {% if employee.gender == "F" %}  selected="selected" {% endif %}>Female</option>
+					<option value="O" {% if employee.gender == "O" %}  selected="selected" {% endif %}>Other</option>
 				</select>
 			</div>
 		</div>
@@ -80,7 +69,7 @@
 			<label for="streetAddress" class="col-sm-2 col-form-label">Street Address</label>
 			<div class="col-sm-4 mb-3">
 				<input type="text" name="streetAddress" class="form-control" id="streetAddress"
-				placeholder="Street" value="{{ customer.streetAddress }}">
+				placeholder="Street" value="{{ customer.streetAddress }}" required>
 			</div>
 			<label for="city" class="col-sm-2 col-form-label">City</label>
 			<div class="col-sm-4 mb-2">
@@ -97,14 +86,14 @@
 			<label for="stateAddress" class="col-sm-2 col-form-label">State</label>
 				<div class="col-sm-4 mb-3">
 					<select class="custom-select" name="stateAddress">
-						<option value="{{ customer.streetAddress }}">Select a State</option>
-						<option value="NSW">New South Wales</option>
-						<option value="NT">Northern Territory</option>
-						<option value="QLD">Queensland</option>
-						<option value="SA">South Australia</option>
-						<option value="TS">Tasmania</option>
-						<option value="VIC">Victoria</option>
-						<option value="WA">Western Australia</option>
+						<option value="" disabled>Select a State</option>
+						<option value="NSW" {% if employee.stateAddress == "NSW" %}  selected="selected" {% endif %}>New South Wales</option>
+						<option value="NT" {% if employee.stateAddress == "NT" %}  selected="selected" {% endif %}>Northern Territory</option>
+						<option value="QLD" {% if employee.stateAddress == "QLD" %}  selected="selected" {% endif %}>Queensland</option>
+						<option value="SA" {% if employee.stateAddress == "SA" %}  selected="selected" {% endif %}>South Australia</option>
+						<option value="TS" {% if employee.stateAddress == "TS" %}  selected="selected" {% endif %}>Tasmania</option>
+						<option value="VIC" {% if employee.stateAddress == "VIC" %}  selected="selected" {% endif %}>Victoria</option>
+						<option value="WA" {% if employee.stateAddress == "WA" %}  selected="selected" {% endif %}>Western Australia</option>
 					</select>
 				</div>
 		</div>
@@ -122,14 +111,14 @@
 			<label for="DOB" class="col-sm-3 col-form-label">Date Of Birth</label>
 			<div class="col-sm-7 mb-2">
 				<input data-date-format="yyyy-mm-dd" class="form-control"
-				id="DOB" name="DOB" placeholder="yyyy-mm-dd" value="{{ customer.DOB }}" required>
+				id="DOB" name="DOB" placeholder="yyyy-mm-dd" value="{{ customer.DOB|date:'Y-m-d' }}" required>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="phoneNumber" class="col-sm-3 col-form-label">Phone Number</label>
 			<div class="col-sm-7 mb-2">
 				<input type="text" name="phoneNumber" class="form-control" id="phoneNumber"
-				placeholder="Phone Number" value="{{ customer.phoneNumber }}">
+				placeholder="Phone Number" value="{{ customer.phoneNumber }}" required>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -137,7 +126,7 @@
 			<div class="input-group col-sm-7 mb-2">
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="basic-addon1">@</span>
-				</div>
+				</div> 
 				<input type="email" name="email" class="form-control" id="email"
 				placeholder="you@example.com" value="{{ customer.email }}">
 			</div>
@@ -146,11 +135,10 @@
 				<label for="occupation" class="col-sm-3 col-form-label">Occupation</label>
 			<div class="col-sm-7 mb-3">
 				<input type="text" name="occupation" class="form-control" id="occupation"
-				placeholder="Occupation" value="{{ customer.occupation }}">
+				placeholder="Occupation" value="{{ customer.occupation }}" required>
 			</div>
 		</div>
 		<div class="form-group row">
-		{% if currentOperation == "Modify" %}
 			<div class="col-sm-6">
 				<button type="submit" class="btn btn-success btn-block" value="Save"><i class="fas fa-save"></i> Save</button>
 			</div>
@@ -160,9 +148,6 @@
 				</button> {% endcomment %}
 				<button type="submit" class ="btn btn-danger btn-block" value="Delete"><i class="far fa-times-circle"></i> Delete</button>
 			</div>
-		{% else %}
-			<button type="submit" class="btn btn-success btn-block"><i class="fa fa-user-plus"></i> Register</button>
-		{% endif %}
 		</div>
 	</div>
 </form>

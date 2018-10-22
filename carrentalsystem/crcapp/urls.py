@@ -50,6 +50,8 @@ urlpatterns = [
     path('management/customer', views.viewCustomers, name='viewCustomers'),
     # For creating a new customer
     path('management/customer/create', views.customerCreate, name='customerCreate'),
+    # For modifying an exsiting customer
+    path('management/customer/<str:customer_ID>', views.customerModify, name='customerModify'),
 
 
 

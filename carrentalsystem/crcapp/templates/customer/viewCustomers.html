@@ -13,46 +13,44 @@
 <br>
 <div id="dtView" class="pt-4">
   <table id="tbl" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%;">
-  <thead>
-    <tr>
-      <th>Customer ID</th>
-      <th>Name</th>
-      <th>Street Address</th>
-      <th>City</th>
-      <th>State</th>
-      <th>DOB</th>
-      <th>Gender</th>
-      <th>Email</th>
-    </tr>
-  </thead>
-  <tbody id="records">
-    {% for customer in customers %}
-    <tr>
-      <td class="pdttable"><a href="/customer/{{ customer.customerID }}">{{ customer.customerID }}</a></td>
-      <td class="pdttable">{{ customer.firstName }} {{ customer.lastName }}</td>
-      <td class="pdttable">{{ customer.streetAddress }}</td>
-      <td class="pdttable">{{ customer.cityAddress }}</td>  
-      <td class="pdttable">{{ customer.stateAddress }}</td> 
-      <td class="pdttable">{{ customer.DOB }}</td>
-      <td class="pdttable">{{ customer.gender }}</td>
-      <td class="pdttable">{{ customer.email }}</td>
-    </tr>
-    {% endfor %}
-    
-  </tbody>
-  <tfoot>
-    <tr>
-      <th>Customer ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Street Address</th>
-      <th>City</th>
-      <th>State</th>
-      <th>DOB</th>
-      <th>Gender</th>
-      <th>Email</th>
-    </tr>
-  </tfoot>
+    <thead>
+      <tr>
+        <th>Customer ID</th>
+        <th>Name</th>
+        <th>Street Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>DOB</th>
+        <th>Gender</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody id="records">
+      {% for customer in customers %}
+      <tr>
+        <td class="pdttable"><a href="{{ request.get_full_path }}/{{ customer.customerID }}">{{ customer.customerID }}</a></td>
+        <td class="pdttable">{{ customer.firstName }} {{ customer.lastName }}</td>
+        <td class="pdttable">{{ customer.streetAddress }}</td>
+        <td class="pdttable">{{ customer.cityAddress }}</td>  
+        <td class="pdttable">{{ customer.stateAddress }}</td> 
+        <td class="pdttable">{{ customer.DOB }}</td>
+        <td class="pdttable">{{ customer.gender }}</td>
+        <td class="pdttable">{{ customer.email }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Customer ID</th>
+        <th>Name</th>
+        <th>Street Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>DOB</th>
+        <th>Gender</th>
+        <th>Email</th>
+      </tr>
+    </tfoot>
   </table>
 </div>
 {% endblock %}
@@ -62,15 +60,15 @@
   $(document).ready(function() {
     // Datatable initialising
     $('#tbl').DataTable({
-      'retrieve': true,
       'paging'      : true, // for pagination
-      'lengthChange': false,
-      'searching'   : true, //searching
+      'lengthChange': true,
+      'searching'   : false, //searching
       'ordering'    : true, //sorting
       'info'        : true,
       'autoWidth'   : true, // keep this true
       'sScrollX': '100%', // this too
       "lengthMenu": [[20, 40, 60, -1], [20, 40, 60, "All"]], // for number of items 
+
       'dom': 'Bfrtip', //export buttons
       'buttons': [
         {
