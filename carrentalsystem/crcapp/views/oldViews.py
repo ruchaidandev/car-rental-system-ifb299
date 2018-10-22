@@ -334,18 +334,6 @@ def getStaff(request, option, msg='', mtype=''):
 
 
 
-# Developer: Jax
-# Order Confirmation page
-def bookOrderConfirm(request, messages=""):
-    # Checking session exists
-    if request.session.has_key('uid'):
-        name = request.session['name']
-        utype = request.session['utype']
-        return render(request, 'booking/orderConfirm.html', {'msg': messages, 'name': name, 'utype': utype})
-    else:
-       return notLoggedIn(request)
-
-
 # Developer: Aidan
 # viewing the staff login management page
 def viewStaffLogin(request):
@@ -431,23 +419,18 @@ def searchStaff(request, msg='',mtype=''):
         utype = request.session['utype']
         fields = Employee._meta.get_fields()
         employees = Employee.objects.all()
-
-        # if request.method == 'POST':
-        #     return changeStaffDetails(request, option, msg, mtype, name, utype)
-        # elif request.method == 'GET':
-        #     employee = Employee.objects.filter(employeeID=option).values()[0]
-        #     stores = Store.objects.all()
         return render(request, 'staff/search.html', {'fields': fields}, {'employees': employees})
     else:
        return notLoggedIn(request)
 
 
 # Developer: Jax
-# Booking page
-def bookingOrder(request):
-    vehicles = Vehicle.objects.all()
-    return render(request, 'booking/order.html', {'vehicles': vehicles})
-
+# View Booking page
+def viewBooking(request, messages="", mtype="i"):
+    orders = Order.objects.all()
+    customers = Customer.objects.all()
+    stores = Store.objects.all()
+    return render(request, 'booking/viewBooking.html', {'orders': orders, 'customers': customers, 'stores': stores})
 
 # Developer: Aidan
 # emails message will contain what to send and to whom 

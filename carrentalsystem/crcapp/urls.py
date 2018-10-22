@@ -58,8 +58,9 @@ urlpatterns = [
 
     ### Booking ###
     # For viewing page
-    path('management/booking/order', views.bookingOrder, name='bookingOrder'),
-    path('management/booking/orderConfirm', views.bookOrderConfirm, name='bookOrderConfirm'),
+    # path('management/booking/order', views.bookingOrder, name='bookingOrder'),
+    # path('management/booking/orderConfirm', views.bookOrderConfirm, name='bookOrderConfirm'),
+    path('management/booking/viewBooking', views.viewBooking, name='viewBooking'),
 
 
     ### Vehicle ###
