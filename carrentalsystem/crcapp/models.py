@@ -14,19 +14,20 @@ class Store(models.Model):
         return self.storeName
 
 # Customer Model
+# Developer: Tom, Sam
 class Customer(models.Model):
     customerID = models.CharField(max_length=10, primary_key=True)#required
     firstName = models.CharField(max_length=80)#required
     lastName = models.CharField(max_length=80)#required
-    streetAddress = models.CharField(max_length=50, null=True)#required
-    cityAddress = models.CharField(max_length=16, null=True)
-    postCodeAddress = models.IntegerField(blank=True, default=None)
-    stateAddress = models.CharField(max_length = 30, null=True)
+    streetAddress = models.CharField(max_length=50)#required
+    cityAddress = models.CharField(max_length=16, blank=True, default="")
+    postCodeAddress = models.PositiveIntegerField(blank=True, null=True)
+    stateAddress = models.CharField(max_length = 30, blank=True, default="")
     DOB = models.DateField(auto_now=False, auto_now_add=False)#required
-    driverLicenceNumber = models.BigIntegerField(blank=True, default=None)
+    driverLicenceNumber = models.BigIntegerField(blank=True, null=True)
     gender = models.CharField(max_length=2)#required
-    occupation = models.CharField(max_length=50, null=True)#required
-    phoneNumber = models.BigIntegerField(null=True)#required
+    occupation = models.CharField(max_length=50)#required
+    phoneNumber = models.BigIntegerField()#required
     email = models.EmailField(validators=[validate_email], blank=True, default="")
     userName = models.CharField(max_length=50, blank=True, default="")
     password = models.TextField(max_length=50, blank=True, default="")

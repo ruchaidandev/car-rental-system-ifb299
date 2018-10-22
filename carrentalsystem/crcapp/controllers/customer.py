@@ -7,7 +7,7 @@ from django.utils import timezone
 
 # Functions related to Customer
 class CustomerController:
-    # Developer: Sam, Tom and with fixes and debugging done by Aidan
+    # Developer: Tom, Sam and with fixes and debugging done by Aidan
     # Create a new customer
     def create(request):
         # Grab the customer with the largest customerID from the database
@@ -32,8 +32,7 @@ class CustomerController:
             occupation_ = request.POST.get("occupation")
             phoneNumber_ = request.POST.get("phoneNumber")
             email_ = request.POST.get("email")
-            userName_ = "NULL"
-            password_ =  "NULL"
+            
             dateJoined_ = timezone.now()
             lastLogin_ = timezone.now() 
 
@@ -52,8 +51,6 @@ class CustomerController:
             occupation = occupation_,
             phoneNumber = phoneNumber_,
             email = email_,
-            userName = userName_,
-            password = password_,
             dateJoined = dateJoined_,
             lastLogin = lastLogin_,
             disable = 0)
@@ -70,7 +67,7 @@ class CustomerController:
         except ValidationError as e:
             return e
 
-    # Developer Sam, Tom and with fixes and debugging done by Aidan
+    # Developer Tom, Sam and with fixes and debugging done by Aidan
     def modify(request):
         try:
             # Get all the form data and put into relted variables. Also prepare the other variables
@@ -96,33 +93,22 @@ class CustomerController:
             existingCustomer.lastName = lastName_
             existingCustomer.streetAddress = streetAddress_
 
-            # For each non-required field check if anything was entered and if so then update the field
-            if (cityAddress_ != ""):
-                existingCustomer.cityAddress = cityAddress_
-            else:
-                existingCustomer.cityAddress = "NULL"
-
+            # For each non-required integer field check if it contains a value and if so update accordingly
             if (postCodeAddress_ != ""):
                 existingCustomer.postCodeAddress = postCodeAddress_
-            #else:
-               # existingCustomer.postCodeAddress = "NULL"
-
-            if (stateAddress_ != ""):
-                existingCustomer.stateAddress = stateAddress_
             else:
-                existingCustomer.stateAddress = "NULL"
+               existingCustomer.postCodeAddress = None
 
             existingCustomer.DOB = DOB_
 
             if (driverLicenceNumber_ != ""):
                 existingCustomer.driverLicenceNumber = driverLicenceNumber_
+            else:
+                existingCustomer.driverLicenceNumber = None
             
             existingCustomer.gender = gender_
             existingCustomer.occupation = occupation_
             existingCustomer.phoneNumber = phoneNumber_
-
-            if (email_ != ""):
-                existingCustomer.email = email
             
             # Check that the new customer details are correct and valid
             vali = existingCustomer.full_clean()
@@ -130,13 +116,13 @@ class CustomerController:
             if vali:#if errors occurred return those
                 return vali
             else:#else the data must be valid and can therefore be saved to the database
-                newCustomer.save()
+                existingCustomer.save()
                 return True
         # If there is an error validating the data then return the error
         except ValidationError as e:
             return e
 
-    # Developer : ?
+    # Developer : Sam
     # Deletes Customer based on given ID
     def delete(ID):
         x = Customer.objects.get(customerID = ID)
