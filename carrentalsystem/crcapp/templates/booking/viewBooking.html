@@ -16,13 +16,13 @@
               <tr>
                 <th>Order ID</th>
                 <th class="select-filter">Order Date</th>
-                <!-- <th class="select-filter">Pickup Date</th>
-                <th class="select-filter">Return Date</th> -->
-                <th class="select-filter">Customer</th>
-                <th class="select-filter">Serviced By</th>
-                <th class="select-filter">Pickup Store</th>
+                <th class="select-filter">Pickup Date</th>
                 <th class="select-filter">Return Date</th>
-                <th class="select-filter">Order Type</th>
+                <th class="select-filter">Customer</th>
+                <!-- <th class="select-filter">Serviced By</th> -->
+                <th class="select-filter">Pickup Store</th>
+                <th class="select-filter">Return Store</th>
+                <!-- <th class="select-filter">Order Type</th> -->
               </tr>
               </thead>
               <tbody id="records">
@@ -30,13 +30,22 @@
                     <tr>
                         <td class="pdttable">{{ order.orderID }}</td>
                         <td class="pdttable">{{ order.orderDate }}</td>
-                        <!-- <td class="pdttable">{{ order.pickupDate }}</td>
-                        <td class="pdttable">{{ order.returnDate }}</td> -->
-                        <td class="pdttable">{{ order.customerID }}</td>
-                        <td class="pdttable">{{ order.employeeID }}</td>
-                        <td class="pdttable">{{ order.pickupStoreID }}</td>
+                        <td class="pdttable">{{ order.pickupDate }}</td>
                         <td class="pdttable">{{ order.returnDate }}</td>
-                        <td class="pdttable">{{ order.orderType }}</td>
+                        <td class="pdttable">{{ order.customerID.firstName }} {{ order.customerID.lastName }}</td>
+                        <!-- <td class="pdttable">{{ order.employeeID }}</td> -->
+                        {% if order.pickupStoreID == "" %}
+                        <td class="pdttable">Pending</td>
+                        {% else %}
+                        <td class="pdttable">{{ order.pickupStoreID }}</td>
+                        {% endif %}
+                        
+                        {% if order.returnStoreID == "" %}
+                        <td class="pdttable">Pending</td>
+                        {% else %}
+                        <td class="pdttable">{{ order.returnStoreID }}</td>
+                        {% endif %}
+                        <!-- <td class="pdttable">{{ order.orderType }}</td> -->
                     </tr>
                     {% endfor %}
               </tbody>
@@ -44,13 +53,13 @@
               <tr>
                 <th>Order ID</th>
                 <th>Order Date</th>
-                <!-- <th>Pickup Date</th>
-                <th>Return Date</th> -->
-                <th>Customer</th>
-                <th>Serviced By</th>
-                <th>Pickup Store</th>
+                <th>Pickup Date</th>
                 <th>Return Date</th>
-                <th>Order Type</th>
+                <th>Customer</th>
+                <!-- <th>Serviced By</th> -->
+                <th>Pickup Store</th>
+                <th>Return Store</th>
+                <!-- <th>Order Type</th> -->
               </tr>
               </tfoot>
             </table>

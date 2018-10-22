@@ -428,9 +428,7 @@ def searchStaff(request, msg='',mtype=''):
 # View Booking page
 def viewBooking(request, messages="", mtype="i"):
     orders = Order.objects.all()
-    customers = Customer.objects.all()
-    stores = Store.objects.all()
-    return render(request, 'booking/viewBooking.html', {'orders': orders, 'customers': customers, 'stores': stores})
+    return render(request, 'booking/viewBooking.html', {'orders': orders})
 
 # Developer: Aidan
 # emails message will contain what to send and to whom 
