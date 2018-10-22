@@ -20,9 +20,9 @@
                 <th>Employee ID</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Store</th>
-                <th>User Type</th>
-                <th>Date Joined</th>
+                <th class="select-filter">Store</th>
+                <th class="select-filter">User Type</th>
+                <th class="select-filter">Date Joined</th>
               </tr>
               </thead>
               <tbody id="records">
@@ -65,9 +65,29 @@
          $(document).ready(function() {
                     // datatable initialising
                         $('#tbl').DataTable({
+                          initComplete: function () {
+                            this.api().columns('.select-filter').every( function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo( $(column.footer()).empty() )
+                                .on( 'change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+            
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                } );
+            
+                            column.data().unique().sort().each( function ( d, j ) {
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
+                            } );
+                            } );
+                          },
                             'paging'      : true, // for pagination
                             'lengthChange': false,
-                            'searching'   : false, //searching
+                            //'searching'   : false, //searching
                             'ordering'    : true, //sorting
                             'info'        : true,
                             'autoWidth'   : true, // keep this true

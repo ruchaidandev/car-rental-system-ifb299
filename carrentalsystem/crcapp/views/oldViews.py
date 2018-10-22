@@ -55,7 +55,29 @@ def profileIndex(request, messages="", mtype="i"):
         if mtype != "":
             del request.session['mtp']
         customer = Customer.objects.get(customerID=request.session['uid'])
-        return render(request, 'public/profile.html', {'msg': messages, 'mtype': mtype,'name': name, 'utype': utype, 'customer': customer})
+        orders = Order.objects.filter(customerID=request.session['uid']).all()
+        
+        return render(request, 'public/profile.html', {'msg': messages, 'mtype': mtype,'name': name, 'utype': utype, 'customer': customer, 'orders':orders})
+    else:
+       return notLoggedIn(request)
+
+# Developer Aidan
+# Customer Profile Page
+def profile(request, messages="", mtype="i"):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        
+        msg = request.session.get('msg', '')
+        mtype = request.session.get('mtp', '')
+        if msg != "":
+            messages =  msg
+            del request.session['msg']
+        if mtype != "":
+            del request.session['mtp']
+        staff = Employee.objects.get(employeeID=request.session['uid'])
+        
+        return render(request, 'staff/profile.html', {'msg': messages, 'mtype': mtype,'name': name, 'utype': utype, 'staff': staff})
     else:
        return notLoggedIn(request)
 
@@ -71,7 +93,7 @@ def registerIndex(request, messages="", mtype="i"):
         else:
             if request.POST.get("password") == request.POST.get("confirmpassword"):
                
-                result = customer.CustomerController.create(request)
+                result = customer.CustomerController.create(request, "signup")
                 if result == True:
                     return render(request, 'public/register.html', {'msg': 'Account created, please login.', 'mtype': "i"})
                 elif result == False:
@@ -154,8 +176,11 @@ def home(request, messages=""):
             del request.session['msg']
         if mtype != "":
             del request.session['mtp']
-
-        return render(request, 'home.html', {'msg': messages, 'mtype': mtype,'name': name, 'utype': utype})
+        counts = { 'vehicles': Vehicle.objects.all().count(), 
+        'stores': Store.objects.all().count(), 
+        'customers': Customer.objects.all().count(), 
+        'orders': Order.objects.all().count() }
+        return render(request, 'home.html', {'msg': messages, 'mtype': mtype,'name': name, 'utype': utype, 'counts': counts})
     else:
        return notLoggedIn(request)
     
@@ -613,3 +638,117 @@ def getVehicle(request, option, msg='',mtype=''):
             return accessDeniedHome(request)
     else:
        return notLoggedIn(request)
+
+
+
+
+# Developer: Aidan
+# Change staff profile
+def changeStaffProfile(request):
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        if utype != "Customer":
+            if request.method == 'POST':
+                reason = CsrfViewMiddleware().process_view(request, None, (), {})
+                # If the reason is true it means verification failed
+                if reason:
+                    messages = "Token verification failed."
+                    request.session['msg'] = messages
+                    request.session['mtp'] = 'd'
+                    return redirect('/management/profile')
+                else:
+                    result = staff.StaffController.modify(request)
+                    if result == True:
+                        messages = "Profile saved."
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'i'
+                        return redirect('/management/profile')
+                    elif result == False:
+                        messages = "Opps, something happened, please try again later."
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'd'
+                        return redirect('/management/profile')
+                    else:
+                        messages = result
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'a'
+                        return redirect('/management/profile')
+            
+        else:
+            return accessDeniedHome(request) 
+    else:
+       return notLoggedIn(request)
+
+# Developer: Aidan
+# Change staff passwords
+def changeStaffProfilePassword(request):
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        if utype != "Customer":
+            if request.method == 'POST':
+                reason = CsrfViewMiddleware().process_view(request, None, (), {})
+                # If the reason is true it means verification failed
+                if reason:
+                    messages = "Token verification failed."
+                    request.session['msg'] = messages
+                    request.session['mtp'] = 'd'
+                    return redirect('/profile')
+                else:
+                    result = staff.StaffController.changePW(request)
+                    if result == True:
+                        messages = "Profile saved."
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'i'
+                        return redirect('/management/profile')
+                    elif result == False:
+                        messages = "Opps, something happened, please try again later."
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'd'
+                        return redirect('/management/profile')
+                    else:
+                        messages = result
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'a'
+                        return redirect('/management/profile')
+            
+        else:
+            return accessDeniedHome(request) 
+    else:
+       return notLoggedIn(request)
+
+# Developer: Aidan
+# # Confirming order
+def confirmOrder(request):    
+
+    if request.session.has_key('bookings'):
+        booking = request.session.get('bookings', '')
+        
+        pickupStore = Store.objects.get(storeID= booking['pickUpStore'])
+        returnStore = Store.objects.get(storeID= booking['returnStore'])
+        vehicles = Vehicle.objects.filter(storeID = pickupStore )
+        returnDate = booking['pickupdate']
+        pickupDate = booking['returndate']
+        return render(request, 'public/booking.html', {'bookings': booking, 'vehicles': vehicles, 'returnStore': returnStore, 'pickupStore': pickupStore,
+     'pickupDate':pickupDate, 'returnDate':returnDate}) 
+    else:
+        return redirect("/")
+
+
+# Developer: Aidan
+# Setting stores to the order
+def setStore(request):
+    if request.method == 'POST':
+        reason = CsrfViewMiddleware().process_view(request, None, (), {})
+        # If the reason is true it means verification failed
+        if reason:
+            return redirect('/')
+        else:
+            bookings = { 'pickUpStore':request.POST.get("pickUpStore") , 'returnStore': request.POST.get("returnStore"),
+             'pickupdate':request.POST.get("pickupdate") , 'returndate': request.POST.get("returndate")}
+            request.session['bookings'] =bookings 
+            return redirect('/booking')
+    return redirect('/')

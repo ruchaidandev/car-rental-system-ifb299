@@ -71,9 +71,9 @@ class StaffController:
 
     # Developer: Sam
     # modifying the staff values
-    def modify(request, empID):
+    def modify(request):
 
-        employeeID_ = empID
+        employeeID_ = request.POST.get("employeeID")
         firstName_ = request.POST.get("firstName")
         lastName_ = request.POST.get("lastName")
         streetAddress_ = request.POST.get("streetAddress")
@@ -299,3 +299,22 @@ class StaffController:
                 each.dateJoined,
                 each.lastLogin,
                 each.storeID)
+
+    def changePW(request):
+        employeeID_ = request.POST.get("employeeID")
+        password_ = make_password(request.POST.get('password', ''))
+
+        existingEmployee = Employee.objects.get(employeeID=employeeID_)
+
+        try:
+            existingEmployee.password = password_
+            
+            vali = existingEmployee.full_clean()
+            if vali:
+                return vali
+            else:
+                existingEmployee.save()
+                return True 
+            return False
+        except ValidationError as e:
+            return e.message_dict

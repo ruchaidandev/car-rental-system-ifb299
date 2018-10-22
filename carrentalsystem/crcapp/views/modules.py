@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.middleware.csrf import CsrfViewMiddleware
 from django.views.decorators.csrf import csrf_exempt, csrf_protect#to use csrf exempt
 from django.contrib.auth.hashers import make_password
-from crcapp.models import Store, Employee, Customer, Vehicle#If the model is used in the view file
+from crcapp.models import Store, Employee, Customer, Vehicle, Order, OrderFor#If the model is used in the view file
 from django.utils import timezone
 from django.core.serializers import serialize
 from django.core.serializers.json import DjangoJSONEncoder

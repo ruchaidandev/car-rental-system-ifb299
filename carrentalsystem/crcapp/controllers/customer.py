@@ -5,6 +5,8 @@ from django.core.exceptions import ValidationError
 from django.contrib.sessions.models import Session
 from django.utils import timezone
 
+
+
 # Functions related to Customer
 class CustomerController:
     # Developer: Tom, Sam and with fixes and debugging done by Aidan
@@ -120,7 +122,7 @@ class CustomerController:
                 return True
         # If there is an error validating the data then return the error
         except ValidationError as e:
-            return e
+            return e.message_dict
 
     # Developer : Sam
     # Deletes Customer based on given ID
@@ -234,3 +236,22 @@ class CustomerController:
                 each.userName,
                 each.dateJoined,
                 each.lastLogin)
+
+    def changePW(request):
+        customerID_ = request.POST.get("customerID")
+        password_ = make_password(request.POST.get('password', ''))
+
+        existingCustomer = Customer.objects.get(customerID=customerID_)
+
+        try:
+            existingCustomer.password = password_
+            
+            vali = existingCustomer.full_clean()
+            if vali:
+                return vali
+            else:
+                existingCustomer.save()
+                return True 
+            return False
+        except ValidationError as e:
+            return e.message_dict

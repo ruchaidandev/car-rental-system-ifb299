@@ -12,6 +12,8 @@ urlpatterns = [
     path('stores', views.storesIndex, name='storesIndex'),
     path('vehicles', views.vehicleIndex, name='vehicleIndex'),
     path('profile', views.profileIndex, name='profileIndex'),
+    path('booking/store', views.setStore, name='setStore'),
+    path('booking', views.confirmOrder, name='confirmOrder'),
     url(r'^vehicle/(?P<option>\S+)$', views.getVehicleIndex, name='getVehicleIndex'),
     path('customer/usernames/list', views.getUsernamesCustomers, name='getUsernames'),
 
@@ -30,7 +32,9 @@ urlpatterns = [
     url(r'^management/staff/activity/(?P<option>\S+)/(?P<empID>\S+)$', views.disableStaff, name='disableStaff'),
     # Getting staff from staff check 
     path('management/staff/store', views.getStaffFromStore, name='getStaffFromStore'),
-
+    path('management/profile', views.profile, name='profile'),
+    path('management/profile/update', views.changeStaffProfile, name='changeStaffProfile'),
+    path('management/profile/update/password', views.changeStaffProfilePassword, name='changeStaffProfilePassword'),
 
     # Getting usernames
     path('management/staff/usernames/list', views.getUsernames, name='getUsernames'),

@@ -185,6 +185,10 @@ a:hover{
     color:#f6f6f6;
 }
 
+.cursorPointer{
+    cursor: pointer;
+}
+
 .subtopbar p{
     font-size:16px;
     font-weight:bold !important;
@@ -251,4 +255,12 @@ a:hover{
 }
 .boxes:hover > a{
     color:#fff;
+}
+.pill{
+    background-color: #154da4;
+    border: 1px solid #0A2A5B;
+    color:#fff;
+    font-weight: 600;
+    padding: 10px;
+    height:120px;
 }
