@@ -30,7 +30,7 @@ def customerCreate(request, msg="", mtype=""):
 
 # Developer: Tom
 # Viewing all the customers
-def viewCustomers(request, messages="", mtype=""):
+def viewCustomers(request, msg="", mtype=""):
     # Checking if session exists
     if request.session.has_key("uid"):
         name = request.session["name"]#name of session
@@ -38,7 +38,7 @@ def viewCustomers(request, messages="", mtype=""):
 
         customers = Customer.objects.all()#grab all customers
 
-        return render(request, "customer/viewCustomers.html", {"msg": messages, "name": name, "mtype": mtype,
+        return render(request, "customer/viewCustomers.html", {"msg": msg, "name": name, "mtype": mtype,
         "utype": utype, "customers": customers})
     # User is not in a session
     else:
@@ -66,7 +66,8 @@ def customerModify(request, customer_ID, msg="", mtype=""):
                 if result == True:#if the customer details were modified 
                     return render(request, "customer/modify.html", {"msg": "Customer details modified.", "mtype": "i"})
                 else:#if the customer details were not modified  and errors occurred
-                    return render(request, "customer/modify.html", {"msg": result, "mtype": "a", name: "name", "utype": utype, "customer": customer})
+                    return render(request, "customer/modify.html", {"msg": result, "mtype": "a", name: "name", "utype": utype,
+                    "customer": existingCustomer})
         elif request.method == "GET":
             exisitngCustomer = get_object_or_404(Customer, customerID=customer_ID)#grab the details of the customer 
             #requested from matching the customerID in the URL and querying the database
@@ -76,3 +77,15 @@ def customerModify(request, customer_ID, msg="", mtype=""):
     # User is not in a session
     else:
        return notLoggedIn(request)
+
+# Developer: Tom
+# Deleting an existing customer
+def customerDelete(request, customer_ID):
+    #existingCustomer = Customer.objects.get(customerID__exact=customer_ID)#grab the details of the customer
+
+    # Grab the name of the customer and store in relevant variables
+    #firstName = existingCustomer.firstName
+    #lastName = existingCustomer.lastName
+
+    customer.CustomerController.delete(customer_ID)#delete the customer
+    return redirect("viewCustomers")#, msg="The customer was deleted from the database", mtype="i")

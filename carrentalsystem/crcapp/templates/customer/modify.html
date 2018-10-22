@@ -56,9 +56,9 @@
 			<div class="col-sm-10">
 				<select class="custom-select" name="gender" required>
 					<option value="" selected disabled>Select a Gender</option>
-					<option value="M" {% if employee.gender == "M" %}  selected="selected" {% endif %}>Male</option>
-					<option value="F" {% if employee.gender == "F" %}  selected="selected" {% endif %}>Female</option>
-					<option value="O" {% if employee.gender == "O" %}  selected="selected" {% endif %}>Other</option>
+					<option value="M" {% if customer.gender == "M" %}  selected="selected" {% endif %}>Male</option>
+					<option value="F" {% if customer.gender == "F" %}  selected="selected" {% endif %}>Female</option>
+					<option value="O" {% if customer.gender == "O" %}  selected="selected" {% endif %}>Other</option>
 				</select>
 			</div>
 		</div>
@@ -86,14 +86,14 @@
 			<label for="stateAddress" class="col-sm-2 col-form-label">State</label>
 				<div class="col-sm-4 mb-3">
 					<select class="custom-select" name="stateAddress">
-						<option value="" disabled>Select a State</option>
-						<option value="NSW" {% if employee.stateAddress == "NSW" %}  selected="selected" {% endif %}>New South Wales</option>
-						<option value="NT" {% if employee.stateAddress == "NT" %}  selected="selected" {% endif %}>Northern Territory</option>
-						<option value="QLD" {% if employee.stateAddress == "QLD" %}  selected="selected" {% endif %}>Queensland</option>
-						<option value="SA" {% if employee.stateAddress == "SA" %}  selected="selected" {% endif %}>South Australia</option>
-						<option value="TS" {% if employee.stateAddress == "TS" %}  selected="selected" {% endif %}>Tasmania</option>
-						<option value="VIC" {% if employee.stateAddress == "VIC" %}  selected="selected" {% endif %}>Victoria</option>
-						<option value="WA" {% if employee.stateAddress == "WA" %}  selected="selected" {% endif %}>Western Australia</option>
+						<option value="" disabled selected>Select a State</option>
+						<option value="NSW" {% if customer.stateAddress == "NSW" %}  selected="selected" {% endif %}>New South Wales</option>
+						<option value="NT" {% if customer.stateAddress == "NT" %}  selected="selected" {% endif %}>Northern Territory</option>
+						<option value="QLD" {% if customer.stateAddress == "QLD" %}  selected="selected" {% endif %}>Queensland</option>
+						<option value="SA" {% if customer.stateAddress == "SA" %}  selected="selected" {% endif %}>South Australia</option>
+						<option value="TS" {% if customer.stateAddress == "TS" %}  selected="selected" {% endif %}>Tasmania</option>
+						<option value="VIC" {% if customer.stateAddress == "VIC" %}  selected="selected" {% endif %}>Victoria</option>
+						<option value="WA" {% if customer.stateAddress == "WA" %}  selected="selected" {% endif %}>Western Australia</option>
 					</select>
 				</div>
 		</div>
@@ -143,14 +143,31 @@
 				<button type="submit" class="btn btn-success btn-block" value="Save"><i class="fas fa-save"></i> Save</button>
 			</div>
 			<div class="col-sm-6">
-				{% comment %} <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModalCenter">
-						Launch demo modal
-				</button> {% endcomment %}
-				<button type="submit" class ="btn btn-danger btn-block" value="Delete"><i class="far fa-times-circle"></i> Delete</button>
+				<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#customerDelete"><i class="far fa-times-circle"></i> Delete</button>
+				{% comment %} <button type="submit" class ="btn btn-danger btn-block" value="Delete"><i class="far fa-times-circle"></i> Delete</button> {% endcomment %}
 			</div>
 		</div>
 	</div>
 </form>
+<!-- Modal -->
+<div class="modal fade" id="customerDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+		  		<h5 class="modal-title" id="exampleModalLabel">Delete Customer</h5>
+		  		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span></button>
+			</div>
+			<div class="modal-body">Are you sure you wish to delete the customer {{ customer.firstName}} {{ customer.lastName }}
+				with the ID of {{ customer.customerID}}?
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<a class="btn btn-primary" href="{{ request.get_full_path }}/delete" role="button">Yes</a>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript">
