@@ -36,8 +36,12 @@
                             <td class="pdttable">{{ vehicle.model }}</td>
                             
                             <td class="pdttable">{{ vehicle.series }}</td> 
-                            <td class="pdttable">{{ vehicle.year }}</td> 
-                            <td class="pdttable">Brisbane</td>     
+                            <td class="pdttable">{{ vehicle.year }}</td>
+                            {% if vehicle.storeID == "" %}
+                            <td class="pdttable">-</td>
+                            {% else %}
+                            <td class="pdttable">{{ vehicle.storeID }}</td>
+                            {% endif %}
                             <td class="pdttable">Pass</td>                    
                         </tr>
                     {% endfor %}
