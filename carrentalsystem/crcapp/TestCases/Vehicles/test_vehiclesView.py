@@ -24,4 +24,7 @@ class VehiclesView(BaseTest):
         driver.find_element_by_id("password").send_keys("dev")
         driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Password'])[1]/following::button[1]").click()
         driver.find_element_by_link_text("View Vehicles").click()
-        self.assertEqual("LAND ROVER", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='V14806'])[1]/following::td[1]").text)
+        driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Search:'])[1]/input[1]").click()
+        driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Search:'])[1]/input[1]").clear()
+        driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Search:'])[1]/input[1]").send_keys("V14810")
+        self.assertEqual("V14810", driver.find_element_by_link_text("V14810").text)
