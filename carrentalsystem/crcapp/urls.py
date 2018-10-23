@@ -50,16 +50,22 @@ urlpatterns = [
     url(r'^management/staff/id/(?P<option>\S+)$', views.getStaff, name='getStaff'),
 
     ### Customer ###
-    # For viewing the page
+    # For viewing all customers
     path('management/customer', views.viewCustomers, name='viewCustomers'),
+    # For creating a new customer
     path('management/customer/create', views.customerCreate, name='customerCreate'),
-    path('profile/update', views.changeProfile, name='changeProfile'),
-    path('profile/update/password', views.changeProfilePassword, name='changeProfilePassword'),
+    # For modifying an exsiting customer
+    path('management/customer/<str:customer_ID>', views.customerModify, name='customerModify'),
+    # For deleting an existing customer
+    path('management/customer/<str:customer_ID>/delete', views.customerDelete, name='customerDelete'),
+
+
 
     ### Booking ###
     # For viewing page
-    path('management/booking/order', views.bookingOrder, name='bookingOrder'),
-    path('management/booking/orderConfirm', views.bookOrderConfirm, name='bookOrderConfirm'),
+    # path('management/booking/order', views.bookingOrder, name='bookingOrder'),
+    # path('management/booking/orderConfirm', views.bookOrderConfirm, name='bookOrderConfirm'),
+    path('management/booking/viewBooking', views.viewBooking, name='viewBooking'),
 
 
     ### Vehicle ###
