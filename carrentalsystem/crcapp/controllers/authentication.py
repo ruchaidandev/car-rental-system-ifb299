@@ -43,6 +43,8 @@ class Authentication:
                 return "NULL"
         except Employee.DoesNotExist:
              return "NULL"
+        except Customer.DoesNotExist:
+             return "NULL"
         except ValidationError as e:
             return e
 

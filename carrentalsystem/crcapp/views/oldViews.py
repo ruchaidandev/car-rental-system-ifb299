@@ -694,6 +694,86 @@ def changeStaffProfilePassword(request):
     else:
        return notLoggedIn(request)
 
+
+
+# Developer: Aidan
+# Change user profile
+def changeProfile(request):
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        if utype == "Customer":
+            if request.method == 'POST':
+                reason = CsrfViewMiddleware().process_view(request, None, (), {})
+                # If the reason is true it means verification failed
+                if reason:
+                    messages = "Token verification failed."
+                    request.session['msg'] = messages
+                    request.session['mtp'] = 'd'
+                    return redirect('/profile')
+                else:
+                    result = customer.CustomerController.modify(request)
+                    if result == True:
+                        messages = "Profile saved."
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'i'
+                        return redirect('/profile')
+                    elif result == False:
+                        messages = "Opps, something happened, please try again later."
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'd'
+                        return redirect('/profile')
+                    else:
+                        messages = result
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'a'
+                        return redirect('/profile')
+            
+        else:
+            return accessDeniedHome(request) 
+    else:
+       return notLoggedIn(request)
+
+# Developer: Aidan
+# Change user passwords
+def changeProfilePassword(request):
+    # Checking session exists
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        if utype == "Customer":
+            if request.method == 'POST':
+                reason = CsrfViewMiddleware().process_view(request, None, (), {})
+                # If the reason is true it means verification failed
+                if reason:
+                    messages = "Token verification failed."
+                    request.session['msg'] = messages
+                    request.session['mtp'] = 'd'
+                    return redirect('/profile')
+                else:
+                    result = customer.CustomerController.changePW(request)
+                    if result == True:
+                        messages = "Profile saved."
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'i'
+                        return redirect('/profile')
+                    elif result == False:
+                        messages = "Opps, something happened, please try again later."
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'd'
+                        return redirect('/profile')
+                    else:
+                        messages = result
+                        request.session['msg'] = messages
+                        request.session['mtp'] = 'a'
+                        return redirect('/profile')
+            
+        else:
+            return accessDeniedHome(request) 
+    else:
+       return notLoggedIn(request)
+
 # Developer: Aidan
 # # Confirming order
 def confirmOrder(request):    
@@ -727,6 +807,17 @@ def setStore(request):
             return redirect('/booking')
     return redirect('/')
 
+@csrf_exempt
+def addVehicleToOrder(request, option):
+    if  request.session.has_key('bookings'):
+        booking = request.session.get('bookings', '')
+        if option != "":
+            booking['vehicleID'] = option
+            request.session['bookings'] =booking 
+            return HttpResponse("True")
+        
+    return HttpResponse("NULL")
+        
 # Developer: Aidan
 # Viewing reports
 def viewReports(request, msg='', mtype=''):

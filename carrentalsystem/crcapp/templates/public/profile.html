@@ -76,14 +76,17 @@
                                                         {% for order in orders %}
                                                         <div class="row orderTabs">
                                                                   <div class="col-md-2">Order #: {{ order.orderID }}</div>
-                                                                  <div class="col">You made and order from {{ order.pickupStoreID.storeName }} <div>
-                                                                      on the {{ order.orderDate | date:"d M, Y" }}</td>
-                                                                  <div class="col-md-2">Pick up date: {{ order.pickupDate | date:"d M, Y" }}
-                                                                      <br>
-                                                                      Return date: {{ order.returnDate | date:"d M, Y" }}
-                                                                  </div>
+                                                                  <div class="col-md-6">You made and order from {{ order.pickupStoreID.storeName }} 
+                                                                      on the {{ order.orderDate | date:"d M, Y" }} </div>
+                                                                  <div class="col-md-2">
+                                                                      <small>
+                                                                            Pick up date: {{ order.pickupDate | date:"d M, Y" }}
+                                                                            <br>
+                                                                            Return date: {{ order.returnDate | date:"d M, Y" }}
+                                                                            </small> 
+                                                                    </div>                                                                 
                                                                   <div class="col-md-2"><div class="btn disabled btn-primary btn-sm divs-center mt-3 " >Check Invoice</div></div>
-                                                                </div>
+                                                            </div>
                                                             {% endfor %}
                                            {% else %}
 
@@ -275,7 +278,7 @@
                 autoclose: true,
                 todayHighlight: true,
             });
-            $("#pwsave").hide();
+            $("#pwsave").addClass("disabled");
 
            
               
@@ -283,10 +286,10 @@
         $("#confpassword").change(function(){
             if($("#password").val() != $("#confpassword").val()){
                 $("#alertPW").html("Sorry, the passwords do not match.");
-                $("#pwsave").hide();
+                $("#pwsave").addClass("disabled");
             }else{
                 $("#alertPW").html("");
-                $("#pwsave").show();
+                $("#pwsave").removeClass("disabled");
             }
         })
   </script>

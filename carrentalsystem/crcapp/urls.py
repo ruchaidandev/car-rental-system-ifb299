@@ -14,8 +14,13 @@ urlpatterns = [
     path('profile', views.profileIndex, name='profileIndex'),
     path('booking/store', views.setStore, name='setStore'),
     path('booking', views.confirmOrder, name='confirmOrder'),
+     url(r'^booking/vehicle/(?P<option>\S+)$', views.addVehicleToOrder, name='addVehicleToOrder'),
     url(r'^vehicle/(?P<option>\S+)$', views.getVehicleIndex, name='getVehicleIndex'),
     path('customer/usernames/list', views.getUsernamesCustomers, name='getUsernames'),
+    
+    path('profile', views.profile, name='profile'),
+    path('profile/update', views.changeProfile, name='changeProfile'),
+    path('profile/update/password', views.changeProfilePassword, name='changeProfilePassword'),
 
     ### Home ###
     path('management', views.home, name='home'),
@@ -65,8 +70,8 @@ urlpatterns = [
     # For viewing page
     # path('management/booking/order', views.bookingOrder, name='bookingOrder'),
     # path('management/booking/orderConfirm', views.bookOrderConfirm, name='bookOrderConfirm'),
-    path('management/booking/viewBooking', views.viewBooking, name='viewBooking'),
-
+    path('management/booking/viewBooking', views.viewBooking, name='viewBooking'),    
+   
 
     ### Vehicle ###
     # For inserting page
