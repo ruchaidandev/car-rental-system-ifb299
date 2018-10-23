@@ -18,7 +18,7 @@
                     <h6>Pick Up Store: {{ pickupStore.storeName }} </h6>
                     <h6>Return Store: {{ returnStore.storeName }} </h6>
                     <h6>Pick Up Date: {{ pickupDate }} </h6>
-                    <h6>Return Date: {{ pickupDate }} </h6>
+                    <h6>Return Date: {{ returnDate }} </h6>
             </div>
             <div class="col-md-6">
                     <div class="btn btn-success">Confirm Order</div>
@@ -28,29 +28,38 @@
         </div>
         <div class="row boxed p-5">
                 <div class="col-md-12">
-                        <h5>Select the vehicle from  {{ pickupStore.storeName }} </h5>
+                        <h5>Select the vehicle from  {{ pickupStore.storeName }}</h5>
                         <div class="row">
-
-                                {% for item in vehicles  %}
-                             <div class="col-md-2 items p-2 text-center">
-                                 <div class="item p-3">
-                                        <h5><small>Make:</small> {{ item.makeName | title  | truncatechars:15}}</h5>
-                                        <p><small>Model:</small> {{ item.model | title   | truncatechars:10}}</p>
-                                        <p><small>Series:</small> {{ item.series | title  | truncatechars:10 }}</p>
-                                        <p><small>Year:</small> {{ item.year }}</p>
-                                        <img src="static/images/carIcon.png" class="img-responsive img-center" width="50%">
-                                        <a href="/vehicle/{{ item.vehicleID }}"> <p class="btn btn-primary btn-sm">Add to order</p></a>
-                                 </div>
-                                 
-                                
-                              </div>
-                              {% endfor %}
-                        
-                            </div>
+                                {% for item in vehicles %}
+                                <div class="col-md-2 items p-2 text-center">
+                                        <div class="item p-3">
+                                                <h5><small>Make:</small> {{ item.makeName | title  | truncatechars:15}}</h5>
+                                                <p><small>Model:</small> {{ item.model | title   | truncatechars:10}}</p>
+                                                <p><small>Series:</small> {{ item.series | title  | truncatechars:10 }}</p>
+                                                <p><small>Year:</small> {{ item.year }}</p>
+                                                <img src="static/images/carIcon.png" class="img-responsive img-center" width="50%">
+                                                <a href="/vehicle/{{ item.vehicleID }}"> <p class="btn btn-primary btn-sm">Add to order</p></a>
+                                        </div> 
+                                </div>
+                                {% endfor %}
+                        </div>
+                        <h5>Recommendations</h5>
+                        <div class="row">
+                                {% for item in reco %}
+                                <div class="col-md-2 items p-2 text-center">
+                                        <div class="item p-3">
+                                                <h5><small>Make:</small> {{ item.makeName | title  | truncatechars:15}}</h5>
+                                                <p><small>Model:</small> {{ item.model | title   | truncatechars:10}}</p>
+                                                <p><small>Series:</small> {{ item.series | title  | truncatechars:10 }}</p>
+                                                <p><small>Year:</small> {{ item.year }}</p>
+                                                <img src="static/images/carIcon.png" class="img-responsive img-center" width="50%">
+                                                <a href="/vehicle/{{ item.vehicleID }}"> <p class="btn btn-primary btn-sm">Add to order</p></a>
+                                        </div> 
+                                </div>
+                                {% endfor %}
+                        </div>
                 </div>
-                
-            </div>
-
+        </div>
     </div>
   </section>
   {% endblock %}

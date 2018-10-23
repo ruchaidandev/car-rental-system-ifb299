@@ -28,7 +28,7 @@
     <tbody id="records">
       {% for customer in customers %}
       <tr>
-        <td class="pdttable"><a href="{{ request.get_full_path }}/{{ customer.customerID }}">{{ customer.customerID }}</a></td>
+        <td class="pdttable"><a href="{{ request.get_full_path }}/id/{{ customer.customerID }}">{{ customer.customerID }}</a></td>
         <td class="pdttable">{{ customer.firstName }} {{ customer.lastName }}</td>
         <td class="pdttable">{{ customer.DOB }}</td>
         <td class="pdttable">{{ customer.gender }}</td>

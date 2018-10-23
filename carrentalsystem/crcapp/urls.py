@@ -55,9 +55,9 @@ urlpatterns = [
     # For creating a new customer
     path('management/customer/create', views.customerCreate, name='customerCreate'),
     # For modifying an exsiting customer
-    path('management/customer/<str:customer_ID>', views.customerModify, name='customerModify'),
+    path('management/customer/id/<str:customer_ID>', views.customerModify, name='customerModify'),
     # For deleting an existing customer
-    path('management/customer/<str:customer_ID>/delete', views.customerDelete, name='customerDelete'),
+    path('management/customer/id/<str:customer_ID>/delete', views.customerDelete, name='customerDelete'),
 
 
 
