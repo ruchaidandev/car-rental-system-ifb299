@@ -76,8 +76,6 @@ urlpatterns = [
     url(r'^management/vehicle/delete/(?P<option>\S+)$', views.deleteVehicle, name='deleteVehicle'),
     url(r'^management/vehicle/id/(?P<option>\S+)$', views.getVehicle, name='getVehicle'),
 
-    ### Sample ------ DO NOT USE IN PRODUCTION ###
-    path('management/sample', views.sample, name='staffCreateAction'),
 
     # Getting staff from staff check 
     path('management/email', views.email, name='email'),
@@ -85,5 +83,6 @@ urlpatterns = [
     ### Store ###
     path('management/store', views.storesStaff, name='storesStaff'),
 
-
+    # Reports 
+    path('management/reports', views.viewReports, name='viewReports'),
 ]

@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.core.serializers import serialize
 from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.sessions.models import Session
+from django.db import connection
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
