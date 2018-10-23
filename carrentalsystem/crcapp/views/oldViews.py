@@ -563,24 +563,23 @@ def deleteVehicle(request, option):
 
 # Developer: Aidan
 # save changes of vehicle
-def changeVehicleDetails(request, option, utype, msg='',mtype=''):
-    utype = request.session['utype']
+def changeVehicleDetails(request, option, name, utype, msg='',mtype=''):
     if utype != "Customer":
-        if request.method == 'POST':
-            vehicle = Vehicle.objects.filter(vehicleID=option).values()[0]
-            stores = Store.objects.all()
-            reason = CsrfViewMiddleware().process_view(request, None, (), {})
-            # If the reason is true it means verification failed
-            if reason:
-                return render(request, 'vehicle/vehicleDetail.html', {'name': name, 'utype': utype,'msg': 'Token verification failed!', 'mtype': "d",'vehicle':vehicle, 'stores':stores})
+       
+        vehicleObj = Vehicle.objects.filter(vehicleID=option).values()[0]
+        stores = Store.objects.all()
+        reason = CsrfViewMiddleware().process_view(request, None, (), {})
+        # If the reason is true it means verification failed
+        if reason:
+            return render(request, 'vehicle/detailview.html', {'name': name, 'utype': utype,'msg': 'Token verification failed!', 'mtype': "d",'vehicle':vehicleObj, 'stores':stores})
+        else:
+            result = vehicle.VehicleController.modify(request, option)
+            if result == True:
+                return render(request, 'vehicle/detailview.html', {'name': name, 'utype': utype,'msg': 'Changes saved.', 'mtype': "i",'vehicle':vehicleObj, 'stores':stores})
+            elif result == False:
+                return render(request, 'vehicle/detailview.html', {'name': name, 'utype': utype,'msg': 'Could not save all changes.', 'mtype': "d",'vehicle':vehicleObj, 'stores':stores})
             else:
-                result = vehicle.VehicleController.modify(request, option)
-                if result == True:
-                    return render(request, 'vehicle/vehicleDetail.html', {'name': name, 'utype': utype,'msg': 'Changes saved.', 'mtype': "i",'vehicle':vehicle, 'stores':stores})
-                elif result == False:
-                    return render(request, 'vehicle/vehicleDetail.html', {'name': name, 'utype': utype,'msg': 'Could not save all changes.', 'mtype': "d",'vehicle':vehicle, 'stores':stores})
-                else:
-                    return render(request, 'vehicle/vehicleDetail.html', {'name': name, 'utype': utype,'msg': result, 'mtype': "a", 'vehicle':vehicle, 'stores':stores})
+                return render(request, 'vehicle/detailview.html', {'name': name, 'utype': utype,'msg': result, 'mtype': "a", 'vehicle':vehicleObj, 'stores':stores})
     else:
         return accessDeniedHome(request)
 
@@ -609,7 +608,7 @@ def getVehicle(request, option, msg='',mtype=''):
         utype = request.session['utype']
         if utype != "Customer":
             if request.method == 'POST':
-                return changeVehicleDetails(request, option, msg, mtype, name, utype)
+                return changeVehicleDetails(request, option, name, utype,  msg, mtype)
             elif request.method == 'GET':
                 vehicle = Vehicle.objects.filter(vehicleID=option).values()[0]
                 stores = Store.objects.all()
