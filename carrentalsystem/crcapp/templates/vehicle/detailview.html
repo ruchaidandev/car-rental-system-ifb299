@@ -2,7 +2,8 @@
 {% extends '../base.html' %}
 {% block title %}Vehicle {{ vehicle.vehicleID }}{% endblock %}
 {% block breadcrumb %}
-<li class="breadcrumb-item active" aria-current="page">Vehicle {{ vehicle.vehicleID }}</li>
+<li class="breadcrumb-item" aria-current="page"><a href="/management/vehicle">Vehicle</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{ vehicle.vehicleID }}</li>
 {% endblock %}
 {% block content %}
 <!-- Error message box will be shown only if the msg variable has some value -->
@@ -29,7 +30,7 @@
 	</div>
 </div>
 {% endif %}
-<form action="/vehicle/edit" method="POST" id="vform">
+<form action="/management/vehicle/id/{{ vehicle.vehicleID }}" method="POST" id="vform">
 	{% csrf_token %}
 	<div class="container">
 		<div class="row">
@@ -331,7 +332,7 @@
 					success: function(result){
 						if(result == "True"){
 							alert("Vehicle Deleted");
-							location.href = "/vehicle";
+							location.href = "/management/vehicle";
 						}
 						else if(result == "False"){
 							alert("Sorry, something happened.");
