@@ -12,7 +12,7 @@ from crcapp.tests import BaseTest
 
 class PublicVehicles(BaseTest):
 
-    # Test for store in public webpage
+    # Test for vehicle in public webpage
     def test_publicVehicles(self):
         driver = self.driver
         driver.get("http://127.0.0.1:8000/")
