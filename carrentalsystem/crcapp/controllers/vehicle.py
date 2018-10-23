@@ -226,20 +226,20 @@ class VehicleController:
         # Passes the store instance to the model
         store = Store.objects.get(storeID=storeID_)
         try:
-            vehicle.makeName = makeName_,
-            vehicle.model = model_,
-            vehicle.series = series_,
-            vehicle.year = year_,
-            vehicle.newPrice = newPrice_,
-            vehicle.enginesize = enginesize_,
-            vehicle.fuelSystem = fuelSystem_,
-            vehicle.tankcapacity = tankcapacity_,
-            vehicle.power = power_,
-            vehicle.seatingCapacity = seatingCapacity_,
-            vehicle.standardTransmission = standardTransmission_,
-            vehicle.bodyType = bodyType_,
-            vehicle.driveType = driveType_,
-            vehicle.wheelbase = wheelbase_,
+            vehicle.makeName = makeName_
+            vehicle.model = model_
+            vehicle.series = series_
+            vehicle.year = year_
+            vehicle.newPrice = newPrice_
+            vehicle.enginesize = enginesize_
+            vehicle.fuelSystem = fuelSystem_
+            vehicle.tankcapacity = tankcapacity_
+            vehicle.power = power_
+            vehicle.seatingCapacity = seatingCapacity_
+            vehicle.standardTransmission = standardTransmission_
+            vehicle.bodyType = bodyType_
+            vehicle.driveType = driveType_
+            vehicle.wheelbase = wheelbase_
             vehicle.store = store
 
             vali = vehicle.full_clean()
