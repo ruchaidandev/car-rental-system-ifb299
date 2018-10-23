@@ -3,7 +3,7 @@
 {% block title %}{{ employee.firstName }} {{ employee.lastName }} {% endblock %}
 
 {% block breadcrumb %}
-<li class="breadcrumb-item"><a href="/management/staff">View Staff</a></li>
+<li class="breadcrumb-item"><a href="{% url 'getAllStaff' %}">Staff Management</a></li>
 <li class="breadcrumb-item active" aria-current="page">{{ employee.firstName }} {{ employee.lastName }}</li>
 {% endblock %}
 
