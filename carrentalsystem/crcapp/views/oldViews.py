@@ -333,7 +333,6 @@ def getStaff(request, option, msg='', mtype=''):
        return notLoggedIn(request)
 
 
-
 # Developer: Aidan
 # viewing the staff login management page
 def viewStaffLogin(request):
