@@ -53,8 +53,9 @@
                                                 <p><small>Model:</small> {{ item.model | title   | truncatechars:10}}</p>
                                                 <p><small>Series:</small> {{ item.series | title  | truncatechars:10 }}</p>
                                                 <p><small>Year:</small> {{ item.year }}</p>
+                                                <a href="/vehicle/{{ item.vehicleID }}" target="_blank"> <p>View More Details</p></a>                                
                                                 <img src="static/images/carIcon.png" class="img-responsive img-center" width="50%">
-                                                <a href="/vehicle/{{ item.vehicleID }}"> <p class="btn btn-primary btn-sm">Add to order</p></a>
+                                                <input type="button" class="btn btn-primary btn-sm addOrderBtn" data-id="{{ item.vehicleID }}" value="Add to order" />
                                         </div> 
                                 </div>
                                 {% endfor %}

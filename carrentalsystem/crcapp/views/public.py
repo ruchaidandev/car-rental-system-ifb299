@@ -128,35 +128,16 @@ def setStore(request):
 def confirmOrder(request):
     if request.session.has_key('bookings'):
         booking = request.session.get('bookings', '')
-
-        pickupStoreID = booking['pickUpStore']
-        recommendations = getRecommendations(pickupStoreID)
         
-        pickupStore = Store.objects.get(storeID= pickupStoreID)
+        pickupStore = Store.objects.get(storeID= booking['pickupStore'])
         returnStore = Store.objects.get(storeID= booking['returnStore'])
-        vehicles = Vehicle.objects.filter(storeID = pickupStore )
+        vehicles = Vehicle.objects.filter(storeID = booking['pickUpStore'] )
         returnDate = booking['returndate']
         pickupDate = booking['pickupdate']
         return render(request, 'public/booking.html', {'bookings': booking, 'vehicles': vehicles, 'returnStore': returnStore, 'pickupStore': pickupStore,
         'pickupDate':pickupDate, 'returnDate':returnDate, "reco": recommendations})
     else:
         return redirect("/")
-
-# Developer: Tom
-# Get recommendations
-def getRecommendations(pickupStoreID):
-    query = '''SELECT crcapp_vehicle.vehicleID, crcapp_vehicle.makeName, crcapp_vehicle.model,
-            crcapp_vehicle.series, crcapp_vehicle.`year`, crcapp_vehicle.newPrice, crcapp_vehicle.enginesize,
-            crcapp_vehicle.fuelSystem, crcapp_vehicle.tankcapacity, crcapp_vehicle.power, crcapp_vehicle.seatingCapacity,
-            crcapp_vehicle.standardTransmission, crcapp_vehicle.bodyType, crcapp_vehicle.driveType, crcapp_vehicle.wheelbase,
-            crcapp_vehicle.storeID_id
-            FROM crcapp_orderfor
-            JOIN crcapp_order ON crcapp_orderfor.orderID_id = crcapp_order.orderID
-            JOIN crcapp_vehicle ON crcapp_orderfor.vehicleID_id = crcapp_vehicle.vehicleID
-            WHERE MONTH(orderDate) = MONTH(current_date())
-            AND pickupSTOREID_id = %s
-            AND crcapp_vehicle.storeID_id = crcapp_order.pickupStoreID_id'''
-    return Vehicle.objects.raw(query, [pickupStoreID])
 
 # Developer: Aidan
 # get vehicle details to modify page
@@ -267,17 +248,35 @@ def proceedOrder(request):
 
     if request.session.has_key('bookings'):
         booking = request.session.get('bookings', '')
+
+        pickupStoreID = booking['pickUpStore']
+        recommendations = getRecommendations(pickupStoreID)
         
-        pickupStore = Store.objects.get(storeID= booking['pickUpStore'])
+        pickupStore = Store.objects.get(storeID= pickupStoreID)
         returnStore = Store.objects.get(storeID= booking['returnStore'])
         vehicles = Vehicle.objects.filter(storeID = pickupStore )
         returnDate = booking['pickupdate']
         pickupDate = booking['returndate']
         return render(request, 'public/booking.html', {'bookings': booking, 'vehicles': vehicles, 'returnStore': returnStore, 'pickupStore': pickupStore,
-     'pickupDate':pickupDate, 'returnDate':returnDate}) 
+     'pickupDate':pickupDate, 'returnDate':returnDate, 'reco': recommendations}) 
     else:
         return redirect("/")
 
+# Developer: Tom
+# Get recommendations
+def getRecommendations(pickupStoreID):
+    query = '''SELECT crcapp_vehicle.vehicleID, crcapp_vehicle.makeName, crcapp_vehicle.model,
+            crcapp_vehicle.series, crcapp_vehicle.`year`, crcapp_vehicle.newPrice, crcapp_vehicle.enginesize,
+            crcapp_vehicle.fuelSystem, crcapp_vehicle.tankcapacity, crcapp_vehicle.power, crcapp_vehicle.seatingCapacity,
+            crcapp_vehicle.standardTransmission, crcapp_vehicle.bodyType, crcapp_vehicle.driveType, crcapp_vehicle.wheelbase,
+            crcapp_vehicle.storeID_id
+            FROM crcapp_orderfor
+            JOIN crcapp_order ON crcapp_orderfor.orderID_id = crcapp_order.orderID
+            JOIN crcapp_vehicle ON crcapp_orderfor.vehicleID_id = crcapp_vehicle.vehicleID
+            WHERE MONTH(orderDate) = MONTH(current_date())
+            AND pickupSTOREID_id = %s
+            AND crcapp_vehicle.storeID_id = crcapp_order.pickupStoreID_id'''
+    return Vehicle.objects.raw(query, [pickupStoreID])
 
 # Developer: Aidan
 # Setting stores to the order
