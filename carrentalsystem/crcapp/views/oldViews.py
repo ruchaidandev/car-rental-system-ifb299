@@ -346,15 +346,15 @@ def createVehicle(request, messages="", mtype=""):
                 reason = CsrfViewMiddleware().process_view(request, None, (), {})
                 # If the reason is true it means verification failed
                 if reason:
-                    return render(request, 'vehicle/create.html', {'msg': 'Token verification failed!', 'mtype': "d"})
+                    return render(request, 'vehicle/create.html', {'msg': 'Token verification failed!', 'mtype': "d", 'stores': stores})
                 else:
                     result = vehicle.VehicleController.create(request)
                     if result == True:
-                        return render(request, 'vehicle/create.html', {'msg': 'Vehicle inserted.', 'mtype': "i"})
+                        return render(request, 'vehicle/create.html', {'msg': 'Vehicle inserted.', 'mtype': "i", 'stores': stores})
                     elif result == False:
-                        return render(request, 'vehicle/create.html', {'msg': 'Vehicle insertion failed.', 'mtype': "d"})
+                        return render(request, 'vehicle/create.html', {'msg': 'Vehicle insertion failed.', 'mtype': "d", 'stores': stores})
                     else:
-                        return render(request, 'vehicle/create.html', {'msg': result, 'mtype': "a"})
+                        return render(request, 'vehicle/create.html', {'msg': result, 'mtype': "a", 'stores': stores})
             elif request.method == "GET":
                 return render(request, 'vehicle/create.html', {'msg': messages, 'name': name, 'mtype': mtype, 'utype': utype, 'stores': stores})
         else:
@@ -375,15 +375,15 @@ def editVehicle(request, messages="", mtype=""):
                 reason = CsrfViewMiddleware().process_view(request, None, (), {})
                 # If the reason is true it means verification failed
                 if reason:
-                    return render(request, 'vehicle/vehicleDetail.html', {'msg': 'Token verification failed!', 'mtype': "d"})
+                    return render(request, 'vehicle/vehicleDetail.html', {'msg': 'Token verification failed!', 'mtype': "d", 'stores': stores})
                 else:
                     result = vehicle.VehicleController.modify(request, request.POST.get("vID"))
                     if result == True:
-                        return render(request, 'vehicle/vehicleDetail.html', {'msg': 'Vehicle updated.', 'mtype': "i"})
+                        return render(request, 'vehicle/vehicleDetail.html', {'msg': 'Vehicle updated.', 'mtype': "i", 'stores': stores})
                     elif result == False:
-                        return render(request, 'vehicle/vehicleDetail.html', {'msg': 'Vehicle updating failed.', 'mtype': "d"})
+                        return render(request, 'vehicle/vehicleDetail.html', {'msg': 'Vehicle updating failed.', 'mtype': "d", 'stores': stores})
                     else:
-                        return render(request, 'vehicle/vehicleDetail.html', {'msg': result, 'mtype': "a"})
+                        return render(request, 'vehicle/vehicleDetail.html', {'msg': result, 'mtype': "a", 'stores': stores})
             
         else:
             return accessDeniedHome(request) 
