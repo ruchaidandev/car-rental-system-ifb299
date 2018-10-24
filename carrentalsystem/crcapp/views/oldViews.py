@@ -541,3 +541,23 @@ def changeStaffProfilePassword(request):
     else:
        return notLoggedIn(request)
        
+# Developer: Aidan
+# Viewing reports
+def viewReports(request, msg='', mtype=''):
+    if request.session.has_key('uid'):
+        name = request.session['name']
+        utype = request.session['utype']
+        if utype != "Customer":
+            stores = Store.objects.all()
+            vehicles = Vehicle.objects.all()
+            orders = Order.objects.all()           
+            query = "SELECT V.count as 'vehicleCount', o.count as 'orderCount', v.state FROM (SELECT COUNT(vehicleID) as 'count', crcapp_store.state FROM crcapp_vehicle, crcapp_store WHERE crcapp_vehicle.storeID_id = crcapp_store.storeID GROUP BY crcapp_store.state) V, (SELECT COUNT(orderID) as 'count', crcapp_store.state FROM crcapp_order, crcapp_store WHERE crcapp_order.pickupStoreID_id = crcapp_store.storeID GROUP BY crcapp_store.state) O WHERE v.state = o.state"
+            cursor = connection.cursor()
+            cursor.execute(query)
+            counts = cursor.fetchall()
+            return render(request, 'reports/reports.html', {'name': name, 'utype': utype,  'msg': '', 'mtype': mtype,'orders':orders, 'vehicles':vehicles, 'stores':stores, 'counts': counts})
+       
+        else:
+            return accessDeniedHome(request) 
+    else:
+       return notLoggedIn(request)
