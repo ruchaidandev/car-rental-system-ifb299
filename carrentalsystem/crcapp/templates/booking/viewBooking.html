@@ -34,8 +34,13 @@
                         <td class="pdttable">{{ order.orderID.pickupDate }}</td>
                         <td class="pdttable">{{ order.orderID.returnDate }}</td>
                         <td class="pdttable">{{ order.orderID.customerID.firstName }} {{ order.orderID.customerID.lastName }}</td>
-                        
-                            <td class="pdttable">{{ order.vehicleID.makeName }} {{ order.vehicleID.model }}</td>
+                        {% if order.vehicleID.model == "" %}
+                        <td class="pdttable">-</td>
+                        {% else %}
+                        <td class="pdttable">{{ order.vehicleID.makeName }} {{ order.vehicleID.model }}</td>
+                        {% endif %}
+
+                        <!-- <td class="pdttable">{{ order.vehicleID.makeName }} {{ order.vehicleID.model }}</td> -->
                         <!-- <td class="pdttable">{{ order.employeeID }}</td> -->
                         {% if order.orderID.pickupStoreID == "" %}
                         <td class="pdttable">-</td>
@@ -59,6 +64,7 @@
                 <th>Pickup Date</th>
                 <th>Return Date</th>
                 <th>Customer</th>
+                <th>Vehicle</th>
                 <!-- <th>Serviced By</th> -->
                 <th>Pickup Store</th>
                 <th>Return Store</th>
