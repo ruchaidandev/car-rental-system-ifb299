@@ -53,14 +53,15 @@
           </div>
           <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
               <ul class="navbar-nav ml-auto">
+                    {% if request.session.bookings != "" and request.session.bookings != NULL %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/booking">Current Cart</a>
+                                </li>
+
+                            {% endif %}
                     {% if request.session.uid != "" and request.session.uid != NULL %}
                         {% if request.session.utype == "Customer" %}
-                        {% if request.session.bookings != "" and request.session.bookings != NULL %}
-                        <li class="nav-item">
-                                <a class="nav-link" href="/booking">Current Order</a>
-                            </li>
-
-                        {% endif %}
+                            
                             <li class="nav-item">
                                 <a class="nav-link" href="/profile">Profile</a>
                             </li>
