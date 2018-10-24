@@ -44,7 +44,7 @@
                 
                   <div class="form-group">
                       <input data-date-format="yyyy-mm-dd" name="pickupdate" class="form-control"
-                      id="pickupdate" placeholder="Pickup Date: yyyy-mm-dd" required >
+                      id="pickupdate" placeholder="Pickup Date: yyyy-mm-dd" min='{{ todaysDate | date:"Y-m-d"}}' required >
               
                 </div>
                 </div>

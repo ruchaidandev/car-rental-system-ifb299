@@ -106,7 +106,7 @@ def disableStaff(request, option, empID):
             else:
                 staff.disable = 0
             staff.save()
-            return redirect('/staff/login/'+empID)
+            return redirect('/management/staff/login/'+empID)
         else:
             return accessDeniedHome(request)
     else:

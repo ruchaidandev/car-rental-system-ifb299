@@ -13,7 +13,7 @@ from django.db import connection
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-from crcapp.controllers import authentication, staff, vehicle, customer
+from crcapp.controllers import authentication, staff, vehicle,orders, customer
 
 # Developer: Aidan
 def notLoggedIn(request):
