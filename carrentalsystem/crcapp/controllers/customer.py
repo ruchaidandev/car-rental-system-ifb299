@@ -5,8 +5,6 @@ from django.core.exceptions import ValidationError
 from django.contrib.sessions.models import Session
 from django.utils import timezone
 
-
-
 # Functions related to Customer
 class CustomerController:
     # Developer: Tom, Sam and with fixes and debugging done by Aidan
@@ -130,6 +128,8 @@ class CustomerController:
         x = Customer.objects.get(customerID = ID)
         x.delete()
 
+    # Developer: Sam
+    # Has a purpose that is only the Developer who wrote it remembers
     def search(arg):
         if(arg == "all"):
             for each in Customer.objects.all():
@@ -237,6 +237,8 @@ class CustomerController:
                 each.dateJoined,
                 each.lastLogin)
 
+    # Developer : Aidan
+    # To change the password of a customer
     def changePW(request):
         customerID_ = request.POST.get("customerID")
         password_ = make_password(request.POST.get('password', ''))

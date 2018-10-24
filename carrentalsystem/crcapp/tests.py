@@ -8,7 +8,7 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.chrome.options import Options
 import unittest, time, re, os, platform
 
-class BaseTest(unittest.TestCase):
+class BaseTest(TestCase):
     def setUp(self):
         PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
         if platform.system() == 'Darwin':
