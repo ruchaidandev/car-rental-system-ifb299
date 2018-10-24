@@ -16,7 +16,8 @@ def index(request, messages="", mtype="i"):
     
     stores = Store.objects.all()
     vehicles = Vehicle.objects.order_by('-vehicleID')[:6]
-    return render(request, 'public/index.html', {'msg': messages, 'mtype': mtype, 'stores': stores, 'vehicles': vehicles})
+    todaysDate = timezone.now()
+    return render(request, 'public/index.html', {'msg': messages, 'mtype': mtype, 'stores': stores, 'vehicles': vehicles, 'todaysDate': todaysDate})
 
 # Developer: Aidan
 # Login page 
@@ -262,7 +263,7 @@ def changeProfilePassword(request):
 
 # Developer: Aidan
 # # Confirming order
-def confirmOrder(request):    
+def proceedOrder(request):    
 
     if request.session.has_key('bookings'):
         booking = request.session.get('bookings', '')
@@ -303,3 +304,25 @@ def addVehicleToOrder(request, option):
             return HttpResponse("True")
         
     return HttpResponse("NULL")
+
+
+@csrf_exempt
+def confirmOrder(request):
+    if  request.session.has_key('bookings'):
+        
+        result = orders.OrderController.create(request)
+        if result == True:
+            del request.session['bookings']
+            return HttpResponse("True")
+        else:
+            return HttpResponse("False")
+    return HttpResponse("NULL")
+
+
+@csrf_exempt
+def cancelOrder(request):
+    if request.session.has_key('bookings'):
+            del request.session['bookings']
+            return HttpResponse("True")
+    else:    
+        return HttpResponse("NULL")

@@ -13,8 +13,10 @@ urlpatterns = [
     path('vehicles', views.vehicleIndex, name='vehicleIndex'),
     path('profile', views.profileIndex, name='profileIndex'),
     path('booking/store', views.setStore, name='setStore'),
-    path('booking', views.confirmOrder, name='confirmOrder'),
-     url(r'^booking/vehicle/(?P<option>\S+)$', views.addVehicleToOrder, name='addVehicleToOrder'),
+    path('booking', views.proceedOrder, name='proceedOrder'),
+    path('booking/confirm', views.confirmOrder, name='confirmOrder'),
+    path('booking/cancel', views.cancelOrder, name='cancelOrder'),
+    url(r'^booking/vehicle/(?P<option>\S+)$', views.addVehicleToOrder, name='addVehicleToOrder'),
     url(r'^vehicle/(?P<option>\S+)$', views.getVehicleIndex, name='getVehicleIndex'),
     path('customer/usernames/list', views.getUsernamesCustomers, name='getUsernames'),
     

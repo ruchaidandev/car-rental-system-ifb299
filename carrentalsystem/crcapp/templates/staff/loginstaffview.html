@@ -348,22 +348,25 @@
        
     });
 
-    $("#disableBtn").click(function(){
+    $("#disableBtn").click(function(e){
+        e.preventDefault();
         $.ajax({
                 url: "/management/staff/activity/disable/{{ employee.employeeID }}",
                 type : 'GET',
                 success: function(result){
-                    location.reload();
+                    
+                    window.location.replace("/management/staff/login/{{ employee.employeeID }}");
                 }});
             
     })
 
-    $("#enableBtn").click(function(){
+    $("#enableBtn").click(function(e){
+        e.preventDefault();
         $.ajax({
                 url: "/management/staff/activity/enable/{{ employee.employeeID }}",
                 type : 'GET',
                 success: function(result){
-                    location.reload();
+                    window.location.replace("/management/staff/login/{{ employee.employeeID }}");
                 }});
             
     })

@@ -73,18 +73,18 @@
                                 <div class="container">
                                    
                                             {% if orders.count != 0 %}
-                                                        {% for order in orders %}
-                                                        <div class="row orderTabs">
-                                                                  <div class="col-md-2">Order #: {{ order.orderID }}</div>
-                                                                  <div class="col-md-6">You made and order from {{ order.pickupStoreID.storeName }} 
+                                                        {% for order in orders reversed %}
+                                                        <div class="row orderTabs pt-2 pb-2">
+                                                                  <div class="col-md-2"><small>Order #: {{ order.orderID }}</small></div>
+                                                                  <div class="col-md-5">You made and order from {{ order.pickupStoreID.storeName }} 
                                                                       on the {{ order.orderDate | date:"d M, Y" }} </div>
-                                                                  <div class="col-md-2">
+                                                                  <div class="col-md-3">
                                                                       <small>
                                                                             Pick up date: {{ order.pickupDate | date:"d M, Y" }}
                                                                             <br>
                                                                             Return date: {{ order.returnDate | date:"d M, Y" }}
                                                                             </small> 
-                                                                    </div>                                                                 
+                                                                    </div>                                                                  
                                                                   <div class="col-md-2"><div class="btn disabled btn-primary btn-sm divs-center mt-3 " >Check Invoice</div></div>
                                                             </div>
                                                             {% endfor %}
