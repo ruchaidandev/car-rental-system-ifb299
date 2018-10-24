@@ -275,7 +275,8 @@ def searchStaff(request, msg='',mtype=''):
 # Developer: Jax
 # View Booking page
 def viewBooking(request, messages="", mtype="i"):
-    orders = Order.objects.all()
+    #orders = Order.objects.all()
+    orders = OrderFor.objects.all()    
     return render(request, 'booking/viewBooking.html', {'orders': orders})
 
 # Developer: Aidan
