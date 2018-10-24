@@ -19,6 +19,7 @@
                 <th class="select-filter">Pickup Date</th>
                 <th class="select-filter">Return Date</th>
                 <th class="select-filter">Customer</th>
+                <th class="select-filter">Vehicle</th>
                 <!-- <th class="select-filter">Serviced By</th> -->
                 <th class="select-filter">Pickup Store</th>
                 <th class="select-filter">Return Store</th>
@@ -28,22 +29,24 @@
               <tbody id="records">
                     {% for order in orders %}
                     <tr>
-                        <td class="pdttable">{{ order.orderID }}</td>
-                        <td class="pdttable">{{ order.orderDate }}</td>
-                        <td class="pdttable">{{ order.pickupDate }}</td>
-                        <td class="pdttable">{{ order.returnDate }}</td>
-                        <td class="pdttable">{{ order.customerID.firstName }} {{ order.customerID.lastName }}</td>
+                        <td class="pdttable">{{ order.orderID.orderID }}</td>
+                        <td class="pdttable">{{ order.orderID.orderDate }}</td>
+                        <td class="pdttable">{{ order.orderID.pickupDate }}</td>
+                        <td class="pdttable">{{ order.orderID.returnDate }}</td>
+                        <td class="pdttable">{{ order.orderID.customerID.firstName }} {{ order.orderID.customerID.lastName }}</td>
+                        
+                            <td class="pdttable">{{ order.vehicleID.makeName }} {{ order.vehicleID.model }}</td>
                         <!-- <td class="pdttable">{{ order.employeeID }}</td> -->
-                        {% if order.pickupStoreID == "" %}
+                        {% if order.orderID.pickupStoreID == "" %}
                         <td class="pdttable">-</td>
                         {% else %}
-                        <td class="pdttable">{{ order.pickupStoreID }}</td>
+                        <td class="pdttable">{{ order.orderID.pickupStoreID }}</td>
                         {% endif %}
                         
-                        {% if order.returnStoreID == "" %}
+                        {% if order.orderID.returnStoreID == "" %}
                         <td class="pdttable">-</td>
                         {% else %}
-                        <td class="pdttable">{{ order.returnStoreID }}</td>
+                        <td class="pdttable">{{ order.orderID.returnStoreID }}</td>
                         {% endif %}
                         <!-- <td class="pdttable">{{ order.orderType }}</td> -->
                     </tr>
