@@ -28,7 +28,7 @@
 3. Code will be reviewed and if accepted will be merged into master
 
 ### Submission
-Course title: IFB299 IT Project Design and Development
-Tutor: Ms Parvaneh Boroujeni
-Team Number : 23
-Date: 29 October 2018
+- Course title: IFB299 IT Project Design and Development
+- Tutor: Ms Parvaneh Boroujeni
+- Team Number : 23
+- Date: 29 October 2018
