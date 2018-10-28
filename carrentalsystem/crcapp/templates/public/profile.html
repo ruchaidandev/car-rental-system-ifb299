@@ -76,8 +76,9 @@
                                                         {% for order in orders reversed %}
                                                         <div class="row orderTabs pt-2 pb-2">
                                                                   <div class="col-md-2"><small>Order #: {{ order.orderID }}</small></div>
-                                                                  <div class="col-md-5">You made and order from {{ order.pickupStoreID.storeName }} 
-                                                                      on the {{ order.orderDate | date:"d M, Y" }} </div>
+                                                                  <div class="col-md-5">You made and order. Pick the vehicle from {{ order.pickupStoreID.storeName }} 
+                                                                      on the {{ order.orderDate | date:"d M, Y" }} and return it to {{ order.returnStoreID.storeName }}
+                                                                    on the {{ order.returnDate | date:"d M, Y" }} </div>
                                                                   <div class="col-md-3">
                                                                       <small>
                                                                             Pick up date: {{ order.pickupDate | date:"d M, Y" }}
