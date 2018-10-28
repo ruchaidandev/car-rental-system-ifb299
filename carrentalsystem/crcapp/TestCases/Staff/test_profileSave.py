@@ -10,10 +10,10 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re, os, platform
 from crcapp.tests import BaseTest
 
-class InsertStaff(BaseTest):
+class ProfileSave(BaseTest):
 
     # Test for insert staff in staff page
-    def test_staffView(self):
+    def test_staffProfileSave(self):
         driver = self.driver
         driver.get("http://127.0.0.1:8000/")
         # driver.get("http://localhost:8000/management/home")
