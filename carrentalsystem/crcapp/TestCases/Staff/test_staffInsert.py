@@ -13,7 +13,7 @@ from crcapp.tests import BaseTest
 class InsertStaff(BaseTest):
 
     # Test for insert staff in staff page
-    def test_staffView(self):
+    def test_staffInsert(self):
         driver = self.driver
         driver.get("http://localhost:8000/management/home")
         driver.find_element_by_link_text("Register New Staff Member").click()
