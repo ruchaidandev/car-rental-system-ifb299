@@ -20,6 +20,7 @@ class BaseTest(TestCase):
         options.add_argument('--headless') # comment this out to show chrome windows runnning
         options.add_argument('--disable-gpu')
         self.driver = webdriver.Chrome(DRIVER,chrome_options=options)
+        # self.driver.fullscreen_window() # To check everything works in fullscreen
         self.driver.implicitly_wait(30)
         self.verificationErrors = []
         self.accept_next_alert = True

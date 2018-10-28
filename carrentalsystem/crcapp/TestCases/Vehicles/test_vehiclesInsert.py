@@ -66,7 +66,7 @@ class VehiclesInsert(BaseTest):
         driver.find_element_by_id("newPrice").clear()
         driver.find_element_by_id("newPrice").send_keys("111")
         driver.find_element_by_id("select2-storeID-container").click()
-        # time.sleep(1)
+        # DropDown not working
         # driver.find_element_by_id("select2-storeID-result-ud7i-S0001").click() 
         # driver.find_element_by_id("submit").click()
         # WebDriverWait(driver, 10).until(EC.text_to_be_present_in_element((By.XPATH, "//*[@id='content']/div/div/div/div/p"), "Vehicle inserted."))
