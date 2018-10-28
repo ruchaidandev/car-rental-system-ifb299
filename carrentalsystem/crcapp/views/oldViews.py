@@ -170,7 +170,7 @@ def changeStaffDetails(request, option,  name, utype, msg='',mtype=''):
             if reason:
                 return render(request, 'staff/staffdetailview.html', {'name': name, 'utype': utype,'msg': 'Token verification failed!', 'mtype': "d",'employee':employee, 'stores':stores})
             else:
-                result = staff.StaffController.modify(request, option)
+                result = staff.StaffController.modify(request)
                 if result == True:
                     return render(request, 'staff/staffdetailview.html', {'name': name, 'utype': utype,'msg': 'Changes saved.', 'mtype': "i",'employee':employee, 'stores':stores})
                 elif result == False:
