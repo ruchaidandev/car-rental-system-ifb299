@@ -20,6 +20,7 @@
 
 ### Notes
  - To run the server: `python manage.py runserver`
+ - Add the your database password in settings.py
  - To run tests: `python manage.py test` or `python manage.py test -v 2` (To show more details of tests)
 
 ### Contribution guidelines 
