@@ -22,11 +22,7 @@
  - To run the server: `python manage.py runserver`
  - Add the your database password in settings.py
  - To run tests: `python manage.py test` or `python manage.py test -v 2` (To show more details of tests)
-
-### Contribution guidelines 
-1. Use development branch/your own branches to code.
-2. Send pull request to Aidan merge into master branch.
-3. Code will be reviewed and if accepted will be merged into master
+ - Artefacts and documents related to the project are located in "artefacts" folder
 
 ### Submission
 - Course title: IFB299 IT Project Design and Development
