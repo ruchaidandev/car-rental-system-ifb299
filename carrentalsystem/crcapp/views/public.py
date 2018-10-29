@@ -1,6 +1,11 @@
 from .modules import *
 
 # Developer: Aidan
+class LazyEncoder(DjangoJSONEncoder):
+    def default(self, obj):
+        return super().default(obj)
+        
+# Developer: Aidan
 # Loading the index page
 def index(request, messages="", mtype="i"):
     # Will get the session variables for the message
@@ -46,7 +51,7 @@ def registerIndex(request, messages="", mtype="i"):
         else:
             if request.POST.get("password") == request.POST.get("confirmpassword"):
                
-                result = customer.CustomerController.create(request, "signup")
+                result = customer.CustomerController.create(request)
                 if result == True:
                     return render(request, 'public/register.html', {'msg': 'Account created, please login.', 'mtype': "i"})
                 elif result == False:
