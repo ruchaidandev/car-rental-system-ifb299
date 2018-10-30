@@ -28,7 +28,7 @@
  
  - The following diagram indicates the processes for development code to be approved and implemented
  
- ![diagram](artefacts/Sprint 2 Artefacts/Development Contribution Process Diagram.png)
+ ![diagram](artefacts/Sprint\ 2\ Artefacts/Development\ Contribution\ Process\ Diagram.png)
 
 ### Submission
 - Course title: IFB299 IT Project Design and Development
