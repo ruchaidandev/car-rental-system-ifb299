@@ -24,11 +24,6 @@
  - To run tests: `python manage.py test` or `python manage.py test -v 2` (To show more details of tests)
  - Artefacts and documents related to the project are located in "artefacts" folder
 
-### Contribution process
- 
- - The following diagram indicates the processes for development code to be approved and implemented
- ![Diagram](artefacts/Sprint\ 2\ Artefacts/Development\ Contribution\ Process\ Diagram.jpg)
-
 ### Submission
 - Course title: IFB299 IT Project Design and Development
 - Tutor: Ms Parvaneh Boroujeni
