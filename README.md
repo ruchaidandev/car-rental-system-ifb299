@@ -1,5 +1,7 @@
 
 # Car Rental System 
+ IFB299 Project 
+ QUT
 
 ### Created by :
  1. Francis King (N10198067)
