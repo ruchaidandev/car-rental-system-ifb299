@@ -6,3 +6,4 @@ __pycache__/
 carrentalsystem/settings.py
 /.vs/ifb299_project/v15
 /.vs
+artefacts/*
